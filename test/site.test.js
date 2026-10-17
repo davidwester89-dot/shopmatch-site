@@ -57,7 +57,7 @@ test('build (productie): pagina’s, sitemap, robots, IndexNow, regels', () => {
     if (!f.endsWith('404.html')) { assert.match(s, /<link rel="canonical" href="https:\/\/shopmatch.nl\//); assert.ok(!s.includes('noindex'), f); }
     const title = s.match(/<title>(.*?)<\/title>/)[1]; assert.ok(title.length <= 60, `${f}: titel te lang (${title.length})`);
     assert.match(s, /Ook van ons/);
-    assert.match(s, /boekhoudmatch.nl/); assert.match(s, /verduurzaammatch.nl/);
+    assert.match(s, /boekhoudmatch.nl/); assert.match(s, /verduurzaammatch.nl/); assert.match(s, /warmtepompenmatch.nl/);
     for (const m of s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)) JSON.parse(m[1]);
     // Interne links bestaan.
     for (const m of s.matchAll(/href="(\/[^"#?]*)/g)) {
