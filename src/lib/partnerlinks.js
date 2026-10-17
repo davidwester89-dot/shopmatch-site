@@ -3,6 +3,7 @@
 // De match leest dit bestand NOOIT: partnerlinks hebben geen invloed op het advies of de volgorde.
 import { PLATFORMS } from './platforms.js';
 export const PARTNERLINKS = {
+  shopify: 'https://shopify.pxf.io/c/7989613/1061744/13624',
   hostinger: 'https://jf79.net/c/?si=16780&li=1754330&wi=438840&ws=shopmatch',
 };
 
