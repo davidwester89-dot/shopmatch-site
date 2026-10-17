@@ -3,11 +3,11 @@ import { IDS, CHECKED, prijsNootVan, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_
 import { knop } from './lib/partnerlinks.js';
 import { VRAGEN } from './lib/match.js';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, ranglijst, situaties } from './lib/checklist.js';
-import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, scoreBlock, scoreBadge, bars, fv, checklistTable, verkoopTekst, maxProdTekst } from './parts.mjs';
+import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, scoreBlock, scoreBadge, bars, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
 
 const KORT = { shopify: 'Shopify', wix: 'Wix', jouwweb: 'JouwWeb', lightspeed: 'Lightspeed', hostinger: 'Hostinger', mijndomein: 'Mijndomein', woocommerce: 'WooCommerce', squarespace: 'Squarespace' };
 const RANG = ranglijst();
-const wordmark = (id) => `<span class="wordmark">${esc(KORT[id])}</span>`;
+const logo = (id, maat = 'md') => logoImg(id, { maat });
 
 const homeFaq = [
   ['Wat is het beste webshop-platform voor een starter?', 'Dat hangt af van je aantal producten en budget. Met een paar producten start je goedkoop met JouwWeb Pro (€ 10 per maand, tot 10 producten). Wil je groeien of over de grens verkopen, dan is Shopify sterker. Zie <a href="/beste-webshop-platform/">beste webshop-platform 2026</a>.'],
@@ -16,7 +16,7 @@ const homeFaq = [
 ];
 const VS = [['/vergelijken/shopify-vs-lightspeed/', 'Shopify of Lightspeed', 'Voor winkels die ook online verkopen.'], ['/vergelijken/wix-vs-jouwweb/', 'Wix of JouwWeb', 'Websitebouwers voor zzp\'ers en kleine shops.'], ['/vergelijken/shopify-vs-woocommerce/', 'Shopify of WooCommerce', 'Alles geregeld of alles zelf in de hand.']];
 const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class="card" href="${h}"><h3>${esc(t)}</h3><p>${esc(d)}</p><span class="more">Bekijk de vergelijking →</span></a>`).join('')}</div>`;
-const miniRows = RANG.map((id) => `<tr><th scope="row"><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td>${scoreBadge(id)}</td><td class="n">${verkoopTekst(id)}</td>${['ideal', 'pos', 'b2b', 'talen'].map((k) => `<td>${fv(FEATURES[id][k], false)}</td>`).join('')}</tr>`).join('');
+const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Score">${scoreBadge(id)}</td><td class="n" data-l="Verkopen vanaf">${verkoopTekst(id)}</td>${[['ideal', 'iDEAL'], ['pos', 'Kassa'], ['b2b', 'B2B'], ['talen', 'Meerdere talen']].map(([k, l]) => `<td data-l="${l}">${fv(FEATURES[id][k], false)}</td>`).join('')}</tr>`).join('');
 
 export const home = {
   path: '/', title: 'ShopMatch: webshop-platforms vergelijken (2026)', ogTitle: 'ShopMatch: welk webshop-platform past bij jouw bedrijf?', h1: 'ShopMatch.nl', og: 'home',
@@ -36,16 +36,16 @@ export const home = {
 <li>${ICONS.schild}<span>Volgorde nooit betaald</span></li>
 <li>${ICONS.gratis}<span>Gratis, zonder account</span></li>
 </ul>
-<section class="logobar" aria-labelledby="h-pl"><h2 id="h-pl">Deze 8 platforms vergelijken we</h2><div class="logos eight">${[...IDS].sort((a, b) => KORT[a].localeCompare(KORT[b], 'nl')).map((id) => `<a class="logo-tile" href="/platformen/${P[id].slug}/" title="${esc(P[id].naam)}">${wordmark(id)}</a>`).join('')}</div></section>
+<section class="logobar" aria-labelledby="h-pl"><h2 id="h-pl">Deze 8 platforms vergelijken we</h2><div class="logos eight">${[...IDS].sort((a, b) => KORT[a].localeCompare(KORT[b], 'nl')).map((id) => `<a class="logo-tile" href="/platformen/${P[id].slug}/">${logo(id, 'lg')}</a>`).join('')}</div></section>
 <h2>Beste keuze per situatie</h2>
 <p class="sub">Een vaste regel op functies en prijs, uit de sites van de aanbieders. Partnerschappen tellen niet mee.</p>
 <ol class="sitlist">
-${situaties().filter((x) => x.top).map((x) => `<li><span class="sit-logo">${wordmark(x.top)}</span><span class="sit-txt"><strong>${esc(x.titel)}</strong><span>${esc(x.regel)}</span></span><span class="sit-pick">${esc(P[x.top].naam)}<b>${verkoopTekst(x.top)}</b></span><a class="sit-why" href="/platformen/${P[x.top].slug}/">Waarom?<span class="sr-only"> ${esc(P[x.top].naam)}</span></a></li>`).join('\n')}
+${situaties().filter((x) => x.top).map((x) => `<li><span class="sit-logo">${logo(x.top)}</span><span class="sit-txt"><strong>${esc(x.titel)}</strong><span>${esc(x.regel)}</span></span><span class="sit-pick">${esc(P[x.top].naam)}<b>${verkoopTekst(x.top)}</b></span><a class="sit-why" href="/platformen/${P[x.top].slug}/">Waarom?<span class="sr-only"> ${esc(P[x.top].naam)}</span></a></li>`).join('\n')}
 </ol>
 <p><a href="/shop-match/">Jouw situatie is anders? Start de match →</a></p>
 <h2>De platforms op een rij</h2>
 <p class="sub">Gesorteerd op checklist-score, bij gelijke stand op prijs. Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is; dat staat per platform bij de prijzen.</p>
-<div class="table-wrap"><table class="data"><thead><tr><th scope="col">Platform</th><th scope="col">Score</th><th scope="col">Verkopen vanaf</th><th scope="col">iDEAL</th><th scope="col">Kassa</th><th scope="col">B2B</th><th scope="col">Meerdere talen</th></tr></thead><tbody>${miniRows}</tbody></table></div>
+<div class="table-wrap"><table class="data stack"><thead><tr><th scope="col">Platform</th><th scope="col">Score</th><th scope="col">Verkopen vanaf</th><th scope="col">iDEAL</th><th scope="col">Kassa</th><th scope="col">B2B</th><th scope="col">Meerdere talen</th></tr></thead><tbody>${miniRows}</tbody></table></div>
 <p><a href="/vergelijken/">Alle 10 checklistpunten, met filters →</a></p>
 <section class="band method-band">
 <h2>Zo vergelijken we</h2>
@@ -101,7 +101,7 @@ export const platformPages = IDS.map((id) => {
   return {
     ...article({ path, title: t.length <= 60 ? t : `${p.naam} prijzen 2026`, h1, description: `${p.naam} vanaf ${p.vanafTekst}. Alle pakketten, de checklist van 10 punten, voor wie het past en de nadelen, met bron.`, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] }),
     navPath: '/platformen/',
-    body: `<article><span class="tag best">Beste voor: ${esc(BEST_FOR[id])}</span><h1>${esc(h1)}</h1>${by()}<p class="lead">${esc(p.kort)}</p>
+    body: `<article><div class="phead"><span class="phead-logo">${logoImg(id, { maat: 'lg', eager: true })}</span><span class="tag best">Beste voor: ${esc(BEST_FOR[id])}</span></div><h1>${esc(h1)}</h1>${by()}<p class="lead">${esc(p.kort)}</p>
 <div class="pcard first"><div class="pc-head"><span class="sc-lbl">Verkopen vanaf</span><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p>${p.vanaf !== VERKOOP_VANAF[id] && id !== 'woocommerce' ? `<p class="pc-price">Website zonder verkoop: vanaf ${esc(p.vanafTekst)}</p>` : ''}</div>
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 ${scoreBlock(id)}
@@ -111,7 +111,7 @@ ${scoreBlock(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
 <div class="out">${knop(id, 'platform_bottom')}</div>
-<h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li><a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · score ${fmtScore(score(x).totaal)}/10 · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>
+<h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li class="withlogo">${logo(x, 'sm')}<a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · score ${fmtScore(score(x).totaal)}/10 · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>
 ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featureBronnen(id))}</article>`,
   };
 });
@@ -155,15 +155,15 @@ ${methodBox()}
 
 const sideRow = (label, a, b) => `<tr><th scope="row">${label}</th><td>${a}</td><td>${b}</td></tr>`;
 const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, faq }) => {
-  const side = (id, kies, posn) => `<div class="card"><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><div class="pc-score" style="margin-top:12px"><span class="sc-lbl">Checklist-score</span>${scoreBadge(id)}${bars(id)}</div><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm')}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
+  const side = (id, kies, posn) => `<div class="card"><span class="pc-logo">${logo(id)}</span><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><div class="pc-score" style="margin-top:12px"><span class="sc-lbl">Checklist-score</span>${scoreBadge(id)}${bars(id)}</div><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm')}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
   return {
     ...article({ path: `/vergelijken/${slug}/`, title, h1, description, og: `vs-${slug}`, parents: [['/vergelijken/', 'Vergelijken']], faq }),
     navPath: '/vergelijken/',
     body: `<article><h1>${esc(h1)}</h1>${by()}<p class="lead">${intro}</p>
 <h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a')}${side(b, kiesB, 'vs_b')}</div>
-<h2>Prijs en pakketten</h2><div class="table-wrap"><table class="data side"><thead><tr><th scope="col"></th><th scope="col">${esc(P[a].naam)}</th><th scope="col">${esc(P[b].naam)}</th></tr></thead><tbody>${rows.map((r) => sideRow(...r)).join('')}</tbody></table></div>
+<h2>Prijs en pakketten</h2><div class="table-wrap"><table class="data side"><thead><tr><th scope="col"></th><th scope="col"><span class="thlogo">${logo(a, 'sm')}</span>${esc(P[a].naam)}</th><th scope="col"><span class="thlogo">${logo(b, 'sm')}</span>${esc(P[b].naam)}</th></tr></thead><tbody>${rows.map((r) => sideRow(...r)).join('')}</tbody></table></div>
 <h2>Checklist naast elkaar</h2><p class="sub">Tien vaste punten uit de sites van de aanbieders. <a href="/over/#methode">Zo tellen we</a></p>
-<div class="table-wrap"><table class="data side"><thead><tr><th scope="col">Checklistpunt</th><th scope="col">${esc(P[a].naam)}</th><th scope="col">${esc(P[b].naam)}</th></tr></thead><tbody>${GROEPEN.map((g) => `<tr><th colspan="3" scope="colgroup" style="background:var(--sand)">${esc(g.naam)}</th></tr>${g.punten.map((k) => sideRow(esc(PUNTEN[k].lang), fv(FEATURES[a][k]), fv(FEATURES[b][k]))).join('')}`).join('')}<tr><th scope="row">Checklist-score</th><td>${scoreBadge(a)}</td><td>${scoreBadge(b)}</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="data side"><thead><tr><th scope="col">Checklistpunt</th><th scope="col"><span class="thlogo">${logo(a, 'sm')}</span>${esc(P[a].naam)}</th><th scope="col"><span class="thlogo">${logo(b, 'sm')}</span>${esc(P[b].naam)}</th></tr></thead><tbody>${GROEPEN.map((g) => `<tr><th colspan="3" scope="colgroup" style="background:var(--sand)">${esc(g.naam)}</th></tr>${g.punten.map((k) => sideRow(esc(PUNTEN[k].lang), fv(FEATURES[a][k]), fv(FEATURES[b][k]))).join('')}`).join('')}<tr><th scope="row">Checklist-score</th><td>${scoreBadge(a)}</td><td>${scoreBadge(b)}</td></tr></tbody></table></div>
 ${faqHtml(faq)}${matchCta()}<p>Meer weten? <a href="/platformen/${P[a].slug}/">${esc(P[a].naam)}</a> · <a href="/platformen/${P[b].slug}/">${esc(P[b].naam)}</a> · <a href="/vergelijken/">alle platforms</a></p>${bron(P[a].bronnen, P[b].bronnen, featureBronnen(a, b))}</article>`,
   };
 };
@@ -240,7 +240,7 @@ export const kosten = {
   ...article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }),
   navPath: '/gidsen/',
   body: `<article class="prose"><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is.</p>
-<h2>Platformkosten in het eerste jaar</h2><div class="table-wrap"><table class="data"><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td>${esc(pk)}</td><td>${esc(j)}</td><td>${esc(l)}</td></tr>`).join('')}</tbody></table></div>
+<h2>Platformkosten in het eerste jaar</h2><div class="table-wrap"><table class="data stack"><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Pakket">${esc(pk)}</td><td data-l="Eerste jaar">${esc(j)}</td><td data-l="Let op">${esc(l)}</td></tr>`).join('')}</tbody></table></div>
 <p>Shopify, Wix en Lightspeed: maandprijs × 12, bij Shopify en Wix met jaarbetaling. Acties zoals de korting van JouwWeb tot en met 31 oktober 2026 en de 6 gratis maanden bij Mijndomein zijn niet meegerekend.</p>
 <h2>Wat er nog bijkomt</h2><ul><li><strong>Domeinnaam.</strong> Vaak het eerste jaar inbegrepen. Bij JouwWeb betaal je daarna € 20 per jaar.</li><li><strong>Transactiekosten.</strong> Elke betaalprovider rekent per betaling. Shopify rekent op Basic 2% extra als je niet met Shopify Payments werkt.</li><li><strong>Apps en thema's.</strong> Bij Shopify en WooCommerce betaal je extra functies vaak los. WooCommerce noemt $ 29 tot $ 299 per jaar per extensie.</li><li><strong>Boekhouding.</strong> Met een webshop heb je een boekhoudprogramma nodig voor facturen en btw. Vergelijk ze op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</li></ul>
 <h2>Zo houd je de kosten laag</h2><ol class="steps"><li>Begin met het kleinste pakket dat bij je aantal producten past.</li><li>Kies een platform zonder verkoopcommissie of met de betaalprovider van het platform.</li><li>Betaal per jaar zodra je zeker bent van je keuze.</li></ol>
