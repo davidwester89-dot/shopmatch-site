@@ -42,7 +42,7 @@ test('partnerlinks hebben geen invloed op de match', () => {
 
 test('build (productie): pagina’s, sitemap, robots, IndexNow, regels', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
-  const html = walk('dist').filter((f) => f.endsWith('.html'));
+  const html = walk('dist').filter((f) => f.endsWith('.html') && !/\/google[0-9a-f]+\.html$/.test(f)); // Google-verificatiebestand is geen pagina
   assert.ok(html.length >= 22);
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   assert.equal((sm.match(/<loc>/g) || []).length, html.length - 1);

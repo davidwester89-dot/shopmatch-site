@@ -9,7 +9,7 @@ const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&
 
 test('on-page SEO: unieke titels, meta ≤ 155, één H1, canonical = eigen URL, og, schema', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
-  const files = walk('dist').filter((f) => f.endsWith('.html') && !f.endsWith('404.html'));
+  const files = walk('dist').filter((f) => f.endsWith('.html') && !f.endsWith('404.html') && !/\/google[0-9a-f]+\.html$/.test(f));
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   const titles = new Map();
   for (const f of files) {
@@ -39,4 +39,11 @@ test('on-page SEO: unieke titels, meta ≤ 155, één H1, canonical = eigen URL,
   }
   const home = readFileSync('dist/index.html', 'utf8');
   assert.match(home, /"@type":"Organization"/); assert.match(home, /"@type":"WebSite"/);
+});
+
+test('Google Search Console-verificatiebestand: ongewijzigd in dist, niet in sitemap', () => {
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
+  const f = 'google5be727237a44c762.html';
+  assert.equal(readFileSync(join('dist', f), 'utf8'), 'google-site-verification: google5be727237a44c762.html');
+  assert.ok(!readFileSync('dist/sitemap.xml', 'utf8').includes(f));
 });

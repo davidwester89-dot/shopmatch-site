@@ -56,7 +56,7 @@ test('checklist en match lezen geen partnerlinks', () => {
 
 test('build: huisstijl, componenten en regels op elke pagina', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
-  const html = walk('dist').filter((f) => f.endsWith('.html'));
+  const html = walk('dist').filter((f) => f.endsWith('.html') && !/\/google[0-9a-f]+\.html$/.test(f));
   for (const f of ['inter-400.woff2', 'inter-600.woff2', 'inter-800.woff2']) assert.ok(existsSync(join('dist/fonts', f)));
   const css = read('src/assets/css/style.css');
   assert.match(css, /--brand:#4b3fc4/); assert.match(css, /font-family:Inter/);
@@ -92,7 +92,7 @@ test('build: huisstijl, componenten en regels op elke pagina', () => {
 
 test('preview: elke pagina noindex', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '/shopmatch-site', GO_LIVE: '' } });
-  for (const f of walk('dist').filter((x) => x.endsWith('.html'))) {
+  for (const f of walk('dist').filter((x) => x.endsWith('.html') && !/\/google[0-9a-f]+\.html$/.test(x))) {
     const s = read(f);
     assert.match(s, /<meta name="robots" content="noindex">/, f);
     assert.match(s, /url\(\/shopmatch-site\/fonts\/inter-400\.woff2\)/, `${f}: fontpad zonder BASE`);
