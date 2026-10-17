@@ -94,3 +94,24 @@ test('preview: elke pagina noindex', () => {
     assert.match(s, /url\(\/shopmatch-site\/fonts\/inter-400\.woff2\)/, `${f}: fontpad zonder BASE`);
   }
 });
+
+test('blog: index, posts in sitemap en feed, byline, bronnen, geen namen', async () => {
+  const { execSync } = await import('node:child_process');
+  const { readFileSync, readdirSync } = await import('node:fs');
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', GO_LIVE: '1', PREVIEW: '' } });
+  const posts = readdirSync('content/blog').filter((f) => f.endsWith('.md')).map((f) => f.replace(/^\d{4}-\d{2}-\d{2}-|\.md$/g, ''));
+  assert.ok(posts.length >= 2);
+  const sm = readFileSync('dist/sitemap.xml', 'utf8');
+  const idx = readFileSync('dist/blog/index.html', 'utf8');
+  assert.match(sm, /https:\/\/shopmatch\.nl\/blog\/<\/loc>/);
+  assert.match(readFileSync('dist/blog/feed.xml', 'utf8'), /<rss/);
+  for (const slug of posts) {
+    const s = readFileSync(`dist/blog/${slug}/index.html`, 'utf8');
+    assert.ok(sm.includes(`https://shopmatch.nl/blog/${slug}/</loc>`), `${slug} niet in sitemap`);
+    assert.ok(idx.includes(`/blog/${slug}/`), `${slug} niet op blogindex`);
+    assert.match(s, /Door de Redactie ShopMatch/);
+    assert.match(s, /<h2>Bronnen<\/h2>/);
+    assert.ok(!/\{\{|Dave|Wester|Reddit|batterijmatch/i.test(s), `${slug}: verboden tekst of token`);
+    assert.ok(/href="\/platformen\//.test(s), `${slug}: geen interne link naar platformpagina`);
+  }
+});

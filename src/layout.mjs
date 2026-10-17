@@ -34,6 +34,7 @@ const NAV = [
   ['/vergelijken/', 'Vergelijken'],
   ['/platformen/', 'Platforms'],
   ['/gidsen/', 'Gidsen'],
+  ['/blog/', 'Blog'],
   ['/over/', 'Over ons'],
 ];
 const navLinks = (navPath) => NAV.map(([h, t, c]) => `<a href="${h}"${c ? ` class="${c}"` : ''}${navPath.startsWith(h) ? ' aria-current="page"' : ''}>${esc(t)}</a>`).join('');
@@ -102,7 +103,7 @@ ${foutGezien(url)}
 <div class="cols">
 <div><a class="logo" href="/">${LOGO}<span>${BRAND}</span></a><p>Eerlijke hulp bij het kiezen van een webshop-platform of websitebouwer.</p></div>
 <div><p class="fh">Vergelijken</p><ul><li><a href="/shop-match/">Webshop-platform kiezen</a></li><li><a href="/vergelijken/">Alle platforms vergelijken</a></li><li><a href="/vergelijken/shopify-vs-lightspeed/">Shopify of Lightspeed</a></li><li><a href="/vergelijken/wix-vs-jouwweb/">Wix of JouwWeb</a></li><li><a href="/vergelijken/shopify-vs-woocommerce/">Shopify of WooCommerce</a></li></ul></div>
-<div><p class="fh">Gidsen</p><ul><li><a href="/beste-webshop-platform/">Beste webshop-platform 2026</a></li><li><a href="/webshop-beginnen-kosten/">Wat kost een webshop?</a></li><li><a href="/gratis-website-maken/">Gratis website maken</a></li><li><a href="/website-maken-zzp/">Website voor zzp'ers</a></li><li><a href="/gidsen/">Alle gidsen</a></li></ul></div>
+<div><p class="fh">Gidsen</p><ul><li><a href="/beste-webshop-platform/">Beste webshop-platform 2026</a></li><li><a href="/webshop-beginnen-kosten/">Wat kost een webshop?</a></li><li><a href="/gratis-website-maken/">Gratis website maken</a></li><li><a href="/website-maken-zzp/">Website voor zzp'ers</a></li><li><a href="/gidsen/">Alle gidsen</a></li><li><a href="/blog/">Blog</a></li></ul></div>
 <div><p class="fh">Over ons</p><ul><li><a href="/over/">Over ShopMatch</a></li><li><a href="/over/#methode">Zo vergelijken we</a></li><li><a href="/privacy/">Privacy en cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie-instellingen</a></li>' : ''}<li><a href="mailto:${SITE.email}">Contact</a></li></ul></div>
 </div>
 ${networkFooter()}

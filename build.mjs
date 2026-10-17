@@ -2,10 +2,14 @@ import { mkdirSync, writeFileSync, cpSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { layout, SITE, BASE, PREVIEW } from './src/layout.mjs';
 import * as P from './src/pages.mjs';
+import { loadPosts, postPage, blogIndex, latestHtml, feed } from './src/blog.mjs';
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
 const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, s); };
-export const pages = [P.home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, P.over, P.privacy, P.notfound];
+// Blog: content/blog/*.md (nieuwste eerst; posts met een datum in de toekomst worden overgeslagen).
+const posts = loadPosts();
+const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
+export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound];
 for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), layout(p));
 cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
 cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
@@ -16,6 +20,7 @@ cpSync('src/root', OUT, { recursive: true });
 // CNAME pas bij livegang (GO_LIVE=1). Zonder CNAME blijft dit een preview op github.io.
 if (process.env.GO_LIVE === '1') write(join(OUT, 'CNAME'), 'shopmatch.nl\n');
 write(join(OUT, '.nojekyll'), '');
+if (posts.length) write(join(OUT, 'blog/feed.xml'), feed(posts));
 write(join(OUT, 'robots.txt'), PREVIEW ? 'User-agent: *\nDisallow: /\n' : `User-agent: *\nAllow: /\n\nSitemap: ${SITE.domain}/sitemap.xml\n`);
 write(join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.filter((p) => !p.noindex).map((p) => `<url><loc>${SITE.domain}${p.path}</loc><lastmod>${p.lastmod || SITE.updated}</lastmod></url>`).join('\n')}\n</urlset>\n`);
-console.log(`Built ${pages.length} pages → ${OUT}/${PREVIEW ? ` (preview, BASE=${BASE || '/'})` : ''}`);
+console.log(`Built ${pages.length} pages (${posts.length} blogposts) → ${OUT}/${PREVIEW ? ` (preview, BASE=${BASE || '/'})` : ''}`);

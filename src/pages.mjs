@@ -58,6 +58,7 @@ ${situaties().filter((x) => x.top).map((x) => `<li><span class="sit-logo">${word
 </section>
 <h2>Populaire vergelijkingen</h2>${vsCards()}
 <h2>Gidsen</h2><ul class="gidslijst"><li><a href="/beste-webshop-platform/">Het beste webshop-platform van 2026, per situatie</a></li><li><a href="/webshop-beginnen-kosten/">Webshop beginnen: wat kost het?</a></li><li><a href="/gratis-website-maken/">Gratis website maken: wat kan wel en niet?</a></li><li><a href="/website-maken-zzp/">Website maken als zzp'er</a></li></ul>
+{{latest}}
 ${faqHtml(homeFaq)}`,
 };
 

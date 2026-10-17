@@ -23,6 +23,9 @@ cards={
  'webshop-beginnen-kosten':('Webshop beginnen: wat kost het?','Jaarkosten per platform'),
  'gratis-website-maken':('Gratis website maken','Wat kan wel en niet'),
  'website-maken-zzp':("Website maken als zzp'er",'De beste opties in 2026'),
+ 'blog':('Blog: webshop en website beginnen','Prijzen en verschillen, met bronnen'),
+ 'blog-shopify-wix-jouwweb-kleine-webshop':('Shopify, Wix of JouwWeb?','Welke past bij je kleine webshop'),
+ 'blog-b2b-webshop-beginnen':('B2B-webshop beginnen','Welk platform past bij zakelijke klanten'),
 }
 art=f'<svg viewBox="0 0 300 300" width="300" height="300"><rect x="20" y="40" width="200" height="140" rx="12" fill="#fff" stroke="{D}" stroke-width="6"/><rect x="5" y="180" width="230" height="14" rx="7" fill="{D}"/><rect x="42" y="62" width="156" height="20" rx="5" fill="{B}"/><rect x="42" y="94" width="44" height="44" rx="6" fill="{P}"/><rect x="98" y="94" width="44" height="44" rx="6" fill="{G}"/><rect x="154" y="94" width="44" height="44" rx="6" fill="#dcdcf0"/><rect x="200" y="110" width="76" height="130" rx="12" fill="#fff" stroke="{D}" stroke-width="6"/><rect x="214" y="128" width="48" height="36" rx="5" fill="{P}"/><rect x="214" y="210" width="48" height="14" rx="7" fill="{B}"/><circle cx="262" cy="46" r="28" fill="{G}"/><path d="m249 47 9 9 18-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 tmp=tempfile.mkdtemp()
@@ -30,7 +33,10 @@ def shot(html,out,w,h):
     f=os.path.join(tmp,'p.html');open(f,'w').write(html)
     subprocess.run(['google-chrome','--headless=new','--no-sandbox','--disable-gpu','--hide-scrollbars','--force-device-scale-factor=1',f'--window-size={w},{h}',f'--screenshot={out}','file://'+f],capture_output=True,check=True)
 os.makedirs('src/assets/og',exist_ok=True);os.makedirs('src/assets/icons',exist_ok=True)
+import sys
+only=set(sys.argv[1:])  # optioneel: alleen deze kaarten maken, bv. python3 scripts/images.py blog
 for k,(t,sub) in cards.items():
+    if only and k not in only: continue
     html=f'''<html><body style="margin:0;width:1200px;height:630px;background:{BG};font-family:'DejaVu Sans',sans-serif;overflow:hidden">
 <div style="position:absolute;left:0;top:0;width:1200px;height:18px;background:{B}"></div>
 <div style="position:absolute;left:72px;top:70px;display:flex;align-items:center;gap:16px;font-size:40px;font-weight:700;color:{D}"><div style="width:64px;height:64px">{LOGO}</div><span>Shop<span style="color:{B}">Match</span>.nl</span></div>
@@ -38,7 +44,7 @@ for k,(t,sub) in cards.items():
 <div style="position:absolute;left:72px;bottom:80px;width:720px;font-size:30px;color:{G};font-weight:700">{sub}</div>
 <div style="position:absolute;right:70px;top:170px;background:{S};border-radius:28px;padding:20px">{art}</div></body></html>'''
     shot(html,f'src/assets/og/{k}.png',1200,630)
-open('src/assets/icons/favicon.svg','w').write(LOGO)
-for size,name in ((32,'favicon-32.png'),(180,'apple-touch-icon.png')):
+if not only: open('src/assets/icons/favicon.svg','w').write(LOGO)
+for size,name in (() if only else ((32,'favicon-32.png'),(180,'apple-touch-icon.png'))):
     shot(f'<html><body style="margin:0;width:{size}px;height:{size}px">{LOGO.replace("<svg ",f"<svg width=\"{size}\" height=\"{size}\" ")}</body></html>',f'src/assets/icons/{name}',size,size)
 print('ok',len(cards))
