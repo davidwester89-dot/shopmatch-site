@@ -1,5 +1,5 @@
 # Bouwt ShopMatch en publiceert via GitHub Pages.
-# PREVIEW: BASE=/shopmatch-site, noindex, geen CNAME → https://davidwester89-dot.github.io/shopmatch-site/
+# LIVE sinds 17-10-2026 (akkoord Dave): BASE leeg, GO_LIVE=1 → https://shopmatch.nl (indexeerbaar, CNAME shopmatch.nl).
 # LIVEGANG (pas na akkoord Dave): BASE leeg en GO_LIVE=1 (schrijft CNAME shopmatch.nl), custom domain in Pages-instellingen.
 name: Deploy ShopMatch
 on:
@@ -14,8 +14,8 @@ concurrency:
   group: pages
   cancel-in-progress: true
 env:
-  BASE: /shopmatch-site
-  GO_LIVE: ''
+  BASE: ''
+  GO_LIVE: '1'
 jobs:
   build:
     runs-on: ubuntu-latest
