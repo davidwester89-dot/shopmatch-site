@@ -1,14 +1,14 @@
 // Platformdata. Alleen feiten van de eigen site van de aanbieder, met bron en controledatum.
 // Bedragen in euro, per maand, zoals de aanbieder ze toont (excl. btw tenzij anders vermeld).
-// nlCheck: true = bedrag in euro moet nog vanaf een Nederlands IP op de eigen prijspagina bevestigd worden
-// (de box ziet daar dollars). Site-controleur bevestigt dit vóór livegang.
+// Euro-bedragen Shopify en Wix bevestigd vanaf een Nederlands IP door Site-controleur (17-10-2026).
+// prijsNoot: optionele eigen tekst boven de prijstabel (standaard 'Excl. btw, zoals <naam> ze toont.').
 export const CHECKED = '2026-10-17';
 
 export const PLATFORMS = {
   shopify: {
     naam: 'Shopify', slug: 'shopify', soort: 'Webshopplatform', url: 'https://www.shopify.com/nl',
     kort: 'Webshopplatform voor wie serieus wil verkopen, ook buiten Nederland.',
-    vanaf: 21, vanafTekst: '€ 21 per maand (Basic, jaarbetaling)', nlCheck: true,
+    vanaf: 21, vanafTekst: '€ 21 per maand (Basic, jaarbetaling)', prijsNoot: 'Zoals Shopify ze toont.',
     plannen: [
       ['Basic', '€ 21 (bij jaarbetaling) · € 28 bij maandbetaling', 'Webshop met onbeperkt producten, 2% extra transactiekosten bij een externe betaalprovider'],
       ['Grow', '€ 59 (bij jaarbetaling) · € 78 bij maandbetaling', 'Tot 5 medewerkersaccounts'],
@@ -22,12 +22,12 @@ export const PLATFORMS = {
   wix: {
     naam: 'Wix', slug: 'wix', soort: 'Websitebouwer', url: 'https://nl.wix.com/',
     kort: 'Flexibele websitebouwer met webshopfuncties vanaf het Core-pakket.',
-    vanaf: 14, vanafTekst: '€ 14 per maand (Light, jaarbetaling)', nlCheck: true,
+    vanaf: 14, vanafTekst: '€ 14 per maand (Light, jaarbetaling)',
     plannen: [
-      ['Light', '€ 14', 'Eigen domein, geen Wix-advertenties, geen online betalingen'],
-      ['Core', '€ 25', 'Online betalingen en basis-webshop'],
-      ['Business', '€ 34', 'Uitgebreidere webshop en meer opslag'],
-      ['Business Elite', '€ 149', 'Geavanceerde webshop en ontwikkelaarstools'],
+      ['Light', '€ 14 (bij jaarbetaling)', 'Eigen domein, geen Wix-advertenties, geen online betalingen'],
+      ['Core', '€ 25 (bij jaarbetaling)', 'Online betalingen en basis-webshop'],
+      ['Business', '€ 34 (bij jaarbetaling)', 'Uitgebreidere webshop en meer opslag'],
+      ['Business Elite', '€ 149 (bij jaarbetaling)', 'Geavanceerde webshop en ontwikkelaarstools'],
     ],
     plus: ['Gratis versie om de editor te proberen', '14 dagen geld-terug-garantie op een premiumpakket', 'Domeinnaam het eerste jaar inbegrepen bij de meeste jaarpakketten'],
     min: ['Betalingen ontvangen pas vanaf Core', 'Gratis versie met Wix-advertenties en een Wix-adres'],

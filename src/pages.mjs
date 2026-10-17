@@ -104,7 +104,7 @@ export const platformPages = IDS.map((id) => {
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 ${scoreBlock(id)}
 <div class="pc-cta">${knop(id, 'platform_top')}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
-<h2>Pakketten en prijzen</h2><p class="sub">Excl. btw, zoals ${esc(p.naam.split(' ')[0])} ze toont.</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
+<h2>Pakketten en prijzen</h2><p class="sub">${esc(p.prijsNoot || `Excl. btw, zoals ${p.naam.split(' ')[0]} ze toont.`)}</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
 <h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld telt als 0. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
