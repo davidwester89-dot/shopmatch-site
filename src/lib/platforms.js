@@ -110,6 +110,21 @@ export const PLATFORMS = {
     voor: 'Wie al met WordPress werkt of volledige controle wil.',
     bronnen: [['WooCommerce prijzen', 'https://woocommerce.com/nl/pricing/']],
   },
+  squarespace: {
+    naam: 'Squarespace', slug: 'squarespace', soort: 'Websitebouwer', url: 'https://www.squarespace.com/',
+    kort: 'Websitebouwer met verzorgde templates, waarmee je in elk pakket producten en diensten verkoopt.',
+    vanaf: 12, vanafTekst: '€ 12 per maand (Basic, jaarbetaling)', prijsNoot: 'Zoals Squarespace ze toont. Squarespace noemt de prijzen inclusief btw waar dat in de regio verplicht is.',
+    plannen: [
+      ['Basic', '€ 12 (bij jaarbetaling) · € 17 bij maandbetaling', 'Onbeperkt producten, 2% transactiekosten op webshopverkopen, 2 bijdragers'],
+      ['Core', '€ 18 (bij jaarbetaling) · € 24 bij maandbetaling', '0% transactiekosten op webshopverkopen, kortingen, Google Shopping'],
+      ['Plus', '€ 32 (bij jaarbetaling) · € 42 bij maandbetaling', 'Lagere kaarttarieven, eigen CSS en JavaScript'],
+      ['Advanced', '€ 69 (bij jaarbetaling) · € 79 bij maandbetaling', 'Laagste kaarttarieven, 0% op cursussen en lidmaatschappen'],
+    ],
+    plus: ['14 dagen gratis proberen, zonder creditcard', 'Onbeperkt producten in elk pakket', 'iDEAL via Squarespace Payments', 'Maandelijks of jaarlijks betalen, op elk moment op te zeggen'],
+    min: ['Basic rekent 2% transactiekosten op webshopverkopen', 'De kassa-app werkt alleen in de VS en het VK', 'Geen gratis pakket'],
+    voor: 'Dienstverleners, creatieve ondernemers en kleine merken die een verzorgde site met webshop willen.',
+    bronnen: [['Squarespace prijzen', 'https://www.squarespace.com/pricing'], ['Squarespace prijzen per valuta (EUR)', 'https://www.squarespace.com/assets/pricing.txt']],
+  },
 };
 export const IDS = Object.keys(PLATFORMS);
 
@@ -123,12 +138,13 @@ export const BEST_FOR = {
   hostinger: 'Laagste instapprijs',
   mijndomein: 'Alles bij één Nederlandse partij',
   woocommerce: 'Volledige controle',
+  squarespace: 'Verzorgd design en diensten',
 };
 // Maandprijs van het goedkoopste pakket waarmee je online kunt verkopen (zelfde bedragen als in PLATFORMS.plannen).
-export const VERKOOP_VANAF = { shopify: 21, wix: 25, jouwweb: 10, lightspeed: 68, hostinger: 3.99, mijndomein: 15, woocommerce: 0 };
-export const VERKOOP_PAKKET = { shopify: 'Basic, jaarbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plugin, plus hosting' };
+export const VERKOOP_VANAF = { shopify: 21, wix: 25, jouwweb: 10, lightspeed: 68, hostinger: 3.99, mijndomein: 15, woocommerce: 0, squarespace: 12 };
+export const VERKOOP_PAKKET = { shopify: 'Basic, jaarbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plugin, plus hosting', squarespace: 'Basic, jaarbetaling' };
 // Maximaal aantal producten in het grootste standaardpakket. Infinity = onbeperkt; null = niet vermeld door de aanbieder.
-export const MAX_PRODUCTEN = { shopify: Infinity, wix: Infinity, jouwweb: Infinity, lightspeed: 15000, hostinger: null, mijndomein: 20000, woocommerce: Infinity };
+export const MAX_PRODUCTEN = { shopify: Infinity, wix: Infinity, jouwweb: Infinity, lightspeed: 15000, hostinger: null, mijndomein: 20000, woocommerce: Infinity, squarespace: Infinity };
 
 // Checklist per platform. v: 'ja' | 'deels' | 'nee' | null (= niet vermeld op de site van de aanbieder).
 // t: korte toelichting. s: bron-URL (alleen sites van de aanbieder zelf, of de plugin bij WooCommerce).
@@ -144,6 +160,8 @@ const S = {
   hoBouw: 'https://www.hostinger.com/nl/website-maken', hoIdeal: 'https://www.hostinger.com/support/6538716-hostinger-ecommerce-accepting-payments-via-ideal/',
   mdShop: 'https://www.mijndomein.nl/producten/webshop',
   wooPrijs: 'https://woocommerce.com/nl/pricing/', wooPay: 'https://woocommerce.com/document/woopayments/payment-methods/',
+  sqPrijs: 'https://www.squarespace.com/pricing', sqIdeal: 'https://support.squarespace.com/hc/en-us/articles/41153740955149-Accepting-iDEAL-with-Squarespace-Payments',
+  sqTaal: 'https://support.squarespace.com/hc/en-us/articles/205809778-Creating-a-multilingual-site-with-Weglot',
   wooB2b: 'https://woocommerce.com/products/b2b-for-woocommerce/', wooPos: 'https://woocommerce.com/woocommerce-pos/', wpml: 'https://wpml.org/',
 };
 export const FEATURES = {
@@ -230,5 +248,17 @@ export const FEATURES = {
     hosting: { v: 'nee', t: 'Hosting, updates en beveiliging regel je zelf', s: S.wooPrijs },
     proberen: { v: 'ja', t: 'De plugin is gratis; hosting betaal je zelf', s: S.wooPrijs },
     maand: { v: 'ja', t: 'Geen abonnement voor de plugin', s: S.wooPrijs },
+  },
+  squarespace: {
+    ideal: { v: 'ja', t: 'Via Squarespace Payments', s: S.sqIdeal },
+    geenfee: { v: 'deels', t: '0% vanaf Core; Basic rekent 2% op webshopverkopen', s: S.sqPrijs },
+    nl: { v: 'nee', t: 'Internationale aanbieder' },
+    onbeperkt: { v: 'ja', t: 'In elk pakket', s: S.sqPrijs },
+    b2b: { v: null },
+    talen: { v: 'deels', t: 'Via de Weglot-integratie', s: S.sqTaal },
+    pos: { v: 'nee', t: 'Kassa alleen in de VS en het VK', s: S.sqPrijs },
+    hosting: { v: 'ja', t: 'Hosting inbegrepen', s: S.sqPrijs },
+    proberen: { v: 'ja', t: '14 dagen gratis, zonder creditcard', s: S.sqPrijs },
+    maand: { v: 'ja', t: 'Maandbetaling, op elk moment op te zeggen', s: S.sqPrijs },
   },
 };

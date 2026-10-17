@@ -423,9 +423,9 @@ table.side{font-size:1rem}table.side th[scope=row]{width:34%;background:var(--bg
 .mlinks{display:flex;flex-wrap:wrap;gap:4px 18px;margin:var(--s3) 0 0}.mlinks a,.mlinks button{min-height:48px;display:inline-flex;align-items:center}
 .mwait{color:var(--muted)}
 @media print{.filters,.sortbar{display:none}}
-.logos.seven{grid-template-columns:repeat(2,1fr)}
-@media(min-width:600px){.logos.seven{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:900px){.logos.seven{grid-template-columns:repeat(7,1fr)}}
+.logos.eight{grid-template-columns:repeat(2,1fr)}
+@media(min-width:600px){.logos.eight{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:900px){.logos.eight{grid-template-columns:repeat(8,1fr)}}
 .sortbar .field{margin:0}.sortbar .field label{font-size:.9rem}
 table .sc{font-size:1.2rem}
 table.matrix{min-width:1560px}
