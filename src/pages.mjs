@@ -13,7 +13,7 @@ const homeFaq = [
 ];
 
 export const home = {
-  path: '/', title: 'ShopMatch: welk webshop-platform of welke websitebouwer past bij jou?', h1: 'Welke webshop of website past bij jou?', og: 'home',
+  path: '/', title: 'ShopMatch: welk webshop-platform past bij jou?', h1: 'Welke webshop of website past bij jou?', og: 'home',
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce. Doe de match en zie in 1 minuut welk platform bij je past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<section class="hero"><div><h1>Welke <b>webshop</b> of website past bij jou?</h1><p class="tagline">Shopify, Wix, JouwWeb en meer naast elkaar.</p><p class="lead">Zeven platforms met de prijzen van de aanbieders zelf. Vijf vragen en je weet welke drie bij je passen.</p><div class="actions"><a class="btn" href="/shop-match/" data-cta="home_hero">Doe de match</a><a class="btn ghost" href="/vergelijken/">Alles vergelijken</a></div></div><div class="art">${HERO_ART}</div></section>
@@ -53,7 +53,7 @@ export const platformPages = IDS.map((id) => {
   const path = `/platformen/${p.slug}/`;
   const h1 = `${p.naam}: prijzen, voor- en nadelen`;
   return {
-    ...article({ path, title: `${p.naam} prijzen 2026: pakketten, voor- en nadelen | ShopMatch`, h1, description: `${p.naam} vanaf ${p.vanafTekst}. Alle pakketten, wat je krijgt, voor wie het past en de nadelen, met prijzen van de site van ${p.naam.split(' ')[0]}.`, og: `platform-${id}`, parents: [['/platformen/', 'Platformen']] }),
+    ...article({ path, title: `${p.naam} prijzen 2026 | ShopMatch`, h1, description: `${p.naam} vanaf ${p.vanafTekst}. Alle pakketten, wat je krijgt, voor wie het past en de nadelen, met prijzen van de site van ${p.naam.split(' ')[0]}.`, og: `platform-${id}`, parents: [['/platformen/', 'Platformen']] }),
     navPath: '/platformen/',
     body: `<article><h1>${esc(h1)}</h1>${by()}<p class="lead">${esc(p.kort)} Vanaf ${esc(p.vanafTekst)}.</p>
 <div class="out">${knop(id, 'platform_top')}<a class="btn ghost small" href="/shop-match/">Past het bij mij?</a></div>
@@ -67,7 +67,7 @@ ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen)}</art
 });
 
 export const platformHub = {
-  path: '/platformen/', title: 'Webshop-platforms en websitebouwers 2026: alle prijzen | ShopMatch', h1: 'Alle platforms', crumb: 'Platformen', og: 'platformen', stamp: { checked: CHECKED },
+  path: '/platformen/', title: 'Webshop-platforms 2026: alle prijzen | ShopMatch', h1: 'Alle platforms', crumb: 'Platformen', og: 'platformen', stamp: { checked: CHECKED },
   description: 'Shopify, Wix, JouwWeb, Lightspeed eCom, Hostinger, Mijndomein en WooCommerce: per platform de pakketten, prijzen en voor wie het past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: IDS.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
   body: `<h1>Alle platforms</h1><p class="lead">Zeven manieren om online te gaan, van gratis plugin tot compleet webshopplatform.</p><div class="grid">${IDS.map(card).join('')}</div>${matchCta()}`,
@@ -88,7 +88,7 @@ ${faqHtml(faq)}${matchCta()}<p>Meer weten? <a href="/platformen/${P[a].slug}/">$
 export const vsPages = [
   cmp({
     slug: 'shopify-vs-lightspeed', a: 'shopify', b: 'lightspeed', h1: 'Shopify of Lightspeed eCom: welke past bij je winkel?',
-    title: 'Shopify vs Lightspeed eCom 2026: prijzen en verschillen | ShopMatch',
+    title: 'Shopify vs Lightspeed eCom 2026 | ShopMatch',
     description: 'Shopify vanaf € 21, Lightspeed eCom vanaf € 68 per maand. De verschillen in prijs, limieten, support en kassa, en wanneer je welke kiest.',
     intro: 'Allebei bouwen ze webshops én kassasystemen. Shopify is goedkoper om te starten. Lightspeed heeft een vestiging in Amsterdam en telefonische support vanaf Advanced.',
     rows: [['Instapprijs', '€ 21 per maand (Basic, jaar)', '€ 68 per maand (Essential)'], ['Producten', 'Onbeperkt', '250 varianten (Essential), 5.000 (Advanced)'], ['Gebruikers', '1 (Basic), tot 5 (Grow)', '1 (Essential), 3 (Advanced)'], ['Support', 'Online', 'E-mail (Essential), telefonisch vanaf Advanced'], ['Winkelkassa', 'Shopify POS', 'Lightspeed kassa'], ['Extra transactiekosten', '2% op Basic bij externe betaalprovider', 'Niet vermeld op de prijspagina']],
@@ -98,7 +98,7 @@ export const vsPages = [
   }),
   cmp({
     slug: 'wix-vs-jouwweb', a: 'wix', b: 'jouwweb', h1: 'Wix of JouwWeb: welke websitebouwer kies je?',
-    title: 'Wix vs JouwWeb 2026: prijzen, webshop en verschillen | ShopMatch',
+    title: 'Wix vs JouwWeb 2026: prijzen en verschillen',
     description: 'JouwWeb vanaf € 5,50, Wix vanaf € 14 per maand. Webshop, betaalmethoden, boekhoudkoppelingen en ontwerp naast elkaar.',
     intro: 'Twee websitebouwers met een gratis versie. JouwWeb komt uit Eindhoven en is goedkoper; Wix geeft meer ontwerpvrijheid.',
     rows: [['Instapprijs', '€ 14 per maand (Light)', '€ 5,50 per maand (Lite)'], ['Webshop vanaf', '€ 25 per maand (Core)', '€ 10 per maand (Pro, 10 producten)'], ['Onbeperkt producten', 'Vanaf Core', 'Business, € 20 per maand'], ['Verkoopcommissie', 'Niet vermeld op de prijspagina', '0%'], ['Boekhoudkoppelingen', 'Niet vermeld op de prijspagina', 'o.a. e-Boekhouden, Moneybird, Jortt, SnelStart'], ['Gratis versie', 'Ja, met Wix-advertenties', 'Ja, zonder eigen domeinnaam'], ['Geld terug', '14 dagen', 'Niet vermeld']],
@@ -108,7 +108,7 @@ export const vsPages = [
   }),
   cmp({
     slug: 'shopify-vs-woocommerce', a: 'shopify', b: 'woocommerce', h1: 'Shopify of WooCommerce: alles geregeld of alles zelf?',
-    title: 'Shopify vs WooCommerce 2026: kosten en verschillen | ShopMatch',
+    title: 'Shopify vs WooCommerce 2026: kosten | ShopMatch',
     description: 'Shopify kost vanaf € 21 per maand all-in, WooCommerce is gratis maar je betaalt hosting en extensies. Zo kies je.',
     intro: 'Shopify regelt hosting, beveiliging en updates voor je. WooCommerce is een gratis plugin voor WordPress: je hebt alles in de hand, maar regelt het ook zelf.',
     rows: [['Platformkosten', '€ 21 per maand (Basic, jaar)', '€ 0'], ['Hosting', 'Inbegrepen', 'Zelf regelen; WooCommerce noemt $ 25 tot $ 350 per maand'], ['Extensies', 'Apps, vaak betaald', '$ 29 tot $ 299 per jaar per extensie'], ['Betaalprovider', 'Shopify Payments, anders 2% extra (Basic)', 'Vrij te kiezen, geen extra kosten'], ['Onderhoud', 'Door Shopify', 'Zelf: updates en beveiliging'], ['Technische kennis', 'Weinig nodig', 'Meer nodig']],
@@ -120,7 +120,7 @@ export const vsPages = [
 
 const allRows = IDS.map((id) => `<tr><th scope="row"><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td>${esc(P[id].soort)}</td><td>${esc(P[id].vanafTekst)}</td><td>${esc(P[id].voor)}</td></tr>`).join('');
 export const vsHub = {
-  path: '/vergelijken/', title: 'Webshop-platforms vergelijken 2026: prijzen naast elkaar | ShopMatch', h1: 'Vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED },
+  path: '/vergelijken/', title: 'Webshop-platforms vergelijken 2026 | ShopMatch', h1: 'Vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED },
   description: 'Alle zeven platforms in één tabel: soort, instapprijs en voor wie het past. Plus de vergelijkingen Shopify vs Lightspeed, Wix vs JouwWeb en Shopify vs WooCommerce.',
   body: `<h1>Webshop-platforms vergelijken</h1><p class="lead">Instapprijzen van de aanbieders zelf, excl. btw.</p><div class="tbl"><table><thead><tr><th>Platform</th><th>Soort</th><th>Vanaf</th><th>Past bij</th></tr></thead><tbody>${allRows}</tbody></table></div>
 <h2>Twee platforms naast elkaar</h2><div class="grid">${vsPages.map((v) => `<a class="card link" href="${v.path}"><h3 class="h3">${esc(v.h1.split(':')[0])}</h3><p class="meta">${esc(v.description)}</p></a>`).join('')}</div>${matchCta()}`,
@@ -142,7 +142,7 @@ const besteFaq = [
   ['Wat is het goedkoopste webshop-platform?', 'Hostinger Website Bouwer Business kost € 3,99 per maand als je 48 maanden vooraf betaalt. Bij maandelijks opzegbare pakketten is JouwWeb Pro met € 10 per maand het goedkoopst.'],
 ];
 export const beste = {
-  ...article({ path: '/beste-webshop-platform/', title: 'Beste webshop-platform 2026: de keuze per situatie | ShopMatch', h1: 'Het beste webshop-platform van 2026', description: 'Welk webshop-platform is het beste in 2026? Per situatie de beste keuze: starters, klein budget, groei, winkel met webshop en volledige controle.', og: 'beste-webshop-platform', parents: G, faq: besteFaq }),
+  ...article({ path: '/beste-webshop-platform/', title: 'Beste webshop-platform 2026: keuze per situatie', h1: 'Het beste webshop-platform van 2026', description: 'Welk webshop-platform is het beste in 2026? Per situatie de beste keuze: starters, klein budget, groei, winkel met webshop en volledige controle.', og: 'beste-webshop-platform', parents: G, faq: besteFaq }),
   navPath: '/gidsen/',
   body: `<article><h1>Het beste webshop-platform van 2026</h1>${by()}<p class="lead">Het beste platform hangt af van wat je verkoopt, hoeveel producten je hebt en hoeveel tijd je in techniek wilt steken. Dit is onze keuze per situatie.</p>
 <h2>Beste voor starters met een paar producten: JouwWeb</h2><p>JouwWeb Pro kost € 10 per maand voor een webshop tot 10 producten, zonder verkoopcommissie. Met Business (€ 20) verkoop je onbeperkt. iDEAL en koppelingen met boekhoudprogramma's zitten erin.</p><div class="out">${knop('jouwweb', 'gids_beste')}</div>
@@ -161,7 +161,7 @@ const kostenFaq = [
   ['Welke kosten komen er nog bij?', 'Een domeinnaam, transactiekosten per betaling, eventueel betaalde apps of een thema, en je boekhouding.'],
 ];
 export const kosten = {
-  ...article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026? | ShopMatch', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }),
+  ...article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }),
   navPath: '/gidsen/',
   body: `<article><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, excl. btw.</p>
 <h2>Platformkosten in het eerste jaar</h2><div class="tbl"><table><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td>${esc(pk)}</td><td>${esc(j)}</td><td>${esc(l)}</td></tr>`).join('')}</tbody></table></div>
@@ -176,7 +176,7 @@ const gratisFaq = [
   ['Kan ik gratis een webshop maken?', 'Niet blijvend bij een websitebouwer: verkopen kan bij JouwWeb vanaf Pro (€ 10) en bij Wix vanaf Core (€ 25 per maand). WooCommerce is gratis, maar hosting niet.'],
 ];
 export const gratis = {
-  ...article({ path: '/gratis-website-maken/', title: 'Gratis website maken in 2026: wat kan wel en niet? | ShopMatch', h1: 'Gratis website maken: wat kan wel en niet?', description: 'Gratis een website maken kan bij JouwWeb en Wix, zonder eigen domein. Wat je gratis krijgt, waar de grenzen liggen en wat de goedkoopste betaalde stap is.', og: 'gratis-website-maken', parents: G, faq: gratisFaq }),
+  ...article({ path: '/gratis-website-maken/', title: 'Gratis website maken 2026: wat kan wel en niet?', h1: 'Gratis website maken: wat kan wel en niet?', description: 'Gratis een website maken kan bij JouwWeb en Wix, zonder eigen domein. Wat je gratis krijgt, waar de grenzen liggen en wat de goedkoopste betaalde stap is.', og: 'gratis-website-maken', parents: G, faq: gratisFaq }),
   navPath: '/gidsen/',
   body: `<article><h1>Gratis website maken: wat kan wel en niet?</h1>${by()}<p class="lead">Een gratis website is prima om te proberen. Voor een zakelijke site wil je een eigen domeinnaam, en die zit niet in de gratis pakketten.</p>
 <h2>Gratis pakketten</h2><div class="tbl"><table><thead><tr><th>Aanbieder</th><th>Gratis</th><th>Grens</th></tr></thead><tbody><tr><th scope="row"><a href="/platformen/jouwweb/">JouwWeb</a></th><td>Gratis pakket, altijd</td><td>Geen eigen domeinnaam</td></tr><tr><th scope="row"><a href="/platformen/wix/">Wix</a></th><td>Gratis website</td><td>Wix-advertenties en een Wix-adres</td></tr><tr><th scope="row"><a href="/platformen/woocommerce/">WooCommerce</a></th><td>Gratis plugin</td><td>Hosting en domein betaal je zelf</td></tr></tbody></table></div>
@@ -191,7 +191,7 @@ const zzpFaq = [
   ['Kan ik afspraken laten boeken op mijn site?', 'Ja. Bij Mijndomein zit boekingen en afspraken in elk MijnWebshop-pakket.'],
 ];
 export const zzp = {
-  ...article({ path: '/website-maken-zzp/', title: 'Website maken als zzp\'er: de beste opties in 2026 | ShopMatch', h1: 'Website maken als zzp\'er', description: 'Als zzp\'er een website maken: wat je nodig hebt en welke websitebouwer past. JouwWeb, Wix, Hostinger en Mijndomein met prijzen.', og: 'website-maken-zzp', parents: G, faq: zzpFaq }),
+  ...article({ path: '/website-maken-zzp/', title: 'Website maken als zzp\'er: beste opties 2026', h1: 'Website maken als zzp\'er', description: 'Als zzp\'er een website maken: wat je nodig hebt en welke websitebouwer past. JouwWeb, Wix, Hostinger en Mijndomein met prijzen.', og: 'website-maken-zzp', parents: G, faq: zzpFaq }),
   navPath: '/gidsen/',
   body: `<article><h1>Website maken als zzp'er</h1>${by()}<p class="lead">Een goede zzp-site heeft een eigen domeinnaam, laat zien wat je doet en maakt contact makkelijk. Dat kan zonder webbouwer.</p>
 <h2>Wat je nodig hebt</h2><ul><li>Een eigen domeinnaam en een e-mailadres op dat domein.</li><li>Een pagina per dienst, met prijzen of een vanaf-prijs.</li><li>Een contactformulier of afsprakenplanner.</li><li>Je bedrijfsgegevens in de footer.</li></ul>
