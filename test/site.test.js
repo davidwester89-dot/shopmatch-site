@@ -4,7 +4,7 @@ import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { score } from '../src/lib/match.js';
-import { uitgaand, knop } from '../src/lib/partnerlinks.js';
+import { uitgaand, knop, PARTNERLINKS } from '../src/lib/partnerlinks.js';
 import { PLATFORMS, IDS } from '../src/lib/platforms.js';
 
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
@@ -18,8 +18,18 @@ test('match: logische uitkomsten', () => {
     assert.ok(!score({ doel, producten: '100', budget, techniek: 'geen', nl: 'nee' }).slice(0, 3).some((r) => r.id === 'woocommerce'));
 });
 
-test('partnerlinks: leeg, en gevuld = sponsored nofollow + label', () => {
-  for (const id of IDS) { const o = uitgaand(id); assert.equal(o.partner, false); assert.equal(o.href, PLATFORMS[id].url); assert.ok(!o.rel.includes('sponsored')); }
+test('partnerlinks: alleen goedgekeurde links, gevuld = sponsored nofollow + zichtbaar label', () => {
+  for (const [id, href] of Object.entries(PARTNERLINKS)) { assert.ok(PLATFORMS[id], `partnerlink voor onbekend platform ${id}`); assert.match(href, /^https:\/\//, id); }
+  for (const id of IDS) {
+    const o = uitgaand(id);
+    if (PARTNERLINKS[id]) { assert.equal(o.partner, true); assert.equal(o.href, PARTNERLINKS[id]); assert.equal(o.rel, 'sponsored nofollow noopener'); }
+    else { assert.equal(o.partner, false); assert.equal(o.href, PLATFORMS[id].url); assert.equal(o.rel, 'noopener'); }
+    const k = knop(id, 't');
+    assert.equal(/rel="sponsored nofollow noopener"/.test(k), !!PARTNERLINKS[id], id);
+    assert.equal(/<\/a><span class="partner">partnerlink<\/span>$/.test(k), !!PARTNERLINKS[id], id);
+  }
+  // Zonder partnerlinks: officiële site, geen sponsored, geen label.
+  for (const id of IDS) { const o = uitgaand(id, {}); assert.equal(o.partner, false); assert.equal(o.href, PLATFORMS[id].url); assert.ok(!knop(id, 't', 'btn', {}).includes('partner"')); }
   const k = knop('shopify', 't', 'btn', { shopify: 'https://example.com/aff' });
   assert.match(k, /rel="sponsored nofollow noopener"/);
   assert.match(k, /partnerlink<\/span>/);
@@ -54,8 +64,12 @@ test('build (productie): pagina’s, sitemap, robots, IndexNow, regels', () => {
       const p = m[1]; const t = p.endsWith('/') ? join('dist', p, 'index.html') : join('dist', p);
       assert.ok(existsSync(t), `${f}: kapotte link ${p}`);
     }
-    // Uitgaande links naar aanbieders: noopener, en sponsored alleen bij een partnerlink.
-    for (const m of s.matchAll(/<a [^>]*data-partner-slot="[^"]+"[^>]*>/g)) assert.match(m[0], /rel="noopener"/);
+    // Uitgaande links naar aanbieders: goedgekeurde partnerlink = sponsored nofollow noopener, anders officiële site met noopener.
+    for (const m of s.matchAll(/<a [^>]*data-partner-slot="([^"]+)"[^>]*>/g)) {
+      const id = m[1]; const href = m[0].match(/href="([^"]+)"/)[1];
+      if (PARTNERLINKS[id]) { assert.equal(href, PARTNERLINKS[id], `${f}: ${id}`); assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: ${id}`); }
+      else { assert.equal(href, PLATFORMS[id].url, `${f}: ${id}`); assert.match(m[0], /rel="noopener"/, `${f}: ${id}`); }
+    }
   }
 });
 

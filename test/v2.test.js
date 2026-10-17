@@ -68,9 +68,13 @@ test('build: huisstijl, componenten en regels op elke pagina', () => {
     assert.match(s, /<details class="menu">/); assert.match(s, /<footer class="site">/);
     assert.ok(!/<div class="net">[\s\S]*shopmatch\.nl[\s\S]*<\/div>/.test(s.slice(s.indexOf('<div class="net">'), s.indexOf('<p class="fine">'))), `${f}: netwerkfooter linkt naar zichzelf`);
     if (/<article/.test(s) && /class="src">Door/.test(s)) assert.match(s, /Door de Redactie ShopMatch/);
-    // Partnerplekken leeg: geen sponsored links en geen label zolang er geen goedgekeurde partnerlink is.
-    assert.ok(!/rel="sponsored/.test(s), `${f}: sponsored zonder partnerlink`);
-    assert.ok(!/class="partner"/.test(s), `${f}: partnerlabel zonder partnerlink`);
+    // Elke sponsored link toont direct erna het zichtbare label 'partnerlink'; geen label zonder sponsored link.
+    const sponsored = [...s.matchAll(/<a [^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
+    for (const m of sponsored) {
+      assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: rel`);
+      assert.match(s.slice(m.index), /^<a [^>]*>[^<]*<\/a><span class="partner">partnerlink<\/span>/, `${f}: sponsored zonder label partnerlink`);
+    }
+    assert.equal((s.match(/class="partner"/g) || []).length, sponsored.length, `${f}: label zonder sponsored link`);
   }
   const v = read('dist/vergelijken/index.html');
   assert.match(v, /id="filters"/); assert.match(v, /id="f-sort"/);
