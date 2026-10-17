@@ -1,7 +1,7 @@
 // ShopMatch: pure matchlogica (ook in de browser gebruikt). Partnerlinks spelen hier geen rol.
 // Antwoorden: doel (site|diensten|shop|winkel), producten (0|10|100|1000|meer),
 // budget (laag|mid|hoog), techniek (geen|wat|veel), nl (ja|nee).
-import { PLATFORMS } from './platforms.js';
+import { PLATFORMS, VERKOOP_VANAF, MAX_PRODUCTEN } from './platforms.js';
 
 export const VRAGEN = [
   { id: 'doel', vraag: 'Wat wil je online zetten?', opties: [['site', 'Een website zonder verkoop'], ['diensten', 'Diensten of afspraken verkopen'], ['shop', 'Een webshop'], ['winkel', 'Webshop naast mijn fysieke winkel']] },
@@ -14,9 +14,9 @@ export const VRAGEN = [
 const N = { '0': 0, '10': 10, '100': 100, '1000': 1000, meer: 5000 };
 const NL = ['jouwweb', 'lightspeed', 'mijndomein'];
 // Maximaal aantal producten per instappakket met webshop (eigen sites, zie platforms.js). Infinity = onbeperkt.
-const MAXPROD = { shopify: Infinity, wix: Infinity, jouwweb: Infinity, lightspeed: 15000, hostinger: Infinity, mijndomein: 20000, woocommerce: Infinity };
+const MAXPROD = Object.fromEntries(Object.entries(MAX_PRODUCTEN).map(([k, v]) => [k, v ?? Infinity])); // niet vermeld = geen grens aannemen
 // Maandprijs van het goedkoopste pakket waarmee je kunt verkopen (jaarbetaling waar dat de vanaf-prijs is).
-export const VERKOOPPRIJS = { shopify: 21, wix: 25, jouwweb: 10, lightspeed: 68, hostinger: 3.99, mijndomein: 15, woocommerce: 0 };
+export const VERKOOPPRIJS = VERKOOP_VANAF;
 /** Maandprijs van het goedkoopste pakket dat past bij het aantal producten. */
 export function verkoopPrijs(id, n) {
   if (id === 'jouwweb' && n > 10) return 20; // Business, onbeperkt

@@ -11,6 +11,7 @@ cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
 cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });
 cpSync('src/assets/icons', OUT, { recursive: true });
+cpSync('src/assets/fonts', join(OUT, 'fonts'), { recursive: true });
 cpSync('src/root', OUT, { recursive: true });
 // CNAME pas bij livegang (GO_LIVE=1). Zonder CNAME blijft dit een preview op github.io.
 if (process.env.GO_LIVE === '1') write(join(OUT, 'CNAME'), 'shopmatch.nl\n');

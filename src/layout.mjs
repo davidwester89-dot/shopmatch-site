@@ -12,31 +12,42 @@ const G = GA_ID ? { script: ' https://www.googletagmanager.com', connect: ' http
 
 export const SITE = {
   name: 'ShopMatch', domain: 'https://shopmatch.nl', email: 'info@shopmatch.nl',
-  tagline: 'De webshop of website die bij je past.', updated: '2026-10-17', theme: '#b44d22', owner: 'Redactie ShopMatch',
+  tagline: 'Webshop kiezen? Vergelijk eerst.', updated: '2026-10-17', theme: '#4b3fc4', owner: 'Redactie ShopMatch',
 };
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-export const BRAND = 'Shop<b>Match</b>.nl';
-// Logo: boodschappentas met vinkje, terracotta vlak.
-export const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect width="40" height="40" rx="10" fill="#b44d22"/><path d="M10 15h20l-1.6 16.5a2 2 0 0 1-2 1.5H13.6a2 2 0 0 1-2-1.5z" fill="#fff"/><path d="M15 15v-2.5a5 5 0 0 1 10 0V15" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="m15.5 23.5 3 3 6-6" fill="none" stroke="#1f5f4f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+export const BRAND = 'Shop<b>Match</b>';
+// Logo: zelfde opbouw als BoekhoudMatch (afgerond vlak, wit symbool, amber stip), eigen accent: boodschappentas met vinkje op indigo.
+export const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect width="40" height="40" rx="11" fill="#4b3fc4"/><path d="M10 15h20l-1.6 16.5a2 2 0 0 1-2 1.5H13.6a2 2 0 0 1-2-1.5z" fill="#fff"/><path d="M15 15v-2.5a5 5 0 0 1 10 0V15" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="m15.5 23.5 3 3 6-6" fill="none" stroke="#4b3fc4" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="8" r="4" fill="#e7a33e"/></svg>';
+
+// Lijn-iconen (zelfde set en stijl als BoekhoudMatch: 24px, lijn 2, ronde uiteinden; Lucide-stijl, MIT).
+const ic = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+export const ICONS = {
+  match: ic('<path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>'),
+  kalender: ic('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'),
+  bron: ic('<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>'),
+  schild: ic('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>'),
+  gratis: ic('<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/><path d="M17 11l2 2 4-4"/>'),
+};
 
 const NAV = [
-  ['/shop-match/', 'Doe de match', 'nav-cta'],
-  ['/platformen/', 'Platformen'],
+  ['/shop-match/', 'Start de match', 'nav-cta'],
   ['/vergelijken/', 'Vergelijken'],
+  ['/platformen/', 'Platforms'],
   ['/gidsen/', 'Gidsen'],
   ['/over/', 'Over ons'],
 ];
+const navLinks = (navPath) => NAV.map(([h, t, c]) => `<a href="${h}"${c ? ` class="${c}"` : ''}${navPath.startsWith(h) ? ' aria-current="page"' : ''}>${esc(t)}</a>`).join('');
 const CSS = readFileSync(new URL('./assets/css/style.css', import.meta.url), 'utf8')
-  .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/;}/g, '}');
+  .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};:,>])\s*/g, '$1').replace(/;}/g, '}');
 
 export function networkFooter() {
-  return `<div class="net"><p class="fh">Ook van ons</p><ul>${networkFor('shopmatch.nl').map((s) => `<li><a href="${s.url}">${s.logo}</a> <span>· ${esc(s.wat)}</span></li>`).join('')}</ul></div>`;
+  return `<div class="net"><p class="fh">Ook van ons</p><ul>${networkFor('shopmatch.nl').map((s) => `<li><a href="${s.url}">${s.logo}</a> · ${esc(s.wat)}</li>`).join('')}</ul></div>`;
 }
 
-/** Interne links krijgen in de preview het BASE-pad; externe links en canonicals blijven gelijk. */
+/** Interne links (en lettertypes in de CSS) krijgen in de preview het BASE-pad; externe links en canonicals blijven gelijk. */
 export function withBase(html) {
   if (!BASE) return html;
-  return html.replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/srcset="([^"]+)"/g, (m, v) => `srcset="${v.replace(/(^|, )\//g, `$1${BASE}/`)}"`);
+  return html.replace(/(href|src|action)="\/(?!\/)/g, `$1="${BASE}/`).replace(/srcset="([^"]+)"/g, (m, v) => `srcset="${v.replace(/(^|, )\//g, `$1${BASE}/`)}"`).replace(/url\(\/fonts\//g, `url(${BASE}/fonts/`);
 }
 
 export function layout(p) {
@@ -50,13 +61,14 @@ export function layout(p) {
   ];
   const hasCta = !p.noCta && p.path !== '/shop-match/' && p.path !== '/404.html';
   const og = `${SITE.domain}/og/${p.og || 'home'}.png`;
+  const navPath = p.navPath || p.path;
   const robots = PREVIEW || p.noindex ? '<meta name="robots" content="noindex">' : '';
   const html = `<!doctype html>
 <html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'${G.script}; style-src 'self' 'unsafe-inline'; img-src 'self' data:${G.img}; connect-src 'self'${G.connect}; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'${G.script}; style-src 'self' 'unsafe-inline'; img-src 'self' data:${G.img}; font-src 'self'; connect-src 'self'${G.connect}; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>${esc(p.title)}</title>
 <meta name="description" content="${esc(p.description)}">
@@ -68,6 +80,7 @@ ${robots}${p.noindex ? '' : `<link rel="canonical" href="${url}">`}
 ${p.article ? `<meta property="article:published_time" content="${p.article.date}"><meta property="article:modified_time" content="${p.article.updated}">` : ''}
 <meta name="theme-color" content="${SITE.theme}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <style>${CSS}</style>
 ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(/</g, '\\u003c')}</script>`).join('\n')}
 </head>
@@ -75,8 +88,9 @@ ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(
 <a class="skip" href="#inhoud">Naar de inhoud</a>
 ${PREVIEW ? '<p class="preview">Preview van ShopMatch.nl, nog niet live</p>' : ''}
 <header class="site"><div class="wrap">
-<a class="logo" href="/">${LOGO}<span>${BRAND}</span></a>
-<nav class="main" aria-label="Hoofdmenu">${NAV.map(([h, t, c]) => `<a href="${h}"${c ? ` class="${c}"` : ''}${(p.navPath || p.path).startsWith(h) ? ' aria-current="page"' : ''}>${esc(t)}</a>`).join('')}</nav>
+<a class="logo" href="/" aria-label="${SITE.name}, naar de homepage">${LOGO}<span>${BRAND}</span></a>
+<nav class="main" aria-label="Hoofdmenu">${navLinks(navPath)}</nav>
+<details class="menu"><summary><span class="burger" aria-hidden="true"></span><span class="menu-txt">Menu</span></summary><nav aria-label="Hoofdmenu">${navLinks(navPath)}</nav></details>
 </div></header>
 <main id="inhoud"><div class="wrap">
 ${crumbs}
@@ -85,14 +99,15 @@ ${foutGezien(url)}
 </div></main>
 <footer class="site"><div class="wrap">
 <div class="cols">
-<div><a class="logo" href="/">${LOGO}<span>${BRAND}</span></a><p>${esc(SITE.tagline)}</p></div>
-<div><p class="fh">Platformen</p><ul><li><a href="/platformen/shopify/">Shopify</a></li><li><a href="/platformen/wix/">Wix</a></li><li><a href="/platformen/jouwweb/">JouwWeb</a></li><li><a href="/platformen/lightspeed/">Lightspeed eCom</a></li><li><a href="/platformen/">Alle platformen</a></li></ul></div>
-<div><p class="fh">Gidsen</p><ul><li><a href="/beste-webshop-platform/">Beste webshop-platform 2026</a></li><li><a href="/webshop-beginnen-kosten/">Wat kost een webshop?</a></li><li><a href="/gratis-website-maken/">Gratis website maken</a></li><li><a href="/website-maken-zzp/">Website voor zzp'ers</a></li></ul></div>
-<div><p class="fh">Over</p><ul><li><a href="/over/">Over ons</a></li><li><a href="/privacy/">Privacy en cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie-instellingen</a></li>' : ''}<li><a href="mailto:${SITE.email}">Contact</a></li></ul></div>
+<div><a class="logo" href="/">${LOGO}<span>${BRAND}</span></a><p>Eerlijke hulp bij het kiezen van een webshop-platform of websitebouwer.</p></div>
+<div><p class="fh">Vergelijken</p><ul><li><a href="/shop-match/">Webshop-platform kiezen</a></li><li><a href="/vergelijken/">Alle platforms vergelijken</a></li><li><a href="/vergelijken/shopify-vs-lightspeed/">Shopify of Lightspeed</a></li><li><a href="/vergelijken/wix-vs-jouwweb/">Wix of JouwWeb</a></li><li><a href="/vergelijken/shopify-vs-woocommerce/">Shopify of WooCommerce</a></li></ul></div>
+<div><p class="fh">Gidsen</p><ul><li><a href="/beste-webshop-platform/">Beste webshop-platform 2026</a></li><li><a href="/webshop-beginnen-kosten/">Wat kost een webshop?</a></li><li><a href="/gratis-website-maken/">Gratis website maken</a></li><li><a href="/website-maken-zzp/">Website voor zzp'ers</a></li><li><a href="/gidsen/">Alle gidsen</a></li></ul></div>
+<div><p class="fh">Over ons</p><ul><li><a href="/over/">Over ShopMatch</a></li><li><a href="/over/#methode">Zo vergelijken we</a></li><li><a href="/privacy/">Privacy en cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie-instellingen</a></li>' : ''}<li><a href="mailto:${SITE.email}">Contact</a></li></ul></div>
 </div>
 ${networkFooter()}
+<p class="fine">© 2026 ${SITE.name}. Partnerlinks hebben nooit invloed op de volgorde of de match.</p>
 </div></footer>
-${hasCta ? `<a class="stickycta" href="/shop-match/" data-cta="sticky_match">Doe de match in 1 minuut</a>` : ''}
+${hasCta ? `<a class="stickycta" href="/shop-match/" data-cta="sticky_match">${ICONS.match}<span>Bekijk jouw match in 1 minuut</span></a>` : ''}
 ${[...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<script type="module" src="${s}"></script>`).join('\n')}
 </body>
 </html>`;
@@ -109,7 +124,7 @@ const SCHILD = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fi
 export function stampHtml(stamp) {
   if (!stamp || (!stamp.checked && !stamp.updated)) return '';
   const t = (d) => `<time datetime="${d}">${fmtDate(d)}</time>`;
-  return `<p class="stamp">${stamp.checked ? `<span class="badge-ok">${SCHILD}Prijzen gecontroleerd op ${t(stamp.checked)}</span>` : ''}${stamp.updated ? `<span class="upd">Laatst bijgewerkt ${t(stamp.updated)}</span>` : ''}</p>`;
+  return `<p class="stamp">${stamp.checked ? `<span class="badge-ok">${SCHILD}<span>Prijzen gecontroleerd op ${t(stamp.checked)}</span></span>` : ''}${stamp.updated ? `<span class="upd">Laatst bijgewerkt ${t(stamp.updated)}</span>` : ''}</p>`;
 }
 export function withStamp(body, stamp) {
   const html = stampHtml(stamp);
