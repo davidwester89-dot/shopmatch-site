@@ -19,7 +19,7 @@ const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class
 const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Score">${scoreBadge(id)}</td><td class="n" data-l="Verkopen vanaf">${verkoopTekst(id)}</td>${[['ideal', 'iDEAL'], ['pos', 'Kassa'], ['b2b', 'B2B'], ['talen', 'Meerdere talen']].map(([k, l]) => `<td data-l="${l}">${fv(FEATURES[id][k], false)}</td>`).join('')}</tr>`).join('');
 
 export const home = {
-  path: '/', title: 'ShopMatch: webshop-platforms vergelijken (2026)', ogTitle: 'ShopMatch: welk webshop-platform past bij jouw bedrijf?', h1: 'ShopMatch.nl', og: 'home',
+  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshop-platform past bij jouw bedrijf?', h1: 'ShopMatch.nl', og: 'home',
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein, Squarespace en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
   schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<section class="hero"><div>
@@ -97,9 +97,12 @@ export const platformPages = IDS.map((id) => {
   const h1 = `${p.naam}: prijzen, voor- en nadelen`;
   const pos = RANG.indexOf(id) + 1;
   const alt = RANG.filter((x) => x !== id).slice(0, 3);
-  const t = `${p.naam} prijzen 2026 | ShopMatch`;
+  // Zoekwoord eerst: '<platform> kosten' (Google-suggesties: shopify/wix/jouwweb/woocommerce/squarespace kosten). Kortste variant die ≤ 60 past.
+  const t = [`${p.naam} kosten 2026: prijzen per pakket | ShopMatch`, `${p.naam} kosten 2026: alle prijzen | ShopMatch`, `${p.naam} kosten 2026 | ShopMatch`, `${p.naam} kosten 2026`].find((x) => x.length <= 60);
+  const prijs = /^€/.test(p.vanafTekst) ? `Vanaf ${p.vanafTekst}` : p.vanafTekst;
+  const d = [`Wat kost ${p.naam}? ${prijs}. Alle pakketten, de checklist van 10 punten, voor- en nadelen en voor wie het past.`, `Wat kost ${p.naam}? ${prijs}. Alle pakketten, checklist, voor- en nadelen.`, `Wat kost ${p.naam}? ${prijs}.`].find((x) => x.length <= 155);
   return {
-    ...article({ path, title: t.length <= 60 ? t : `${p.naam} prijzen 2026`, h1, description: `${p.naam} vanaf ${p.vanafTekst}. Alle pakketten, de checklist van 10 punten, voor wie het past en de nadelen, met bron.`, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] }),
+    ...article({ path, title: t, h1, description: d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] }),
     navPath: '/platformen/',
     body: `<article><div class="phead"><span class="phead-logo">${logoImg(id, { maat: 'lg', eager: true })}</span><span class="tag best">Beste voor: ${esc(BEST_FOR[id])}</span></div><h1>${esc(h1)}</h1>${by()}<p class="lead">${esc(p.kort)}</p>
 <div class="pcard first"><div class="pc-head"><span class="sc-lbl">Verkopen vanaf</span><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p>${p.vanaf !== VERKOOP_VANAF[id] && id !== 'woocommerce' ? `<p class="pc-price">Website zonder verkoop: vanaf ${esc(p.vanafTekst)}</p>` : ''}</div>
@@ -118,7 +121,7 @@ ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featu
 
 export const platformHub = {
   path: '/platformen/', title: 'Webshop-platforms 2026: prijzen en score | ShopMatch', h1: 'Alle webshop-platforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: CHECKED },
-  description: 'Shopify, Wix, JouwWeb, Lightspeed eCom, Hostinger, Mijndomein, Squarespace en WooCommerce: per platform de prijs, checklist-score, voor- en nadelen en voor wie het past.',
+  description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein, Squarespace en WooCommerce: per platform de prijs, checklist-score en voor wie het past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
   body: `<h1>Alle webshop-platforms op een rij</h1><p class="lead">Acht manieren om online te verkopen, van gratis plugin tot compleet platform met kassa. Gesorteerd op checklist-score, bij gelijke stand op prijs.</p>
 <div class="actions"><a class="btn" href="/shop-match/">Liever advies op maat? Start de match</a><a class="btn ghost" href="/vergelijken/">Filter en vergelijk</a></div>
