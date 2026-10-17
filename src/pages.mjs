@@ -1,5 +1,5 @@
 import { SITE, esc, ORG, GA_ID, ICONS, fmtDate } from './layout.mjs';
-import { IDS, CHECKED, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET } from './lib/platforms.js';
+import { IDS, CHECKED, prijsNootVan, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET } from './lib/platforms.js';
 import { knop } from './lib/partnerlinks.js';
 import { VRAGEN } from './lib/match.js';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, ranglijst, situaties } from './lib/checklist.js';
@@ -44,7 +44,7 @@ ${situaties().filter((x) => x.top).map((x) => `<li><span class="sit-logo">${word
 </ol>
 <p><a href="/shop-match/">Jouw situatie is anders? Start de match →</a></p>
 <h2>De platforms op een rij</h2>
-<p class="sub">Gesorteerd op checklist-score, bij gelijke stand op prijs. Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, excl. btw.</p>
+<p class="sub">Gesorteerd op checklist-score, bij gelijke stand op prijs. Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is; dat staat per platform bij de prijzen.</p>
 <div class="table-wrap"><table class="data"><thead><tr><th scope="col">Platform</th><th scope="col">Score</th><th scope="col">Verkopen vanaf</th><th scope="col">iDEAL</th><th scope="col">Kassa</th><th scope="col">B2B</th><th scope="col">Meerdere talen</th></tr></thead><tbody>${miniRows}</tbody></table></div>
 <p><a href="/vergelijken/">Alle 10 checklistpunten, met filters →</a></p>
 <section class="band method-band">
@@ -104,7 +104,7 @@ export const platformPages = IDS.map((id) => {
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 ${scoreBlock(id)}
 <div class="pc-cta">${knop(id, 'platform_top')}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
-<h2>Pakketten en prijzen</h2><p class="sub">${esc(p.prijsNoot || `Excl. btw, zoals ${p.naam.split(' ')[0]} ze toont.`)}</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
+<h2>Pakketten en prijzen</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
 <h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld telt als 0. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
@@ -146,7 +146,7 @@ export const vsHub = {
 <div class="sortbar"><h2 style="margin:0">Alle platforms naast elkaar</h2>${sel('f-sort', 'Sorteer op', [['score', 'Checklist-score'], ['prijs', 'Laagste prijs'], ['naam', 'Naam']])}</div>
 ${matrix(RANG)}
 <p class="empty" id="f-empty" hidden>Geen platform voldoet aan alles. Zet een filter uit of <a href="/shop-match/">start de match</a>.</p>
-<p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, excl. btw. Bronnen staan op de pagina van elk platform.</p>
+<p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, zoals de aanbieder het toont. JouwWeb, Hostinger en Mijndomein noemen excl. btw, Wix exclusief toeslagen; Shopify, Lightspeed en WooCommerce vermelden het niet. Bronnen staan op de pagina van elk platform.</p>
 ${methodBox()}
 <h2>Twee platforms naast elkaar</h2>${vsCards()}${matchCta()}`,
 };
@@ -236,7 +236,7 @@ const kostenFaq = [
 export const kosten = {
   ...article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }),
   navPath: '/gidsen/',
-  body: `<article class="prose"><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, excl. btw.</p>
+  body: `<article class="prose"><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is.</p>
 <h2>Platformkosten in het eerste jaar</h2><div class="table-wrap"><table class="data"><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td>${esc(pk)}</td><td>${esc(j)}</td><td>${esc(l)}</td></tr>`).join('')}</tbody></table></div>
 <p>Shopify, Wix en Lightspeed: maandprijs × 12, bij Shopify en Wix met jaarbetaling. Acties zoals de korting van JouwWeb tot en met 31 oktober 2026 en de 6 gratis maanden bij Mijndomein zijn niet meegerekend.</p>
 <h2>Wat er nog bijkomt</h2><ul><li><strong>Domeinnaam.</strong> Vaak het eerste jaar inbegrepen. Bij JouwWeb betaal je daarna € 20 per jaar.</li><li><strong>Transactiekosten.</strong> Elke betaalprovider rekent per betaling. Shopify rekent op Basic 2% extra als je niet met Shopify Payments werkt.</li><li><strong>Apps en thema's.</strong> Bij Shopify en WooCommerce betaal je extra functies vaak los. WooCommerce noemt $ 29 tot $ 299 per jaar per extensie.</li><li><strong>Boekhouding.</strong> Met een webshop heb je een boekhoudprogramma nodig voor facturen en btw. Vergelijk ze op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</li></ul>

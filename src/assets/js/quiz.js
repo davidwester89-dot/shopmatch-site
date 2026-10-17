@@ -26,7 +26,7 @@ const prijsTekst = (r, a) => (r.id === 'woocommerce' ? '€ 0 + hosting' : `${fm
 function toon(a, scroll) {
   const top = score(a).slice(0, 3);
   const [b] = top; const pb = PLATFORMS[b.id];
-  out.innerHTML = `<h2>Jouw beste match</h2><p class="big">${esc(pb.naam)}</p><p class="pc-price"><strong>${prijsTekst(b, a)}</strong>${a.doel === 'site' ? 'Instappakket' : 'Goedkoopste pakket dat bij je aantal producten past'}, excl. btw</p>`
+  out.innerHTML = `<h2>Jouw beste match</h2><p class="big">${esc(pb.naam)}</p><p class="pc-price"><strong>${prijsTekst(b, a)}</strong> ${a.doel === 'site' ? 'Instappakket' : 'Goedkoopste pakket dat bij je aantal producten past'}, zoals ${esc(pb.naam.split(' ')[0])} het toont</p>`
     + `<div class="match-cta">${knop(b.id, 'match_1')}<a class="vlink" href="${BASE}/platformen/${pb.slug}/">Lees alles over ${esc(pb.naam)} →</a></div>`
     + `<h3>Top 3</h3><ol class="mtop">${top.map((r, i) => {
       const p = PLATFORMS[r.id]; const c = checklist(r.id);

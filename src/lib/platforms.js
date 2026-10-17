@@ -1,14 +1,17 @@
 // Platformdata. Alleen feiten van de eigen site van de aanbieder, met bron en controledatum.
-// Bedragen in euro, per maand, zoals de aanbieder ze toont (excl. btw tenzij anders vermeld).
+// Bedragen in euro, per maand, zoals de aanbieder ze toont. btw = wat de aanbieder zelf over btw/toeslagen zegt (leeg = niets vermeld).
 // Euro-bedragen Shopify en Wix bevestigd vanaf een Nederlands IP door Site-controleur (17-10-2026).
-// prijsNoot: optionele eigen tekst boven de prijstabel (standaard 'Excl. btw, zoals <naam> ze toont.').
+// prijsNoot: optionele eigen tekst boven de prijstabel; anders de standaardnoot uit prijsNootVan().
 export const CHECKED = '2026-10-17';
+
+/** Noot boven de prijstabel: btw-basis alleen als de aanbieder die zelf noemt (Site-controleur 17-10). */
+export const prijsNootVan = (p) => p.prijsNoot || (p.btw ? `${p.btw[0].toUpperCase()}${p.btw.slice(1)}, zoals ${p.naam.split(' ')[0]} ze toont.` : `Zoals ${p.naam.split(' ')[0]} ze toont; de prijspagina vermeldt niet of btw inbegrepen is.`);
 
 export const PLATFORMS = {
   shopify: {
     naam: 'Shopify', slug: 'shopify', soort: 'Webshopplatform', url: 'https://www.shopify.com/nl',
     kort: 'Webshopplatform voor wie serieus wil verkopen, ook buiten Nederland.',
-    vanaf: 21, vanafTekst: '€ 21 per maand (Basic, jaarbetaling)', prijsNoot: 'Zoals Shopify ze toont.',
+    vanaf: 21, vanafTekst: '€ 21 per maand (Basic, jaarbetaling)',
     plannen: [
       ['Basic', '€ 21 (bij jaarbetaling) · € 28 bij maandbetaling', 'Webshop met onbeperkt producten, 2% extra transactiekosten bij een externe betaalprovider'],
       ['Grow', '€ 59 (bij jaarbetaling) · € 78 bij maandbetaling', 'Tot 5 medewerkersaccounts'],
@@ -22,7 +25,7 @@ export const PLATFORMS = {
   wix: {
     naam: 'Wix', slug: 'wix', soort: 'Websitebouwer', url: 'https://nl.wix.com/',
     kort: 'Flexibele websitebouwer met webshopfuncties vanaf het Core-pakket.',
-    vanaf: 14, vanafTekst: '€ 14 per maand (Light, jaarbetaling)',
+    vanaf: 14, vanafTekst: '€ 14 per maand (Light, jaarbetaling)', btw: 'exclusief toeslagen',
     plannen: [
       ['Light', '€ 14 (bij jaarbetaling)', 'Eigen domein, geen Wix-advertenties, geen online betalingen'],
       ['Core', '€ 25 (bij jaarbetaling)', 'Online betalingen en basis-webshop'],
@@ -37,7 +40,7 @@ export const PLATFORMS = {
   jouwweb: {
     naam: 'JouwWeb', slug: 'jouwweb', soort: 'Websitebouwer', url: 'https://www.jouwweb.nl/',
     kort: 'Websitebouwer uit Eindhoven met webshop zonder verkoopcommissie.',
-    vanaf: 5.5, vanafTekst: '€ 5,50 per maand (Lite, jaarbetaling)',
+    vanaf: 5.5, vanafTekst: '€ 5,50 per maand (Lite, jaarbetaling)', btw: 'excl. btw',
     plannen: [
       ['Gratis', '€ 0', 'Editor proberen, geen eigen domeinnaam'],
       ['Lite', '€ 5,50', 'Eigen domeinnaam (eerste jaar gratis)'],
@@ -53,7 +56,7 @@ export const PLATFORMS = {
   lightspeed: {
     naam: 'Lightspeed eCom', slug: 'lightspeed', soort: 'Webshopplatform', url: 'https://www.lightspeedhq.nl/ecommerce/',
     kort: 'Webshopplatform van kassaleverancier Lightspeed, voor winkels die ook online verkopen.',
-    vanaf: 68, vanafTekst: '€ 68 per maand (Essential)',
+    vanaf: 68, vanafTekst: '€ 68 per maand (Essential)', prijsNoot: 'Zoals Lightspeed ze toont op de prijspagina; daar staat niet of de bedragen incl. of excl. btw zijn.',
     plannen: [
       ['Essential', '€ 68', '250 productvarianten, 1 gebruiker, 1 taal, e-mailsupport'],
       ['Advanced', '€ 120', '5.000 varianten, 3 gebruikers, 3 talen, telefonische support'],
@@ -67,7 +70,7 @@ export const PLATFORMS = {
   hostinger: {
     naam: 'Hostinger Website Bouwer', slug: 'hostinger', soort: 'Websitebouwer', url: 'https://www.hostinger.com/nl/website-maken',
     kort: 'Goedkope websitebouwer met AI, webshop vanaf het Onbeperkt-pakket.',
-    vanaf: 2.99, vanafTekst: '€ 2,99 per maand (Premium, 48 maanden vooraf)',
+    vanaf: 2.99, vanafTekst: '€ 2,99 per maand (Premium, 48 maanden vooraf)', btw: 'excl. btw',
     plannen: [
       ['Premium', '€ 2,99 (48 mnd vooraf, € 143,52)', 'Verlenging € 9,99 per maand'],
       ['Onbeperkt', '€ 3,99 (48 mnd vooraf, € 191,52)', 'Met e-commerce, onbeperkt websites; verlenging € 16,99 per maand'],
@@ -81,7 +84,7 @@ export const PLATFORMS = {
   mijndomein: {
     naam: 'Mijndomein MijnWebshop', slug: 'mijndomein', soort: 'Webshopbouwer', url: 'https://www.mijndomein.nl/producten/webshop',
     kort: 'Webshopbouwer van een Nederlandse domeinaanbieder, alles in één pakket.',
-    vanaf: 15, vanafTekst: '€ 15 per maand (Start)',
+    vanaf: 15, vanafTekst: '€ 15 per maand (Start)', btw: 'excl. btw',
     plannen: [
       ['Start', '€ 15 per maand · € 126 per jaar', '25 producten, voor starters'],
       ['Plus', '€ 29,50 per maand · € 324 per jaar', '1.000 producten, 300 varianten per product'],
@@ -96,7 +99,7 @@ export const PLATFORMS = {
   woocommerce: {
     naam: 'WooCommerce', slug: 'woocommerce', soort: 'Open source (WordPress)', url: 'https://woocommerce.com/nl/',
     kort: 'Gratis webshop-plugin voor WordPress: maximale vrijheid, zelf hosten.',
-    vanaf: 0, vanafTekst: 'Gratis plugin, je betaalt hosting en extensies',
+    vanaf: 0, vanafTekst: 'Gratis plugin, je betaalt hosting en extensies', prijsNoot: 'De plugin is gratis. Hosting en extensies noemt WooCommerce in dollars, zonder vermelding van btw.',
     plannen: [
       ['WooCommerce', '€ 0', 'Geen abonnement, geen omzetaandeel'],
       ['Hosting', 'Zelf kiezen', 'WooCommerce noemt $ 25 tot $ 350 per maand voor de meeste shops'],
