@@ -282,9 +282,9 @@ ${faqHtml(zzpFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.hostinger.bronnen, P.
 export const guides = [beste, kosten, gratis, zzp];
 
 export const gidsHub = {
-  path: '/gidsen/', title: 'Gidsen: webshop en website beginnen | ShopMatch', h1: 'Gidsen', crumb: 'Gidsen', og: 'home',
+  path: '/gidsen/', title: 'Gidsen: webshop en website beginnen | ShopMatch', h1: 'Webshop of website beginnen: alle gidsen', crumb: 'Gidsen', og: 'home',
   description: 'Gidsen over het beste webshop-platform, de kosten van een webshop, gratis een website maken en een website als zzp\'er.',
-  body: `<h1>Gidsen</h1><div class="grid cards two">${guides.map((g) => `<a class="card" href="${g.path}"><h2 class="h3">${esc(g.h1)}</h2><p>${esc(g.description)}</p><span class="more">Lees de gids →</span></a>`).join('')}</div>${matchCta()}`,
+  body: `<h1>Webshop of website beginnen: alle gidsen</h1><div class="grid cards two">${guides.map((g) => `<a class="card" href="${g.path}"><h2 class="h3">${esc(g.h1)}</h2><p>${esc(g.description)}</p><span class="more">Lees de gids →</span></a>`).join('')}</div>${matchCta()}`,
 };
 
 // ---- Statisch ----
