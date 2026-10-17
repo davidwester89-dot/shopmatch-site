@@ -1,4 +1,4 @@
-import { SITE, esc, ORG, fmtDate } from './layout.mjs';
+import { SITE, esc, ORG, AUTHOR, fmtDate } from './layout.mjs';
 import { PLATFORMS, CHECKED, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET, MAX_PRODUCTEN } from './lib/platforms.js';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, waardeTekst } from './lib/checklist.js';
 import { knop } from './lib/partnerlinks.js';
@@ -20,7 +20,7 @@ export const article = ({ path, title, h1, description, og, parents, date = DATE
   path, title, h1, crumb: h1, description, og, parents, ogType: 'article', lastmod: date,
   article: { date, updated: date }, stamp: { checked: CHECKED },
   schema: [
-    { '@context': 'https://schema.org', '@type': schemaType, headline: h1, description, mainEntityOfPage: SITE.domain + path, image: `${SITE.domain}/og/${og}.png`, datePublished: date, dateModified: date, author: ORG, publisher: ORG, inLanguage: 'nl' },
+    { '@context': 'https://schema.org', '@type': schemaType, headline: h1, description, mainEntityOfPage: SITE.domain + path, image: `${SITE.domain}/og/${og}.png`, datePublished: date, dateModified: date, author: AUTHOR, publisher: ORG, inLanguage: 'nl' },
     ...(faq ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }] : []),
   ],
 });

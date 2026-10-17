@@ -3,12 +3,12 @@
 // via partnerlinks.js; heeft nooit invloed op score of volgorde) en {{score:<platform-id>}} = checklist-score uit de data.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { SITE, esc, fmtDate, ORG } from './layout.mjs';
+import { SITE, esc, fmtDate, ORG, AUTHOR } from './layout.mjs';
 import { parsePost, markdown, inline } from './markdown.mjs';
 import { knop } from './lib/partnerlinks.js';
 import { PLATFORMS } from './lib/platforms.js';
 import { score, fmtScore } from './lib/checklist.js';
-import { faqHtml } from './parts.mjs';
+import { faqHtml, matchCta } from './parts.mjs';
 
 export const TOOLNAMES = {
   '/shop-match/': 'Welk webshop-platform past bij jou? Doe de match',
@@ -69,7 +69,7 @@ ${others.length ? `<h2>Meer op de blog</h2><div class="grid cards two">${others.
     schema: [{
       '@context': 'https://schema.org', '@type': 'Article', headline: post.title, description: post.description,
       datePublished: post.date, dateModified: post.updated, inLanguage: 'nl-NL', wordCount: post.words,
-      author: ORG, publisher: ORG, image: `${SITE.domain}/og/${og}.png`,
+      author: AUTHOR, publisher: ORG, image: `${SITE.domain}/og/${og}.png`,
       mainEntityOfPage: { '@type': 'WebPage', '@id': SITE.domain + post.path },
       citation: post.sources.map((s) => s.url),
     }].concat(post.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: post.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: tokens(a, post.slug).replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '') } })) }] : []),
@@ -82,7 +82,9 @@ export function blogIndex(posts) {
 <p class="lead">Welk platform past bij jouw bedrijf en wat kost het? Kort uitgelegd, met de prijzen van de aanbieders zelf en bronnen.</p>
 <div class="postlist">
 ${posts.map((x) => `<a class="card" href="${x.path}"><time datetime="${x.date}">${fmtDate(x.date)}</time><h2 style="margin:.2em 0 .3em;font-size:1.3rem">${esc(x.title)}</h2><p>${esc(x.description)}</p><span class="more">Lees verder →</span></a>`).join('\n')}
-</div>`;
+</div>
+<p>Liever alles naast elkaar? <a href="/vergelijken/">Vergelijk alle webshop-platforms</a>.</p>
+${matchCta()}`;
   const upd = posts.map((x) => x.updated).sort().at(-1);
   return {
     path: '/blog/', title: 'Blog: webshop en website beginnen | ShopMatch', h1: 'Blog', ogTitle: 'Blog: webshop en website beginnen',

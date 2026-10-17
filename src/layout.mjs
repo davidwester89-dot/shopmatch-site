@@ -117,6 +117,8 @@ ${[...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<scri
 }
 
 export const ORG = { '@type': 'Organization', '@id': SITE.domain + '/#org', name: SITE.name, url: SITE.domain + '/', email: SITE.email, logo: { '@type': 'ImageObject', url: SITE.domain + '/apple-touch-icon.png' } };
+/** Auteur van artikelen: de redactie (organisatie), nooit een persoonsnaam. */
+export const AUTHOR = { '@type': 'Organization', name: SITE.owner, url: SITE.domain + '/over/', parentOrganization: { '@id': SITE.domain + '/#org' } };
 export function siteGraph() {
   return { '@context': 'https://schema.org', '@graph': [ORG, { '@type': 'WebSite', '@id': SITE.domain + '/#website', name: SITE.name, url: SITE.domain + '/', inLanguage: 'nl-NL', publisher: { '@id': SITE.domain + '/#org' } }] };
 }
