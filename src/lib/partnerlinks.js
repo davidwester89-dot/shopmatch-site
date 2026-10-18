@@ -4,7 +4,10 @@
 import { PLATFORMS } from './platforms.js';
 export const PARTNERLINKS = {
   shopify: 'https://shopify.pxf.io/c/7989613/1061744/13624',
-  hostinger: 'https://jf79.net/c/?si=16780&li=1754330&wi=438840&ws=shopmatch',
+  // TODO: Hostinger (Daisycon campagne 16780, media ShopMatch 438840) staat nog op 'in afwachting'. Zolang dat zo is, stuurt
+  // jf79.net door naar een andere adverteerder; daarom tijdelijk geen partnerlink en gaat de knop gewoon naar hostinger.com/nl
+  // (url in platforms.js). Na goedkeuring de Daisycon-deeplink terugzetten:
+  // hostinger: 'https://jf79.net/c/?si=16780&li=1754330&wi=438840&ws=shopmatch',
 };
 
 /** Uitgaande link: partnerlink (rel sponsored nofollow, met label) als die er is, anders de officiële site. */
