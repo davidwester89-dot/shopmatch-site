@@ -28,11 +28,11 @@ export const PLATFORMS = {
     vanaf: 14, vanafTekst: '€ 14 per maand (Light, jaarbetaling)', btw: 'exclusief toeslagen',
     plannen: [
       ['Light', '€ 14 (bij jaarbetaling)', 'Eigen domein, geen Wix-advertenties, geen online betalingen'],
-      ['Core', '€ 25 (bij jaarbetaling)', 'Online betalingen en basis-webshop'],
+      ['Core', '€ 25 (bij jaarbetaling)', 'Online betalingen en basiswebshop'],
       ['Business', '€ 34 (bij jaarbetaling)', 'Uitgebreidere webshop en meer opslag'],
       ['Business Elite', '€ 149 (bij jaarbetaling)', 'Geavanceerde webshop en ontwikkelaarstools'],
     ],
-    plus: ['Gratis versie om de editor te proberen', '14 dagen geld-terug-garantie op een premiumpakket', 'Domeinnaam het eerste jaar inbegrepen bij de meeste jaarpakketten'],
+    plus: ['Gratis versie om de editor te proberen', '14 dagen geld-teruggarantie op een premiumpakket', 'Domeinnaam het eerste jaar inbegrepen bij de meeste jaarpakketten'],
     min: ['Betalingen ontvangen pas vanaf Core', 'Gratis versie met Wix-advertenties en een Wix-adres'],
     voor: 'Dienstverleners en creatieve ondernemers die veel vrijheid in het ontwerp willen.',
     bronnen: [['Wix pakketten', 'https://nl.wix.com/upgrade/website'], ['Wix pakketten FAQ', 'https://www.wix.com/plans']],
@@ -76,7 +76,7 @@ export const PLATFORMS = {
       ['Onbeperkt', '€ 3,99 (48 mnd vooraf, € 191,52)', 'Met e-commerce, onbeperkt websites; verlenging € 16,99 per maand'],
       ['Cloud Startup', '€ 7,99 (48 mnd vooraf, € 383,52)', 'Verlenging € 23,99 per maand'],
     ],
-    plus: ['Laagste instapprijs', '30 dagen geld-terug-garantie', 'Gratis domeinnaam bij jaarpakketten', '24/7 ondersteuning'],
+    plus: ['Laagste instapprijs', '30 dagen geld-teruggarantie', 'Gratis domeinnaam bij jaarpakketten', '24/7 ondersteuning'],
     min: ['Lage prijs alleen bij 48 maanden vooraf betalen', 'Verlenging is duidelijk duurder'],
     voor: 'Starters met een klein budget die een eenvoudige site of kleine shop willen.',
     bronnen: [['Hostinger Website Bouwer', 'https://www.hostinger.com/nl/website-maken']],
@@ -98,8 +98,8 @@ export const PLATFORMS = {
   },
   woocommerce: {
     naam: 'WooCommerce', slug: 'woocommerce', soort: 'Open source (WordPress)', url: 'https://woocommerce.com/nl/',
-    kort: 'Gratis webshop-plugin voor WordPress: maximale vrijheid, zelf hosten.',
-    vanaf: 0, vanafTekst: 'Gratis plugin, je betaalt hosting en extensies', prijsNoot: 'De plugin is gratis. Hosting en extensies noemt WooCommerce in dollars, zonder vermelding van btw.',
+    kort: 'Gratis webshopplug-in voor WordPress: maximale vrijheid, zelf hosten.',
+    vanaf: 0, vanafTekst: 'Gratis plug-in, je betaalt hosting en extensies', prijsNoot: 'De plug-in is gratis. Hosting en extensies noemt WooCommerce in dollars, zonder vermelding van btw.',
     plannen: [
       ['WooCommerce', '€ 0', 'Geen abonnement, geen omzetaandeel'],
       ['Hosting', 'Zelf kiezen', 'WooCommerce noemt $ 25 tot $ 350 per maand voor de meeste shops'],
@@ -142,12 +142,12 @@ export const BEST_FOR = {
 };
 // Maandprijs van het goedkoopste pakket waarmee je online kunt verkopen (zelfde bedragen als in PLATFORMS.plannen).
 export const VERKOOP_VANAF = { shopify: 21, wix: 25, jouwweb: 10, lightspeed: 68, hostinger: 3.99, mijndomein: 15, woocommerce: 0, squarespace: 12 };
-export const VERKOOP_PAKKET = { shopify: 'Basic, jaarbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plugin, plus hosting', squarespace: 'Basic, jaarbetaling' };
+export const VERKOOP_PAKKET = { shopify: 'Basic, jaarbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plug-in, plus hosting', squarespace: 'Basic, jaarbetaling' };
 // Maximaal aantal producten in het grootste standaardpakket. Infinity = onbeperkt; null = niet vermeld door de aanbieder.
 export const MAX_PRODUCTEN = { shopify: Infinity, wix: Infinity, jouwweb: Infinity, lightspeed: 15000, hostinger: null, mijndomein: 20000, woocommerce: Infinity, squarespace: Infinity };
 
 // Checklist per platform. v: 'ja' | 'deels' | 'nee' | null (= niet vermeld op de site van de aanbieder).
-// t: korte toelichting. s: bron-URL (alleen sites van de aanbieder zelf, of de plugin bij WooCommerce).
+// t: korte toelichting. s: bron-URL (alleen sites van de aanbieder zelf, of de plug-in bij WooCommerce).
 const S = {
   shopPrijs: 'https://www.shopify.com/nl/prijzen', shopPay: 'https://help.shopify.com/nl/manual/payments/shopify-payments/local-payment-methods',
   shopB2b: 'https://help.shopify.com/nl/manual/b2b', shopTaal: 'https://help.shopify.com/nl/manual/markets/languages', shopPos: 'https://www.shopify.com/nl/pos',
@@ -238,16 +238,16 @@ export const FEATURES = {
     maand: { v: 'deels', t: 'Per maand betalen, maar het pakket loopt 12 maanden', s: S.mdShop },
   },
   woocommerce: {
-    ideal: { v: 'ja', t: 'Via WooPayments of een betaalplugin', s: S.wooPay },
+    ideal: { v: 'ja', t: 'Via WooPayments of een betaalplug-in', s: S.wooPay },
     geenfee: { v: 'ja', t: 'Geen omzetaandeel', s: S.wooPrijs },
     nl: { v: 'nee', t: 'Internationale aanbieder' },
     onbeperkt: { v: 'ja', t: 'Onbeperkt producten en varianten', s: S.wooPrijs },
     b2b: { v: 'deels', t: 'Via een betaalde extensie', s: S.wooB2b },
-    talen: { v: 'deels', t: 'Via een plugin, zoals WPML', s: S.wpml },
+    talen: { v: 'deels', t: 'Via een plug-in, zoals WPML', s: S.wpml },
     pos: { v: 'ja', t: 'WooCommerce POS in de app (tablet)', s: S.wooPos },
     hosting: { v: 'nee', t: 'Hosting, updates en beveiliging regel je zelf', s: S.wooPrijs },
-    proberen: { v: 'ja', t: 'De plugin is gratis; hosting betaal je zelf', s: S.wooPrijs },
-    maand: { v: 'ja', t: 'Geen abonnement voor de plugin', s: S.wooPrijs },
+    proberen: { v: 'ja', t: 'De plug-in is gratis; hosting betaal je zelf', s: S.wooPrijs },
+    maand: { v: 'ja', t: 'Geen abonnement voor de plug-in', s: S.wooPrijs },
   },
   squarespace: {
     ideal: { v: 'ja', t: 'Via Squarespace Payments', s: S.sqIdeal },

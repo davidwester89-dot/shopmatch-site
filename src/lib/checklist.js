@@ -37,7 +37,7 @@ export function score(id) {
 }
 export const fmtScore = (n) => String(n).replace('.', ',');
 
-/** Vaste volgorde voor lijsten: hoogste checklist-score, bij gelijke stand de laagste verkoopprijs. */
+/** Vaste volgorde voor lijsten: hoogste checklistscore, bij gelijke stand de laagste verkoopprijs. */
 export function ranglijst(ids = Object.keys(PLATFORMS)) {
   return [...ids].sort((a, b) => score(b).totaal - score(a).totaal || VERKOOP_VANAF[a] - VERKOOP_VANAF[b]);
 }

@@ -67,7 +67,7 @@ test('build: huisstijl, componenten en regels op elke pagina', () => {
     for (const r of nep) assert.ok(!r.test(s), `${f} bevat ${r}`);
     assert.match(s, /<details class="menu">/); assert.match(s, /<footer class="site">/);
     assert.ok(!/<div class="net">[\s\S]*shopmatch\.nl[\s\S]*<\/div>/.test(s.slice(s.indexOf('<div class="net">'), s.indexOf('<p class="fine">'))), `${f}: netwerkfooter linkt naar zichzelf`);
-    if (/<article/.test(s) && /class="src">Door/.test(s)) assert.match(s, /Door de Redactie ShopMatch/);
+    if (/<article/.test(s) && /class="src">Door/.test(s)) assert.match(s, /Door Redactie ShopMatch/);
     // Elke sponsored link toont direct erna het zichtbare label 'partnerlink'; geen label zonder sponsored link.
     const sponsored = [...s.matchAll(/<a [^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
     for (const m of sponsored) {
@@ -113,7 +113,7 @@ test('blog: index, posts in sitemap en feed, byline, bronnen, geen namen', async
     const s = readFileSync(`dist/blog/${slug}/index.html`, 'utf8');
     assert.ok(sm.includes(`https://shopmatch.nl/blog/${slug}/</loc>`), `${slug} niet in sitemap`);
     assert.ok(idx.includes(`/blog/${slug}/`), `${slug} niet op blogindex`);
-    assert.match(s, /Door de Redactie ShopMatch/);
+    assert.match(s, /Door Redactie ShopMatch/);
     assert.match(s, /<h2>Bronnen<\/h2>/);
     assert.ok(!/\{\{|Dave|Wester|Reddit|batterijmatch/i.test(s), `${slug}: verboden tekst of token`);
     assert.ok(/href="\/platformen\//.test(s), `${slug}: geen interne link naar platformpagina`);

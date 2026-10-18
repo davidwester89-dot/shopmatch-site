@@ -19,7 +19,7 @@ sources:
 - Hostinger: Website Bouwer | https://www.hostinger.com/nl/website-maken
 - Mijndomein: MijnWebshop | https://www.mijndomein.nl/producten/webshop
 ---
-Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Ze willen prijzen zonder btw zien, op rekening betalen en snel opnieuw bestellen. Niet elk webshop-platform kan dat. Van de acht platforms die we volgen, noemen er maar vier B2B-functies op hun eigen site.
+Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Ze willen prijzen zonder btw zien, op rekening betalen en snel opnieuw bestellen. Niet elk webshopplatform kan dat. Van de acht platforms die we volgen, noemen er maar vier B2B-functies op hun eigen site.
 
 > **Kort gezegd:** klein beginnen met zakelijke klanten kan bij JouwWeb (Pro € 10, Business € 20 per maand, excl. btw).
 >
@@ -27,18 +27,18 @@ Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Z
 >
 > Lightspeed eCom heeft B2B pas in Professional (€ 259 per maand) en WooCommerce via een betaalde extensie.
 >
-> Alle platforms met filter op B2B: [webshop-platforms vergelijken](/vergelijken/).
+> Alle platforms met filter op B2B: [webshopplatforms vergelijken](/vergelijken/).
 
 ## Welke platforms hebben B2B-functies?
 
 Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin het zit. Prijzen per maand zoals de aanbieder ze toont: JouwWeb noemt ze excl. btw. Shopify en Lightspeed vermelden op hun prijspagina niet of btw inbegrepen is.
 
-| Platform | B2B volgens de aanbieder | Goedkoopste pakket met B2B | Checklist-score |
+| Platform | B2B volgens de aanbieder | Goedkoopste pakket met B2B | Checklistscore |
 |---|---|---|---|
 | [JouwWeb](/platformen/jouwweb/) | B2B-webshop, btw-verleggingsregeling, btw-regels voor EU-leveringen | Pro € 10 (tot 10 producten), Business € 20 (onbeperkt) | {{score:jouwweb}} |
 | [Shopify](/platformen/shopify/) | Shopify B2B in Basic, Grow, Advanced en Plus; niet in Starter of Retail | Basic € 21 bij jaarbetaling | {{score:shopify}} |
 | [Lightspeed eCom](/platformen/lightspeed/) | B2B in het Professional-pakket | Professional € 259 | {{score:lightspeed}} |
-| [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plugin € 0, plus hosting en extensie | {{score:woocommerce}} |
+| [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plug-in € 0, plus hosting en extensie | {{score:woocommerce}} |
 
 [Wix](/platformen/wix/), [Squarespace](/platformen/squarespace/), [Hostinger](/platformen/hostinger/) en [Mijndomein](/platformen/mijndomein/) noemen op de pagina's die wij volgen geen B2B-functies. Daarom telt B2B bij hen in de checklist als 0. [Zo tellen we](/over/#methode).
 
@@ -55,7 +55,7 @@ Zakelijke klanten kopen anders dan consumenten. Zet deze punten naast je wensen 
 
 ## JouwWeb: klein en zakelijk beginnen
 
-JouwWeb heeft een B2B-webshop met de btw-verleggingsregeling en btw-regels voor EU-leveringen. Op de webshoppagina noemt JouwWeb ook een klantaccount-systeem, betalen via factuur, een minimum bestelbedrag en facturen met je logo. In Pro en Business krijg je volgens JouwWeb alle webshopfuncties zonder extra kosten, en je betaalt 0% verkoopcommissie.
+JouwWeb heeft een B2B-webshop met de btw-verleggingsregeling en btw-regels voor EU-leveringen. Op de webshoppagina noemt JouwWeb ook een klantaccountsysteem, betalen via factuur, een minimum bestelbedrag en facturen met je logo. In Pro en Business krijg je volgens JouwWeb alle webshopfuncties zonder extra kosten, en je betaalt 0% verkoopcommissie.
 
 Voor je administratie koppelt JouwWeb met onder meer e-Boekhouden, Moneybird, Exact, SnelStart, Twinfield en Yuki.
 
@@ -81,7 +81,7 @@ Lightspeed past bij een groothandel of winkel die online en in de winkel één v
 
 ## WooCommerce: alles zelf in de hand
 
-WooCommerce is een gratis plugin voor WordPress. B2B-functies voeg je toe met een betaalde extensie. WooCommerce noemt voor extensies $ 29 tot $ 299 per jaar per stuk, en hosting regel je zelf. Je hebt de meeste vrijheid, maar ook het meeste werk: updates en beveiliging zijn voor jou.
+WooCommerce is een gratis plug-in voor WordPress. B2B-functies voeg je toe met een betaalde extensie. WooCommerce noemt voor extensies $ 29 tot $ 299 per jaar per stuk, en hosting regel je zelf. Je hebt de meeste vrijheid, maar ook het meeste werk: updates en beveiliging zijn voor jou.
 
 {{knop:woocommerce}}
 

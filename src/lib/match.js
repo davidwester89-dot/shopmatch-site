@@ -7,7 +7,7 @@ export const VRAGEN = [
   { id: 'doel', vraag: 'Wat wil je online zetten?', opties: [['site', 'Een website zonder verkoop'], ['diensten', 'Diensten of afspraken verkopen'], ['shop', 'Een webshop'], ['winkel', 'Webshop naast mijn fysieke winkel']] },
   { id: 'producten', vraag: 'Hoeveel producten ga je verkopen?', opties: [['0', 'Geen'], ['10', 'Tot 10'], ['100', '10 tot 100'], ['1000', '100 tot 1.000'], ['meer', 'Meer dan 1.000']] },
   { id: 'budget', vraag: 'Wat mag het per maand kosten?', opties: [['laag', 'Zo weinig mogelijk (tot € 10)'], ['mid', '€ 10 tot € 40'], ['hoog', 'Meer dan € 40 als het past']] },
-  { id: 'techniek', vraag: 'Hoe technisch ben je?', opties: [['geen', 'Niet: het moet gewoon werken'], ['wat', 'Een beetje'], ['veel', 'Ik regel graag zelf hosting en plugins']] },
+  { id: 'techniek', vraag: 'Hoe technisch ben je?', opties: [['geen', 'Niet: het moet gewoon werken'], ['wat', 'Een beetje'], ['veel', 'Ik regel graag zelf hosting en plug-ins']] },
   { id: 'nl', vraag: 'Hoe belangrijk is een Nederlandse aanbieder?', opties: [['ja', 'Belangrijk'], ['nee', 'Maakt niet uit']] },
 ];
 

@@ -1,6 +1,6 @@
 // Blog: content/blog/JJJJ-MM-DD-slug.md → /blog/<slug>/. Zelfde opbouw als de BoekhoudMatch-blog.
 // Extra tokens in de markdown: {{knop:<platform-id>}} op een eigen regel = knop naar de aanbieder (partnerlink zodra goedgekeurd,
-// via partnerlinks.js; heeft nooit invloed op score of volgorde) en {{score:<platform-id>}} = checklist-score uit de data.
+// via partnerlinks.js; heeft nooit invloed op score of volgorde) en {{score:<platform-id>}} = checklistscore uit de data.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { SITE, esc, fmtDate, ORG, AUTHOR } from './layout.mjs';
@@ -11,8 +11,8 @@ import { score, fmtScore } from './lib/checklist.js';
 import { faqHtml, matchCta } from './parts.mjs';
 
 export const TOOLNAMES = {
-  '/shop-match/': 'Welk webshop-platform past bij jou? Doe de match',
-  '/vergelijken/': 'Alle webshop-platforms vergelijken',
+  '/shop-match/': 'Welk webshopplatform past bij jou? Doe de match',
+  '/vergelijken/': 'Alle webshopplatforms vergelijken',
   '/platformen/': 'Alle platforms op een rij',
   '/webshop-beginnen-kosten/': 'Wat kost een webshop beginnen?',
 };
@@ -53,7 +53,7 @@ export function postPage(post, all) {
   const og = `blog-${post.slug}`;
   const body = `
 <article class="article">
-<h1>${esc(post.title)}</h1><p class="src">Door de ${SITE.owner} · <time datetime="${post.date}">${fmtDate(post.date)}</time> · ${readMin(post.words)} min lezen</p>
+<h1>${esc(post.title)}</h1><p class="src">Door ${SITE.owner} · <time datetime="${post.date}">${fmtDate(post.date)}</time> · ${readMin(post.words)} min lezen</p>
 ${post.html}
 ${faqBlock(post)}
 ${post.tools.length ? `<aside class="cta"><h2>Vergelijk het zelf</h2><ul>${post.tools.map((t) => `<li><a href="${t}">${esc(TOOLNAMES[t] || t)} →</a></li>`).join('')}</ul></aside>` : ''}
@@ -83,12 +83,12 @@ export function blogIndex(posts) {
 <div class="postlist">
 ${posts.map((x) => `<a class="card" href="${x.path}"><time datetime="${x.date}">${fmtDate(x.date)}</time><h2 style="margin:.2em 0 .3em;font-size:1.3rem">${esc(x.title)}</h2><p>${esc(x.description)}</p><span class="more">Lees verder →</span></a>`).join('\n')}
 </div>
-<p>Liever alles naast elkaar? <a href="/vergelijken/">Vergelijk alle webshop-platforms</a>.</p>
+<p>Liever alles naast elkaar? <a href="/vergelijken/">Vergelijk alle webshopplatforms</a>.</p>
 ${matchCta()}`;
   const upd = posts.map((x) => x.updated).sort().at(-1);
   return {
     path: '/blog/', title: 'Blog: webshop en website beginnen | ShopMatch', h1: 'Blog', ogTitle: 'Blog: webshop en website beginnen',
-    description: 'Artikelen over het kiezen van een webshop-platform of websitebouwer: prijzen, verschillen en wat past bij jouw bedrijf. Met bronnen.',
+    description: 'Artikelen over het kiezen van een webshopplatform of websitebouwer: prijzen, verschillen en wat past bij jouw bedrijf. Met bronnen.',
     crumb: 'Blog', og: 'blog', body, lastmod: upd, stamp: { updated: upd },
     schema: [{ '@context': 'https://schema.org', '@type': 'Blog', name: 'ShopMatch blog', url: SITE.domain + '/blog/', inLanguage: 'nl-NL', publisher: ORG,
       blogPost: posts.map((x) => ({ '@type': 'BlogPosting', headline: x.title, url: SITE.domain + x.path, datePublished: x.date, dateModified: x.updated })) }],
@@ -107,7 +107,7 @@ export function feed(posts) {
 <channel>
 <title>ShopMatch blog</title>
 <link>${SITE.domain}/blog/</link>
-<description>Webshop-platforms en websitebouwers kiezen, met bronnen.</description>
+<description>Webshopplatforms en websitebouwers kiezen, met bronnen.</description>
 <language>nl-nl</language>
 <atom:link href="${SITE.domain}/blog/feed.xml" rel="self" type="application/rss+xml"/>
 ${posts[0] ? `<lastBuildDate>${rfc822(posts[0].updated)}</lastBuildDate>` : ''}

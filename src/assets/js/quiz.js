@@ -32,7 +32,7 @@ function toon(a, scroll) {
     + `<div class="match-cta">${knop(b.id, 'match_1')}<a class="vlink" href="${BASE}/platformen/${pb.slug}/">Lees alles over ${esc(pb.naam)} →</a></div>`
     + `<h3>Top 3</h3><ol class="mtop">${top.map((r, i) => {
       const p = PLATFORMS[r.id]; const c = checklist(r.id);
-      return `<li${i === 0 ? ' class="first"' : ''}>${i === 0 ? '<span class="badge">Beste match</span> ' : ''}<span class="tag best">${esc(BEST_FOR[r.id])}</span><div class="mhead">${logo(r.id, 'sm')}<h3>${i + 1}. ${esc(p.naam)}</h3></div><p class="pc-price">${prijsTekst(r, a)} · checklist-score ${fmtScore(c.totaal)}/${c.max}</p>`
+      return `<li${i === 0 ? ' class="first"' : ''}>${i === 0 ? '<span class="badge">Beste match</span> ' : ''}<span class="tag best">${esc(BEST_FOR[r.id])}</span><div class="mhead">${logo(r.id, 'sm')}<h3>${i + 1}. ${esc(p.naam)}</h3></div><p class="pc-price">${prijsTekst(r, a)} · checklistscore ${fmtScore(c.totaal)}/${c.max}</p>`
         + (r.waarom.length ? `<p class="lbl ok" style="margin:8px 0 0">Waarom het past</p><ul class="why">${r.waarom.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : '')
         + `<p class="lbl warn" style="margin:8px 0 0">Let op</p><ul class="why"><li>${esc(letOp(r.id, a))}</li></ul>`
         + (i > 0 ? `<div class="mini-cta">${knop(r.id, 'match_' + (i + 1), 'btn ghost sm')}<a href="${BASE}/platformen/${p.slug}/">Alles over ${esc(p.naam.split(' ')[0])}</a></div>` : '') + '</li>';

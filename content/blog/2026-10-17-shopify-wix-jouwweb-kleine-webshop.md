@@ -25,7 +25,7 @@ Je wilt een kleine webshop beginnen en drie namen komen steeds terug: Shopify, W
 >
 > Wix past als het ontwerp van je site voorop staat en de webshop erbij komt (Core € 25 per maand bij jaarbetaling).
 >
-> Alle acht platforms naast elkaar: [webshop-platforms vergelijken](/vergelijken/).
+> Alle acht platforms naast elkaar: [webshopplatforms vergelijken](/vergelijken/).
 
 ## Wat kost een kleine webshop bij Shopify, Wix en JouwWeb?
 
@@ -41,9 +41,9 @@ Dit zijn de goedkoopste pakketten waarmee je online kunt verkopen, zoals de aanb
 | Kassa voor een winkel | Shopify POS | Niet vermeld | Niet vermeld |
 | Proberen | 3 dagen gratis, daarna 3 maanden € 1 per maand | Gratis versie en 14 dagen geld terug | Gratis pakket |
 | Nederlandse aanbieder | Nee | Nee | Ja, uit Eindhoven |
-| Checklist-score | {{score:shopify}} | {{score:wix}} | {{score:jouwweb}} |
+| Checklistscore | {{score:shopify}} | {{score:wix}} | {{score:jouwweb}} |
 
-De checklist-score is een telling van tien vaste punten die de aanbieder zelf op zijn site noemt, zoals iDEAL, B2B, kassa en contractvorm. Staat iets er niet, dan telt het als 0. [Zo tellen we](/over/#methode).
+De checklistscore is een telling van tien vaste punten die de aanbieder zelf op zijn site noemt, zoals iDEAL, B2B, kassa en contractvorm. Staat iets er niet, dan telt het als 0. [Zo tellen we](/over/#methode).
 
 ## Rekenvoorbeeld: een webshop met 50 producten
 
