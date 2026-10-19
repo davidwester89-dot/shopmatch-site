@@ -4,7 +4,7 @@ import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { score } from '../src/lib/match.js';
-import { uitgaand, knop, PARTNERLINKS } from '../src/lib/partnerlinks.js';
+import { uitgaand, knop, PARTNERLINKS, WIX_ECOM, WIX_WSB, WIX_URLS } from '../src/lib/partnerlinks.js';
 import { PLATFORMS, IDS } from '../src/lib/platforms.js';
 
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
@@ -33,6 +33,11 @@ test('partnerlinks: alleen goedgekeurde links, gevuld = sponsored nofollow + zic
   const k = knop('shopify', 't', 'btn', { shopify: 'https://example.com/aff' });
   assert.match(k, /rel="sponsored nofollow noopener"/);
   assert.match(k, /partnerlink<\/span>/);
+  // Wix: default ecom, trafcat wsb voor websitebouwer-CTA's.
+  assert.equal(uitgaand('wix').href, WIX_ECOM);
+  assert.equal(uitgaand('wix', { trafcat: 'wsb' }).href, WIX_WSB);
+  assert.equal(uitgaand('wix', { trafcat: 'ecom' }).href, WIX_ECOM);
+  assert.ok(knop('wix', 't', 'btn', { trafcat: 'wsb' }).includes(WIX_WSB));
 });
 
 test('partnerlinks hebben geen invloed op de match', () => {
@@ -67,8 +72,11 @@ test('build (productie): pagina’s, sitemap, robots, IndexNow, regels', () => {
     // Uitgaande links naar aanbieders: goedgekeurde partnerlink = sponsored nofollow noopener, anders officiële site met noopener.
     for (const m of s.matchAll(/<a [^>]*data-partner-slot="([^"]+)"[^>]*>/g)) {
       const id = m[1]; const href = m[0].match(/href="([^"]+)"/)[1];
-      if (PARTNERLINKS[id]) { assert.equal(href, PARTNERLINKS[id], `${f}: ${id}`); assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: ${id}`); }
-      else { assert.equal(href, PLATFORMS[id].url, `${f}: ${id}`); assert.match(m[0], /rel="noopener"/, `${f}: ${id}`); }
+      if (PARTNERLINKS[id]) {
+        if (id === 'wix') assert.ok(WIX_URLS.includes(href), `${f}: wix href ${href}`);
+        else assert.equal(href, PARTNERLINKS[id], `${f}: ${id}`);
+        assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: ${id}`);
+      } else { assert.equal(href, PLATFORMS[id].url, `${f}: ${id}`); assert.match(m[0], /rel="noopener"/, `${f}: ${id}`); }
     }
   }
 });

@@ -1,6 +1,6 @@
 import { SITE, esc, ORG, GA_ID, ICONS, fmtDate } from './layout.mjs';
 import { IDS, CHECKED, prijsNootVan, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET } from './lib/platforms.js';
-import { knop } from './lib/partnerlinks.js';
+import { knop, wixTrafcat } from './lib/partnerlinks.js';
 import { VRAGEN } from './lib/match.js';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, ranglijst, situaties } from './lib/checklist.js';
 import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, scoreBlock, scoreBadge, bars, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
@@ -108,12 +108,12 @@ export const platformPages = IDS.map((id) => {
 <div class="pcard first"><div class="pc-head"><span class="sc-lbl">Verkopen vanaf</span><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p>${p.vanaf !== VERKOOP_VANAF[id] && id !== 'woocommerce' ? `<p class="pc-price">Website zonder verkoop: vanaf ${esc(p.vanafTekst)}</p>` : ''}</div>
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 ${scoreBlock(id)}
-<div class="pc-cta">${knop(id, 'platform_top')}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
+<div class="pc-cta">${knop(id, 'platform_top', 'btn', wixTrafcat(id, 'wsb'))}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
 <h2>Pakketten en prijzen</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
 <h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld telt als 0. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
-<div class="out">${knop(id, 'platform_bottom')}</div>
+<div class="out">${knop(id, 'platform_bottom', 'btn', wixTrafcat(id, 'wsb'))}</div>
 <h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li class="withlogo">${logo(x, 'sm')}<a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · score ${fmtScore(score(x).totaal)}/10 · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>
 ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featureBronnen(id))}</article>`,
   };
@@ -157,13 +157,13 @@ ${methodBox()}
 };
 
 const sideRow = (label, a, b) => `<tr><th scope="row">${label}</th><td>${a}</td><td>${b}</td></tr>`;
-const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, faq }) => {
-  const side = (id, kies, posn) => `<div class="card"><span class="pc-logo">${logo(id)}</span><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><div class="pc-score" style="margin-top:12px"><span class="sc-lbl">Checklistscore</span>${scoreBadge(id)}${bars(id)}</div><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm')}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
+const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, faq, aTrafcat, bTrafcat }) => {
+  const side = (id, kies, posn, trafcat) => `<div class="card"><span class="pc-logo">${logo(id)}</span><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><div class="pc-score" style="margin-top:12px"><span class="sc-lbl">Checklistscore</span>${scoreBadge(id)}${bars(id)}</div><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm', wixTrafcat(id, trafcat))}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
   return {
     ...article({ path: `/vergelijken/${slug}/`, title, h1, description, og: `vs-${slug}`, parents: [['/vergelijken/', 'Vergelijken']], faq }),
     navPath: '/vergelijken/',
     body: `<article><h1>${esc(h1)}</h1>${by()}<p class="lead">${intro}</p>
-<h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a')}${side(b, kiesB, 'vs_b')}</div>
+<h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a', aTrafcat)}${side(b, kiesB, 'vs_b', bTrafcat)}</div>
 <h2>Prijs en pakketten</h2><div class="table-wrap"><table class="data side"><thead><tr><th scope="col"></th><th scope="col"><span class="thlogo">${logo(a, 'sm')}</span>${esc(P[a].naam)}</th><th scope="col"><span class="thlogo">${logo(b, 'sm')}</span>${esc(P[b].naam)}</th></tr></thead><tbody>${rows.map((r) => sideRow(...r)).join('')}</tbody></table></div>
 <h2>Checklist naast elkaar</h2><p class="sub">Tien vaste punten uit de sites van de aanbieders. <a href="/over/#methode">Zo tellen we</a></p>
 <div class="table-wrap"><table class="data side"><thead><tr><th scope="col">Checklistpunt</th><th scope="col"><span class="thlogo">${logo(a, 'sm')}</span>${esc(P[a].naam)}</th><th scope="col"><span class="thlogo">${logo(b, 'sm')}</span>${esc(P[b].naam)}</th></tr></thead><tbody>${GROEPEN.map((g) => `<tr><th colspan="3" scope="colgroup" style="background:var(--sand)">${esc(g.naam)}</th></tr>${g.punten.map((k) => sideRow(esc(PUNTEN[k].lang), fv(FEATURES[a][k]), fv(FEATURES[b][k]))).join('')}`).join('')}<tr><th scope="row">Checklistscore</th><td>${scoreBadge(a)}</td><td>${scoreBadge(b)}</td></tr></tbody></table></div>
@@ -183,7 +183,7 @@ export const vsPages = [
     faq: [['Is Shopify goedkoper dan Lightspeed?', 'Bij de instap wel: Shopify Basic kost € 21 per maand bij jaarbetaling, Lightspeed eCom Essential € 68 per maand.'], ['Hebben beide een kassasysteem?', 'Ja. Shopify heeft Shopify POS en Lightspeed levert eigen kassasystemen.']],
   }),
   cmp({
-    slug: 'wix-vs-jouwweb', a: 'wix', b: 'jouwweb', h1: 'Wix of JouwWeb: welke websitebouwer kies je?',
+    slug: 'wix-vs-jouwweb', a: 'wix', b: 'jouwweb', aTrafcat: 'wsb', h1: 'Wix of JouwWeb: welke websitebouwer kies je?',
     title: 'Wix vs JouwWeb 2026: prijzen en verschillen',
     description: 'JouwWeb vanaf € 5,50, Wix vanaf € 14 per maand. Webshop, betaalmethoden, boekhoudkoppelingen en ontwerp naast elkaar.',
     intro: 'Twee websitebouwers met een gratis versie. JouwWeb komt uit Eindhoven en is goedkoper; Wix geeft meer ontwerpvrijheid.',
@@ -229,7 +229,7 @@ export const beste = {
 <h2>Beste om te groeien en internationaal te verkopen: Shopify</h2><p>Onbeperkt producten vanaf Basic (€ 21 per maand bij jaarbetaling) en een grote appwinkel. Let op de 2% extra transactiekosten als je niet met Shopify Payments werkt.</p><div class="out">${knop('shopify', 'gids_beste')}</div>
 <h2>Beste voor een winkel met webshop: Lightspeed eCom</h2><p>Webshop en kassa van één leverancier. Essential kost € 68 per maand; telefonische support krijg je vanaf Advanced (€ 120).</p><div class="out">${knop('lightspeed', 'gids_beste')}</div>
 <h2>Beste alles-in-één bij een Nederlandse partij: Mijndomein</h2><p>Domein, e-mail, cookiebanner en webshop in één pakket. MijnWebshop Start kost € 15 per maand voor 25 producten; het pakket loopt 12 maanden.</p><div class="out">${knop('mijndomein', 'gids_beste')}</div>
-<h2>Beste voor ontwerpvrijheid: Wix</h2><p>Veel vrijheid in vormgeving. Online betalingen ontvangen kan vanaf Core (€ 25 per maand).</p><div class="out">${knop('wix', 'gids_beste')}</div>
+<h2>Beste voor ontwerpvrijheid: Wix</h2><p>Veel vrijheid in vormgeving. Online betalingen ontvangen kan vanaf Core (€ 25 per maand).</p><div class="out">${knop('wix', 'gids_beste', 'btn', { trafcat: 'wsb' })}</div>
 <h2>Beste voor volledige controle: WooCommerce</h2><p>Gratis plug-in voor WordPress, zonder platformkosten of omzetaandeel. Je regelt zelf hosting, updates en beveiliging.</p><div class="out">${knop('woocommerce', 'gids_beste')}</div>
 <h2>Alles op een rij</h2><div class="table-wrap"><table class="data"><thead><tr><th>Situatie</th><th>Platform</th><th>Vanaf per maand</th></tr></thead><tbody><tr><td>Paar producten</td><td><a href="/platformen/jouwweb/">JouwWeb</a></td><td>€ 10</td></tr><tr><td>Kleinste budget</td><td><a href="/platformen/hostinger/">Hostinger</a></td><td>€ 3,99 (48 mnd vooraf)</td></tr><tr><td>Groei en buitenland</td><td><a href="/platformen/shopify/">Shopify</a></td><td>€ 21</td></tr><tr><td>Winkel met webshop</td><td><a href="/platformen/lightspeed/">Lightspeed eCom</a></td><td>€ 68</td></tr><tr><td>Alles bij één partij</td><td><a href="/platformen/mijndomein/">Mijndomein</a></td><td>€ 15</td></tr><tr><td>Ontwerpvrijheid</td><td><a href="/platformen/wix/">Wix</a></td><td>€ 25</td></tr><tr><td>Volledige controle</td><td><a href="/platformen/woocommerce/">WooCommerce</a></td><td>€ 0 + hosting</td></tr></tbody></table></div>
 ${faqHtml(besteFaq)}${matchCta('Welke past bij jouw situatie?')}${bron(...['jouwweb', 'hostinger', 'shopify', 'lightspeed', 'mijndomein', 'wix', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
@@ -276,7 +276,7 @@ export const zzp = {
 <h2>Wat je nodig hebt</h2><ul><li>Een eigen domeinnaam en een e-mailadres op dat domein.</li><li>Een pagina per dienst, met prijzen of een vanaf-prijs.</li><li>Een contactformulier of afsprakenplanner.</li><li>Je bedrijfsgegevens onderaan je site (in de voettekst).</li></ul>
 <h2>Welke bouwer past?</h2><div class="table-wrap"><table class="data"><thead><tr><th>Bouwer</th><th>Vanaf per maand</th><th>Sterk punt</th></tr></thead><tbody><tr><th scope="row"><a href="/platformen/jouwweb/">JouwWeb</a></th><td>€ 5,50 (Lite)</td><td>Domeinnaam eerste jaar gratis, Nederlandstalig</td></tr><tr><th scope="row"><a href="/platformen/hostinger/">Hostinger</a></th><td>€ 2,99 (48 mnd vooraf)</td><td>Laagste prijs, AI-bouwer</td></tr><tr><th scope="row"><a href="/platformen/wix/">Wix</a></th><td>€ 14 (Light)</td><td>Ontwerpvrijheid</td></tr><tr><th scope="row"><a href="/platformen/mijndomein/">Mijndomein</a></th><td>€ 15 (Start)</td><td>Afspraken boeken en e-mail inbegrepen</td></tr></tbody></table></div>
 <h2>Factureren en btw</h2><p>Verkoop je via je site, dan wil je facturen en btw goed op orde. JouwWeb koppelt met onder meer e-Boekhouden, Moneybird, Jortt en SnelStart. Welk boekhoudprogramma bij je past, zie je op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</p>
-<div class="out">${knop('jouwweb', 'gids_zzp')}${knop('wix', 'gids_zzp', 'btn ghost')}</div>
+<div class="out">${knop('jouwweb', 'gids_zzp')}${knop('wix', 'gids_zzp', 'btn ghost', { trafcat: 'wsb' })}</div>
 ${faqHtml(zzpFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.hostinger.bronnen, P.wix.bronnen, P.mijndomein.bronnen)}</article>`,
 };
 export const guides = [beste, kosten, gratis, zzp];
