@@ -12,10 +12,8 @@ export const PARTNERLINKS = {
   shopify: 'https://shopify.pxf.io/c/7989613/1061744/13624',
   // Default = ecom (webshop-CTA's). Voor websitebouwer: knop('wix', pos, cls, { trafcat: 'wsb' }).
   wix: WIX_ECOM,
-  // TODO: Hostinger (Daisycon campagne 16780, media ShopMatch 438840) staat nog op 'in afwachting'. Zolang dat zo is, stuurt
-  // jf79.net door naar een andere adverteerder; daarom tijdelijk geen partnerlink en gaat de knop gewoon naar hostinger.com/nl
-  // (url in platforms.js). Na goedkeuring de Daisycon-deeplink terugzetten:
-  // hostinger: 'https://jf79.net/c/?si=16780&li=1754330&wi=438840&ws=shopmatch',
+  // Hostinger: Daisycon campagne 16780, media ShopMatch 438840 goedgekeurd 19-10-2026; gecheckt: landt op hostinger.com/nl.
+  hostinger: 'https://jf79.net/c/?si=16780&li=1722914&wi=438840&ws=shopmatch&dl=nl',
 };
 
 /** Alle goedgekeurde Wix-URL's (voor tests en live-checks). */
