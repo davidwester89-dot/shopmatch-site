@@ -98,7 +98,7 @@ const RELATED = {
 export const VERDIEPING = Object.fromEntries(IDS.filter((id) => existsSync(`content/platformen/${id}.md`)).map((id) => {
   const { meta, body } = parseFrontmatter(readFileSync(`content/platformen/${id}.md`, 'utf8'));
   const sources = (Array.isArray(meta.sources) ? meta.sources : []).map((x) => { const i = x.lastIndexOf('|'); return [x.slice(0, i).trim(), x.slice(i + 1).trim()]; });
-  return [id, { updated: meta.updated, sources, html: markdown(body) }];
+  return [id, { updated: meta.updated, seo_title: meta.seo_title, description: meta.description, sources, html: markdown(body) }];
 }));
 export const platformPages = IDS.map((id) => {
   const p = P[id];
@@ -111,7 +111,7 @@ export const platformPages = IDS.map((id) => {
   const prijs = /^€/.test(p.vanafTekst) ? `Vanaf ${p.vanafTekst}` : p.vanafTekst;
   const d = [`Wat kost ${p.naam}? ${prijs}. Alle pakketten, de checklist van 10 punten, voor- en nadelen en voor wie het past.`, `Wat kost ${p.naam}? ${prijs}. Alle pakketten, checklist, voor- en nadelen.`, `Wat kost ${p.naam}? ${prijs}.`].find((x) => x.length <= 155);
   const v = VERDIEPING[id];
-  const art = article({ path, title: t, h1, description: d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
+  const art = article({ path, title: v?.seo_title || t, h1, description: v?.description || d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
   if (v?.updated) {
     art.lastmod = v.updated; art.stamp = { ...art.stamp, updated: v.updated }; art.article = { ...art.article, updated: v.updated };
     art.schema[0] = { ...art.schema[0], dateModified: v.updated };

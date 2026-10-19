@@ -1,11 +1,12 @@
 ---
 updated: 2026-10-20
+seo_title: Shopify kosten 2026: per maand, transactiekosten en iDEAL
+description: Wat kost Shopify? Vanaf € 21 per maand bij jaarbetaling. Transactiekosten per abonnement, iDEAL via Shopify Payments, btw, apps en thema's uitgelegd.
 sources:
 - Shopify: Prijzen | https://www.shopify.com/nl/prijzen
 - Shopify Helpcentrum: Shopify Payments | https://help.shopify.com/nl/manual/payments/shopify-payments/pricing
 - Shopify Helpcentrum: iDEAL en Wero | https://help.shopify.com/nl/manual/payments/shopify-payments/local-payment-methods/ideal
 - Shopify Helpcentrum: Lokale betaalmethoden | https://help.shopify.com/nl/manual/payments/shopify-payments/local-payment-methods
-- Shopify: Shopify Payments, de voordelen en hoe je het instelt | https://www.shopify.com/nl/blog/shopify-payments
 - Shopify Helpcentrum: Btw-vereisten voor Shopify-facturering in Europese winkels | https://help.shopify.com/nl/manual/your-account/manage-billing/billing-charges/types-of-charges/taxes/billing-taxes-eu-ireland-switzerland-turkey
 - Shopify: Terms of Service | https://www.shopify.com/legal/terms
 - Shopify Helpcentrum: Kosten van derden op je Shopify-facturen | https://help.shopify.com/nl/manual/your-account/manage-billing/billing-charges/types-of-charges/third-party-charges
@@ -38,7 +39,7 @@ Gebruik je Shopify Payments, dan betaal je die extra kosten niet. Dat geldt ook 
 
 Een rekenvoorbeeld: verkoop je op Basic voor € 1.000 per maand via een externe betaalprovider, dan komt daar 2% bij, dus € 20 per maand. Bovenop wat die provider zelf per betaling rekent.
 
-Kort gezegd: verkoop je in Nederland, dan is Shopify Payments meestal de goedkoopste route. Een tweede betaalprovider naast Shopify Payments kan, maar dan betaal je over die betalingen weer extra transactiekosten.
+Kort gezegd: verkoop je in Nederland, dan vermijd je met Shopify Payments de extra transactiekosten.
 
 ## iDEAL in Shopify
 
@@ -53,7 +54,7 @@ Wel moet je winkel aan een paar eisen voldoen:
 
 Je klant ziet iDEAL alleen bij het afrekenen als hij een Nederlands adres heeft en in euro's betaalt.
 
-Wat kost een iDEAL-betaling? Volgens Shopify's eigen uitleg over Shopify Payments betaal je voor iDEAL 29 cent per bestelling, zonder extra kosten voor Shopify Payments zelf.
+Shopify rekent voor iDEAL | Wero administratiekosten per betaling. Een vast bedrag daarvoor noemt Shopify niet op de prijspagina of in het helpcentrum.
 
 Twee dingen om te weten:
 
