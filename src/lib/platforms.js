@@ -68,7 +68,7 @@ export const PLATFORMS = {
     bronnen: [['Lightspeed eCom prijzen', 'https://www.lightspeedhq.nl/ecommerce/prijzen/']],
   },
   hostinger: {
-    naam: 'Hostinger Website Bouwer', slug: 'hostinger', soort: 'Websitebouwer', url: 'https://www.hostinger.com/nl',
+    naam: 'Hostinger Website Bouwer', knopnaam: 'Hostinger', slug: 'hostinger', soort: 'Websitebouwer', url: 'https://www.hostinger.com/nl',
     kort: 'Goedkope websitebouwer met AI, webshop vanaf het Onbeperkt-pakket.',
     vanaf: 2.99, vanafTekst: '€ 2,99 per maand (Premium, 48 maanden vooraf)', btw: 'excl. btw',
     plannen: [

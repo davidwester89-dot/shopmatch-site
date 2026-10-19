@@ -45,7 +45,7 @@ export function uitgaand(id, arg) {
   if (!p) throw new Error('Onbekend platform ' + id);
   const { partnerlinks, trafcat } = opts(arg);
   const pl = hrefVoor(id, partnerlinks, trafcat);
-  return pl ? { href: pl, rel: 'sponsored nofollow noopener', partner: true, naam: p.naam } : { href: p.url, rel: 'noopener', partner: false, naam: p.naam };
+  return pl ? { href: pl, rel: 'sponsored nofollow noopener', partner: true, naam: p.knopnaam || p.naam } : { href: p.url, rel: 'noopener', partner: false, naam: p.knopnaam || p.naam };
 }
 
 /** Knop naar de aanbieder. Partnerlink krijgt altijd het zichtbare label "partnerlink". */
