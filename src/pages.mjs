@@ -271,10 +271,11 @@ const zzpFaq = [
 ];
 export const zzp = {
   ...article({ path: '/website-maken-zzp/', title: 'Website maken als zzp\'er: beste opties 2026', h1: 'Website maken als zzp\'er', description: 'Als zzp\'er een website maken: wat je nodig hebt en welke websitebouwer past. JouwWeb, Wix, Hostinger en Mijndomein met prijzen.', og: 'website-maken-zzp', parents: G, faq: zzpFaq }),
-  navPath: '/gidsen/',
+  navPath: '/gidsen/', lastmod: '2026-10-19',
   body: `<article class="prose"><h1>Website maken als zzp'er</h1>${by()}<p class="lead">Een goede zzp-site heeft een eigen domeinnaam, laat zien wat je doet en maakt contact makkelijk. Dat kan zonder webbouwer.</p>
 <h2>Wat je nodig hebt</h2><ul><li>Een eigen domeinnaam en een e-mailadres op dat domein.</li><li>Een pagina per dienst, met prijzen of een vanaf-prijs.</li><li>Een contactformulier of afsprakenplanner.</li><li>Je bedrijfsgegevens onderaan je site (in de voettekst).</li></ul>
 <h2>Welke bouwer past?</h2><div class="table-wrap"><table class="data"><thead><tr><th>Bouwer</th><th>Vanaf per maand</th><th>Sterk punt</th></tr></thead><tbody><tr><th scope="row"><a href="/platformen/jouwweb/">JouwWeb</a></th><td>€ 5,50 (Lite)</td><td>Domeinnaam eerste jaar gratis, Nederlandstalig</td></tr><tr><th scope="row"><a href="/platformen/hostinger/">Hostinger</a></th><td>€ 2,99 (48 mnd vooraf)</td><td>Laagste prijs, AI-bouwer</td></tr><tr><th scope="row"><a href="/platformen/wix/">Wix</a></th><td>€ 14 (Light)</td><td>Ontwerpvrijheid</td></tr><tr><th scope="row"><a href="/platformen/mijndomein/">Mijndomein</a></th><td>€ 15 (Start)</td><td>Afspraken boeken en e-mail inbegrepen</td></tr></tbody></table></div>
+<p>Wil je later ook een echte webshop met veel producten? Lees dan eerst <a href="/platformen/shopify/">wat Shopify kost en wat je ervoor krijgt</a>.</p>
 <h2>Factureren en btw</h2><p>Verkoop je via je site, dan wil je facturen en btw goed op orde. JouwWeb koppelt met onder meer e-Boekhouden, Moneybird, Jortt en SnelStart. Welk boekhoudprogramma bij je past, zie je op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</p>
 <div class="out">${knop('jouwweb', 'gids_zzp')}${knop('wix', 'gids_zzp', 'btn ghost', { trafcat: 'wsb' })}</div>
 ${faqHtml(zzpFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.hostinger.bronnen, P.wix.bronnen, P.mijndomein.bronnen)}</article>`,
