@@ -77,7 +77,7 @@ Alles over prijzen en pakketten: [JouwWeb](/platformen/jouwweb/).
 
 ## Wanneer kies je Shopify?
 
-Shopify is een echt webshopplatform. Je krijgt vanaf Basic onbeperkt producten, hosting en SSL. Verkoop je ook in een winkel of op de markt, dan gebruik je Shopify POS als kassa. Wil je in meerdere landen verkopen, dan stel je per markt talen in. Shopify B2B zit in Basic, Grow en Advanced.
+Shopify is een echt webshopplatform. Je krijgt vanaf Basic onbeperkt producten, hosting en SSL. Verkoop je ook in een winkel of op de markt, dan gebruik je Shopify POS als kassa. Welke kassa of pinautomaat past bij jouw zaak? Vergelijk op [KassaMatch](https://kassamatch.nl/). Wil je in meerdere landen verkopen, dan stel je per markt talen in. Shopify B2B zit in Basic, Grow en Advanced.
 
 Het nadeel: veel extra functies krijg je via apps, en die zijn vaak betaald. En werk je niet met Shopify Payments, dan betaal je op Basic 2% extra per transactie.
 
