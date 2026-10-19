@@ -1,6 +1,8 @@
 import { SITE, esc, ORG, GA_ID, ICONS, fmtDate } from './layout.mjs';
 import { IDS, CHECKED, prijsNootVan, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET } from './lib/platforms.js';
 import { knop, wixTrafcat } from './lib/partnerlinks.js';
+import { existsSync, readFileSync } from 'node:fs';
+import { parseFrontmatter, markdown } from './markdown.mjs';
 import { VRAGEN } from './lib/match.js';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, ranglijst, situaties } from './lib/checklist.js';
 import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, scoreBlock, scoreBadge, bars, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
@@ -91,6 +93,13 @@ const RELATED = {
   mijndomein: [['/webshop-beginnen-kosten/', 'Wat kost een webshop?']],
   squarespace: [['/website-maken-zzp/', 'Website maken als zzp\'er'], ['/webshop-beginnen-kosten/', 'Wat kost een webshop?']],
 };
+// Verdieping per platform (optioneel): content/platformen/<id>.md met frontmatter updated + sources (Naam | https://url).
+// Komt onder "Voor wie?"; de bronnen gaan mee in de bronregel en updated wordt lastmod en dateModified.
+export const VERDIEPING = Object.fromEntries(IDS.filter((id) => existsSync(`content/platformen/${id}.md`)).map((id) => {
+  const { meta, body } = parseFrontmatter(readFileSync(`content/platformen/${id}.md`, 'utf8'));
+  const sources = (Array.isArray(meta.sources) ? meta.sources : []).map((x) => { const i = x.lastIndexOf('|'); return [x.slice(0, i).trim(), x.slice(i + 1).trim()]; });
+  return [id, { updated: meta.updated, sources, html: markdown(body) }];
+}));
 export const platformPages = IDS.map((id) => {
   const p = P[id];
   const path = `/platformen/${p.slug}/`;
@@ -101,8 +110,14 @@ export const platformPages = IDS.map((id) => {
   const t = [`${p.naam} kosten 2026: prijzen per pakket | ShopMatch`, `${p.naam} kosten 2026: alle prijzen | ShopMatch`, `${p.naam} kosten 2026 | ShopMatch`, `${p.naam} kosten 2026`].find((x) => x.length <= 60);
   const prijs = /^€/.test(p.vanafTekst) ? `Vanaf ${p.vanafTekst}` : p.vanafTekst;
   const d = [`Wat kost ${p.naam}? ${prijs}. Alle pakketten, de checklist van 10 punten, voor- en nadelen en voor wie het past.`, `Wat kost ${p.naam}? ${prijs}. Alle pakketten, checklist, voor- en nadelen.`, `Wat kost ${p.naam}? ${prijs}.`].find((x) => x.length <= 155);
+  const v = VERDIEPING[id];
+  const art = article({ path, title: t, h1, description: d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
+  if (v?.updated) {
+    art.lastmod = v.updated; art.stamp = { ...art.stamp, updated: v.updated }; art.article = { ...art.article, updated: v.updated };
+    art.schema[0] = { ...art.schema[0], dateModified: v.updated };
+  }
   return {
-    ...article({ path, title: t, h1, description: d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] }),
+    ...art,
     navPath: '/platformen/',
     body: `<article><div class="phead"><span class="phead-logo">${logoImg(id, { maat: 'lg', eager: true })}</span><span class="tag best">Beste voor: ${esc(BEST_FOR[id])}</span></div><h1>${esc(h1)}</h1>${by()}<p class="lead">${esc(p.kort)}</p>
 <div class="pcard first"><div class="pc-head"><span class="sc-lbl">Verkopen vanaf</span><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p>${p.vanaf !== VERKOOP_VANAF[id] && id !== 'woocommerce' ? `<p class="pc-price">Website zonder verkoop: vanaf ${esc(p.vanafTekst)}</p>` : ''}</div>
@@ -113,9 +128,9 @@ ${scoreBlock(id)}
 <h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld telt als 0. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
-<div class="out">${knop(id, 'platform_bottom', 'btn', wixTrafcat(id, 'wsb'))}</div>
+${v ? v.html + '\n' : ''}<div class="out">${knop(id, 'platform_bottom', 'btn', wixTrafcat(id, 'wsb'))}</div>
 <h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li class="withlogo">${logo(x, 'sm')}<a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · score ${fmtScore(score(x).totaal)}/10 · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>
-${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featureBronnen(id))}</article>`,
+${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featureBronnen(id), v ? v.sources : [])}</article>`,
   };
 });
 
