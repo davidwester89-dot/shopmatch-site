@@ -12,8 +12,8 @@ export const PARTNERLINKS = {
   shopify: 'https://shopify.pxf.io/c/7989613/1061744/13624',
   // Default = ecom (webshop-CTA's). Voor websitebouwer: knop('wix', pos, cls, { trafcat: 'wsb' }).
   wix: WIX_ECOM,
-  // Hostinger: Daisycon campagne 16780, media ShopMatch 438840 goedgekeurd 19-10-2026; gecheckt: landt op hostinger.com/nl.
-  hostinger: 'https://jf79.net/c/?si=16780&li=1722914&wi=438840&ws=shopmatch&dl=nl',
+  // Hostinger: Daisycon campagne 16780, media ShopMatch 438840 goedgekeurd 19-10-2026; NL-deeplink 20-10-2026: landt op hostinger.com/nl/website-maken.
+  hostinger: 'https://jf79.net/c/?si=16780&li=1722914&wi=438840&ws=shopmatch&dl=nl%2Fwebsite-maken',
 };
 
 /** Alle goedgekeurde Wix-URL's (voor tests en live-checks). */
