@@ -6,6 +6,7 @@ import { knop, wixTrafcat } from './lib/partnerlinks.js';
 import { existsSync, readFileSync } from 'node:fs';
 import { parseFrontmatter, markdown } from './markdown.mjs';
 import { VRAGEN } from './lib/match.js';
+import { HERO_ART } from './hero-art.mjs';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, ranglijst, situaties } from './lib/checklist.js';
 import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, scoreBlock, scoreBadge, bars, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
 
@@ -26,32 +27,39 @@ export const home = {
   path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home',
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein, Squarespace en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
   schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
-  body: `<section class="hero"><div>
+  body: `<section class="hero sec"><div class="hero-txt">
 <p class="h1-brand">Shop<b>Match</b>.nl</p>
 <h1 class="tagline">Webshop kiezen? Vergelijk eerst.</h1>
 <p class="lead">Welk webshopplatform past bij jouw bedrijf? Acht platforms naast elkaar op prijs, iDEAL, kassa, B2B en contract. Beantwoord 5 vragen en zie je top 3.</p>
 <div class="actions"><a class="btn" href="/shop-match/" data-cta="home_hero">Start de match</a><a class="btn ghost" href="/vergelijken/">Vergelijk alle 8 platforms</a></div>
 </div>
+<div class="hero-side">
+${HERO_ART}
 <div class="hero-q"><p class="hero-q-step">Vraag 1 van 5</p><p class="hero-q-title" id="hq">${esc(VRAGEN[0].vraag)}</p><div class="hero-q-opts" role="group" aria-labelledby="hq">${VRAGEN[0].opties.map(([v, l]) => `<a class="choice" href="/shop-match/?doel=${v}" rel="nofollow">${esc(l)}<span aria-hidden="true">→</span></a>`).join('')}</div><p class="hero-q-foot">Daarna nog 4 korte vragen. Gratis, zonder account.</p></div>
-</section>
+</div>
 <ul class="trustbar">
 <li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time></span></li>
 <li>${ICONS.bron}<span>Bron bij elke prijs en functie</span></li>
 <li>${ICONS.schild}<span>Volgorde nooit betaald</span></li>
 <li>${ICONS.gratis}<span>Gratis, zonder account</span></li>
 </ul>
-<section class="logobar" aria-labelledby="h-pl"><h2 id="h-pl">Deze 8 platforms vergelijken we</h2><div class="logos eight">${[...IDS].sort((a, b) => KORT[a].localeCompare(KORT[b], 'nl')).map((id) => `<a class="logo-tile" href="/platformen/${P[id].slug}/">${logo(id, 'lg')}</a>`).join('')}</div></section>
+</section>
+<div class="sec"><section class="logobar" aria-labelledby="h-pl"><h2 id="h-pl">Deze 8 platforms vergelijken we</h2><div class="logos eight">${[...IDS].sort((a, b) => KORT[a].localeCompare(KORT[b], 'nl')).map((id) => `<a class="logo-tile" href="/platformen/${P[id].slug}/">${logo(id, 'lg')}</a>`).join('')}</div></section></div>
+<section class="sec tint">
 <h2>Beste keuze per situatie</h2>
 <p class="sub">Een vaste regel op functies en prijs, uit de sites van de aanbieders. Partnerschappen tellen niet mee.</p>
 <ol class="sitlist">
 ${situaties().filter((x) => x.top).map((x) => `<li><span class="sit-logo">${logo(x.top)}</span><span class="sit-txt"><strong>${esc(x.titel)}</strong><span>${esc(x.regel)}</span></span><span class="sit-pick">${esc(P[x.top].naam)}<b>${verkoopTekst(x.top)}</b></span><a class="sit-why" href="/platformen/${P[x.top].slug}/">Waarom?<span class="sr-only"> ${esc(P[x.top].naam)}</span></a></li>`).join('\n')}
 </ol>
 <p><a href="/shop-match/">Jouw situatie is anders? Start de match →</a></p>
+</section>
+<section class="sec">
 <h2>De platforms op een rij</h2>
 <p class="sub">Gesorteerd op checklistscore, bij gelijke stand op prijs. Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is; dat staat per platform bij de prijzen.</p>
 <div class="table-wrap"><table class="data stack"><thead><tr><th scope="col">Platform</th><th scope="col">Score</th><th scope="col">Verkopen vanaf</th><th scope="col">iDEAL</th><th scope="col">Kassa</th><th scope="col">B2B</th><th scope="col">Meerdere talen</th></tr></thead><tbody>${miniRows}</tbody></table></div>
 <p><a href="/vergelijken/">Alle 10 checklistpunten, met filters →</a></p>
-<section class="band method-band">
+</section>
+<section class="band method-band sec">
 <h2>Zo vergelijken we</h2>
 <ol class="steps">
 <li><strong>Prijs van de aanbieder zelf.</strong> Elke prijs komt van de prijspagina van de aanbieder, met link naar de bron.</li>
@@ -60,10 +68,21 @@ ${situaties().filter((x) => x.top).map((x) => `<li><span class="sit-logo">${logo
 </ol>
 <p class="author">Door <a href="/over/">${SITE.owner}</a> · <a href="/over/#methode">Hoe de score werkt</a></p>
 </section>
+<section class="sec">
 <h2>Populaire vergelijkingen</h2>${vsCards()}
+</section>
+<section class="sec tint">
 <h2>Gidsen</h2><ul class="gidslijst"><li><a href="/beste-webshop-platform/">Het beste webshopplatform van 2026, per situatie</a></li><li><a href="/webshop-beginnen-kosten/">Webshop beginnen: wat kost het?</a></li><li><a href="/gratis-website-maken/">Gratis website maken: wat kan wel en niet?</a></li><li><a href="/website-maken-zzp/">Website maken als zzp'er</a></li></ul>
+</section>
+<section class="sec">
 {{latest}}
-${faqHtml(homeFaq)}`,
+</section>
+<section class="sec tint"><div class="faq-sec">
+${faqHtml(homeFaq)}
+</div></section>
+<section class="sec band-sec">
+<div class="cta-band"><div><h2>Welk webshopplatform past bij jou?</h2><p>Beantwoord 5 vragen en zie je top 3. Gratis, zonder account.</p></div><a class="btn" href="/shop-match/" data-cta="home_band">Start de match</a></div>
+</section>`,
 };
 
 export const quiz = {
