@@ -72,7 +72,7 @@ Verkoop je 10 producten of minder? Dan kost JouwWeb Pro € 120 per jaar (excl. 
 
 ## Wanneer kies je JouwWeb?
 
-JouwWeb is gemaakt voor kleine ondernemers die snel en in het Nederlands willen starten. Je betaalt geen verkoopcommissie en iDEAL, Bancontact, PayPal en Klarna zitten erin. Handig voor je administratie: JouwWeb koppelt met onder meer e-Boekhouden, Moneybird, Jortt en SnelStart. Verzendlabels voor PostNL, DHL, DPD, GLS en UPS print je vanuit je webshop.
+JouwWeb is gemaakt voor kleine ondernemers die snel en in het Nederlands willen starten. Je betaalt geen verkoopcommissie en iDEAL, Bancontact, PayPal en Klarna zitten erin. Handig voor je administratie: JouwWeb koppelt met onder meer e-Boekhouden, Moneybird, Jortt en SnelStart. Welk van die pakketten bij jou past, zie je met [de boekhoudprogramma-match](https://boekhoudmatch.nl/boekhoudprogramma-kiezen/) op BoekhoudMatch. Verzendlabels voor PostNL, DHL, DPD, GLS en UPS print je vanuit je webshop.
 
 Let op: Pro is beperkt tot 10 producten. Meertalig verkopen gaat met een extra site per taal.
 

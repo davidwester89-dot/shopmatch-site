@@ -85,7 +85,7 @@ Volgens de gebruiksvoorwaarden sluit je in Europa je contract met Shopify Intern
 
 Krijg je als ondernemer een dienst van een bedrijf uit een ander EU-land, dan krijg je volgens de Belastingdienst meestal een factuur met 'btw verlegd'. Je berekent de btw dan zelf en geeft die op in rubriek 4b van je btw-aangifte. Gebruik je het abonnement voor btw-belaste omzet, dan trek je hetzelfde bedrag weer af als voorbelasting in rubriek 5b. Per saldo betaal je dan niets.
 
-Je Shopify-factuur hoort dus ook in je btw-aangifte, niet alleen bij je kosten.
+Je Shopify-factuur hoort dus ook in je btw-aangifte, niet alleen bij je kosten. Hoe je die aangifte stap voor stap invult, lees je bij [zo doe je je btw-aangifte als zzp'er](https://boekhoudmatch.nl/blog/btw-aangifte-doen-zzp/) op BoekhoudMatch.
 
 ## Extra kosten: apps en thema's
 

@@ -46,7 +46,7 @@ Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin
 
 Zakelijke klanten kopen anders dan consumenten. Zet deze punten naast je wensen voordat je kiest:
 
-1. **Btw.** Kun je btw verleggen als je aan een bedrijf in een ander EU-land levert?
+1. **Btw.** Kun je btw verleggen als je aan een bedrijf in een ander EU-land levert? Zie op BoekhoudMatch [wat er bij verlegde btw op je factuur moet](https://boekhoudmatch.nl/btw-berekenen/).
 2. **Betalen op rekening.** Veel bedrijven betalen liever achteraf via een factuur dan direct met iDEAL.
 3. **Klantaccounts.** Kunnen klanten inloggen, hun bestellingen terugzien en snel opnieuw bestellen?
 4. **Eigen prijzen per klant.** Heb je vaste afnemers met afspraken, dan wil je prijzen of een assortiment per klant.
