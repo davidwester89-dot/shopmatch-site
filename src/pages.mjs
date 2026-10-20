@@ -65,7 +65,7 @@ ${faqHtml(homeFaq)}`,
 };
 
 export const quiz = {
-  path: '/shop-match/', title: 'Webshopplatform kiezen: doe de ShopMatch', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true,
+  path: '/shop-match/', title: 'Webshop keuzehulp: welk platform past bij jou?', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true,
   description: 'Vijf vragen over je plannen, aantal producten, budget en ervaring. Je krijgt de drie platforms die het best passen, met prijs en uitleg.',
   scripts: ['/js/quiz.js'],
   schema: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ShopMatch', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: SITE.domain + '/shop-match/', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, publisher: ORG }],
@@ -92,6 +92,10 @@ const RELATED = {
   hostinger: [['/gratis-website-maken/', 'Gratis website maken']],
   mijndomein: [['/webshop-beginnen-kosten/', 'Wat kost een webshop?']],
   squarespace: [['/website-maken-zzp/', 'Website maken als zzp\'er'], ['/webshop-beginnen-kosten/', 'Wat kost een webshop?']],
+};
+// Eén zin onder Alternatieven (SEO-audit 20-10, SM-01): interne links naar platforms die nog niet geïndexeerd zijn.
+const ALT_ZIN = {
+  shopify: '<p>Wil je klein en goedkoper starten? Kijk dan ook naar <a href="/platformen/hostinger/">Hostinger</a>, het platform met de laagste instapprijs, of naar <a href="/platformen/wix/">Wix</a> als je veel ontwerpvrijheid wilt.</p>',
 };
 // Verdieping per platform (optioneel): content/platformen/<id>.md met frontmatter updated + sources (Naam | https://url).
 // Komt onder "Voor wie?"; de bronnen gaan mee in de bronregel en updated wordt lastmod en dateModified.
@@ -129,13 +133,13 @@ ${scoreBlock(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
 ${v ? v.html + '\n' : ''}<div class="out">${knop(id, 'platform_bottom', 'btn', wixTrafcat(id, 'wsb'))}</div>
-<h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li class="withlogo">${logo(x, 'sm')}<a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · score ${fmtScore(score(x).totaal)}/10 · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>
+<h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li class="withlogo">${logo(x, 'sm')}<a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · score ${fmtScore(score(x).totaal)}/10 · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>${ALT_ZIN[id] || ''}
 ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featureBronnen(id), v ? v.sources : [])}</article>`,
   };
 });
 
 export const platformHub = {
-  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en score | ShopMatch', h1: 'Alle webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: CHECKED },
+  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Alle webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: CHECKED },
   description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein, Squarespace en WooCommerce: per platform de prijs, checklistscore en voor wie het past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
   body: `<h1>Alle webshopplatforms op een rij</h1><p class="lead">Acht manieren om online te verkopen, van gratis plug-in tot compleet platform met kassa. Gesorteerd op checklistscore, bij gelijke stand op prijs.</p>
@@ -172,13 +176,13 @@ ${methodBox()}
 };
 
 const sideRow = (label, a, b) => `<tr><th scope="row">${label}</th><td>${a}</td><td>${b}</td></tr>`;
-const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, faq, aTrafcat, bTrafcat }) => {
+const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, faq, aTrafcat, bTrafcat, naVerdict = '' }) => {
   const side = (id, kies, posn, trafcat) => `<div class="card"><span class="pc-logo">${logo(id)}</span><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><div class="pc-score" style="margin-top:12px"><span class="sc-lbl">Checklistscore</span>${scoreBadge(id)}${bars(id)}</div><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm', wixTrafcat(id, trafcat))}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
   return {
     ...article({ path: `/vergelijken/${slug}/`, title, h1, description, og: `vs-${slug}`, parents: [['/vergelijken/', 'Vergelijken']], faq }),
     navPath: '/vergelijken/',
     body: `<article><h1>${esc(h1)}</h1>${by()}<p class="lead">${intro}</p>
-<h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a', aTrafcat)}${side(b, kiesB, 'vs_b', bTrafcat)}</div>
+<h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a', aTrafcat)}${side(b, kiesB, 'vs_b', bTrafcat)}</div>${naVerdict}
 <h2>Prijs en pakketten</h2><div class="table-wrap"><table class="data side"><thead><tr><th scope="col"></th><th scope="col"><span class="thlogo">${logo(a, 'sm')}</span>${esc(P[a].naam)}</th><th scope="col"><span class="thlogo">${logo(b, 'sm')}</span>${esc(P[b].naam)}</th></tr></thead><tbody>${rows.map((r) => sideRow(...r)).join('')}</tbody></table></div>
 <h2>Checklist naast elkaar</h2><p class="sub">Tien vaste punten uit de sites van de aanbieders. <a href="/over/#methode">Zo tellen we</a></p>
 <div class="table-wrap"><table class="data side"><thead><tr><th scope="col">Checklistpunt</th><th scope="col"><span class="thlogo">${logo(a, 'sm')}</span>${esc(P[a].naam)}</th><th scope="col"><span class="thlogo">${logo(b, 'sm')}</span>${esc(P[b].naam)}</th></tr></thead><tbody>${GROEPEN.map((g) => `<tr><th colspan="3" scope="colgroup" style="background:var(--sand)">${esc(g.naam)}</th></tr>${g.punten.map((k) => sideRow(esc(PUNTEN[k].lang), fv(FEATURES[a][k]), fv(FEATURES[b][k]))).join('')}`).join('')}<tr><th scope="row">Checklistscore</th><td>${scoreBadge(a)}</td><td>${scoreBadge(b)}</td></tr></tbody></table></div>
@@ -205,6 +209,7 @@ export const vsPages = [
     rows: [['Instapprijs', '€ 14 per maand (Light)', '€ 5,50 per maand (Lite)'], ['Webshop vanaf', '€ 25 per maand (Core)', '€ 10 per maand (Pro, 10 producten)'], ['Onbeperkt producten', 'Vanaf Core', 'Business, € 20 per maand'], ['Verkoopcommissie', 'Niet vermeld op de prijspagina', '0%'], ['Boekhoudkoppelingen', 'Niet vermeld op de prijspagina', 'o.a. e-Boekhouden, Moneybird, Jortt, SnelStart'], ['Gratis versie', 'Ja, met Wix-advertenties', 'Ja, zonder eigen domeinnaam'], ['Geld terug', '14 dagen', 'Niet vermeld']],
     kiesA: ['ontwerp en vrijheid voor je het belangrijkst zijn', 'je eerst 14 dagen met geld-teruggarantie wilt proberen'],
     kiesB: ['je goedkoop wilt starten met een kleine webshop', 'je een koppeling met je boekhoudprogramma wilt', 'je hulp in het Nederlands wilt'],
+    naVerdict: '<p>Twijfel je ook over Shopify? Lees in de blog <a href="/blog/shopify-wix-jouwweb-kleine-webshop/">Shopify, Wix of JouwWeb voor een kleine webshop</a>.</p>',
     faq: [['Is JouwWeb goedkoper dan Wix?', 'Ja. Een webshop kost bij JouwWeb vanaf € 10 per maand (Pro), bij Wix vanaf € 25 per maand (Core).'], ['Kan ik bij Wix gratis een webshop maken?', 'Nee. Online betalingen ontvangen kan bij Wix vanaf het Core-pakket.']],
   }),
   cmp({
