@@ -14,7 +14,14 @@ export const bron = (...lists) => {
   return `<p class="src">Bronnen: ${uniq.map(([t, u]) => `<a href="${u}" rel="noopener">${esc(t)}</a>`).join(' · ')}</p>`;
 };
 /** Bronnen van de checklist van één of meer platforms (unieke URL's, met naam van het platform). */
-export const featureBronnen = (...ids) => ids.flatMap((id) => [...new Set(Object.values(FEATURES[id]).map((f) => f.s).filter(Boolean))].map((u) => [`${P[id].naam.split(' ')[0]}: ${new URL(u).hostname.replace(/^www\./, '')}${new URL(u).pathname.replace(/\/$/, '')}`, u]));
+export const featureBronnen = (...ids) => ids.flatMap((id) => [...new Set(Object.values(FEATURES[id]).map((f) => f.s).filter(Boolean))].map((u) => [`${P[id].naam.split(' ')[0]}: ${bronTekst(u)}`, u]));
+/** Linktekst van een bron: paginatitel uit de URL als die leesbaar is (3+ woorden), anders domein + pad. */
+export function bronTekst(u) {
+  const url = new URL(u); const host = url.hostname.replace(/^www\./, '');
+  const slug = decodeURIComponent(url.pathname.replace(/\/$/, '').split('/').pop() || '').replace(/\.html?$/, '').replace(/^\d+-/, '');
+  if (slug.split('-').length >= 3) return `${slug.charAt(0).toUpperCase()}${slug.slice(1).replace(/-/g, ' ')} (${host})`;
+  return `${host}${url.pathname.replace(/\/$/, '')}`;
+}
 export const matchCta = (t = 'Twijfel je nog?') => `<div class="cta"><h2>${t}</h2><p>Vijf vragen over je plannen, aantal producten, budget en ervaring. Je krijgt de drie platforms die het best passen, met prijs.</p><a class="btn" href="/shop-match/" data-cta="match">Start de match</a></div>`;
 export const article = ({ path, title, h1, description, og, parents, date = DATE, faq, schemaType = 'Article' }) => ({
   path, title, h1, crumb: h1, description, og, parents, ogType: 'article', lastmod: date,

@@ -485,3 +485,10 @@ table.matrix td{min-width:118px}
 .plogo-sm{width:100px;height:30px}
 .plogo-lg{width:100%;max-width:160px;height:auto;aspect-ratio:10/3}
 @media(min-width:700px){.sit-logo .plogo{width:110px;height:33px}}
+
+/* Audit 20-10-2026 (snelheid-mobiel-ux): bronlinks breken af, skiplink en consentlink 48 px, partnerlabel en voetnoten >= 15 px */
+.src a,.report a{overflow-wrap:anywhere}
+.skip:focus{min-height:48px}
+.consent a{display:inline-block;padding-block:12px}
+.partner{font-size:.9375rem}
+.fnote{font-size:.9375rem}
