@@ -17,7 +17,7 @@ const logo = (id, maat = 'md') => logoImg(id, { maat });
 const homeFaq = [
   ['Wat is het beste webshopplatform voor een starter?', 'Dat hangt af van je aantal producten en budget. Met een paar producten start je goedkoop met JouwWeb Pro (€ 10 per maand, tot 10 producten). Wil je groeien of over de grens verkopen, dan is Shopify sterker. Zie <a href="/beste-webshop-platform/">beste webshopplatform 2026</a>.'],
   ['Hoe komt de checklistscore tot stand?', 'We tellen 10 vaste punten, zoals iDEAL, kassa, B2B en contractvorm. Ja is 1 punt, deels een half punt, nee of niet vermeld 0. Alles komt van de site van de aanbieder. Prijs staat er apart naast. Zie <a href="/over/#methode">zo vergelijken we</a>.'],
-  ['Verdient ShopMatch aan de aanbevelingen?', 'Bij sommige aanbieders kunnen we in de toekomst een vergoeding krijgen via een partnerlink. Die links hebben altijd het label "partnerlink" en tellen nooit mee in de match, de score of de volgorde.'],
+  ['Verdient ShopMatch aan de aanbevelingen?', 'Bij sommige aanbieders kunnen we in de toekomst een vergoeding krijgen via een partnerlink. Die links worden bij de knoppen vermeld en tellen nooit mee in de match, de score of de volgorde.'],
 ];
 const VS = [['/vergelijken/shopify-vs-lightspeed/', 'Shopify of Lightspeed', 'Voor winkels die ook online verkopen.'], ['/vergelijken/wix-vs-jouwweb/', 'Wix of JouwWeb', 'Websitebouwers voor zzp\'ers en kleine shops.'], ['/vergelijken/shopify-vs-woocommerce/', 'Shopify of WooCommerce', 'Alles geregeld of alles zelf in de hand.']];
 const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class="card" href="${h}"><h3>${esc(t)}</h3><p>${esc(d)}</p><span class="more">Bekijk de vergelijking →</span></a>`).join('')}</div>`;

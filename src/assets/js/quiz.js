@@ -2,7 +2,7 @@
 import { score, compleet, VRAGEN } from './lib/match.js';
 import { PLATFORMS, BEST_FOR } from './lib/platforms.js';
 import { score as checklist, fmtScore } from './lib/checklist.js';
-import { knop, wixTrafcat } from './lib/partnerlinks.js';
+import { knop, metNoot, wixTrafcat } from './lib/partnerlinks.js';
 import { logoImg } from './lib/logos.js';
 import { track } from './consent.js';
 
@@ -37,7 +37,7 @@ function toon(a, scroll) {
   const top = score(a).slice(0, 3);
   const [b] = top; const pb = PLATFORMS[b.id];
   const logo = (id, maat) => logoImg(id, { maat, base: BASE });
-  out.innerHTML = `<h2>Jouw beste match</h2><div class="mbest">${logo(b.id, 'md')}<p class="big">${esc(pb.naam)}</p></div><p class="pc-price"><strong>${prijsTekst(b, a)}</strong> ${a.doel === 'site' ? 'Instappakket' : 'Goedkoopste pakket dat bij je aantal producten past'}, zoals ${esc(pb.naam.split(' ')[0])} het toont</p>`
+  out.innerHTML = metNoot(`<h2>Jouw beste match</h2><div class="mbest">${logo(b.id, 'md')}<p class="big">${esc(pb.naam)}</p></div><p class="pc-price"><strong>${prijsTekst(b, a)}</strong> ${a.doel === 'site' ? 'Instappakket' : 'Goedkoopste pakket dat bij je aantal producten past'}, zoals ${esc(pb.naam.split(' ')[0])} het toont</p>`
     + `<div class="match-cta">${knop(b.id, 'match_1', 'btn', wixOpt(b.id, a))}<a class="vlink" href="${BASE}/platformen/${pb.slug}/">Lees alles over ${esc(pb.naam)} →</a></div>`
     + `<h3>Top 3</h3><ol class="mtop">${top.map((r, i) => {
       const p = PLATFORMS[r.id]; const c = checklist(r.id);
@@ -48,7 +48,7 @@ function toon(a, scroll) {
     }).join('')}</ol>`
     + `<div class="match-next"><a class="btn ghost" href="${BASE}/vergelijken/?ids=${top.map((r) => r.id).join(',')}">Vergelijk deze 3 naast elkaar</a></div>`
     + `<p class="mlinks"><button type="button" class="linkbtn" id="m-reset">Opnieuw beginnen</button><button type="button" class="linkbtn" id="m-share">Deel of bewaar: kopieer de link</button></p>`
-    + `<p class="sub">Volgorde: wat past, dan je budget, dan de prijs. Partnerlinks tellen niet mee.</p>`;
+    + `<p class="sub">Volgorde: wat past, dan je budget, dan de prijs. Partnerlinks tellen niet mee.</p>`);
   const q = new URLSearchParams(a).toString();
   history.replaceState(null, '', `${location.pathname}?${q}`);
   document.getElementById('m-reset').addEventListener('click', () => { form.reset(); history.replaceState(null, '', location.pathname); update(); out.innerHTML = WACHT; form.querySelector('input').focus(); });

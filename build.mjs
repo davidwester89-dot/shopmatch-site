@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync, cpSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { layout, SITE, BASE, PREVIEW } from './src/layout.mjs';
+import { partnerNoten } from './src/lib/partnerlinks.js';
 import * as P from './src/pages.mjs';
 import { loadPosts, postPage, blogIndex, latestHtml, feed } from './src/blog.mjs';
 const OUT = 'dist';
@@ -10,7 +11,7 @@ const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileS
 const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
 export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound];
-for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), layout(p));
+for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(layout(p)));
 cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
 cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });
