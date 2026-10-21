@@ -18,7 +18,7 @@ test('match: logische uitkomsten', () => {
     assert.ok(!score({ doel, producten: '100', budget, techniek: 'geen', nl: 'nee' }).slice(0, 3).some((r) => r.id === 'woocommerce'));
 });
 
-test('partnerlinks: alleen goedgekeurde links, gevuld = sponsored nofollow + zichtbaar label', () => {
+test('partnerlinks: alleen goedgekeurde links, gevuld = sponsored nofollow, geen zichtbaar label', () => {
   for (const [id, href] of Object.entries(PARTNERLINKS)) { assert.ok(PLATFORMS[id], `partnerlink voor onbekend platform ${id}`); assert.match(href, /^https:\/\//, id); }
   for (const id of IDS) {
     const o = uitgaand(id);
@@ -26,13 +26,13 @@ test('partnerlinks: alleen goedgekeurde links, gevuld = sponsored nofollow + zic
     else { assert.equal(o.partner, false); assert.equal(o.href, PLATFORMS[id].url); assert.equal(o.rel, 'noopener'); }
     const k = knop(id, 't');
     assert.equal(/rel="sponsored nofollow noopener"/.test(k), !!PARTNERLINKS[id], id);
-    assert.equal(/<\/a><span class="partner">partnerlink<\/span>$/.test(k), !!PARTNERLINKS[id], id);
+    assert.ok(!/partnerlink|class="partner"/i.test(k.replace(/data-partner-slot="[^"]*"/, '')), id); assert.match(k, /<\/a>$/, id);
   }
   // Zonder partnerlinks: officiële site, geen sponsored, geen label.
   for (const id of IDS) { const o = uitgaand(id, {}); assert.equal(o.partner, false); assert.equal(o.href, PLATFORMS[id].url); assert.ok(!knop(id, 't', 'btn', {}).includes('partner"')); }
   const k = knop('shopify', 't', 'btn', { shopify: 'https://example.com/aff' });
   assert.match(k, /rel="sponsored nofollow noopener"/);
-  assert.match(k, /partnerlink<\/span>/);
+  assert.ok(!/<span class="partner"|>\s*partnerlink\s*</i.test(k));
   // Wix: default ecom, trafcat wsb voor websitebouwer-CTA's.
   assert.equal(uitgaand('wix').href, WIX_ECOM);
   assert.equal(uitgaand('wix', { trafcat: 'wsb' }).href, WIX_WSB);

@@ -39,7 +39,7 @@ function hrefVoor(id, partnerlinks, trafcat) {
   return base;
 }
 
-/** Uitgaande link: partnerlink (rel sponsored nofollow, met label) als die er is, anders de officiële site. */
+/** Uitgaande link: partnerlink (rel sponsored nofollow, zonder zichtbaar label) als die er is, anders de officiële site. */
 export function uitgaand(id, arg) {
   const p = PLATFORMS[id];
   if (!p) throw new Error('Onbekend platform ' + id);
@@ -48,10 +48,10 @@ export function uitgaand(id, arg) {
   return pl ? { href: pl, rel: 'sponsored nofollow noopener', partner: true, naam: p.knopnaam || p.naam } : { href: p.url, rel: 'noopener', partner: false, naam: p.knopnaam || p.naam };
 }
 
-/** Knop naar de aanbieder. Partnerlink krijgt altijd het zichtbare label "partnerlink". */
+/** Knop naar de aanbieder. Partnerlink: rel sponsored nofollow noopener, geen zichtbaar label (uitleg in de FAQ). */
 export function knop(id, pos, cls = 'btn', arg) {
   const o = uitgaand(id, arg);
-  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${id}" data-pos="${pos}" data-cta="outbound" data-partner-slot="${id}">Naar ${o.naam}</a>${o.partner ? '<span class="partner">partnerlink</span>' : ''}`;
+  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${id}" data-pos="${pos}" data-cta="outbound" data-partner-slot="${id}">Naar ${o.naam}</a>`;
 }
 
 /** Alleen voor Wix: geef { trafcat } door; anders undefined (andere platforms negeren het). */
