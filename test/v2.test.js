@@ -104,7 +104,8 @@ test('blog: index, posts in sitemap en feed, byline, bronnen, geen namen', async
   const { execSync } = await import('node:child_process');
   const { readFileSync, readdirSync } = await import('node:fs');
   execSync('node build.mjs', { env: { ...process.env, BASE: '', GO_LIVE: '1', PREVIEW: '' } });
-  const posts = readdirSync('content/blog').filter((f) => f.endsWith('.md')).map((f) => f.replace(/^\d{4}-\d{2}-\d{2}-|\.md$/g, ''));
+  const today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+  const posts = readdirSync('content/blog').filter((f) => f.endsWith('.md') && f.slice(0, 10) <= today).map((f) => f.replace(/^\d{4}-\d{2}-\d{2}-|\.md$/g, ''));
   assert.ok(posts.length >= 2);
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   const idx = readFileSync('dist/blog/index.html', 'utf8');

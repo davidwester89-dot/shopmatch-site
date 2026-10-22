@@ -25,6 +25,7 @@ cards={
  'blog':('Blog: webshop en website beginnen','Prijzen en verschillen, met bronnen'),
  'blog-shopify-wix-jouwweb-kleine-webshop':('Shopify, Wix of JouwWeb?','Welke past bij je kleine webshop'),
  'blog-b2b-webshop-beginnen':('B2B-webshop beginnen','Welk platform past bij zakelijke klanten'),
+ 'blog-herroepingsknop-webshop':('Herroepingsknop verplicht','Wat je webshop moet regelen'),
 }
 art=f'<svg viewBox="0 0 300 300" width="300" height="300"><rect x="20" y="40" width="200" height="140" rx="12" fill="#fff" stroke="{D}" stroke-width="6"/><rect x="5" y="180" width="230" height="14" rx="7" fill="{D}"/><rect x="42" y="62" width="156" height="20" rx="5" fill="{B}"/><rect x="42" y="94" width="44" height="44" rx="6" fill="{P}"/><rect x="98" y="94" width="44" height="44" rx="6" fill="{G}"/><rect x="154" y="94" width="44" height="44" rx="6" fill="#dcdcf0"/><rect x="200" y="110" width="76" height="130" rx="12" fill="#fff" stroke="{D}" stroke-width="6"/><rect x="214" y="128" width="48" height="36" rx="5" fill="{P}"/><rect x="214" y="210" width="48" height="14" rx="7" fill="{B}"/><circle cx="262" cy="46" r="28" fill="{G}"/><path d="m249 47 9 9 18-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 tmp=tempfile.mkdtemp()
