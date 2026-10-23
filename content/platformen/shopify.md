@@ -1,7 +1,7 @@
 ---
-updated: 2026-10-20
-seo_title: Shopify kosten 2026: per maand, transactiekosten en iDEAL
-description: Wat kost Shopify? Vanaf € 21 per maand bij jaarbetaling. Transactiekosten per abonnement, iDEAL via Shopify Payments, btw, apps en thema's uitgelegd.
+updated: 2026-10-23
+seo_title: Wat kost Shopify per maand? Abonnementen en kosten 2026
+description: Shopify kost € 21 per maand (Basic, jaarbetaling) of € 28 per maand. Alle abonnementen, transactiekosten, iDEAL via Shopify Payments en btw op een rij.
 sources:
 - Shopify: Prijzen | https://www.shopify.com/nl/prijzen
 - Shopify Helpcentrum: Shopify Payments | https://help.shopify.com/nl/manual/payments/shopify-payments/pricing

@@ -125,18 +125,27 @@ export const VERDIEPING = Object.fromEntries(IDS.filter((id) => existsSync(`cont
   const sources = (Array.isArray(meta.sources) ? meta.sources : []).map((x) => { const i = x.lastIndexOf('|'); return [x.slice(0, i).trim(), x.slice(i + 1).trim()]; });
   return [id, { updated: meta.updated, seo_title: meta.seo_title, description: meta.description, sources, html: markdown(body) }];
 }));
+// CTR-fix 23-10 (GSC 28 d: veel vertoningen, 0 klikken): title/meta/H1 op de zoekwoorden ('lightspeed kosten/abonnement/alternatief', 'wix prijzen/website kosten').
+const SEO_PLATFORM = {
+  shopify: { h1: 'Wat kost Shopify? Abonnementen, kosten, voor- en nadelen' },
+  lightspeed: { title: 'Lightspeed eCom kosten 2026: abonnement vanaf € 68 p/m', h1: 'Lightspeed eCom: kosten, abonnementen en alternatieven',
+    description: 'Wat kost Lightspeed eCom? Essential € 68, Advanced € 120 en Professional € 259 per maand. Wat je per abonnement krijgt en goedkopere alternatieven.' },
+  wix: { title: 'Wix prijzen 2026: wat kost een Wix-website per maand?', h1: 'Wix: prijzen per pakket, voor- en nadelen',
+    description: 'Wix kost vanaf € 14 per maand (Light, jaarbetaling); online verkopen kan vanaf Core (€ 25). Alle Wix-pakketten, wat erin zit en voor wie Wix past.' },
+};
 export const platformPages = IDS.map((id) => {
   const p = P[id];
   const path = `/platformen/${p.slug}/`;
-  const h1 = `${p.naam}: prijzen, voor- en nadelen`;
+  const v = VERDIEPING[id];
+  const s = SEO_PLATFORM[id] || {};
+  const h1 = s.h1 || `${p.naam}: prijzen, voor- en nadelen`;
   const pos = RANG.indexOf(id) + 1;
   const alt = RANG.filter((x) => x !== id).slice(0, 3);
   // Zoekwoord eerst: '<platform> kosten' (Google-suggesties: shopify/wix/jouwweb/woocommerce/squarespace kosten). Kortste variant die ≤ 60 past.
   const t = [`${p.naam} kosten 2026: prijzen per pakket | ShopMatch`, `${p.naam} kosten 2026: alle prijzen | ShopMatch`, `${p.naam} kosten 2026 | ShopMatch`, `${p.naam} kosten 2026`].find((x) => x.length <= 60);
   const prijs = /^€/.test(p.vanafTekst) ? `Vanaf ${p.vanafTekst}` : p.vanafTekst;
   const d = [`Wat kost ${p.naam}? ${prijs}. Alle pakketten, de checklist van 10 punten, voor- en nadelen en voor wie het past.`, `Wat kost ${p.naam}? ${prijs}. Alle pakketten, checklist, voor- en nadelen.`, `Wat kost ${p.naam}? ${prijs}.`].find((x) => x.length <= 155);
-  const v = VERDIEPING[id];
-  const art = article({ path, title: v?.seo_title || t, h1, description: v?.description || d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
+  const art = article({ path, title: s.title || v?.seo_title || t, h1, description: s.description || v?.description || d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
   if (v?.updated) {
     art.lastmod = v.updated; art.stamp = { ...art.stamp, updated: v.updated }; art.article = { ...art.article, updated: v.updated };
     art.schema[0] = { ...art.schema[0], dateModified: v.updated };
