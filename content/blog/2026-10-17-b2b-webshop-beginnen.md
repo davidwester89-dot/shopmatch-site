@@ -3,7 +3,7 @@ title: B2B-webshop maken: welk platform past bij zakelijke klanten?
 seo_title: B2B-webshop maken of starten: welk platform? (2026)
 description: B2B-webshop maken? 4 platforms met B2B-functies naast elkaar: JouwWeb vanaf € 10, Shopify vanaf € 21, Lightspeed vanaf € 259 per maand. Zo kies je.
 date: 2026-10-17
-updated: 2026-10-23
+updated: 2026-10-26
 checked: 2026-10-17
 tools: /shop-match/, /vergelijken/, /platformen/
 sources:
@@ -15,11 +15,10 @@ sources:
 - WooCommerce: B2B for WooCommerce | https://woocommerce.com/products/b2b-for-woocommerce/
 - WooCommerce: Prijzen | https://woocommerce.com/nl/pricing/
 - Wix: Premiumpakketten | https://nl.wix.com/upgrade/website
-- Squarespace: Prijzen | https://www.squarespace.com/pricing
 - Hostinger: Website Bouwer | https://www.hostinger.com/nl/website-maken
 - Mijndomein: MijnWebshop | https://www.mijndomein.nl/producten/webshop
 ---
-Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Ze willen prijzen zonder btw zien, op rekening betalen en snel opnieuw bestellen. Niet elk webshopplatform kan dat. Van de acht platforms die we volgen, noemen er maar vier B2B-functies op hun eigen site.
+Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Ze willen prijzen zonder btw zien, op rekening betalen en snel opnieuw bestellen. Niet elk webshopplatform kan dat. Van de zeven platforms die we volgen, noemen er maar vier B2B-functies op hun eigen site.
 
 > **Kort gezegd:** klein beginnen met zakelijke klanten kan bij JouwWeb (Pro € 10, Business € 20 per maand, excl. btw).
 >
@@ -40,7 +39,7 @@ Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin
 | [Lightspeed eCom](/platformen/lightspeed/) | B2B in het Professional-pakket | Professional € 259 | {{score:lightspeed}} |
 | [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plug-in € 0, plus hosting en extensie | {{score:woocommerce}} |
 
-[Wix](/platformen/wix/), [Squarespace](/platformen/squarespace/), [Hostinger](/platformen/hostinger/) en [Mijndomein](/platformen/mijndomein/) noemen op de pagina's die wij volgen geen B2B-functies. Daarom telt B2B bij hen in de checklist als 0. [Zo tellen we](/over/#methode).
+[Wix](/platformen/wix/), [Hostinger](/platformen/hostinger/) en [Mijndomein](/platformen/mijndomein/) noemen op de pagina's die wij volgen geen B2B-functies. Daarom telt B2B bij hen in de checklist als 0. [Zo tellen we](/over/#methode).
 
 ## Waar let je op bij een B2B-webshop?
 

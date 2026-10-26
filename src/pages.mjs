@@ -10,8 +10,10 @@ import { HERO_ART } from './hero-art.mjs';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, fmtScore, ranglijst, situaties } from './lib/checklist.js';
 import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, scoreBlock, scoreBadge, bars, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
 
-const KORT = { shopify: 'Shopify', wix: 'Wix', jouwweb: 'JouwWeb', lightspeed: 'Lightspeed', hostinger: 'Hostinger', mijndomein: 'Mijndomein', woocommerce: 'WooCommerce', squarespace: 'Squarespace' };
+const KORT = { shopify: 'Shopify', wix: 'Wix', jouwweb: 'JouwWeb', lightspeed: 'Lightspeed', hostinger: 'Hostinger', mijndomein: 'Mijndomein', woocommerce: 'WooCommerce' };
 const RANG = ranglijst();
+// Laatste inhoudelijke wijziging (Squarespace uit de vergelijking, tellingen en selectietekst): lastmod en dateModified van die pagina's.
+const GEWIJZIGD = '2026-10-26';
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
 const homeFaq = [
@@ -24,14 +26,14 @@ const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class
 const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Score">${scoreBadge(id)}</td><td class="n" data-l="Verkopen vanaf">${verkoopTekst(id)}</td>${[['ideal', 'iDEAL'], ['pos', 'Kassa'], ['b2b', 'B2B'], ['talen', 'Meerdere talen']].map(([k, l]) => `<td data-l="${l}">${fv(FEATURES[id][k], false)}</td>`).join('')}</tr>`).join('');
 
 export const home = {
-  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home',
-  description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein, Squarespace en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
+  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: GEWIJZIGD,
+  description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
   schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<section class="hero sec"><div class="hero-txt">
 <p class="h1-brand">Shop<b>Match</b>.nl</p>
 <h1 class="tagline">Webshop kiezen? Vergelijk eerst.</h1>
-<p class="lead">Welk webshopplatform past bij jouw bedrijf? Acht platforms naast elkaar op prijs, iDEAL, kassa, B2B en contract. Beantwoord 5 vragen en zie je top 3.</p>
-<div class="actions"><a class="btn" href="/shop-match/" data-cta="home_hero">Start de match</a><a class="btn ghost" href="/vergelijken/">Vergelijk alle 8 platforms</a></div>
+<p class="lead">Welk webshopplatform past bij jouw bedrijf? Zeven platforms naast elkaar op prijs, iDEAL, kassa, B2B en contract. Beantwoord 5 vragen en zie je top 3.</p>
+<div class="actions"><a class="btn" href="/shop-match/" data-cta="home_hero">Start de match</a><a class="btn ghost" href="/vergelijken/">Vergelijk alle 7 platforms</a></div>
 </div>
 <div class="hero-side">
 ${HERO_ART}
@@ -44,7 +46,7 @@ ${HERO_ART}
 <li>${ICONS.gratis}<span>Gratis, zonder account</span></li>
 </ul>
 </section>
-<div class="sec"><section class="logobar" aria-labelledby="h-pl"><h2 id="h-pl">Deze 8 platforms vergelijken we</h2><div class="logos eight">${[...IDS].sort((a, b) => KORT[a].localeCompare(KORT[b], 'nl')).map((id) => `<a class="logo-tile" href="/platformen/${P[id].slug}/">${logo(id, 'lg')}</a>`).join('')}</div></section></div>
+<div class="sec"><section class="logobar" aria-labelledby="h-pl"><h2 id="h-pl">Deze 7 platforms vergelijken we</h2><div class="logos eight">${[...IDS].sort((a, b) => KORT[a].localeCompare(KORT[b], 'nl')).map((id) => `<a class="logo-tile" href="/platformen/${P[id].slug}/">${logo(id, 'lg')}</a>`).join('')}</div></section></div>
 <section class="sec tint">
 <h2>Beste keuze per situatie</h2>
 <p class="sub">Een vaste regel op functies en prijs, uit de sites van de aanbieders. Partnerschappen tellen niet mee.</p>
@@ -86,7 +88,7 @@ ${faqHtml(homeFaq)}
 };
 
 export const quiz = {
-  path: '/shop-match/', title: 'Webshop keuzehulp: welk platform past bij jou?', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true,
+  path: '/shop-match/', title: 'Webshop keuzehulp: welk platform past bij jou?', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true, lastmod: GEWIJZIGD,
   description: 'Vijf vragen over je plannen, aantal producten, budget en ervaring. Je krijgt de drie platforms die het best passen, met prijs en uitleg.',
   scripts: ['/js/quiz.js'],
   schema: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ShopMatch', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: SITE.domain + '/shop-match/', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, publisher: ORG }],
@@ -97,7 +99,7 @@ export const quiz = {
 ${VRAGEN.map((v, i) => `<fieldset class="q"><legend>${i + 1}. ${esc(v.vraag)}</legend><div class="opts">${v.opties.map(([val, t]) => `<label><input type="radio" name="${v.id}" value="${val}" required><span>${esc(t)}</span></label>`).join('')}</div></fieldset>`).join('')}
 <div class="qdone"><button class="btn" type="submit">Toon mijn match</button><p class="sub">Gratis, zonder account. Je antwoorden blijven in je browser.</p></div>
 </form>
-<aside class="card mpanel" id="result" aria-live="polite"><h2>Jouw beste match</h2><p class="mwait">Beantwoord de vragen. Je top 3 verschijnt hier, met prijs en uitleg.</p><p class="sub">Of bekijk <a href="/vergelijken/">alle 8 platforms naast elkaar</a>.</p></aside>
+<aside class="card mpanel" id="result" aria-live="polite"><h2>Jouw beste match</h2><p class="mwait">Beantwoord de vragen. Je top 3 verschijnt hier, met prijs en uitleg.</p><p class="sub">Of bekijk <a href="/vergelijken/">alle 7 platforms naast elkaar</a>.</p></aside>
 </div>
 <noscript><p class="alert">De match werkt met JavaScript. Zonder JavaScript vind je alle platforms naast elkaar op <a href="/vergelijken/">vergelijken</a>.</p></noscript>
 <section class="method" id="methode"><h2>Zo werkt de match</h2><ol><li><strong>Eerst wat past.</strong> Wat je wilt verkopen, hoeveel producten en of je een winkel hebt. Platforms waarvan het grootste pakket te weinig producten aankan, vallen af.</li><li><strong>Dan je budget.</strong> We rekenen met de maandprijs van het goedkoopste pakket dat bij je aantal producten past.</li><li><strong>Dan techniek en voorkeur.</strong> Wil je niets zelf regelen, dan komt WooCommerce niet in je top 3. Vind je een Nederlandse aanbieder belangrijk, dan telt dat mee.</li><li><strong>Bij gelijke stand: de laagste prijs.</strong> Partnerlinks tellen nooit mee.</li></ol><p class="src">Prijzen gecontroleerd op ${fmtDate(CHECKED)} bij de aanbieders.</p></section>`,
@@ -112,7 +114,6 @@ const RELATED = {
   jouwweb: [['/vergelijken/wix-vs-jouwweb/', 'Wix of JouwWeb'], ['/blog/shopify-wix-jouwweb-kleine-webshop/', 'Blog: Shopify, Wix of JouwWeb voor een kleine webshop'], ['/blog/b2b-webshop-beginnen/', 'Blog: B2B-webshop beginnen, welk platform?']],
   hostinger: [['/gratis-website-maken/', 'Gratis website maken']],
   mijndomein: [['/webshop-beginnen-kosten/', 'Wat kost een webshop?']],
-  squarespace: [['/website-maken-zzp/', 'Website maken als zzp\'er'], ['/webshop-beginnen-kosten/', 'Wat kost een webshop?']],
 };
 // Eén zin onder Alternatieven (SEO-audit 20-10, SM-01): interne links naar platforms die nog niet geïndexeerd zijn.
 const ALT_ZIN = {
@@ -141,7 +142,7 @@ export const platformPages = IDS.map((id) => {
   const h1 = s.h1 || `${p.naam}: prijzen, voor- en nadelen`;
   const pos = RANG.indexOf(id) + 1;
   const alt = RANG.filter((x) => x !== id).slice(0, 3);
-  // Zoekwoord eerst: '<platform> kosten' (Google-suggesties: shopify/wix/jouwweb/woocommerce/squarespace kosten). Kortste variant die ≤ 60 past.
+  // Zoekwoord eerst: '<platform> kosten' (Google-suggesties: shopify/wix/jouwweb/woocommerce kosten). Kortste variant die ≤ 60 past.
   const t = [`${p.naam} kosten 2026: prijzen per pakket | ShopMatch`, `${p.naam} kosten 2026: alle prijzen | ShopMatch`, `${p.naam} kosten 2026 | ShopMatch`, `${p.naam} kosten 2026`].find((x) => x.length <= 60);
   const prijs = /^€/.test(p.vanafTekst) ? `Vanaf ${p.vanafTekst}` : p.vanafTekst;
   const d = [`Wat kost ${p.naam}? ${prijs}. Alle pakketten, de checklist van 10 punten, voor- en nadelen en voor wie het past.`, `Wat kost ${p.naam}? ${prijs}. Alle pakketten, checklist, voor- en nadelen.`, `Wat kost ${p.naam}? ${prijs}.`].find((x) => x.length <= 155);
@@ -169,10 +170,10 @@ ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featu
 });
 
 export const platformHub = {
-  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Alle webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: CHECKED },
-  description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein, Squarespace en WooCommerce: per platform de prijs, checklistscore en voor wie het past.',
+  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: GEWIJZIGD }, lastmod: GEWIJZIGD,
+  description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce: per platform de prijs, checklistscore en voor wie het past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
-  body: `<h1>Alle webshopplatforms op een rij</h1><p class="lead">Acht manieren om online te verkopen, van gratis plug-in tot compleet platform met kassa. Gesorteerd op checklistscore, bij gelijke stand op prijs.</p>
+  body: `<h1>Webshopplatforms op een rij</h1><p class="lead">Zeven manieren om online te verkopen, van gratis plug-in tot compleet platform met kassa. Gesorteerd op checklistscore, bij gelijke stand op prijs.</p>
 <div class="actions"><a class="btn" href="/shop-match/">Liever advies op maat? Start de match</a><a class="btn ghost" href="/vergelijken/">Filter en vergelijk</a></div>
 <ol class="plist">${RANG.map((id, i) => pcard(id, { rank: i + 1, pos: 'lijst' })).join('')}</ol>
 ${methodBox()}`,
@@ -185,10 +186,10 @@ const FILTERS = ['ideal', 'pos', 'b2b', 'talen', 'nl', 'geenfee', 'hosting', 'ma
 const sel = (id, label, opts) => `<div class="field"><label for="${id}">${label}</label><select id="${id}" name="${id}">${opts.map(([v, t]) => `<option value="${v}">${esc(t)}</option>`).join('')}</select></div>`;
 
 export const vsHub = {
-  path: '/vergelijken/', title: 'Webshopplatforms vergelijken 2026 | ShopMatch', h1: 'Webshopplatforms vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED, updated: CHECKED },
+  path: '/vergelijken/', title: 'Webshopplatforms vergelijken 2026 | ShopMatch', h1: 'Webshopplatforms vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED, updated: GEWIJZIGD }, lastmod: GEWIJZIGD,
   scripts: ['/js/vergelijk.js'],
-  description: 'Alle 8 webshopplatforms in één tabel: prijs, aantal producten, iDEAL, kassa, B2B, talen en contract. Filter op wat jij nodig hebt.',
-  body: `<h1>Webshopplatforms vergelijken (2026)</h1><p class="lead">Acht platforms op prijs en 10 vaste punten. Filter op wat jouw bedrijf nodig heeft.</p>
+  description: 'Alle 7 webshopplatforms in één tabel: prijs, aantal producten, iDEAL, kassa, B2B, talen en contract. Filter op wat jij nodig hebt.',
+  body: `<h1>Webshopplatforms vergelijken (2026)</h1><p class="lead">Zeven platforms op prijs en 10 vaste punten. Filter op wat jouw bedrijf nodig heeft.</p>
 <div class="actions"><a class="btn" href="/shop-match/">Liever advies op maat? Start de match</a></div>
 <form class="filters card" id="filters" aria-labelledby="h-f"><h2 id="h-f">Filter de platforms</h2>
 <div class="fgrid">${sel('f-budget', 'Budget per maand', BUDGET)}${sel('f-prod', 'Aantal producten', PROD)}</div>
@@ -200,7 +201,7 @@ export const vsHub = {
 <div class="sortbar"><h2 style="margin:0">Alle platforms naast elkaar</h2>${sel('f-sort', 'Sorteer op', [['score', 'Checklistscore'], ['prijs', 'Laagste prijs'], ['naam', 'Naam']])}</div>
 ${matrix(RANG)}
 <p class="empty" id="f-empty" hidden>Geen platform voldoet aan alles. Zet een filter uit of <a href="/shop-match/">start de match</a>.</p>
-<p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, zoals de aanbieder het toont. JouwWeb, Hostinger en Mijndomein noemen excl. btw, Wix exclusief toeslagen, Squarespace inclusief btw waar dat verplicht is; Shopify, Lightspeed en WooCommerce vermelden het niet. Bronnen staan op de pagina van elk platform.</p>
+<p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, zoals de aanbieder het toont. JouwWeb, Hostinger en Mijndomein noemen excl. btw, Wix exclusief toeslagen; Shopify, Lightspeed en WooCommerce vermelden het niet. Bronnen staan op de pagina van elk platform.</p>
 ${methodBox()}
 <h2>Twee platforms naast elkaar</h2>${vsCards()}${matchCta()}`,
 };
@@ -261,7 +262,6 @@ const kostRows = [
   ['hostinger', 'Onbeperkt', '€ 191,52 voor 48 maanden', 'Daarna € 16,99 per maand'],
   ['mijndomein', 'MijnWebshop Start (25 producten)', '€ 126', 'Pakket loopt 12 maanden'],
   ['shopify', 'Basic', '€ 252', '2% extra per transactie bij externe betaalprovider'],
-  ['squarespace', 'Basic', '€ 144', '2% transactiekosten op webshopverkopen; Core zonder: € 216 per jaar'],
   ['wix', 'Core', '€ 300', 'Betalingen ontvangen vanaf Core'],
   ['lightspeed', 'Essential', '€ 816', '250 productvarianten'],
   ['woocommerce', 'Plug-in', '€ 0', 'Plus hosting: WooCommerce noemt $ 25 tot $ 350 per maand'],
@@ -291,14 +291,15 @@ const kostenFaq = [
 ];
 export const kosten = {
   ...article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }),
-  navPath: '/gidsen/',
+  navPath: '/gidsen/', lastmod: GEWIJZIGD, stamp: { checked: CHECKED, updated: GEWIJZIGD },
   body: `<article class="prose"><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is.</p>
 <h2>Platformkosten in het eerste jaar</h2><div class="table-wrap"><table class="data stack"><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Pakket">${esc(pk)}</td><td data-l="Eerste jaar">${esc(j)}</td><td data-l="Let op">${esc(l)}</td></tr>`).join('')}</tbody></table></div>
 <p>Shopify, Wix en Lightspeed: maandprijs × 12, bij Shopify en Wix met jaarbetaling. Acties zoals de korting van JouwWeb tot en met 31 oktober 2026 en de 6 gratis maanden bij Mijndomein zijn niet meegerekend.</p>
 <h2>Wat er nog bijkomt</h2><ul><li><strong>Domeinnaam.</strong> Vaak het eerste jaar inbegrepen. Bij JouwWeb betaal je daarna € 20 per jaar.</li><li><strong>Transactiekosten.</strong> Elke betaalprovider rekent per betaling. Shopify rekent op Basic 2% extra als je niet met Shopify Payments werkt.</li><li><strong>Apps en thema's.</strong> Bij Shopify en WooCommerce betaal je extra functies vaak los. WooCommerce noemt $ 29 tot $ 299 per jaar per extensie.</li><li><strong>Boekhouding.</strong> Met een webshop heb je een boekhoudprogramma nodig voor facturen en btw. Vergelijk ze op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</li></ul>
 <h2>Zo houd je de kosten laag</h2><ol class="steps"><li>Begin met het kleinste pakket dat bij je aantal producten past.</li><li>Kies een platform zonder verkoopcommissie of met de betaalprovider van het platform.</li><li>Betaal per jaar zodra je zeker bent van je keuze.</li></ol>
-${faqHtml(kostenFaq)}${matchCta('Welk platform past bij jouw budget?')}${bron(...['jouwweb', 'hostinger', 'mijndomein', 'squarespace', 'shopify', 'wix', 'lightspeed', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
+${faqHtml(kostenFaq)}${matchCta('Welk platform past bij jouw budget?')}${bron(...['jouwweb', 'hostinger', 'mijndomein', 'shopify', 'wix', 'lightspeed', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
 };
+kosten.article = { ...kosten.article, updated: GEWIJZIGD }; kosten.schema[0] = { ...kosten.schema[0], dateModified: GEWIJZIGD };
 
 const gratisFaq = [
   ['Kan ik echt gratis een website maken?', 'Ja, bij JouwWeb en Wix. Je krijgt dan geen eigen domeinnaam en bij Wix staan er Wix-advertenties op je site.'],
@@ -340,13 +341,13 @@ export const gidsHub = {
 
 // ---- Statisch ----
 export const over = {
-  path: '/over/', title: 'Over ShopMatch: wie we zijn en hoe we werken', h1: 'Over ons', crumb: 'Over ons', og: 'home',
+  path: '/over/', title: 'Over ShopMatch: wie we zijn en hoe we werken', h1: 'Over ons', crumb: 'Over ons', og: 'home', lastmod: GEWIJZIGD,
   description: 'ShopMatch helpt ondernemers kiezen tussen webshopplatforms en websitebouwers. Wie we zijn, hoe we prijzen controleren en hoe we onafhankelijk blijven.',
   schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Over ShopMatch', about: ORG }],
   body: `<article class="prose"><h1>Over ons</h1><p class="lead">ShopMatch komt van het team achter BoekhoudMatch en VerduurzaamMatch. We zagen steeds dezelfde vraag bij startende ondernemers: waar bouw ik mijn webshop of website?</p>
 <p>Veel vergelijkingen zijn geschreven door webbouwers die je hun eigen favoriet willen verkopen, of door buitenlandse sites met dollarprijzen. Wij zetten de platforms die Nederlandse ondernemers echt gebruiken naast elkaar, met de prijzen van de aanbieders zelf.</p>
 <h2>Wat we elke week doen</h2><ul><li><strong>Prijzen checken</strong> op de prijspagina's van de aanbieders.</li><li><strong>Acties bijhouden</strong>, zoals tijdelijke kortingen en gratis maanden.</li><li><strong>De match testen</strong>, zodat de uitkomst klopt met de pakketten.</li><li><strong>Gidsen bijwerken</strong> zodra er iets verandert.</li></ul>
-<h2>Hoe we werken</h2><ul><li><strong>Alleen de bron.</strong> Elk bedrag komt van de site van de aanbieder, met link.</li><li><strong>Niets verzonnen.</strong> Staat iets niet op de site van de aanbieder, dan zeggen we dat.</li><li><strong>Onafhankelijk.</strong> We bouwen geen webshops en verkopen geen pakketten.</li><li><strong>Partnerlinks tellen nooit mee</strong> in de match of de volgorde. Ze worden bij de knoppen vermeld met één zin per blok.</li></ul>
+<h2>Hoe we werken</h2><ul><li><strong>Alleen de bron.</strong> Elk bedrag komt van de site van de aanbieder, met link.</li><li><strong>Niets verzonnen.</strong> Staat iets niet op de site van de aanbieder, dan zeggen we dat.</li><li><strong>Onafhankelijk.</strong> We bouwen geen webshops en verkopen geen pakketten.</li><li><strong>Welke aanbieders erin staan.</strong> We vergelijken ook aanbieders waar we niet aan verdienen.</li><li><strong>Partnerlinks tellen nooit mee</strong> in de match of de volgorde. Ze worden bij de knoppen vermeld met één zin per blok.</li></ul>
 </article>${methodBox()}<article class="prose"><h2>Wat telt de checklist?</h2><ul>${GROEPEN.map((g) => `<li><strong>${esc(g.naam)}:</strong> ${g.punten.map((k) => esc(/^Nederland/.test(PUNTEN[k].lang) || !/^[A-Z][a-z]/.test(PUNTEN[k].lang) ? PUNTEN[k].lang : PUNTEN[k].lang[0].toLowerCase() + PUNTEN[k].lang.slice(1))).join(', ')}.</li>`).join('')}</ul><p>Noemt een aanbieder een punt niet op de eigen site, dan staat er "niet vermeld" en telt het als 0. Zo kan een platform lager uitkomen omdat de aanbieder minder openbaar maakt. Mist er iets? Mail ons, dan passen we het aan met bron.</p>
 <p>Fout gezien? Mail naar <a href="mailto:${SITE.email}">${SITE.email}</a>.</p></article>`,
 };

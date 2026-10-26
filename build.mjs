@@ -12,6 +12,11 @@ const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
 export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound];
 for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(layout(p)));
+// Doorverwijzingen voor weggehaalde pagina's. GitHub Pages kan geen 301 sturen: statische pagina met meta refresh,
+// canonical naar het doel en noindex. Staan niet in de sitemap.
+export const REDIRECTS = { '/platformen/squarespace/': '/platformen/' }; // Squarespace uit de vergelijking (26-10-2026)
+const redirectHtml = (to) => `<!doctype html>\n<html lang="nl"><head><meta charset="utf-8"><title>Doorverwijzing | ${SITE.name}</title><meta name="robots" content="noindex"><link rel="canonical" href="${SITE.domain}${to}"><meta http-equiv="refresh" content="0; url=${BASE}${to}"><script>location.replace(${JSON.stringify(BASE + to)})</script></head><body><p>Deze pagina is verhuisd naar <a href="${BASE}${to}">${SITE.domain}${to}</a>.</p></body></html>\n`;
+for (const [from, to] of Object.entries(REDIRECTS)) write(join(OUT, from, 'index.html'), redirectHtml(to));
 cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
 cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });

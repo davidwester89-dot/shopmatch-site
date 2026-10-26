@@ -10,6 +10,5 @@ Officiële logo's, overgenomen van de eigen site van elke aanbieder (17-10-2026)
 | Hostinger | https://www.hostinger.com/nl (header-logo) |
 | Mijndomein | https://www.mijndomein.nl/data-assets/images/logo-mijndomein.svg |
 | WooCommerce | https://woocommerce.com/wp-content/themes/woo/images/woo-logo.svg |
-| Squarespace | https://www.squarespace.com/ (header-logo) |
 
 De merken en logo's zijn eigendom van de aanbieders. We gebruiken ze alleen om het platform te herkennen; elk logo staat in hetzelfde vak en heeft geen invloed op score of volgorde.

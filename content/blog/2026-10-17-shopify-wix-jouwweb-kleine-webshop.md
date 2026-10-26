@@ -28,7 +28,7 @@ Je wilt een kleine webshop beginnen en drie namen komen steeds terug: Shopify, W
 >
 > Wix past als het ontwerp van je site voorop staat en de webshop erbij komt (Core € 25 per maand bij jaarbetaling).
 >
-> Alle acht platforms naast elkaar: [webshopplatforms vergelijken](/vergelijken/).
+> Alle zeven platforms naast elkaar: [webshopplatforms vergelijken](/vergelijken/).
 
 ## Wat kost een kleine webshop bij Shopify, Wix en JouwWeb?
 

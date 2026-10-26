@@ -427,7 +427,7 @@ table.side{font-size:1rem}table.side th[scope=row]{width:34%;background:var(--bg
 @media print{.filters,.sortbar{display:none}}
 .logos.eight{grid-template-columns:repeat(2,1fr)}
 @media(min-width:600px){.logos.eight{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:900px){.logos.eight{grid-template-columns:repeat(8,1fr)}}
+@media(min-width:900px){.logos.eight{grid-template-columns:repeat(7,1fr)}}
 .sortbar .field{margin:0}.sortbar .field label{font-size:.9rem}
 table .sc{font-size:1.2rem}
 table.matrix{min-width:1560px}
@@ -481,7 +481,7 @@ table.matrix td{min-width:118px}
 .mini-cta a:not(.btn),.out a:not(.btn),.withlogo>a,.postlist a{display:inline-flex;align-items:center;min-height:44px}
 .logos.eight{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(min-width:600px){.logos.eight{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(min-width:900px){.logos.eight{grid-template-columns:repeat(8,minmax(0,1fr))}.logobar .logo-tile{padding:8px 10px}}
+@media(min-width:900px){.logos.eight{grid-template-columns:repeat(7,minmax(0,1fr))}.logobar .logo-tile{padding:8px 10px}}
 .plogo-sm{width:100px;height:30px}
 .plogo-lg{width:100%;max-width:160px;height:auto;aspect-ratio:10/3}
 @media(min-width:700px){.sit-logo .plogo{width:110px;height:33px}}

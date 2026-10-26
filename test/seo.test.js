@@ -9,7 +9,7 @@ const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&
 
 test('on-page SEO: unieke titels, meta ≤ 155, één H1, canonical = eigen URL, og, schema', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
-  const files = walk('dist').filter((f) => f.endsWith('.html') && !f.endsWith('404.html') && !/\/google[0-9a-f]+\.html$/.test(f));
+  const files = walk('dist').filter((f) => f.endsWith('.html') && !f.endsWith('404.html') && !/\/google[0-9a-f]+\.html$/.test(f) && !/http-equiv="refresh"/.test(readFileSync(f, 'utf8'))); // doorverwijspagina's zijn geen pagina's (zie redirects.test.js)
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   const titles = new Map();
   for (const f of files) {

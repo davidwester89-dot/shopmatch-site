@@ -4,7 +4,7 @@ from PIL import Image
 B='#4b3fc4';D='#161b2e';S='#efeff8';BG='#f8f8fc';G='#1f3f6b';P='#b9b2f0'
 LOGO='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="#4b3fc4"/><path d="M10 15h20l-1.6 16.5a2 2 0 0 1-2 1.5H13.6a2 2 0 0 1-2-1.5z" fill="#fff"/><path d="M15 15v-2.5a5 5 0 0 1 10 0V15" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="m15.5 23.5 3 3 6-6" fill="none" stroke="#4b3fc4" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="8" r="4" fill="#e7a33e"/></svg>'
 cards={
- 'home':('Welke webshop of website past bij jou?','Shopify · Wix · JouwWeb · Lightspeed · Hostinger · Mijndomein · Squarespace · WooCommerce'),
+ 'home':('Welke webshop of website past bij jou?','Shopify · Wix · JouwWeb · Lightspeed · Hostinger · Mijndomein · WooCommerce'),
  'match':('Doe de ShopMatch','5 vragen, je top 3 met prijs'),
  'platformen':('Alle webshop-platforms','Prijs, checklist-score en voor wie het past'),
  'vergelijken':('Webshop-platforms vergelijken','Prijs, iDEAL, kassa en B2B naast elkaar'),
@@ -15,7 +15,6 @@ cards={
  'platform-hostinger':('Hostinger Website Bouwer','Prijzen, voor- en nadelen'),
  'platform-mijndomein':('Mijndomein MijnWebshop','Prijzen, voor- en nadelen'),
  'platform-woocommerce':('WooCommerce','Kosten, voor- en nadelen'),
- 'platform-squarespace':('Squarespace','Prijzen, voor- en nadelen'),
  'vs-shopify-vs-lightspeed':('Shopify of Lightspeed eCom?','Prijzen en verschillen'),
  'vs-wix-vs-jouwweb':('Wix of JouwWeb?','Prijzen en verschillen'),
  'vs-shopify-vs-woocommerce':('Shopify of WooCommerce?','Alles geregeld of alles zelf'),

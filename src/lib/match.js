@@ -40,10 +40,10 @@ export function score(a) {
     if (a.budget === 'mid') { if (prijs > 40) s -= 25; else if (prijs >= 10) s += 6; }
     if (a.budget === 'hoog' && (id === 'shopify' || id === 'lightspeed')) s += 8;
     // Doel
-    if (a.doel === 'site') { if (['wix', 'jouwweb', 'hostinger', 'squarespace'].includes(id)) { s += 18; waarom.push('Sterk in gewone websites'); } if (['shopify', 'lightspeed', 'mijndomein'].includes(id)) s -= 25; }
-    if (a.doel === 'diensten') { if (['wix', 'jouwweb', 'mijndomein', 'squarespace'].includes(id)) { s += 12; waarom.push(id === 'mijndomein' ? 'Afspraken boeken zit in elk pakket' : 'Website en diensten verkopen in één'); } if (id === 'lightspeed') s -= 20; }
+    if (a.doel === 'site') { if (['wix', 'jouwweb', 'hostinger'].includes(id)) { s += 18; waarom.push('Sterk in gewone websites'); } if (['shopify', 'lightspeed', 'mijndomein'].includes(id)) s -= 25; }
+    if (a.doel === 'diensten') { if (['wix', 'jouwweb', 'mijndomein'].includes(id)) { s += 12; waarom.push(id === 'mijndomein' ? 'Afspraken boeken zit in elk pakket' : 'Website en diensten verkopen in één'); } if (id === 'lightspeed') s -= 20; }
     if (a.doel === 'shop') { if (['shopify', 'jouwweb', 'mijndomein', 'woocommerce'].includes(id)) { s += 10; waarom.push('Gebouwd om online te verkopen'); } }
-    if (a.doel === 'winkel') { if (id === 'lightspeed') { s += 30; waarom.push('Kassa en webshop van één leverancier'); } if (id === 'shopify') { s += 22; waarom.push('Verkopen in de winkel met Shopify POS'); } if (['hostinger', 'wix', 'squarespace'].includes(id)) s -= 10; }
+    if (a.doel === 'winkel') { if (id === 'lightspeed') { s += 30; waarom.push('Kassa en webshop van één leverancier'); } if (id === 'shopify') { s += 22; waarom.push('Verkopen in de winkel met Shopify POS'); } if (['hostinger', 'wix'].includes(id)) s -= 10; }
     // Aantal producten
     if (verkoop && n >= 1000 && ['shopify', 'woocommerce', 'lightspeed'].includes(id)) { s += 14; waarom.push('Schaalt naar duizenden producten'); }
     if (verkoop && n <= 10 && id === 'jouwweb') { s += 8; waarom.push('Pro-pakket: webshop tot 10 producten voor € 10'); }

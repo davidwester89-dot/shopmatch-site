@@ -12,7 +12,7 @@ import { faqHtml, matchCta } from './parts.mjs';
 
 export const TOOLNAMES = {
   '/shop-match/': 'Welk webshopplatform past bij jou? Doe de match',
-  '/vergelijken/': 'Alle webshopplatforms vergelijken',
+  '/vergelijken/': 'Webshopplatforms vergelijken',
   '/platformen/': 'Alle platforms op een rij',
   '/webshop-beginnen-kosten/': 'Wat kost een webshop beginnen?',
 };
