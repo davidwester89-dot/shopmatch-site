@@ -3,8 +3,8 @@ title: Wix vs Shopify (of JouwWeb): welke past bij je kleine webshop?
 seo_title: Wix vs Shopify voor een kleine online winkel (2026)
 description: Wix vs Shopify voor een kleine online winkel: Shopify Basic € 21, Wix Core € 25 per maand (jaarbetaling). Plus JouwWeb, kosten per verkoop en iDEAL.
 date: 2026-10-17
-updated: 2026-10-23
-checked: 2026-10-19
+updated: 2026-10-26
+checked: 2026-10-26
 tools: /shop-match/, /vergelijken/, /webshop-beginnen-kosten/
 sources:
 - Shopify: Prijzen | https://www.shopify.com/nl/prijzen
@@ -16,6 +16,9 @@ sources:
 - JouwWeb: Prijzen | https://www.jouwweb.nl/prijzen
 - JouwWeb: Webshop | https://www.jouwweb.nl/webshop
 - JouwWeb: Over ons | https://www.jouwweb.nl/over-ons
+- JouwWeb Helpcentrum: Betaalmethoden instellen | https://help.jouwweb.nl/hc/nl/articles/29035784739985-Betaalmethoden-instellen
+- JouwWeb Helpcentrum: Automatische betaalmethoden configureren via Mollie | https://help.jouwweb.nl/hc/nl/articles/28594307235857-Automatische-betaalmethoden-configureren-via-Mollie
+- Mollie: Tarieven | https://www.mollie.com/nl/pricing
 ---
 Je wilt een kleine webshop beginnen en drie namen komen steeds terug: Shopify, Wix en JouwWeb. Alle drie zijn ze makkelijk te gebruiken zonder webbouwer. Toch verschillen ze flink in prijs, in wat je per verkoop betaalt en in hoe ver je ermee kunt groeien.
 
@@ -69,6 +72,24 @@ Heb je meer dan 10 producten, dan valt JouwWeb Pro af en kom je bij Business uit
 Bij Shopify komt daar 2% per verkoop bij als je een andere betaalprovider gebruikt dan Shopify Payments. Bij JouwWeb betaal je na het eerste jaar € 20 per jaar voor je domeinnaam. Bij Wix zit een domeinnaam het eerste jaar in de meeste jaarpakketten.
 
 Verkoop je 10 producten of minder? Dan kost JouwWeb Pro € 120 per jaar (excl. btw). Tot en met 31 oktober 2026 betaal je bij JouwWeb de eerste 12 maanden de helft. Die actie hebben we niet meegerekend.
+
+## Wat kost JouwWeb voor een webshop?
+
+JouwWeb heeft vier pakketten, maar je kunt alleen met Pro en Business verkopen. Lite (€ 5,50 per maand) en het gratis pakket hebben geen webshop. De prijzen zijn exclusief btw en gelden bij jaarlijkse betaling, zo staat het op de prijspagina van JouwWeb (gecontroleerd op 26-10-2026).
+
+| JouwWeb-pakket | Prijs per maand | Producten | Actie t/m 31-10-2026 (eerste 12 maanden) |
+|---|---|---|---|
+| Pro | € 10 | 10 | € 5 |
+| Business | € 20 | Onbeperkt | € 10 |
+
+Wat er nog bij kan komen:
+
+- **Domeinnaam.** Het eerste jaar is gratis, daarna betaal je € 20 per jaar. Een extra domeinnaam kost ook € 20 per jaar.
+- **Mailbox.** Pro heeft 1 mailbox en Business 1 XL-mailbox. Een extra mailbox kost € 15 per jaar.
+- **Kosten per betaling.** JouwWeb rekent 0% verkoopcommissie, maar je betaalprovider rekent wel per betaling. JouwWeb koppelt automatische betalingen vooral via Mollie. Daar kost een iDEAL-betaling in Nederland € 0,32 (tarief van Mollie). Voor iDEAL via Mollie heb je een KvK-inschrijving en een zakelijke bankrekening nodig. Zonder KvK kun je volgens JouwWeb Stripe of PayPal gebruiken.
+- **Contract.** Betaal je per jaar, dan verlengt je abonnement automatisch met een jaar, tenzij je minstens een maand voor de verlengdatum opzegt. Betaal je per maand, dan zeg je op met een opzegtermijn van een maand. Het maandtarief bij maandbetaling staat niet op de prijspagina.
+
+Een voorbeeld: met 30 iDEAL-bestellingen per maand betaal je bij Mollie € 9,60 per maand aan transactiekosten (30 × € 0,32), naast je JouwWeb-abonnement.
 
 ## Wanneer kies je JouwWeb?
 
