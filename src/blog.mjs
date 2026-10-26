@@ -82,7 +82,7 @@ export function blogIndex(posts) {
 <div class="postlist">
 ${posts.map((x) => `<a class="card" href="${x.path}"><time datetime="${x.date}">${fmtDate(x.date)}</time><h2 style="margin:.2em 0 .3em;font-size:1.3rem">${esc(x.title)}</h2><p>${esc(x.description)}</p><span class="more">Lees verder →</span></a>`).join('\n')}
 </div>
-<p>Liever alles naast elkaar? <a href="/vergelijken/">Vergelijk alle webshopplatforms</a>.</p>
+<p>Liever alles naast elkaar? <a href="/vergelijken/">Vergelijk de webshopplatforms</a>.</p>
 ${matchCta()}`;
   const upd = posts.map((x) => x.updated).sort().at(-1);
   return {

@@ -33,12 +33,13 @@ test('iDEAL-blog: bronnenlijst en JSON-LD citation alleen absolute https-URL\'s,
   for (const t of ['iDEAL: Wat is iDEAL | Wero?', 'Shopify Help: iDEAL | Wero', 'Wix Help: iDEAL | Wero toevoegen via Wix Payments']) assert.ok(h.includes(`rel="noopener">${t}</a>`), t);
 });
 
-test('L7 5-11 (iDEAL-bronlinks): post en hub /blog/ op de pushdatum', () => {
+test('L7 5-11 (iDEAL-bronlinks): post op 2026-11-05; hub /blog/ op die datum of later (regel D)', () => {
   const sm = read('dist/sitemap.xml');
   const h = read('dist/blog/webshop-maken-met-ideal/index.html');
   assert.ok(sm.includes('<loc>https://shopmatch.nl/blog/webshop-maken-met-ideal/</loc><lastmod>2026-11-05</lastmod>'));
-  assert.ok(sm.includes('<loc>https://shopmatch.nl/blog/</loc><lastmod>2026-11-05</lastmod>'));
+  const blogLm = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
+  assert.ok(blogLm && blogLm >= UPD, `/blog/ lastmod ${blogLm}`);
   assert.match(h, /"dateModified": ?"2026-11-05"/);
   assert.match(h, /bijgewerkt (?:op )?<time datetime="2026-11-05">/i);
-  assert.match(read('dist/blog/index.html'), /bijgewerkt (?:op )?<time datetime="2026-11-05">/i);
+  assert.match(read('dist/blog/index.html'), new RegExp(`bijgewerkt (?:op )?<time datetime="${blogLm}">`, 'i'));
 });

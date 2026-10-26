@@ -25,11 +25,22 @@ test('L7 4-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   const blog = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
   assert.ok(blog && blog >= SP_UPD, `/blog/ lastmod ${blog}`);
   assert.match(read('dist/blog/index.html'), new RegExp(`bijgewerkt (op )?<time datetime="${blog}">`, 'i'), '/blog/');
-  for (const p of [...SP_PADEN, '/blog/shopify-wix-jouwweb-kleine-webshop/']) {
+  for (const p of SP_PADEN) {
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SP_UPD}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
     assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${SP_UPD}">`, 'i'), p);
     if (p !== '/blog/') assert.doesNotMatch(h, new RegExp(`"dateModified": ?"(?!${SP_UPD})`), p); // /blog/ heeft geen eigen dateModified (alleen die van de posts in de lijst)
+  }
+  // 6-11: title/meta + hub-CTA → post updated 2026-11-06 (of later); exact SP_UPD niet meer vast
+  {
+    const p = '/blog/shopify-wix-jouwweb-kleine-webshop/';
+    const lm = sm.match(new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>(\\d{4}-\\d{2}-\\d{2})</lastmod>`))?.[1];
+    const h = read(`dist${p}index.html`);
+    const zicht = h.match(/bijgewerkt (?:op )?<time datetime="(\d{4}-\d{2}-\d{2})">/i)?.[1];
+    const dm = h.match(/"dateModified": ?"(\d{4}-\d{2}-\d{2})"/)?.[1];
+    assert.ok(lm && lm >= SP_UPD, `${p} lastmod ${lm}`);
+    assert.equal(zicht, lm, `${p} zichtbaar`);
+    assert.equal(dm, lm, `${p} dateModified`);
   }
 });
 
