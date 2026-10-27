@@ -304,7 +304,7 @@ footer.site .net ul{display:flex;flex-wrap:wrap;gap:4px 22px;list-style:none;mar
 .postlist{list-style:none;padding:0;margin:0 0 var(--s3)}
 .postlist li{padding:var(--s3) 0;border-top:1px solid var(--line);display:flex;flex-direction:column}
 .postlist li:last-child{border-bottom:1px solid var(--line)}
-.postlist a{font-weight:600;font-size:1.06rem;padding:var(--s1) 0}
+ul.postlist a{font-weight:600;font-size:1.06rem;padding:var(--s1) 0}
 /* Pakketkaarten (aanbiederpagina) */
 .pkg-grid{list-style:none;padding:0;display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fill,minmax(240px,1fr));margin-bottom:var(--s3)}
 .pkg-grid>li{display:flex}.pkg-card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:var(--s5);display:flex;flex-direction:column}
@@ -478,7 +478,7 @@ table.matrix td{min-width:118px}
  table.stack td.n{text-align:left}
 }
 /* v3: klikvlakken van losse tekstlinks naast knoppen en in lijsten min. 44px */
-.mini-cta a:not(.btn),.out a:not(.btn),.withlogo>a,.postlist a{display:inline-flex;align-items:center;min-height:44px}
+.mini-cta a:not(.btn),.out a:not(.btn),.withlogo>a,ul.postlist a{display:inline-flex;align-items:center;min-height:44px}
 .logos.eight{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(min-width:600px){.logos.eight{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(min-width:900px){.logos.eight{grid-template-columns:repeat(7,minmax(0,1fr))}.logobar .logo-tile{padding:8px 10px}}
