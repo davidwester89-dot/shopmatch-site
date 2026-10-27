@@ -3,7 +3,7 @@ title: B2B-webshop maken: welk platform past bij zakelijke klanten?
 seo_title: B2B-webshop maken of starten: welk platform? (2026)
 description: B2B-webshop maken? 4 platforms met B2B-functies naast elkaar: JouwWeb vanaf € 10, Shopify vanaf € 21, Lightspeed vanaf € 259 per maand. Zo kies je.
 date: 2026-10-17
-updated: 2026-10-26
+updated: 2026-10-28
 checked: 2026-10-17
 tools: /shop-match/, /vergelijken/, /platformen/
 sources:
@@ -14,6 +14,7 @@ sources:
 - Lightspeed eCom: Prijzen | https://www.lightspeedhq.nl/ecommerce/prijzen/
 - WooCommerce: B2B for WooCommerce | https://woocommerce.com/products/b2b-for-woocommerce/
 - WooCommerce: Prijzen | https://woocommerce.com/nl/pricing/
+- ECB: euro-referentiekoers US$ | https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html
 - Wix: Premiumpakketten | https://nl.wix.com/upgrade/website
 - Hostinger: Website Bouwer | https://www.hostinger.com/nl/website-maken
 - Mijndomein: MijnWebshop | https://www.mijndomein.nl/producten/webshop
@@ -80,7 +81,7 @@ Lightspeed past bij een groothandel of winkel die online en in de winkel één v
 
 ## WooCommerce: alles zelf in de hand
 
-WooCommerce is een gratis plug-in voor WordPress. B2B-functies voeg je toe met een betaalde extensie. WooCommerce noemt voor extensies $ 29 tot $ 299 per jaar per stuk, en hosting regel je zelf. Je hebt de meeste vrijheid, maar ook het meeste werk: updates en beveiliging zijn voor jou.
+WooCommerce is een gratis plug-in voor WordPress. B2B-functies voeg je toe met een betaalde extensie. WooCommerce noemt voor extensies US$ 29 tot US$ 299 per jaar per stuk (ca. € 26 tot € 268, ECB-koers 27-10-2026; btw niet vermeld), en hosting regel je zelf. Je hebt de meeste vrijheid, maar ook het meeste werk: updates en beveiliging zijn voor jou.
 
 {{knop:woocommerce}}
 

@@ -14,6 +14,9 @@ const KORT = { shopify: 'Shopify', wix: 'Wix', jouwweb: 'JouwWeb', lightspeed: '
 const RANG = ranglijst();
 // Laatste inhoudelijke wijziging (Squarespace uit de vergelijking, tellingen en selectietekst): lastmod en dateModified van die pagina's.
 const GEWIJZIGD = '2026-10-26';
+// Dollarbedragen van WooCommerce met euro-indicatie (ECB-koers 27-10-2026): bijgewerkt-datum van de pagina's met die bedragen.
+const VALUTA_GEWIJZIGD = '2026-10-28';
+const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
 const homeFaq = [
@@ -146,7 +149,8 @@ export const platformPages = IDS.map((id) => {
   const t = [`${p.naam} kosten 2026: prijzen per pakket | ShopMatch`, `${p.naam} kosten 2026: alle prijzen | ShopMatch`, `${p.naam} kosten 2026 | ShopMatch`, `${p.naam} kosten 2026`].find((x) => x.length <= 60);
   const prijs = /^€/.test(p.vanafTekst) ? `Vanaf ${p.vanafTekst}` : p.vanafTekst;
   const d = [`Wat kost ${p.naam}? ${prijs}. Alle pakketten, de checklist van 10 punten, voor- en nadelen en voor wie het past.`, `Wat kost ${p.naam}? ${prijs}. Alle pakketten, checklist, voor- en nadelen.`, `Wat kost ${p.naam}? ${prijs}.`].find((x) => x.length <= 155);
-  const art = article({ path, title: s.title || v?.seo_title || t, h1, description: s.description || v?.description || d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
+  let art = article({ path, title: s.title || v?.seo_title || t, h1, description: s.description || v?.description || d, og: `platform-${id}`, parents: [['/platformen/', 'Platforms']] });
+  if (id === 'woocommerce') art = bijgewerkt(art, VALUTA_GEWIJZIGD);
   if (v?.updated) {
     art.lastmod = v.updated; art.stamp = { ...art.stamp, updated: v.updated }; art.article = { ...art.article, updated: v.updated };
     art.schema[0] = { ...art.schema[0], dateModified: v.updated };
@@ -209,8 +213,9 @@ ${methodBox()}
 const sideRow = (label, a, b) => `<tr><th scope="row">${label}</th><td>${a}</td><td>${b}</td></tr>`;
 const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, faq, aTrafcat, bTrafcat, naVerdict = '' }) => {
   const side = (id, kies, posn, trafcat) => `<div class="card"><span class="pc-logo">${logo(id)}</span><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><div class="pc-score" style="margin-top:12px"><span class="sc-lbl">Checklistscore</span>${scoreBadge(id)}${bars(id)}</div><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm', wixTrafcat(id, trafcat))}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
+  const art = article({ path: `/vergelijken/${slug}/`, title, h1, description, og: `vs-${slug}`, parents: [['/vergelijken/', 'Vergelijken']], faq });
   return {
-    ...article({ path: `/vergelijken/${slug}/`, title, h1, description, og: `vs-${slug}`, parents: [['/vergelijken/', 'Vergelijken']], faq }),
+    ...(a === 'woocommerce' || b === 'woocommerce' ? bijgewerkt(art, VALUTA_GEWIJZIGD) : art),
     navPath: '/vergelijken/',
     body: `<article><h1>${esc(h1)}</h1>${by()}<p class="lead">${intro}</p>
 <h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a', aTrafcat)}${side(b, kiesB, 'vs_b', bTrafcat)}</div>${naVerdict}
@@ -246,9 +251,9 @@ export const vsPages = [
   cmp({
     slug: 'shopify-vs-woocommerce', a: 'shopify', b: 'woocommerce', h1: 'Shopify of WooCommerce: alles geregeld of alles zelf?',
     title: 'Shopify vs WooCommerce 2026: kosten | ShopMatch',
-    description: 'Shopify kost vanaf € 21 per maand all-in, WooCommerce is gratis maar je betaalt hosting en extensies. Zo kies je.',
+    description: 'Shopify kost vanaf € 21 per maand all-in. WooCommerce is gratis, maar hosting en extensies betaal je zelf. De kosten naast elkaar en zo kies je.',
     intro: 'Shopify regelt hosting, beveiliging en updates voor je. WooCommerce is een gratis plug-in voor WordPress: je hebt alles in de hand, maar regelt het ook zelf.',
-    rows: [['Platformkosten', '€ 21 per maand (Basic, jaar)', '€ 0'], ['Hosting', 'Inbegrepen', 'Zelf regelen; WooCommerce noemt $ 25 tot $ 350 per maand'], ['Extensies', 'Apps, vaak betaald', '$ 29 tot $ 299 per jaar per extensie'], ['Betaalprovider', 'Shopify Payments, anders 2% extra (Basic)', 'Vrij te kiezen, geen extra kosten'], ['Onderhoud', 'Door Shopify', 'Zelf: updates en beveiliging'], ['Technische kennis', 'Weinig nodig', 'Meer nodig']],
+    rows: [['Platformkosten', '€ 21 per maand (Basic, jaar)', '€ 0'], ['Hosting', 'Inbegrepen', 'Zelf regelen; WooCommerce noemt US$ 25 tot US$ 350 per maand (ca. € 22 tot € 314, ECB-koers 27-10-2026; btw niet vermeld)'], ['Extensies', 'Apps, vaak betaald', 'US$ 29 tot US$ 299 per jaar per extensie (ca. € 26 tot € 268, ECB-koers 27-10-2026; btw niet vermeld)'], ['Betaalprovider', 'Shopify Payments, anders 2% extra (Basic)', 'Vrij te kiezen, geen extra kosten'], ['Onderhoud', 'Door Shopify', 'Zelf: updates en beveiliging'], ['Technische kennis', 'Weinig nodig', 'Meer nodig']],
     kiesA: ['je snel wilt starten zonder technisch gedoe', 'je geen tijd wilt steken in updates en beveiliging'],
     kiesB: ['je al een WordPress-site hebt', 'je vrij wilt kiezen in betaalprovider en hosting', 'je zelf (of je bouwer) technisch onderhoud aankunt'],
     faq: [['Is WooCommerce echt gratis?', 'De plug-in wel. Hosting, een domein en betaalde extensies betaal je zelf.'], ['Rekent Shopify transactiekosten?', 'Werk je met een externe betaalprovider in plaats van Shopify Payments, dan rekent Shopify op Basic 2% extra per transactie.']],
@@ -264,7 +269,7 @@ const kostRows = [
   ['shopify', 'Basic', '€ 252', '2% extra per transactie bij externe betaalprovider'],
   ['wix', 'Core', '€ 300', 'Betalingen ontvangen vanaf Core'],
   ['lightspeed', 'Essential', '€ 816', '250 productvarianten'],
-  ['woocommerce', 'Plug-in', '€ 0', 'Plus hosting: WooCommerce noemt $ 25 tot $ 350 per maand'],
+  ['woocommerce', 'Plug-in', '€ 0', 'Plus hosting: WooCommerce noemt US$ 25 tot US$ 350 per maand (ca. € 22 tot € 314, ECB-koers 27-10-2026; btw niet vermeld)'],
 ];
 const besteFaq = [
   ['Wat is het beste webshopplatform in 2026?', 'Er is geen platform dat voor iedereen het beste is. Voor een kleine start is JouwWeb het goedkoopst met een volwaardige webshop, voor groei en verkoop over de grens is Shopify het sterkst en voor een winkel met webshop past Lightspeed eCom.'],
@@ -290,16 +295,16 @@ const kostenFaq = [
   ['Welke kosten komen er nog bij?', 'Een domeinnaam, transactiekosten per betaling, eventueel betaalde apps of een thema, en je boekhouding.'],
 ];
 export const kosten = {
-  ...article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }),
-  navPath: '/gidsen/', lastmod: GEWIJZIGD, stamp: { checked: CHECKED, updated: GEWIJZIGD },
+  ...bijgewerkt(article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }), VALUTA_GEWIJZIGD),
+  navPath: '/gidsen/', stamp: { checked: CHECKED, updated: VALUTA_GEWIJZIGD },
   body: `<article class="prose"><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is.</p>
 <h2>Platformkosten in het eerste jaar</h2><div class="table-wrap"><table class="data stack"><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Pakket">${esc(pk)}</td><td data-l="Eerste jaar">${esc(j)}</td><td data-l="Let op">${esc(l)}</td></tr>`).join('')}</tbody></table></div>
 <p>Shopify, Wix en Lightspeed: maandprijs × 12, bij Shopify en Wix met jaarbetaling. Acties zoals de korting van JouwWeb tot en met 31 oktober 2026 en de 6 gratis maanden bij Mijndomein zijn niet meegerekend.</p>
-<h2>Wat er nog bijkomt</h2><ul><li><strong>Domeinnaam.</strong> Vaak het eerste jaar inbegrepen. Bij JouwWeb betaal je daarna € 20 per jaar.</li><li><strong>Transactiekosten.</strong> Elke betaalprovider rekent per betaling. Shopify rekent op Basic 2% extra als je niet met Shopify Payments werkt.</li><li><strong>Apps en thema's.</strong> Bij Shopify en WooCommerce betaal je extra functies vaak los. WooCommerce noemt $ 29 tot $ 299 per jaar per extensie.</li><li><strong>Boekhouding.</strong> Met een webshop heb je een boekhoudprogramma nodig voor facturen en btw. Vergelijk ze op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</li></ul>
+<h2>Wat er nog bijkomt</h2><ul><li><strong>Domeinnaam.</strong> Vaak het eerste jaar inbegrepen. Bij JouwWeb betaal je daarna € 20 per jaar.</li><li><strong>Transactiekosten.</strong> Elke betaalprovider rekent per betaling. Shopify rekent op Basic 2% extra als je niet met Shopify Payments werkt.</li><li><strong>Apps en thema's.</strong> Bij Shopify en WooCommerce betaal je extra functies vaak los. WooCommerce noemt US$ 29 tot US$ 299 per jaar per extensie (ca. € 26 tot € 268, ECB-koers 27-10-2026; btw niet vermeld).</li><li><strong>Boekhouding.</strong> Met een webshop heb je een boekhoudprogramma nodig voor facturen en btw. Vergelijk ze op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</li></ul>
 <h2>Zo houd je de kosten laag</h2><ol class="steps"><li>Begin met het kleinste pakket dat bij je aantal producten past.</li><li>Kies een platform zonder verkoopcommissie of met de betaalprovider van het platform.</li><li>Betaal per jaar zodra je zeker bent van je keuze.</li></ol>
 ${faqHtml(kostenFaq)}${matchCta('Welk platform past bij jouw budget?')}${bron(...['jouwweb', 'hostinger', 'mijndomein', 'shopify', 'wix', 'lightspeed', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
 };
-kosten.article = { ...kosten.article, updated: GEWIJZIGD }; kosten.schema[0] = { ...kosten.schema[0], dateModified: GEWIJZIGD };
+kosten.article = { ...kosten.article, updated: VALUTA_GEWIJZIGD }; kosten.schema[0] = { ...kosten.schema[0], dateModified: VALUTA_GEWIJZIGD };
 
 const gratisFaq = [
   ['Kan ik echt gratis een website maken?', 'Ja, bij JouwWeb en Wix. Je krijgt dan geen eigen domeinnaam en bij Wix staan er Wix-advertenties op je site.'],

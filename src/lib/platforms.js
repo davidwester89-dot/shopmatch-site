@@ -99,16 +99,16 @@ export const PLATFORMS = {
   woocommerce: {
     naam: 'WooCommerce', slug: 'woocommerce', soort: 'Open source (WordPress)', url: 'https://woocommerce.com/nl/',
     kort: 'Gratis webshopplug-in voor WordPress: maximale vrijheid, zelf hosten.',
-    vanaf: 0, vanafTekst: 'Gratis plug-in, je betaalt hosting en extensies', prijsNoot: 'De plug-in is gratis. Hosting en extensies noemt WooCommerce in dollars, zonder vermelding van btw.',
+    vanaf: 0, vanafTekst: 'Gratis plug-in, je betaalt hosting en extensies', prijsNoot: 'De plug-in is gratis. Hosting en extensies noemt WooCommerce in US$, zonder vermelding van btw. De euro-indicatie is omgerekend tegen de ECB-referentiekoers van 27-10-2026 (€ 1 = US$ 1,1150).',
     plannen: [
       ['WooCommerce', '€ 0', 'Geen abonnement, geen omzetaandeel'],
-      ['Hosting', 'Zelf kiezen', 'WooCommerce noemt $ 25 tot $ 350 per maand voor de meeste shops'],
-      ['Extensies', 'Per stuk', 'WooCommerce noemt $ 29 tot $ 299 per jaar per extensie'],
+      ['Hosting', 'Zelf kiezen', 'WooCommerce noemt US$ 25 tot US$ 350 per maand voor de meeste shops (ca. € 22 tot € 314, ECB-koers 27-10-2026; btw niet vermeld)'],
+      ['Extensies', 'Per stuk', 'WooCommerce noemt US$ 29 tot US$ 299 per jaar per extensie (ca. € 26 tot € 268, ECB-koers 27-10-2026; btw niet vermeld)'],
     ],
     plus: ['Geen platformkosten of omzetaandeel', 'Onbeperkt producten en varianten', 'Vrije keuze van betaalprovider'],
     min: ['Je regelt zelf hosting, updates en beveiliging', 'Meer technische kennis nodig'],
     voor: 'Wie al met WordPress werkt of volledige controle wil.',
-    bronnen: [['WooCommerce prijzen', 'https://woocommerce.com/nl/pricing/']],
+    bronnen: [['WooCommerce prijzen', 'https://woocommerce.com/nl/pricing/'], ['ECB: euro-referentiekoers US$', 'https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html']],
   },
 };
 export const IDS = Object.keys(PLATFORMS);
