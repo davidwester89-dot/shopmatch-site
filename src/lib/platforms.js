@@ -99,7 +99,7 @@ export const PLATFORMS = {
   woocommerce: {
     naam: 'WooCommerce', slug: 'woocommerce', soort: 'Open source (WordPress)', url: 'https://woocommerce.com/nl/',
     kort: 'Gratis webshopplug-in voor WordPress: maximale vrijheid, zelf hosten.',
-    vanaf: 0, vanafTekst: 'Gratis plug-in, je betaalt hosting en extensies', prijsNoot: 'De plug-in is gratis. Hosting en extensies noemt WooCommerce in US$, zonder vermelding van btw. De euro-indicatie is omgerekend tegen de ECB-referentiekoers van 27-10-2026 (€ 1 = US$ 1,1150).',
+    vanaf: 0, vanafTekst: 'Gratis plug-in, je betaalt hosting en extensies', prijsNoot: 'De plug-in is gratis. Hosting en extensies noemt WooCommerce niet in euro en zonder vermelding van btw. De euro-indicatie is omgerekend tegen de ECB-referentiekoers van 27-10-2026 (€ 1 = US$ 1,1150).',
     plannen: [
       ['WooCommerce', '€ 0', 'Geen abonnement, geen omzetaandeel'],
       ['Hosting', 'Zelf kiezen', 'WooCommerce noemt US$ 25 tot US$ 350 per maand voor de meeste shops (ca. € 22 tot € 314, ECB-koers 27-10-2026; btw niet vermeld)'],
