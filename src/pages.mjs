@@ -44,7 +44,7 @@ ${HERO_ART}
 <div class="hero-q"><p class="hero-q-step">Vraag 1 van 5</p><p class="hero-q-title" id="hq">${esc(VRAGEN[0].vraag)}</p><div class="hero-q-opts" role="group" aria-labelledby="hq">${VRAGEN[0].opties.map(([v, l]) => `<a class="choice" href="/shop-match/?doel=${v}" rel="nofollow">${esc(l)}<span aria-hidden="true">→</span></a>`).join('')}</div><p class="hero-q-foot">Daarna nog 4 korte vragen. Gratis, zonder account.</p></div>
 </div>
 <ul class="trustbar">
-<li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time></span></li>
+<li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time>, bijgewerkt op <time datetime="${SCORE_WEG}">${fmtDate(SCORE_WEG)}</time></span></li>
 <li>${ICONS.bron}<span>Bron bij elke prijs en functie</span></li>
 <li>${ICONS.schild}<span>Volgorde nooit betaald</span></li>
 <li>${ICONS.gratis}<span>Gratis, zonder account</span></li>
@@ -347,7 +347,7 @@ export const gidsHub = {
 
 // ---- Statisch ----
 export const over = {
-  path: '/over/', title: 'Over ShopMatch: wie we zijn en hoe we werken', h1: 'Over ons', crumb: 'Over ons', og: 'home', lastmod: SCORE_WEG,
+  path: '/over/', title: 'Over ShopMatch: wie we zijn en hoe we werken', h1: 'Over ons', crumb: 'Over ons', og: 'home', stamp: { updated: SCORE_WEG }, lastmod: SCORE_WEG,
   description: 'ShopMatch helpt ondernemers kiezen tussen webshopplatforms en websitebouwers. Wie we zijn, hoe we prijzen controleren en hoe we onafhankelijk blijven.',
   schema: [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Over ShopMatch', about: ORG }],
   body: `<article class="prose"><h1>Over ons</h1><p class="lead">ShopMatch komt van het team achter BoekhoudMatch en VerduurzaamMatch. We zagen steeds dezelfde vraag bij startende ondernemers: waar bouw ik mijn webshop of website?</p>
