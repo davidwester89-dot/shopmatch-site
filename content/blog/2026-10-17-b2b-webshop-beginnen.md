@@ -3,7 +3,7 @@ title: B2B-webshop maken: welk platform past bij zakelijke klanten?
 seo_title: B2B-webshop maken of starten: welk platform? (2026)
 description: B2B-webshop maken? 4 platforms met B2B-functies naast elkaar: JouwWeb vanaf € 10, Shopify vanaf € 21, Lightspeed vanaf € 259 per maand. Zo kies je.
 date: 2026-10-17
-updated: 2026-10-28
+updated: 2026-10-29
 checked: 2026-10-17
 tools: /shop-match/, /vergelijken/, /platformen/
 sources:
@@ -33,12 +33,12 @@ Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Z
 
 Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin het zit. Prijzen per maand zoals de aanbieder ze toont: JouwWeb noemt ze excl. btw. Shopify en Lightspeed vermelden op hun prijspagina niet of btw inbegrepen is.
 
-| Platform | B2B volgens de aanbieder | Goedkoopste pakket met B2B | Checklistscore |
-|---|---|---|---|
-| [JouwWeb](/platformen/jouwweb/) | B2B-webshop, btw-verleggingsregeling, btw-regels voor EU-leveringen | Pro € 10 (tot 10 producten), Business € 20 (onbeperkt) | {{score:jouwweb}} |
-| [Shopify](/platformen/shopify/) | Shopify B2B in Basic, Grow, Advanced en Plus; niet in Starter of Retail | Basic € 21 bij jaarbetaling | {{score:shopify}} |
-| [Lightspeed eCom](/platformen/lightspeed/) | B2B in het Professional-pakket | Professional € 259 | {{score:lightspeed}} |
-| [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plug-in € 0, plus hosting en extensie | {{score:woocommerce}} |
+| Platform | B2B volgens de aanbieder | Goedkoopste pakket met B2B |
+|---|---|---|
+| [JouwWeb](/platformen/jouwweb/) | B2B-webshop, btw-verleggingsregeling, btw-regels voor EU-leveringen | Pro € 10 (tot 10 producten), Business € 20 (onbeperkt) |
+| [Shopify](/platformen/shopify/) | Shopify B2B in Basic, Grow, Advanced en Plus; niet in Starter of Retail | Basic € 21 bij jaarbetaling |
+| [Lightspeed eCom](/platformen/lightspeed/) | B2B in het Professional-pakket | Professional € 259 |
+| [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plug-in € 0, plus hosting en extensie |
 
 [Wix](/platformen/wix/), [Hostinger](/platformen/hostinger/) en [Mijndomein](/platformen/mijndomein/) noemen op de pagina's die wij volgen geen B2B-functies. Daarom telt B2B bij hen in de checklist als 0. [Zo tellen we](/over/#methode).
 

@@ -1,7 +1,6 @@
 // ShopMatch: leest de antwoorden, rekent met ./lib/match.js en toont de top 3. Niets verlaat de browser.
 import { score, compleet, VRAGEN } from './lib/match.js';
 import { PLATFORMS, BEST_FOR } from './lib/platforms.js';
-import { score as checklist, fmtScore } from './lib/checklist.js';
 import { knop, metNoot, wixTrafcat } from './lib/partnerlinks.js';
 import { logoImg } from './lib/logos.js';
 import { track } from './consent.js';
@@ -40,8 +39,8 @@ function toon(a, scroll) {
   out.innerHTML = metNoot(`<h2>Jouw beste match</h2><div class="mbest">${logo(b.id, 'md')}<p class="big">${esc(pb.naam)}</p></div><p class="pc-price"><strong>${prijsTekst(b, a)}</strong> ${a.doel === 'site' ? 'Instappakket' : 'Goedkoopste pakket dat bij je aantal producten past'}, zoals ${esc(pb.naam.split(' ')[0])} het toont</p>`
     + `<div class="match-cta">${knop(b.id, 'match_1', 'btn', wixOpt(b.id, a))}<a class="vlink" href="${BASE}/platformen/${pb.slug}/">Lees alles over ${esc(pb.naam)} →</a></div>`
     + `<h3>Top 3</h3><ol class="mtop">${top.map((r, i) => {
-      const p = PLATFORMS[r.id]; const c = checklist(r.id);
-      return `<li${i === 0 ? ' class="first"' : ''}>${i === 0 ? '<span class="badge">Beste match</span> ' : ''}<span class="tag best">${esc(BEST_FOR[r.id])}</span><div class="mhead">${logo(r.id, 'sm')}<h3>${i + 1}. ${esc(p.naam)}</h3></div><p class="pc-price">${prijsTekst(r, a)} · checklistscore ${fmtScore(c.totaal)}/${c.max}</p>`
+      const p = PLATFORMS[r.id];
+      return `<li${i === 0 ? ' class="first"' : ''}>${i === 0 ? '<span class="badge">Beste match</span> ' : ''}<span class="tag best">${esc(BEST_FOR[r.id])}</span><div class="mhead">${logo(r.id, 'sm')}<h3>${i + 1}. ${esc(p.naam)}</h3></div><p class="pc-price">${prijsTekst(r, a)}</p>`
         + (r.waarom.length ? `<p class="lbl ok" style="margin:8px 0 0">Waarom het past</p><ul class="why">${r.waarom.map((w) => `<li>${esc(w)}</li>`).join('')}</ul>` : '')
         + `<p class="lbl warn" style="margin:8px 0 0">Let op</p><ul class="why"><li>${esc(letOp(r.id, a))}</li></ul>`
         + (i > 0 ? `<div class="mini-cta">${knop(r.id, 'match_' + (i + 1), 'btn ghost sm', wixOpt(r.id, a))}<a href="${BASE}/platformen/${p.slug}/">Alles over ${esc(p.naam.split(' ')[0])}</a></div>` : '') + '</li>';
