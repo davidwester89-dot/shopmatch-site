@@ -15,14 +15,14 @@ De merken en logo's zijn eigendom van de aanbieders. We gebruiken ze alleen om h
 
 ## Gebruiksrecht (nagekeken 30-10-2026)
 
-Per maker de merkrichtlijn of perskit en de status. Besluit Dave 30-10: elk merk toont zijn logo, ook bij strenge merkregels; een logo gaat er alleen uit als het merk daarom vraagt (dan ZONDER_LOGO in src/lib/logo-rechten.js).
+Per maker de merkrichtlijn of perskit en de status. Besluit 30-10: elk merk toont zijn logo, ook bij strenge merkregels; een logo gaat er alleen uit als het merk daarom vraagt (dan ZONDER_LOGO in src/lib/logo-rechten.js).
 
 | Merk | Richtlijn | Status |
 |---|---|---|
-| hostinger | https://www.hostinger.com/legal/brand-guidelines-permissions | logo: getoond op besluit Dave 30-10; weghalen op verzoek merk. Richtlijn: vooraf goedkeuring nodig |
+| hostinger | https://www.hostinger.com/legal/brand-guidelines-permissions | logo: getoond op besluit 30-10; weghalen op verzoek merk. Richtlijn: vooraf goedkeuring nodig |
 | jouwweb | geen merkrichtlijn gevonden (jouwweb.nl, 30-10) | logo: geen gepubliceerde beperking gevonden |
-| lightspeed | https://www.lightspeedhq.com/legal/lightspeed-trademark-and-copyright-guidelines/ | logo: getoond op besluit Dave 30-10; weghalen op verzoek merk. Richtlijn: logogebruik alleen met specifieke licentie of toestemming |
+| lightspeed | https://www.lightspeedhq.com/legal/lightspeed-trademark-and-copyright-guidelines/ | logo: getoond op besluit 30-10; weghalen op verzoek merk. Richtlijn: logogebruik alleen met specifieke licentie of toestemming |
 | mijndomein | https://press.thesharinggroup.com/assets/217798/ | logo: perskit met logo's openbaar |
-| shopify | https://www.shopify.com/legal/trademarks | logo: getoond op besluit Dave 30-10; weghalen op verzoek merk. Richtlijn: logo en merkmateriaal alleen met uitdrukkelijke schriftelijke toestemming (partners binnen het Partner Program) |
+| shopify | https://www.shopify.com/legal/trademarks | logo: getoond op besluit 30-10; weghalen op verzoek merk. Richtlijn: logo en merkmateriaal alleen met uitdrukkelijke schriftelijke toestemming (partners binnen het Partner Program) |
 | wix | https://www.wix.com/about/design-assets | logo: toegestaan om Wix aan te duiden; volledig logo ongewijzigd, geen suggestie van partnerschap |
-| woocommerce | https://woocommerce.com/trademark-guidelines/ | logo: getoond op besluit Dave 30-10; weghalen op verzoek merk. Richtlijn: logo alleen met merklicentie van Automattic; naam in platte tekst mag |
+| woocommerce | https://woocommerce.com/trademark-guidelines/ | logo: getoond op besluit 30-10; weghalen op verzoek merk. Richtlijn: logo alleen met merklicentie van Automattic; naam in platte tekst mag |

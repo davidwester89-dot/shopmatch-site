@@ -9,7 +9,7 @@ import { ZONDER_LOGO } from './src/lib/logo-rechten.js';
 import { loadPosts, postPage, blogIndex, latestHtml, feed } from './src/blog.mjs';
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
-// Logo's in tabelcellen met precies de naam van een platform (Dave 30-10); zelfde vak voor elk platform, alleen beeld.
+// Logo's in tabelcellen met precies de naam van een platform (30-10); zelfde vak voor elk platform, alleen beeld.
 // Niet voor merken in ZONDER_LOGO (merkrichtlijn vraagt toestemming; SC 30-10): daar blijft alleen de naam.
 const logoCellen = maakLogoCellen(Object.entries(PLATFORMS).filter(([id]) => !ZONDER_LOGO.has(id)).map(([id, p]) => ({ namen: [...new Set([p.naam, p.naam.split(' ')[0]])], src: `${BASE}/logos/${id}.svg`, merk: p.naam.split(' ')[0] })));
 const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, p.endsWith('.html') ? logoCellen(s) : s); };
@@ -24,7 +24,7 @@ export const REDIRECTS = { '/platformen/squarespace/': '/platformen/' }; // Squa
 const redirectHtml = (to) => `<!doctype html>\n<html lang="nl"><head><meta charset="utf-8"><title>Doorverwijzing | ${SITE.name}</title><meta name="robots" content="noindex"><link rel="canonical" href="${SITE.domain}${to}"><meta http-equiv="refresh" content="0; url=${BASE}${to}"><script>location.replace(${JSON.stringify(BASE + to)})</script></head><body><p>Deze pagina is verhuisd naar <a href="${BASE}${to}">${SITE.domain}${to}</a>.</p></body></html>\n`;
 for (const [from, to] of Object.entries(REDIRECTS)) write(join(OUT, from, 'index.html'), redirectHtml(to));
 cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
-cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
+cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true, filter: (p) => !/logo-(rechten|cellen)\.m?js$/.test(p) }); // alleen build-time, niet publiceren
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });
 cpSync('src/assets/logos', join(OUT, 'logos'), { recursive: true, filter: (f) => !f.endsWith('.md') });
 cpSync('src/assets/icons', OUT, { recursive: true });
