@@ -3,10 +3,14 @@ import { dirname, join } from 'node:path';
 import { layout, SITE, BASE, PREVIEW } from './src/layout.mjs';
 import { partnerNoten } from './src/lib/partnerlinks.js';
 import * as P from './src/pages.mjs';
+import { maakLogoCellen } from './src/lib/logo-cellen.mjs';
+import { PLATFORMS } from './src/lib/platforms.js';
 import { loadPosts, postPage, blogIndex, latestHtml, feed } from './src/blog.mjs';
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
-const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, s); };
+// Logo's in tabelcellen met precies de naam van een platform (Dave 30-10); zelfde vak voor elk platform, alleen beeld.
+const logoCellen = maakLogoCellen(Object.entries(PLATFORMS).map(([id, p]) => ({ namen: [...new Set([p.naam, p.naam.split(' ')[0]])], src: `${BASE}/logos/${id}.svg`, merk: p.naam.split(' ')[0] })));
+const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, p.endsWith('.html') ? logoCellen(s) : s); };
 // Blog: content/blog/*.md (nieuwste eerst; posts met een datum in de toekomst worden overgeslagen).
 const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };

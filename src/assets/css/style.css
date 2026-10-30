@@ -607,3 +607,6 @@ a.card{border-top:4px solid transparent}a.card:hover{border-top-color:var(--bran
 
 /* Partnerzin per blok met partnerlinks (vervangt het label per knop) */
 .pnoot{font-size:.875rem;color:var(--muted);margin:6px 0 0}
+/* Logo's in tabelcellen (30-10): vast vak, voor elke aanbieder gelijk */
+.cel-logo{display:block;margin:0 0 4px;line-height:0}
+.cel-logo img{display:block;width:80px;height:24px;max-width:100%;object-fit:contain;object-position:left center}
