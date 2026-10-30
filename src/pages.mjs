@@ -17,6 +17,8 @@ const RANG = ranglijst();
 const SCORE_WEG = '2026-10-29';
 // Dollarbedragen van WooCommerce met euro-indicatie (ECB-koers 27-10-2026): bijgewerkt-datum van de pagina's met die bedragen.
 const VALUTA_GEWIJZIGD = '2026-10-28';
+// Logo's van de platforms in de tabellen (30-10-2026): bijgewerkt-datum, lastmod en dateModified van de pagina's met die tabellen (L7).
+const LOGO_UPD = '2026-10-30';
 const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
@@ -276,7 +278,7 @@ const besteFaq = [
   ['Wat is het beste webshopplatform in 2026?', 'Er is geen platform dat voor iedereen het beste is. Voor een kleine start is JouwWeb het goedkoopst met een volwaardige webshop, voor groei en verkoop over de grens is Shopify het sterkst en voor een winkel met webshop past Lightspeed eCom.'],
   ['Wat is het goedkoopste webshopplatform?', 'Hostinger Website Bouwer Onbeperkt kost € 3,99 per maand als je 48 maanden vooraf betaalt. Bij maandelijks opzegbare pakketten is JouwWeb Pro met € 10 per maand het goedkoopst.'],
 ];
-export const beste = {
+export const beste = bijgewerkt({
   ...article({ path: '/beste-webshop-platform/', title: 'Beste webshopplatform 2026: keuze per situatie', h1: 'Het beste webshopplatform van 2026', description: 'Welk webshopplatform is het beste in 2026? Per situatie de beste keuze: starters, klein budget, groei, winkel met webshop en volledige controle.', og: 'beste-webshop-platform', parents: G, faq: besteFaq }),
   navPath: '/gidsen/',
   body: `<article class="prose"><h1>Het beste webshopplatform van 2026</h1>${by()}<p class="lead">Het beste platform hangt af van wat je verkoopt, hoeveel producten je hebt en hoeveel tijd je in techniek wilt steken. Dit is onze keuze per situatie.</p>
@@ -289,7 +291,7 @@ export const beste = {
 <h2>Beste voor volledige controle: WooCommerce</h2><p>Gratis plug-in voor WordPress, zonder platformkosten of omzetaandeel. Je regelt zelf hosting, updates en beveiliging.</p><div class="out">${knop('woocommerce', 'gids_beste')}</div>
 <h2>Alles op een rij</h2><div class="table-wrap"><table class="data"><thead><tr><th>Situatie</th><th>Platform</th><th>Vanaf per maand</th></tr></thead><tbody><tr><td>Paar producten</td><td><a href="/platformen/jouwweb/">JouwWeb</a></td><td>€ 10</td></tr><tr><td>Kleinste budget</td><td><a href="/platformen/hostinger/">Hostinger</a></td><td>€ 3,99 (48 mnd vooraf)</td></tr><tr><td>Groei en buitenland</td><td><a href="/platformen/shopify/">Shopify</a></td><td>€ 21</td></tr><tr><td>Winkel met webshop</td><td><a href="/platformen/lightspeed/">Lightspeed eCom</a></td><td>€ 68</td></tr><tr><td>Alles bij één partij</td><td><a href="/platformen/mijndomein/">Mijndomein</a></td><td>€ 15</td></tr><tr><td>Ontwerpvrijheid</td><td><a href="/platformen/wix/">Wix</a></td><td>€ 25</td></tr><tr><td>Volledige controle</td><td><a href="/platformen/woocommerce/">WooCommerce</a></td><td>€ 0 + hosting</td></tr></tbody></table></div>
 ${faqHtml(besteFaq)}${matchCta('Welke past bij jouw situatie?')}${bron(...['jouwweb', 'hostinger', 'shopify', 'lightspeed', 'mijndomein', 'wix', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
-};
+}, LOGO_UPD);
 
 const kostenFaq = [
   ['Wat kost een webshop beginnen per jaar?', 'Alleen aan platformkosten tussen € 0 (WooCommerce, plus hosting) en € 816 (Lightspeed eCom Essential). Een kleine webshop bij JouwWeb Pro kost € 120 per jaar.'],
@@ -311,7 +313,7 @@ const gratisFaq = [
   ['Kan ik echt gratis een website maken?', 'Ja, bij JouwWeb en Wix. Je krijgt dan geen eigen domeinnaam en bij Wix staan er Wix-advertenties op je site.'],
   ['Kan ik gratis een webshop maken?', 'Niet blijvend bij een websitebouwer: verkopen kan bij JouwWeb vanaf Pro (€ 10) en bij Wix vanaf Core (€ 25 per maand). WooCommerce is gratis, maar hosting niet.'],
 ];
-export const gratis = {
+export const gratis = bijgewerkt({
   ...article({ path: '/gratis-website-maken/', title: 'Gratis website maken 2026: wat kan wel en niet?', h1: 'Gratis website maken: wat kan wel en niet?', description: 'Gratis een website maken kan bij JouwWeb en Wix, zonder eigen domein. Wat je gratis krijgt, waar de grenzen liggen en wat de goedkoopste betaalde stap is.', og: 'gratis-website-maken', parents: G, faq: gratisFaq }),
   navPath: '/gidsen/',
   body: `<article class="prose"><h1>Gratis website maken: wat kan wel en niet?</h1>${by()}<p class="lead">Een gratis website is prima om te proberen. Voor een zakelijke site wil je een eigen domeinnaam, en die zit niet in de gratis pakketten.</p>
@@ -320,13 +322,13 @@ export const gratis = {
 <h2>De goedkoopste stap naar een eigen domein</h2><p>JouwWeb Lite kost € 5,50 per maand met het eerste jaar een gratis domeinnaam. Hostinger Premium kost € 2,99 per maand, maar alleen bij 48 maanden vooraf (€ 143,52).</p>
 <div class="out">${knop('jouwweb', 'gids_gratis')}${knop('hostinger', 'gids_gratis', 'btn ghost')}</div>
 ${faqHtml(gratisFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.wix.bronnen, P.woocommerce.bronnen, P.shopify.bronnen, P.hostinger.bronnen, P.mijndomein.bronnen)}</article>`,
-};
+}, LOGO_UPD);
 
 const zzpFaq = [
   ['Welke websitebouwer is het beste voor een zzp\'er?', 'Voor een dienstensite zonder webshop zijn JouwWeb (vanaf € 5,50) en Hostinger (vanaf € 2,99 bij 48 maanden vooraf) het voordeligst. Wix geeft de meeste ontwerpvrijheid.'],
   ['Kan ik afspraken laten boeken op mijn site?', 'Ja. Bij Mijndomein zit boekingen en afspraken in elk MijnWebshop-pakket.'],
 ];
-export const zzp = {
+export const zzp = bijgewerkt({
   ...article({ path: '/website-maken-zzp/', title: 'Website maken als zzp\'er: beste opties 2026', h1: 'Website maken als zzp\'er', description: 'Als zzp\'er een website maken: wat je nodig hebt en welke websitebouwer past. JouwWeb, Wix, Hostinger en Mijndomein met prijzen.', og: 'website-maken-zzp', parents: G, faq: zzpFaq }),
   navPath: '/gidsen/', lastmod: '2026-10-19',
   body: `<article class="prose"><h1>Website maken als zzp'er</h1>${by()}<p class="lead">Een goede zzp-site heeft een eigen domeinnaam, laat zien wat je doet en maakt contact makkelijk. Dat kan zonder webbouwer.</p>
@@ -336,7 +338,7 @@ export const zzp = {
 <h2>Factureren en btw</h2><p>Verkoop je via je site, dan wil je facturen en btw goed op orde. JouwWeb koppelt met onder meer e-Boekhouden, Moneybird, Jortt en SnelStart. Welk boekhoudprogramma bij je past, zie je op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</p>
 <div class="out">${knop('jouwweb', 'gids_zzp')}${knop('wix', 'gids_zzp', 'btn ghost', { trafcat: 'wsb' })}</div>
 ${faqHtml(zzpFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.hostinger.bronnen, P.wix.bronnen, P.mijndomein.bronnen)}</article>`,
-};
+}, LOGO_UPD);
 export const guides = [beste, kosten, gratis, zzp];
 
 export const gidsHub = {

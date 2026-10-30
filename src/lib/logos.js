@@ -12,5 +12,5 @@ export function logoImg(id, { maat = 'md', eager = false, base = '', cls = '' } 
   if (!p) throw new Error('Onbekend platform ' + id);
   const [w, h] = LOGO_MATEN[maat];
   const merk = p.naam.split(' ')[0];
-  return `<img class="plogo plogo-${maat}${cls ? ' ' + cls : ''}" src="${base}/logos/${id}.svg" alt="${merk} logo" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+  return `<img class="plogo plogo-${maat}${cls ? ' ' + cls : ''}" src="${base}/logos/${id}.svg" alt="${merk}" width="${w}" height="${h}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
 }
