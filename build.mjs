@@ -24,7 +24,7 @@ export const REDIRECTS = { '/platformen/squarespace/': '/platformen/' }; // Squa
 const redirectHtml = (to) => `<!doctype html>\n<html lang="nl"><head><meta charset="utf-8"><title>Doorverwijzing | ${SITE.name}</title><meta name="robots" content="noindex"><link rel="canonical" href="${SITE.domain}${to}"><meta http-equiv="refresh" content="0; url=${BASE}${to}"><script>location.replace(${JSON.stringify(BASE + to)})</script></head><body><p>Deze pagina is verhuisd naar <a href="${BASE}${to}">${SITE.domain}${to}</a>.</p></body></html>\n`;
 for (const [from, to] of Object.entries(REDIRECTS)) write(join(OUT, from, 'index.html'), redirectHtml(to));
 cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
-cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true, filter: (p) => !/logo-(rechten|cellen)\.m?js$/.test(p) }); // alleen build-time, niet publiceren
+cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true, filter: (p) => !/(logo-(rechten|cellen)\.m?js|[\\/]checklist\.js)$/.test(p) }); // alleen build-time, niet publiceren (checklist.js: SC 30-10)
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });
 cpSync('src/assets/logos', join(OUT, 'logos'), { recursive: true, filter: (f) => !f.endsWith('.md') });
 cpSync('src/assets/icons', OUT, { recursive: true });
