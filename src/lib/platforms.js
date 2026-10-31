@@ -84,15 +84,15 @@ export const PLATFORMS = {
     naam: 'Mijndomein MijnWebshop', slug: 'mijndomein', soort: 'Webshopbouwer', url: 'https://www.mijndomein.nl/producten/webshop',
     kort: 'Webshopbouwer van een Nederlandse domeinaanbieder, alles in één pakket.',
     vanaf: 15, vanafTekst: '€ 15 per maand (Start)', btw: 'excl. btw',
+    prijsNoot: 'Excl. btw, zoals Mijndomein ze toont. Per maand = bij maandbetaling. Per jaar = 12 × de maandprijs bij jaarbetaling (Start € 13,50, Plus € 27, Pro € 40; onze rekensom, excl. btw).',
     plannen: [
-      ['Start', '€ 15 per maand · € 126 per jaar', '25 producten, voor starters'],
+      ['Start', '€ 15 per maand · € 162 per jaar', '25 producten, voor starters'],
       ['Plus', '€ 29,50 per maand · € 324 per jaar', '1.000 producten, 300 varianten per product'],
-      ['Pro', '€ 43,50 per maand · € 522 per jaar', '20.000 producten, 400 varianten per product'],
+      ['Pro', '€ 43,50 per maand · € 480 per jaar', '20.000 producten, 400 varianten per product'],
     ],
     plus: ['Mollie en Stripe: iDEAL, Klarna, PayPal en Apple Pay', 'E-mail, cookiebanner en afspraken boeken in elk pakket', 'Live chat op werkdagen'],
     min: ['Pakketten lopen 12 maanden en verlengen automatisch', 'Start is beperkt tot 25 producten'],
     voor: 'Starters die domein, e-mail en webshop bij één Nederlandse partij willen.',
-    actie: 'Bij maandbetaling zijn de eerste 6 maanden nu gratis.',
     bronnen: [['Mijndomein MijnWebshop', 'https://www.mijndomein.nl/producten/webshop'], ['Mijndomein actievoorwaarden', 'https://www.mijndomein.nl/actievoorwaarden']],
   },
   woocommerce: {
@@ -215,7 +215,7 @@ export const FEATURES = {
     talen: { v: null },
     pos: { v: null },
     hosting: { v: 'ja', t: 'Hosting en e-mail inbegrepen', s: S.mdShop },
-    proberen: { v: 'deels', t: 'Actie: eerste 6 maanden gratis bij maandbetaling', s: S.mdShop },
+    proberen: { v: 'nee', t: 'Opzeggen binnen 11 maanden kan, restitutie niet', s: S.mdShop },
     maand: { v: 'deels', t: 'Per maand betalen, maar het pakket loopt 12 maanden', s: S.mdShop },
   },
   woocommerce: {
