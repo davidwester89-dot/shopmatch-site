@@ -26,7 +26,8 @@ test('geen scores in de gebouwde pagina\'s en scripts', () => {
 test('pagina\'s die een score toonden: lastmod en dateModified 2026-10-29', () => {
   const sm = read('dist/sitemap.xml');
   // De twee blogs zijn op 30-10 opnieuw bijgewerkt (logo's in de tabellen); die datum test test/logo-l7.test.js.
-  for (const p of ['/', '/platformen/', '/platformen/shopify/', '/platformen/woocommerce/', '/vergelijken/', '/vergelijken/wix-vs-jouwweb/', '/over/'])
+  // '/' en '/platformen/' zijn op 1-11 opnieuw bijgewerkt (JouwWeb-actie weg, hubdatum); die datum test test/acties-weg-0111.test.js.
+  for (const p of ['/platformen/shopify/', '/platformen/woocommerce/', '/vergelijken/', '/vergelijken/wix-vs-jouwweb/', '/over/'])
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p}</loc><lastmod>2026-10-29</lastmod>`), p);
   for (const f of ['platformen/shopify', 'vergelijken/wix-vs-jouwweb']) {
     const h = read(`dist/${f}/index.html`);

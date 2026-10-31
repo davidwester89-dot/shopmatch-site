@@ -19,6 +19,10 @@ const SCORE_WEG = '2026-10-29';
 const VALUTA_GEWIJZIGD = '2026-10-28';
 // Logo's van de platforms in de tabellen (30-10-2026): bijgewerkt-datum, lastmod en dateModified van de pagina's met die tabellen (L7).
 const LOGO_UPD = '2026-10-30';
+// JouwWeb-actie t/m 31-10-2026 weggehaald (L4): bijgewerkt-datum, lastmod en dateModified van de pagina's met die actie (L7, pushdatum).
+const JW_ACTIE_WEG = '2026-11-01';
+// Hubs en pagina's die daardoor meeschuiven (L7): home (blogkaart, leestijd), /shop-match/ (js/lib/platforms.js), /platformen/ en /gidsen/ (hub = nieuwste kind).
+const HUB_UPD = JW_ACTIE_WEG;
 const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
@@ -32,7 +36,7 @@ const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class
 const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td class="n" data-l="Verkopen vanaf">${verkoopTekst(id)}</td>${[['ideal', 'iDEAL'], ['pos', 'Kassa'], ['b2b', 'B2B'], ['talen', 'Meerdere talen']].map(([k, l]) => `<td data-l="${l}">${fv(FEATURES[id][k], false)}</td>`).join('')}</tr>`).join('');
 
 export const home = {
-  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: SCORE_WEG,
+  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: HUB_UPD,
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
   schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<section class="hero sec"><div class="hero-txt">
@@ -46,7 +50,7 @@ ${HERO_ART}
 <div class="hero-q"><p class="hero-q-step">Vraag 1 van 5</p><p class="hero-q-title" id="hq">${esc(VRAGEN[0].vraag)}</p><div class="hero-q-opts" role="group" aria-labelledby="hq">${VRAGEN[0].opties.map(([v, l]) => `<a class="choice" href="/shop-match/?doel=${v}" rel="nofollow">${esc(l)}<span aria-hidden="true">→</span></a>`).join('')}</div><p class="hero-q-foot">Daarna nog 4 korte vragen. Gratis, zonder account.</p></div>
 </div>
 <ul class="trustbar">
-<li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time>, bijgewerkt op <time datetime="${SCORE_WEG}">${fmtDate(SCORE_WEG)}</time></span></li>
+<li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time>, bijgewerkt op <time datetime="${HUB_UPD}">${fmtDate(HUB_UPD)}</time></span></li>
 <li>${ICONS.bron}<span>Bron bij elke prijs en functie</span></li>
 <li>${ICONS.schild}<span>Volgorde nooit betaald</span></li>
 <li>${ICONS.gratis}<span>Gratis, zonder account</span></li>
@@ -94,7 +98,7 @@ ${faqHtml(homeFaq)}
 };
 
 export const quiz = {
-  path: '/shop-match/', title: 'Webshop keuzehulp: welk platform past bij jou?', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true, lastmod: SCORE_WEG,
+  path: '/shop-match/', title: 'Webshop keuzehulp: welk platform past bij jou?', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true, stamp: { updated: HUB_UPD }, lastmod: HUB_UPD,
   description: 'Vijf vragen over je plannen, aantal producten, budget en ervaring. Je krijgt de drie platforms die het best passen, met prijs en uitleg.',
   scripts: ['/js/quiz.js'],
   schema: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ShopMatch', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: SITE.domain + '/shop-match/', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, publisher: ORG }],
@@ -159,6 +163,7 @@ export const platformPages = IDS.map((id) => {
     art.schema[0] = { ...art.schema[0], dateModified: v.updated };
   }
   art = bijgewerkt(art, SCORE_WEG);
+  if (id === 'jouwweb') art = bijgewerkt(art, JW_ACTIE_WEG);
   return {
     ...art,
     navPath: '/platformen/',
@@ -177,7 +182,7 @@ ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featu
 });
 
 export const platformHub = {
-  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: SCORE_WEG }, lastmod: SCORE_WEG,
+  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: HUB_UPD }, lastmod: HUB_UPD,
   description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce: per platform de prijs, de checklist en voor wie het past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
   body: `<h1>Webshopplatforms op een rij</h1><p class="lead">Zeven manieren om online te verkopen, van gratis plug-in tot compleet platform met kassa. Gesorteerd op het aantal checklistpunten dat de aanbieder noemt, bij gelijke stand op prijs.</p>
@@ -293,21 +298,23 @@ export const beste = bijgewerkt({
 ${faqHtml(besteFaq)}${matchCta('Welke past bij jouw situatie?')}${bron(...['jouwweb', 'hostinger', 'shopify', 'lightspeed', 'mijndomein', 'wix', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
 }, LOGO_UPD);
 
+// Laatste bodywijziging /webshop-beginnen-kosten/ (L7): 1-11-2026, JouwWeb-actie uit de noot.
+const KOSTEN_UPD = JW_ACTIE_WEG;
 const kostenFaq = [
   ['Wat kost een webshop beginnen per jaar?', 'Alleen aan platformkosten tussen € 0 (WooCommerce, plus hosting) en € 816 (Lightspeed eCom Essential). Een kleine webshop bij JouwWeb Pro kost € 120 per jaar.'],
   ['Welke kosten komen er nog bij?', 'Een domeinnaam, transactiekosten per betaling, eventueel betaalde apps of een thema, en je boekhouding.'],
 ];
 export const kosten = {
-  ...bijgewerkt(article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }), VALUTA_GEWIJZIGD),
-  navPath: '/gidsen/', stamp: { checked: CHECKED, updated: VALUTA_GEWIJZIGD },
+  ...bijgewerkt(article({ path: '/webshop-beginnen-kosten/', title: 'Webshop beginnen: wat kost het in 2026?', h1: 'Webshop beginnen: wat kost het?', description: 'Wat kost een webshop beginnen in 2026? De jaarkosten per platform, van € 0 tot € 816, plus domein, transactiekosten en apps.', og: 'webshop-beginnen-kosten', parents: G, faq: kostenFaq }), KOSTEN_UPD),
+  navPath: '/gidsen/', stamp: { checked: CHECKED, updated: KOSTEN_UPD },
   body: `<article class="prose"><h1>Webshop beginnen: wat kost het?</h1>${by()}<p class="lead">De grootste vaste post is het abonnement van je platform. Dit betaal je in het eerste jaar voor het goedkoopste pakket waarmee je kunt verkopen, zoals de aanbieder het toont. Niet elke aanbieder vermeldt of btw inbegrepen is.</p>
 <h2>Platformkosten in het eerste jaar</h2><div class="table-wrap"><table class="data stack"><thead><tr><th>Platform</th><th>Pakket</th><th>Eerste jaar</th><th>Let op</th></tr></thead><tbody>${kostRows.map(([id, pk, j, l]) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td data-l="Pakket">${esc(pk)}</td><td data-l="Eerste jaar">${esc(j)}</td><td data-l="Let op">${esc(l)}</td></tr>`).join('')}</tbody></table></div>
-<p>Shopify, Wix en Lightspeed: maandprijs × 12, bij Shopify en Wix met jaarbetaling. Acties zoals de korting van JouwWeb tot en met 31 oktober 2026 en de 6 gratis maanden bij Mijndomein zijn niet meegerekend.</p>
+<p>Shopify, Wix en Lightspeed: maandprijs × 12, bij Shopify en Wix met jaarbetaling. Tijdelijke acties zijn niet meegerekend.</p>
 <h2>Wat er nog bijkomt</h2><ul><li><strong>Domeinnaam.</strong> Vaak het eerste jaar inbegrepen. Bij JouwWeb betaal je daarna € 20 per jaar.</li><li><strong>Transactiekosten.</strong> Elke betaalprovider rekent per betaling. Shopify rekent op Basic 2% extra als je niet met Shopify Payments werkt.</li><li><strong>Apps en thema's.</strong> Bij Shopify en WooCommerce betaal je extra functies vaak los. WooCommerce noemt US$ 29 tot US$ 299 per jaar per extensie (ca. € 26 tot € 268, ECB-koers 27-10-2026; btw niet vermeld).</li><li><strong>Boekhouding.</strong> Met een webshop heb je een boekhoudprogramma nodig voor facturen en btw. Vergelijk ze op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</li></ul>
 <h2>Zo houd je de kosten laag</h2><ol class="steps"><li>Begin met het kleinste pakket dat bij je aantal producten past.</li><li>Kies een platform zonder verkoopcommissie of met de betaalprovider van het platform.</li><li>Betaal per jaar zodra je zeker bent van je keuze.</li></ol>
 ${faqHtml(kostenFaq)}${matchCta('Welk platform past bij jouw budget?')}${bron(...['jouwweb', 'hostinger', 'mijndomein', 'shopify', 'wix', 'lightspeed', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
 };
-kosten.article = { ...kosten.article, updated: VALUTA_GEWIJZIGD }; kosten.schema[0] = { ...kosten.schema[0], dateModified: VALUTA_GEWIJZIGD };
+kosten.article = { ...kosten.article, updated: KOSTEN_UPD }; kosten.schema[0] = { ...kosten.schema[0], dateModified: KOSTEN_UPD };
 
 const gratisFaq = [
   ['Kan ik echt gratis een website maken?', 'Ja, bij JouwWeb en Wix. Je krijgt dan geen eigen domeinnaam en bij Wix staan er Wix-advertenties op je site.'],
@@ -342,7 +349,7 @@ ${faqHtml(zzpFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.hostinger.bronnen, P.
 export const guides = [beste, kosten, gratis, zzp];
 
 export const gidsHub = {
-  path: '/gidsen/', title: 'Gidsen: webshop en website beginnen | ShopMatch', h1: 'Webshop of website beginnen: alle gidsen', crumb: 'Gidsen', og: 'home',
+  path: '/gidsen/', title: 'Gidsen: webshop en website beginnen | ShopMatch', h1: 'Webshop of website beginnen: alle gidsen', crumb: 'Gidsen', og: 'home', stamp: { updated: HUB_UPD }, lastmod: HUB_UPD,
   description: 'Gidsen over het beste webshopplatform, de kosten van een webshop, gratis een website maken en een website als zzp\'er.',
   body: `<h1>Webshop of website beginnen: alle gidsen</h1><div class="grid cards two">${guides.map((g) => `<a class="card" href="${g.path}"><h2 class="h3">${esc(g.h1)}</h2><p>${esc(g.description)}</p><span class="more">Lees de gids →</span></a>`).join('')}</div>${matchCta()}`,
 };

@@ -50,7 +50,6 @@ export const PLATFORMS = {
     plus: ['0% verkoopcommissie', 'iDEAL, Bancontact, PayPal, Klarna en meer', 'Koppelingen met o.a. e-Boekhouden, Moneybird, Jortt en SnelStart', 'Verzendlabels voor PostNL, DHL, DPD, GLS en UPS'],
     min: ['Pro is beperkt tot 10 producten', 'Domeinnaam na het eerste jaar € 20 per jaar'],
     voor: 'Zzp\'ers en kleine webshops die snel en in het Nederlands willen starten.',
-    actie: 'Tot en met 31 oktober 2026 betaal je de eerste 12 maanden de helft.',
     bronnen: [['JouwWeb prijzen', 'https://www.jouwweb.nl/prijzen'], ['JouwWeb webshop', 'https://www.jouwweb.nl/webshop'], ['Over JouwWeb', 'https://www.jouwweb.nl/over-ons']],
   },
   lightspeed: {
