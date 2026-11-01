@@ -1,7 +1,7 @@
 ---
 title: Wix vs Shopify (of JouwWeb): welke past bij je kleine webshop?
 seo_title: Wix vs Shopify voor een kleine online winkel (2026)
-description: Wix vs Shopify voor een kleine online winkel: Shopify Basic € 21, Wix Core € 25 per maand (jaarbetaling). Plus JouwWeb, kosten per verkoop en iDEAL.
+description: Wix vs Shopify voor een kleine online winkel: Shopify Basic € 28 (€ 21 bij jaarbetaling), Wix Core € 25 per maand (jaarbetaling). Plus JouwWeb.
 date: 2026-10-17
 updated: 2026-11-02
 checked: 2026-10-26
@@ -24,7 +24,7 @@ Je wilt een kleine webshop beginnen en drie namen komen steeds terug: Shopify, W
 
 > **Kort gezegd:** met een paar producten en vooral Nederlandse klanten ben je met JouwWeb het goedkoopst uit (vanaf € 10 per maand, excl. btw).
 >
-> Wil je groeien, over de grens verkopen of ook een winkelkassa? Dan is Shopify sterker (Basic € 21 per maand bij jaarbetaling).
+> Wil je groeien, over de grens verkopen of ook een winkelkassa? Dan is Shopify sterker (Basic € 28 per maand bij maandbetaling, € 21 bij jaarbetaling).
 >
 > Wix past als het ontwerp van je site voorop staat en de webshop erbij komt (Core € 25 per maand bij jaarbetaling).
 >
@@ -36,7 +36,7 @@ Dit zijn de goedkoopste pakketten waarmee je online kunt verkopen, zoals de aanb
 
 | | Shopify | Wix | JouwWeb |
 |---|---|---|---|
-| Goedkoopste pakket om te verkopen | Basic: € 21 per maand bij jaarbetaling, € 28 bij maandbetaling | Core: € 25 per maand bij jaarbetaling | Pro: € 10 per maand, tot 10 producten |
+| Goedkoopste pakket om te verkopen | Basic: € 28 per maand bij maandbetaling, € 21 bij jaarbetaling | Core: € 25 per maand bij jaarbetaling | Pro: € 10 per maand, tot 10 producten |
 | Onbeperkt producten | Vanaf Basic | Vanaf Core | Business: € 20 per maand |
 | Extra kosten per verkoop | 2% op Basic als je niet met Shopify Payments werkt | Niet vermeld op de prijspagina | 0% verkoopcommissie |
 | iDEAL | Via Shopify Payments | Via Wix Payments of Stripe | Ja, zonder commissie |
@@ -49,7 +49,7 @@ Dit zijn de goedkoopste pakketten waarmee je online kunt verkopen, zoals de aanb
 
 Het grootste verschil zit in waar ze vandaan komen. Shopify is gebouwd als webshop. Wix is een websitebouwer waar je een webshop aan toevoegt.
 
-- **Prijs.** Shopify Basic kost € 21 per maand bij jaarbetaling en € 28 bij maandbetaling. Bij Wix ontvang je betalingen vanaf Core: € 25 per maand bij een jaarabonnement, exclusief toeslagen.
+- **Prijs.** Shopify Basic kost € 28 per maand bij maandbetaling en € 21 bij jaarbetaling. Bij Wix ontvang je betalingen vanaf Core: € 25 per maand bij een jaarabonnement, exclusief toeslagen.
 - **Kosten per verkoop.** Shopify rekent op Basic 2% extra als je een andere betaalprovider gebruikt dan Shopify Payments. Voor een iDEAL-betaling via Shopify Payments rekent Shopify administratiekosten per betaling, maar een vast bedrag noemt Shopify niet op de prijspagina of in het helpcentrum. Het tarief voor jouw winkel zie je in je Shopify-beheer bij de betalingsinstellingen. Wix noemt op de prijspagina geen verkoopcommissie.
 - **Winkel erbij.** Met Shopify POS gebruik je Shopify ook als kassa. Wix noemt geen kassa op de pagina's die wij volgen.
 - **Ontwerp.** Wix geeft je veel vrijheid in de vormgeving van je hele site. Bij Shopify start je vanuit een winkeltemplate.
@@ -63,7 +63,8 @@ Heb je meer dan 10 producten, dan valt JouwWeb Pro af en kom je bij Business uit
 | Platform | Pakket | Eerste jaar |
 |---|---|---|
 | JouwWeb | Business | € 240 (excl. btw) |
-| Shopify | Basic, jaarbetaling | € 252 |
+| Shopify | Basic, maandbetaling | € 336 (12 × € 28, onze rekensom) |
+| Shopify | Basic, jaarbetaling | € 252 (12 × € 21, onze rekensom) |
 | Wix | Core, jaarbetaling | € 300 (exclusief toeslagen) |
 
 Bij Shopify komt daar 2% per verkoop bij als je een andere betaalprovider gebruikt dan Shopify Payments. Bij JouwWeb betaal je na het eerste jaar € 20 per jaar voor je domeinnaam. Bij Wix zit een domeinnaam het eerste jaar in de meeste jaarpakketten.
@@ -147,10 +148,10 @@ Of laat de match het doen: vijf vragen over je producten, budget en ervaring, en
 ## Veelgestelde vragen
 
 ### Wat is goedkoper voor een kleine webshop, Wix of Shopify?
-Bij jaarbetaling is Shopify Basic goedkoper: € 21 per maand, tegen € 25 per maand voor Wix Core (exclusief toeslagen). Betaal je Shopify per maand, dan kost Basic € 28. Werk je bij Shopify niet met Shopify Payments, dan komt er op Basic 2% per verkoop bij.
+Shopify Basic kost € 28 per maand bij maandbetaling en € 21 per maand bij jaarbetaling. Wix Core kost € 25 per maand bij een jaarabonnement (exclusief toeslagen). Bij jaarbetaling is Shopify Basic dus goedkoper. Werk je bij Shopify niet met Shopify Payments, dan komt er op Basic 2% per verkoop bij.
 
 ### Is JouwWeb goedkoper dan Shopify?
-Ja, bij de instap. JouwWeb Pro kost € 10 per maand (excl. btw, tot 10 producten), Shopify Basic € 21 per maand bij jaarbetaling. Met onbeperkt producten liggen ze dichter bij elkaar: JouwWeb Business € 240 per jaar, Shopify Basic € 252 per jaar.
+Ja, bij de instap. JouwWeb Pro kost € 10 per maand (excl. btw, tot 10 producten), Shopify Basic € 28 per maand bij maandbetaling of € 21 bij jaarbetaling. Met onbeperkt producten liggen ze dichter bij elkaar: JouwWeb Business € 240 per jaar, Shopify Basic € 336 per jaar bij maandbetaling of € 252 bij jaarbetaling (onze rekensom).
 
 ### Kan ik bij Wix gratis een webshop maken?
 Nee. Met de gratis versie van Wix kun je een site bouwen, maar online betalingen ontvangen kan pas vanaf Core (€ 25 per maand bij jaarbetaling).
