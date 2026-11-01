@@ -130,7 +130,7 @@ const SCHILD = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fi
 export function stampHtml(stamp) {
   if (!stamp || (!stamp.checked && !stamp.updated)) return '';
   const t = (d) => `<time datetime="${d}">${fmtDate(d)}</time>`;
-  return `<p class="stamp">${stamp.checked ? `<span class="badge-ok">${SCHILD}<span>Prijzen gecontroleerd op ${t(stamp.checked)}</span></span>` : ''}${stamp.updated ? `<span class="upd">Laatst bijgewerkt ${t(stamp.updated)}</span>` : ''}</p>`;
+  return `<p class="stamp">${stamp.checked ? `<span class="badge-ok">${SCHILD}<span>Prijzen gecontroleerd op ${t(stamp.checked)}${(stamp.checkedPer || []).map(([n, d]) => `, ${esc(n)} op ${t(d)}`).join('')}</span></span>` : ''}${stamp.updated ? `<span class="upd">Laatst bijgewerkt ${t(stamp.updated)}</span>` : ''}</p>`;
 }
 export function withStamp(body, stamp) {
   const html = stampHtml(stamp);

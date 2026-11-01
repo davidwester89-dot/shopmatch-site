@@ -3,6 +3,8 @@
 // Euro-bedragen Shopify en Wix bevestigd vanaf een Nederlands IP door Site-controleur (17-10-2026).
 // prijsNoot: optionele eigen tekst boven de prijstabel; anders de standaardnoot uit prijsNootVan().
 export const CHECKED = '2026-10-17';
+// Controledatum per aanbieder als die afwijkt van CHECKED (alleen echte controles): Mijndomein-prijzen opnieuw gerenderd op 31-10-2026 (mijndomein.nl/producten/webshop, beide toggles).
+export const GECONTROLEERD = { mijndomein: '2026-10-31' };
 
 /** Noot boven de prijstabel: btw-basis alleen als de aanbieder die zelf noemt (Site-controleur 17-10). */
 export const prijsNootVan = (p) => p.prijsNoot || (p.btw ? `${p.btw[0].toUpperCase()}${p.btw.slice(1)}, zoals ${p.naam.split(' ')[0]} ze toont.` : `Zoals ${p.naam.split(' ')[0]} ze toont; de prijspagina vermeldt niet of btw inbegrepen is.`);
@@ -93,7 +95,7 @@ export const PLATFORMS = {
     plus: ['Mollie en Stripe: iDEAL, Klarna, PayPal en Apple Pay', 'E-mail, cookiebanner en afspraken boeken in elk pakket', 'Live chat op werkdagen'],
     min: ['Pakketten lopen 12 maanden en verlengen automatisch', 'Start is beperkt tot 25 producten'],
     voor: 'Starters die domein, e-mail en webshop bij één Nederlandse partij willen.',
-    bronnen: [['Mijndomein MijnWebshop', 'https://www.mijndomein.nl/producten/webshop'], ['Mijndomein actievoorwaarden', 'https://www.mijndomein.nl/actievoorwaarden']],
+    bronnen: [['Mijndomein MijnWebshop', 'https://www.mijndomein.nl/producten/webshop']],
   },
   woocommerce: {
     naam: 'WooCommerce', slug: 'woocommerce', soort: 'Open source (WordPress)', url: 'https://woocommerce.com/nl/',
