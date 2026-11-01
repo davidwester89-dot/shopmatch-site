@@ -8,7 +8,7 @@ import { parseFrontmatter, markdown } from './markdown.mjs';
 import { VRAGEN } from './lib/match.js';
 import { HERO_ART } from './hero-art.mjs';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, ranglijst, situaties } from './lib/checklist.js';
-import { P, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
+import { P, perAanbieder, by, bron, featureBronnen, matchCta, article, faqHtml, plansTable, pcard, matrix, methodBox, fv, checklistTable, verkoopTekst, maxProdTekst, logoImg } from './parts.mjs';
 
 const KORT = { shopify: 'Shopify', wix: 'Wix', jouwweb: 'JouwWeb', lightspeed: 'Lightspeed', hostinger: 'Hostinger', mijndomein: 'Mijndomein', woocommerce: 'WooCommerce' };
 const RANG = ranglijst();
@@ -29,6 +29,11 @@ const MD_UPD = '2026-11-01';
 // L7 (pushdatum): /platformen/mijndomein/, /webshop-beginnen-kosten/, /gratis-website-maken/, /website-maken-zzp/, /beste-webshop-platform/, /shop-match/ (js/lib/platforms.js) en de hubs /platformen/ en /gidsen/.
 const MD_VERVOLG = '2026-11-02';
 const MD_CHECKED_PER = [['Mijndomein', GECONTROLEERD.mijndomein]];
+// Match en kaarten: maandprijs bij maandbetaling (MM-besluit 01-11-2026 11:05): Shopify 21 -> 28, Lightspeed 68/120/259 -> 78/138/298, Mijndomein Plus 27 -> 29,50 (alleen match).
+// L7 (pushdatum): /, /shop-match/ (js), /platformen/ en alle platformpagina's (kaart en alternatieven), /vergelijken/, /vergelijken/shopify-vs-lightspeed/ en /vergelijken/shopify-vs-woocommerce/.
+const MAAND_UPD = '2026-11-02';
+const PER_ALLE = perAanbieder(IDS);
+const perTijd = (per) => per.map(([n, d]) => `, ${esc(n)} op <time datetime="${d}">${fmtDate(d)}</time>`).join('');
 const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
@@ -42,7 +47,7 @@ const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class
 const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${logo(id, 'sm')}</span><a href="/platformen/${P[id].slug}/">${esc(P[id].naam)}</a></th><td class="n" data-l="Verkopen vanaf">${verkoopTekst(id)}</td>${[['ideal', 'iDEAL'], ['pos', 'Kassa'], ['b2b', 'B2B'], ['talen', 'Meerdere talen']].map(([k, l]) => `<td data-l="${l}">${fv(FEATURES[id][k], false)}</td>`).join('')}</tr>`).join('');
 
 export const home = {
-  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: HUB_UPD,
+  path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: MAAND_UPD,
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
   schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<section class="hero sec"><div class="hero-txt">
@@ -56,7 +61,7 @@ ${HERO_ART}
 <div class="hero-q"><p class="hero-q-step">Vraag 1 van 5</p><p class="hero-q-title" id="hq">${esc(VRAGEN[0].vraag)}</p><div class="hero-q-opts" role="group" aria-labelledby="hq">${VRAGEN[0].opties.map(([v, l]) => `<a class="choice" href="/shop-match/?doel=${v}" rel="nofollow">${esc(l)}<span aria-hidden="true">→</span></a>`).join('')}</div><p class="hero-q-foot">Daarna nog 4 korte vragen. Gratis, zonder account.</p></div>
 </div>
 <ul class="trustbar">
-<li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time>, bijgewerkt op <time datetime="${HUB_UPD}">${fmtDate(HUB_UPD)}</time></span></li>
+<li>${ICONS.kalender}<span>Prijzen gecontroleerd op <time datetime="${CHECKED}">${fmtDate(CHECKED)}</time>${perTijd(PER_ALLE)}, bijgewerkt op <time datetime="${MAAND_UPD}">${fmtDate(MAAND_UPD)}</time></span></li>
 <li>${ICONS.bron}<span>Bron bij elke prijs en functie</span></li>
 <li>${ICONS.schild}<span>Volgorde nooit betaald</span></li>
 <li>${ICONS.gratis}<span>Gratis, zonder account</span></li>
@@ -118,7 +123,7 @@ ${VRAGEN.map((v, i) => `<fieldset class="q"><legend>${i + 1}. ${esc(v.vraag)}</l
 <aside class="card mpanel" id="result" aria-live="polite"><h2>Jouw beste match</h2><p class="mwait">Beantwoord de vragen. Je top 3 verschijnt hier, met prijs en uitleg.</p><p class="sub">Of bekijk <a href="/vergelijken/">alle 7 platforms naast elkaar</a>.</p></aside>
 </div>
 <noscript><p class="alert">De match werkt met JavaScript. Zonder JavaScript vind je alle platforms naast elkaar op <a href="/vergelijken/">vergelijken</a>.</p></noscript>
-<section class="method" id="methode"><h2>Zo werkt de match</h2><ol><li><strong>Eerst wat past.</strong> Wat je wilt verkopen, hoeveel producten en of je een winkel hebt. Platforms waarvan het grootste pakket te weinig producten aankan, vallen af.</li><li><strong>Dan je budget.</strong> We rekenen met de maandprijs van het goedkoopste pakket dat bij je aantal producten past.</li><li><strong>Dan techniek en voorkeur.</strong> Wil je niets zelf regelen, dan komt WooCommerce niet in je top 3. Vind je een Nederlandse aanbieder belangrijk, dan telt dat mee.</li><li><strong>Bij gelijke stand: de laagste prijs.</strong> Partnerlinks tellen nooit mee.</li></ol><p class="src">Prijzen gecontroleerd op ${fmtDate(CHECKED)} bij de aanbieders.</p></section>`,
+<section class="method" id="methode"><h2>Zo werkt de match</h2><ol><li><strong>Eerst wat past.</strong> Wat je wilt verkopen, hoeveel producten en of je een winkel hebt. Platforms waarvan het grootste pakket te weinig producten aankan, vallen af.</li><li><strong>Dan je budget.</strong> We rekenen met de maandprijs van het goedkoopste pakket dat bij je aantal producten past.</li><li><strong>Dan techniek en voorkeur.</strong> Wil je niets zelf regelen, dan komt WooCommerce niet in je top 3. Vind je een Nederlandse aanbieder belangrijk, dan telt dat mee.</li><li><strong>Bij gelijke stand: de laagste prijs.</strong> Partnerlinks tellen nooit mee.</li></ol><p class="src">Prijzen gecontroleerd op ${fmtDate(CHECKED)}${perTijd(PER_ALLE).replace(/<[^>]+>/g, '')} bij de aanbieders.</p></section>`,
 };
 
 // ---- Platformpagina's ----
@@ -170,7 +175,8 @@ export const platformPages = IDS.map((id) => {
   }
   art = bijgewerkt(art, SCORE_WEG);
   if (id === 'jouwweb') art = bijgewerkt(art, JW_ACTIE_WEG);
-  if (id === 'mijndomein') { art = bijgewerkt(art, MD_VERVOLG); art.stamp = { ...art.stamp, checkedPer: MD_CHECKED_PER }; }
+  if (id === 'mijndomein') art = bijgewerkt(art, MD_VERVOLG);
+  art = bijgewerkt(art, MAAND_UPD); art.stamp = { ...art.stamp, checkedPer: perAanbieder([id, ...alt]) };
   return {
     ...art,
     navPath: '/platformen/',
@@ -189,13 +195,13 @@ ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featu
 });
 
 export const platformHub = {
-  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, updated: MD_VERVOLG }, lastmod: MD_VERVOLG,
+  path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, checkedPer: PER_ALLE, updated: MAAND_UPD }, lastmod: MAAND_UPD,
   description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce: per platform de prijs, de checklist en voor wie het past.',
   schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
   body: `<h1>Webshopplatforms op een rij</h1><p class="lead">Zeven manieren om online te verkopen, van gratis plug-in tot compleet platform met kassa. Gesorteerd op het aantal checklistpunten dat de aanbieder noemt, bij gelijke stand op prijs.</p>
 <div class="actions"><a class="btn" href="/shop-match/">Liever advies op maat? Start de match</a><a class="btn ghost" href="/vergelijken/">Filter en vergelijk</a></div>
 <ol class="plist">${RANG.map((id, i) => pcard(id, { rank: i + 1, pos: 'lijst' })).join('')}</ol>
-${methodBox()}`,
+${methodBox('h2', PER_ALLE)}`,
 };
 
 // ---- Vergelijken ----
@@ -205,7 +211,7 @@ const FILTERS = ['ideal', 'pos', 'b2b', 'talen', 'nl', 'geenfee', 'hosting', 'ma
 const sel = (id, label, opts) => `<div class="field"><label for="${id}">${label}</label><select id="${id}" name="${id}">${opts.map(([v, t]) => `<option value="${v}">${esc(t)}</option>`).join('')}</select></div>`;
 
 export const vsHub = {
-  path: '/vergelijken/', title: 'Webshopplatforms vergelijken 2026 | ShopMatch', h1: 'Webshopplatforms vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED, updated: MD_UPD }, lastmod: MD_UPD,
+  path: '/vergelijken/', title: 'Webshopplatforms vergelijken 2026 | ShopMatch', h1: 'Webshopplatforms vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED, checkedPer: PER_ALLE, updated: MAAND_UPD }, lastmod: MAAND_UPD,
   scripts: ['/js/vergelijk.js'],
   description: 'Alle 7 webshopplatforms in één tabel: prijs, aantal producten, iDEAL, kassa, B2B, talen en contract. Filter op wat jij nodig hebt.',
   body: `<h1>Webshopplatforms vergelijken (2026)</h1><p class="lead">Zeven platforms op prijs en 10 vaste punten. Filter op wat jouw bedrijf nodig heeft.</p>
@@ -221,7 +227,7 @@ export const vsHub = {
 ${matrix(RANG)}
 <p class="empty" id="f-empty" hidden>Geen platform voldoet aan alles. Zet een filter uit of <a href="/shop-match/">start de match</a>.</p>
 <p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, zoals de aanbieder het toont. JouwWeb, Hostinger en Mijndomein noemen excl. btw, Wix exclusief toeslagen; Shopify, Lightspeed en WooCommerce vermelden het niet. Bronnen staan op de pagina van elk platform.</p>
-${methodBox()}
+${methodBox('h2', PER_ALLE)}
 <h2>Twee platforms naast elkaar</h2>${vsCards()}${matchCta()}`,
 };
 
@@ -230,7 +236,7 @@ const cmp = ({ slug, a, b, h1, title, description, intro, rows, kiesA, kiesB, fa
   const side = (id, kies, posn, trafcat) => `<div class="card"><span class="pc-logo">${logo(id)}</span><span class="tag best">${esc(BEST_FOR[id])}</span><h2>${esc(P[id].naam)}</h2><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p><p class="lbl" style="margin-top:14px">Kies ${esc(P[id].naam)} als</p><ul>${kies.map((x) => `<li>${x}</li>`).join('')}</ul><div class="out">${knop(id, posn, 'btn sm', wixTrafcat(id, trafcat))}<a href="/platformen/${P[id].slug}/">Alles over ${esc(P[id].naam.split(' ')[0])} →</a></div></div>`;
   const art = article({ path: `/vergelijken/${slug}/`, title, h1, description, og: `vs-${slug}`, parents: [['/vergelijken/', 'Vergelijken']], faq });
   return {
-    ...bijgewerkt(art, SCORE_WEG),
+    ...(a === 'shopify' ? (() => { const x = bijgewerkt(art, MAAND_UPD); return { ...x, stamp: { ...x.stamp, checkedPer: perAanbieder([a, b]) } }; })() : bijgewerkt(art, SCORE_WEG)),
     navPath: '/vergelijken/',
     body: `<article><h1>${esc(h1)}</h1>${by()}<p class="lead">${intro}</p>
 <h2>Snel antwoord</h2><div class="verdict">${side(a, kiesA, 'vs_a', aTrafcat)}${side(b, kiesB, 'vs_b', bTrafcat)}</div>${naVerdict}
@@ -247,10 +253,10 @@ export const vsPages = [
     title: 'Shopify vs Lightspeed eCom 2026 | ShopMatch',
     description: 'Shopify vanaf € 21, Lightspeed eCom vanaf € 68 per maand. De verschillen in prijs, limieten, support en kassa, en wanneer je welke kiest.',
     intro: 'Allebei bouwen ze webshops én kassasystemen. Shopify is goedkoper om te starten. Lightspeed heeft een vestiging in Amsterdam en telefonische support vanaf Advanced.',
-    rows: [['Instapprijs', '€ 21 per maand (Basic, jaar)', '€ 68 per maand (Essential)'], ['Producten', 'Onbeperkt', '250 varianten (Essential), 5.000 (Advanced)'], ['Gebruikers', '1 (Basic), tot 5 (Grow)', '1 (Essential), 3 (Advanced)'], ['Support', 'Online', 'E-mail (Essential), telefonisch vanaf Advanced'], ['Winkelkassa', 'Shopify POS', 'Lightspeed kassa'], ['B2B', 'Vanaf Basic, tot 3 catalogi', 'In Professional (€ 259)'], ['Extra transactiekosten', '2% op Basic bij externe betaalprovider', 'Geen bij externe betaalproviders']],
+    rows: [['Instapprijs', '€ 28 per maand (Basic, maandbetaling), € 21 bij jaarbetaling', '€ 78 per maand (Essential, maandbetaling), € 68 bij jaarbetaling'], ['Producten', 'Onbeperkt', '250 varianten (Essential), 5.000 (Advanced)'], ['Gebruikers', '1 (Basic), tot 5 (Grow)', '1 (Essential), 3 (Advanced)'], ['Support', 'Online', 'E-mail (Essential), telefonisch vanaf Advanced'], ['Winkelkassa', 'Shopify POS', 'Lightspeed kassa'], ['B2B', 'Vanaf Basic, tot 3 catalogi', 'In Professional (€ 259)'], ['Extra transactiekosten', '2% op Basic bij externe betaalprovider', 'Geen bij externe betaalproviders']],
     kiesA: ['je met een kleiner budget start', 'je onbeperkt producten wilt zonder hoger pakket', 'je ook in andere landen wilt verkopen'],
     kiesB: ['je een fysieke winkel hebt en voorraad op één plek wilt', 'je telefonische support in het Nederlands belangrijk vindt', 'je zonder extra transactiekosten je eigen betaalprovider wilt gebruiken'],
-    faq: [['Is Shopify goedkoper dan Lightspeed?', 'Bij de instap wel: Shopify Basic kost € 21 per maand bij jaarbetaling, Lightspeed eCom Essential € 68 per maand.'], ['Hebben beide een kassasysteem?', 'Ja. Shopify heeft Shopify POS en Lightspeed levert eigen kassasystemen.']],
+    faq: [['Is Shopify goedkoper dan Lightspeed?', 'Bij de instap wel: Shopify Basic kost € 28 per maand bij maandbetaling (€ 21 bij jaarbetaling), Lightspeed eCom Essential € 78 per maand bij maandbetaling (€ 68 bij jaarbetaling).'], ['Hebben beide een kassasysteem?', 'Ja. Shopify heeft Shopify POS en Lightspeed levert eigen kassasystemen.']],
   }),
   cmp({
     slug: 'wix-vs-jouwweb', a: 'wix', b: 'jouwweb', aTrafcat: 'wsb', h1: 'Wix of JouwWeb: welke websitebouwer kies je?',

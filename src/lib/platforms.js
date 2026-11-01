@@ -3,8 +3,9 @@
 // Euro-bedragen Shopify en Wix bevestigd vanaf een Nederlands IP door Site-controleur (17-10-2026).
 // prijsNoot: optionele eigen tekst boven de prijstabel; anders de standaardnoot uit prijsNootVan().
 export const CHECKED = '2026-10-17';
-// Controledatum per aanbieder als die afwijkt van CHECKED (alleen echte controles): Mijndomein-prijzen opnieuw gerenderd op 31-10-2026 (mijndomein.nl/producten/webshop, beide toggles).
-export const GECONTROLEERD = { mijndomein: '2026-10-31' };
+// Controledatum per aanbieder als die afwijkt van CHECKED (alleen echte controles): Mijndomein-prijzen opnieuw gerenderd op 31-10-2026 (mijndomein.nl/producten/webshop, beide toggles);
+// Lightspeed-prijzen gerenderd op 1-11-2026 (lightspeedhq.nl/ecommerce/prijzen/, tabs Maandelijks en Jaarlijks).
+export const GECONTROLEERD = { lightspeed: '2026-11-01', mijndomein: '2026-10-31' };
 
 /** Noot boven de prijstabel: btw-basis alleen als de aanbieder die zelf noemt (Site-controleur 17-10). */
 export const prijsNootVan = (p) => p.prijsNoot || (p.btw ? `${p.btw[0].toUpperCase()}${p.btw.slice(1)}, zoals ${p.naam.split(' ')[0]} ze toont.` : `Zoals ${p.naam.split(' ')[0]} ze toont; de prijspagina vermeldt niet of btw inbegrepen is.`);
@@ -13,7 +14,7 @@ export const PLATFORMS = {
   shopify: {
     naam: 'Shopify', slug: 'shopify', soort: 'Webshopplatform', url: 'https://www.shopify.com/nl',
     kort: 'Webshopplatform voor wie serieus wil verkopen, ook buiten Nederland.',
-    vanaf: 21, vanafTekst: '€ 21 per maand (Basic, jaarbetaling)',
+    vanaf: 28, vanafTekst: '€ 28 per maand (Basic, maandbetaling)',
     plannen: [
       ['Basic', '€ 21 (bij jaarbetaling) · € 28 bij maandbetaling', 'Webshop met onbeperkt producten, 2% extra transactiekosten bij een externe betaalprovider'],
       ['Grow', '€ 59 (bij jaarbetaling) · € 78 bij maandbetaling', 'Tot 5 medewerkersaccounts'],
@@ -57,11 +58,11 @@ export const PLATFORMS = {
   lightspeed: {
     naam: 'Lightspeed eCom', slug: 'lightspeed', soort: 'Webshopplatform', url: 'https://www.lightspeedhq.nl/ecommerce/',
     kort: 'Webshopplatform van kassaleverancier Lightspeed, voor winkels die ook online verkopen.',
-    vanaf: 68, vanafTekst: '€ 68 per maand (Essential)', prijsNoot: 'Zoals Lightspeed ze toont op de prijspagina; daar staat niet of de bedragen incl. of excl. btw zijn.',
+    vanaf: 78, vanafTekst: '€ 78 per maand (Essential, maandbetaling)', prijsNoot: 'Zoals Lightspeed ze toont op de prijspagina: per maand bij maandbetaling (tab Maandelijks), daaronder de maandprijs bij jaarbetaling (tab Jaarlijks). Daar staat niet of de bedragen incl. of excl. btw zijn.',
     plannen: [
-      ['Essential', '€ 68', '250 productvarianten, 1 gebruiker, 1 taal, e-mailsupport'],
-      ['Advanced', '€ 120', '5.000 varianten, 3 gebruikers, 3 talen, telefonische support'],
-      ['Professional', '€ 259', '15.000 varianten, onbeperkt gebruikers, 7 talen, B2B'],
+      ['Essential', '€ 78 per maand · € 68 per maand bij jaarbetaling', '250 productvarianten, 1 gebruiker, 1 taal, e-mailsupport'],
+      ['Advanced', '€ 138 per maand · € 120 per maand bij jaarbetaling', '5.000 varianten, 3 gebruikers, 3 talen, telefonische support'],
+      ['Professional', '€ 298 per maand · € 259 per maand bij jaarbetaling', '15.000 varianten, onbeperkt gebruikers, 7 talen, B2B'],
     ],
     plus: ['Vestiging in Amsterdam (Lightspeed Netherlands B.V.)', 'Webshop en kassa van één leverancier', 'Telefonische support vanaf Advanced', 'Maandelijks op te zeggen en te wijzigen'],
     min: ['Duurste instap van deze vergelijking', 'Essential heeft geen telefonische support en geen blog'],
@@ -125,9 +126,10 @@ export const BEST_FOR = {
   mijndomein: 'Alles bij één Nederlandse partij',
   woocommerce: 'Volledige controle',
 };
-// Maandprijs van het goedkoopste pakket waarmee je online kunt verkopen (zelfde bedragen als in PLATFORMS.plannen).
-export const VERKOOP_VANAF = { shopify: 21, wix: 25, jouwweb: 10, lightspeed: 68, hostinger: 3.99, mijndomein: 15, woocommerce: 0 };
-export const VERKOOP_PAKKET = { shopify: 'Basic, jaarbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plug-in, plus hosting' };
+// Maandprijs van het goedkoopste pakket waarmee je online kunt verkopen (zelfde bedragen als in PLATFORMS.plannen): de prijs bij maandelijks betalen
+// (MM-besluit 01-11-2026; bronnen en controledatum in src/lib/match.js). Wix, JouwWeb en Hostinger tonen geen maandprijs bij maandbetaling: daar de getoonde prijs.
+export const VERKOOP_VANAF = { shopify: 28, wix: 25, jouwweb: 10, lightspeed: 78, hostinger: 3.99, mijndomein: 15, woocommerce: 0 };
+export const VERKOOP_PAKKET = { shopify: 'Basic, maandbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential, maandbetaling', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plug-in, plus hosting' };
 // Maximaal aantal producten in het grootste standaardpakket. Infinity = onbeperkt; null = niet vermeld door de aanbieder.
 export const MAX_PRODUCTEN = { shopify: Infinity, wix: Infinity, jouwweb: Infinity, lightspeed: 15000, hostinger: null, mijndomein: 20000, woocommerce: Infinity };
 

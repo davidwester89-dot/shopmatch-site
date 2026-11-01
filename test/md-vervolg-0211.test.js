@@ -25,7 +25,7 @@ test('noot kostenpagina: btw-basis bij onze rekensom', () => {
 
 test('controledatum per aanbieder op de pagina\'s met de Mijndomein-prijzen van 31-10', () => {
   for (const p of ['/platformen/mijndomein/', '/webshop-beginnen-kosten/']) {
-    assert.match(read(`dist${p}index.html`), /Prijzen gecontroleerd op <time datetime="2026-10-17">17 oktober 2026<\/time>, Mijndomein op <time datetime="2026-10-31">31 oktober 2026<\/time>/, p);
+    assert.match(read(`dist${p}index.html`), /Prijzen gecontroleerd op <time datetime="2026-10-17">17 oktober 2026<\/time>(, Lightspeed op <time datetime="2026-11-01">1 november 2026<\/time>)?, Mijndomein op <time datetime="2026-10-31">31 oktober 2026<\/time>/, p);
   }
 });
 

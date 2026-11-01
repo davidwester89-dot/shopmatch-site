@@ -1,10 +1,13 @@
 import { SITE, esc, ORG, AUTHOR, fmtDate } from './layout.mjs';
-import { PLATFORMS, CHECKED, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET, MAX_PRODUCTEN } from './lib/platforms.js';
+import { PLATFORMS, CHECKED, GECONTROLEERD, FEATURES, BEST_FOR, VERKOOP_VANAF, VERKOOP_PAKKET, MAX_PRODUCTEN } from './lib/platforms.js';
 import { GROEPEN, PUNTEN, IDS_PUNTEN, score, waardeTekst } from './lib/checklist.js';
 import { knop } from './lib/partnerlinks.js';
 import { logoImg } from './lib/logos.js';
 export { logoImg };
 export const P = PLATFORMS;
+/** Afwijkende controledatums van de aanbieders op een pagina: [[korte naam, datum]] (zie GECONTROLEERD in platforms.js). */
+export const perAanbieder = (ids) => Object.keys(GECONTROLEERD).filter((id) => ids.includes(id)).map((id) => [P[id].naam.split(' ')[0], GECONTROLEERD[id]]);
+const perTekst = (per) => per.map(([n, d]) => `, ${esc(n)} op ${fmtDate(d)}`).join('');
 export const DATE = '2026-10-17';
 export const by = (d = DATE) => `<p class="src">Door ${SITE.owner} · ${fmtDate(d)}</p>`;
 export const bron = (...lists) => {
@@ -81,4 +84,4 @@ export function matrix(ids) {
   return `<p class="scrollhint mx">Veeg opzij voor alle kolommen →</p><div class="table-wrap"><table class="data matrix stack" id="matrix"><caption class="sr-only">Alle platforms naast elkaar: prijs en checklist</caption><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
 }
 
-export const methodBox = (h = 'h2') => `<section class="method" id="methode"><${h}>Zo vergelijken we</${h}><ol><li><strong>Prijs van de aanbieder zelf.</strong> Elk bedrag komt van de prijspagina van de aanbieder, zoals die het toont, met link naar de bron. Of btw inbegrepen is, staat per platform voor zover de aanbieder het vermeldt.</li><li><strong>Vaste checklist van 10 punten.</strong> We kijken per punt of de aanbieder het zelf noemt: ja, deels, nee of niet vermeld. Geen oordeel of review. Prijs staat er apart naast.</li><li><strong>Partnerlinks veranderen niets.</strong> De volgorde is: meeste checklistpunten die de aanbieder noemt, dan prijs. De match kijkt naar wat past, dan je budget, dan de prijs. Commissie telt nooit mee.</li></ol><p class="src">Door ${SITE.owner} · Prijzen gecontroleerd op ${fmtDate(CHECKED)}</p></section>`;
+export const methodBox = (h = 'h2', per = []) => `<section class="method" id="methode"><${h}>Zo vergelijken we</${h}><ol><li><strong>Prijs van de aanbieder zelf.</strong> Elk bedrag komt van de prijspagina van de aanbieder, zoals die het toont, met link naar de bron. Of btw inbegrepen is, staat per platform voor zover de aanbieder het vermeldt.</li><li><strong>Vaste checklist van 10 punten.</strong> We kijken per punt of de aanbieder het zelf noemt: ja, deels, nee of niet vermeld. Geen oordeel of review. Prijs staat er apart naast.</li><li><strong>Partnerlinks veranderen niets.</strong> De volgorde is: meeste checklistpunten die de aanbieder noemt, dan prijs. De match kijkt naar wat past, dan je budget, dan de prijs. Commissie telt nooit mee.</li></ol><p class="src">Door ${SITE.owner} · Prijzen gecontroleerd op ${fmtDate(CHECKED)}${perTekst(per)}</p></section>`;

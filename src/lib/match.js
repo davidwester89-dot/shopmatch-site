@@ -15,15 +15,24 @@ const N = { '0': 0, '10': 10, '100': 100, '1000': 1000, meer: 5000 };
 const NL = ['jouwweb', 'lightspeed', 'mijndomein'];
 // Maximaal aantal producten per instappakket met webshop (eigen sites, zie platforms.js). Infinity = onbeperkt.
 const MAXPROD = Object.fromEntries(Object.entries(MAX_PRODUCTEN).map(([k, v]) => [k, v ?? Infinity])); // niet vermeld = geen grens aannemen
-// Maandprijs van het goedkoopste pakket waarmee je kunt verkopen (jaarbetaling waar dat de vanaf-prijs is).
+// Maandprijs van het goedkoopste pakket waarmee je kunt verkopen: de maandprijs bij maandelijks betalen van de officiële prijspagina (NL-IP),
+// excl./incl. btw zoals de aanbieder toont (MM-besluit 01-11-2026 11:05, zelfde regel als TM 30-10). Toont een aanbieder geen prijs bij maandbetaling,
+// dan blijft de getoonde prijs staan, met een comment. Gecontroleerd 1-11-2026 (headless Chrome, NL-IP, toggles geklikt):
+// - shopify 28: shopify.com/nl/prijzen, "Maandelijks betalen € 28 EUR/mnd" (Basic; jaarlijks € 21).
+// - wix 25: nl.wix.com/pricing toont alleen "jaarabonnementen die bij aankoop volledig worden betaald" (Core € 25); geen maandprijs op de prijspagina, dus blijft staan.
+// - jouwweb 10/20: jouwweb.nl/tarieven, "Prijzen zijn exclusief BTW en gelden bij jaarlijkse betaling"; maandbetaling kan, maar zonder getoonde maandprijs, dus blijft staan.
+// - lightspeed 78/138/298: lightspeedhq.nl/ecommerce/prijzen/, tab "Maandelijks" (tab "Jaarlijks": 68/120/259).
+// - hostinger 3.99: hostinger.com/nl/website-maken, "Alle plannen worden vooraf betaald" (48 maanden); geen maandbetaling, dus blijft staan.
+// - mijndomein 15/29,50/43,50: mijndomein.nl/producten/webshop, toggle "Maandelijks" (excl. btw; gecontroleerd 31-10 en 1-11-2026).
+// - woocommerce 0: gratis plug-in, geen abonnement.
 export const VERKOOPPRIJS = VERKOOP_VANAF;
 /** Maandprijs van het goedkoopste pakket dat past bij het aantal producten. */
 export function verkoopPrijs(id, n) {
-  if (id === 'jouwweb' && n > 10) return 20; // Business, onbeperkt
-  if (id === 'mijndomein' && n > 1000) return 43.5; // Pro, € 522 per jaar
-  if (id === 'mijndomein' && n > 25) return 27; // Plus, € 324 per jaar
-  if (id === 'lightspeed' && n > 5000) return 259; // Professional
-  if (id === 'lightspeed' && n > 250) return 120; // Advanced
+  if (id === 'jouwweb' && n > 10) return 20; // Business, onbeperkt; alleen prijs bij jaarbetaling getoond (jouwweb.nl/tarieven)
+  if (id === 'mijndomein' && n > 1000) return 43.5; // Pro, maandprijs bij maandbetaling (mijndomein.nl/producten/webshop, gecontroleerd 31-10-2026)
+  if (id === 'mijndomein' && n > 25) return 29.5; // Plus, maandprijs bij maandbetaling (mijndomein.nl/producten/webshop, gecontroleerd 31-10-2026)
+  if (id === 'lightspeed' && n > 5000) return 298; // Professional, tab Maandelijks (lightspeedhq.nl/ecommerce/prijzen/, 1-11-2026)
+  if (id === 'lightspeed' && n > 250) return 138; // Advanced, tab Maandelijks (lightspeedhq.nl/ecommerce/prijzen/, 1-11-2026)
   return VERKOOPPRIJS[id];
 }
 

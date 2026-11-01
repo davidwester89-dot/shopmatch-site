@@ -11,15 +11,16 @@ const read = (p) => readFileSync(p, 'utf8');
 const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? files(p) : p.endsWith('.html') ? [p] : []; });
 const DATUM = '2026-11-01';
 // /shop-match/, /platformen/, /platformen/mijndomein/, /gidsen/, /webshop-beginnen-kosten/ en /gratis-website-maken/ zijn op 2-11 opnieuw bijgewerkt (Mijndomein-vervolg); die datum test test/md-vervolg-0211.test.js.
-const PAGINAS = ['/', '/platformen/jouwweb/', '/vergelijken/', '/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/'];
-const MET_DATEMODIFIED = ['/platformen/jouwweb/', '/blog/shopify-wix-jouwweb-kleine-webshop/'];
+// '/', '/platformen/jouwweb/' en '/vergelijken/' zijn op 2-11 opnieuw bijgewerkt (maandprijzen); die datum test test/maandprijs-0211.test.js.
+const PAGINAS = ['/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/'];
+const MET_DATEMODIFIED = ['/blog/shopify-wix-jouwweb-kleine-webshop/'];
 
 test('JouwWeb-actie t/m 31-10-2026: nergens meer in de gebouwde site', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
   const fout = [];
   for (const f of files('dist')) {
     // Uitzondering (2-11): de controledatum van de Mijndomein-prijzen in de stempel ('Mijndomein op 31 oktober 2026') is geen actie.
-    const h = read(f).replace(/Mijndomein op <time datetime="2026-10-31">31 oktober 2026<\/time>/g, '');
+    const h = read(f).replace(/Mijndomein op (<time datetime="2026-10-31">)?31 oktober 2026(<\/time>)?/g, '');
     if (/31 oktober 2026|31-10-2026|eerste 12 maanden de helft/i.test(h)) fout.push(f);
   }
   assert.deepEqual(fout, []);
