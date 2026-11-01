@@ -1,9 +1,9 @@
 ---
 title: B2B-webshop maken: welk platform past bij zakelijke klanten?
 seo_title: B2B-webshop maken of starten: welk platform? (2026)
-description: B2B-webshop maken? 4 platforms met B2B-functies naast elkaar: JouwWeb vanaf € 10, Shopify vanaf € 21, Lightspeed vanaf € 259 per maand. Zo kies je.
+description: B2B-webshop maken? 4 platforms met B2B-functies naast elkaar: JouwWeb vanaf € 10, Shopify vanaf € 21, Lightspeed vanaf € 298 per maand. Zo kies je.
 date: 2026-10-17
-updated: 2026-10-30
+updated: 2026-11-02
 checked: 2026-10-17
 tools: /shop-match/, /vergelijken/, /platformen/
 sources:
@@ -25,19 +25,19 @@ Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Z
 >
 > Wil je per klant eigen prijzen, betaalmethoden en producten, of B2B en consumenten in één winkel? Kijk dan naar Shopify (Basic € 21 per maand bij jaarbetaling).
 >
-> Lightspeed eCom heeft B2B pas in Professional (€ 259 per maand) en WooCommerce via een betaalde extensie.
+> Lightspeed eCom heeft B2B pas in Professional (€ 298 per maand bij maandbetaling, € 259 bij jaarbetaling) en WooCommerce via een betaalde extensie.
 >
 > Alle platforms met filter op B2B: [webshopplatforms vergelijken](/vergelijken/).
 
 ## Welke platforms hebben B2B-functies?
 
-Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin het zit. Prijzen per maand zoals de aanbieder ze toont: JouwWeb noemt ze excl. btw. Shopify en Lightspeed vermelden op hun prijspagina niet of btw inbegrepen is.
+Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin het zit. Prijzen per maand zoals de aanbieder ze toont: JouwWeb noemt ze excl. btw. Shopify en Lightspeed vermelden op hun prijspagina niet of btw inbegrepen is. Lightspeed: per maand bij maandbetaling (prijspagina gecontroleerd op 1-11-2026).
 
 | Platform | B2B volgens de aanbieder | Goedkoopste pakket met B2B |
 |---|---|---|
 | [JouwWeb](/platformen/jouwweb/) | B2B-webshop, btw-verleggingsregeling, btw-regels voor EU-leveringen | Pro € 10 (tot 10 producten), Business € 20 (onbeperkt) |
 | [Shopify](/platformen/shopify/) | Shopify B2B in Basic, Grow, Advanced en Plus; niet in Starter of Retail | Basic € 21 bij jaarbetaling |
-| [Lightspeed eCom](/platformen/lightspeed/) | B2B in het Professional-pakket | Professional € 259 |
+| [Lightspeed eCom](/platformen/lightspeed/) | B2B in het Professional-pakket | Professional € 298 (€ 259 bij jaarbetaling) |
 | [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plug-in € 0, plus hosting en extensie |
 
 [Wix](/platformen/wix/), [Hostinger](/platformen/hostinger/) en [Mijndomein](/platformen/mijndomein/) noemen op de pagina's die wij volgen geen B2B-functies. Daarom telt B2B bij hen in de checklist als 0. [Zo tellen we](/over/#methode).
@@ -73,7 +73,7 @@ Volgens Shopify hangen de B2B-functies af van je abonnement. Op Basic betaal je 
 
 ## Lightspeed eCom: als je ook een winkel hebt
 
-Lightspeed eCom levert webshop en kassa van één leverancier. B2B zit in Professional (€ 259 per maand), samen met 15.000 productvarianten, onbeperkt gebruikers en 7 talen. Dat is een flinke stap: bij Essential (€ 68) en Advanced (€ 120) noemt Lightspeed geen B2B.
+Lightspeed eCom levert webshop en kassa van één leverancier. B2B zit in Professional (€ 298 per maand bij maandbetaling, € 259 bij jaarbetaling), samen met 15.000 productvarianten, onbeperkt gebruikers en 7 talen. Dat is een flinke stap: bij Essential (€ 78) en Advanced (€ 138, beide bij maandbetaling) noemt Lightspeed geen B2B.
 
 Lightspeed past bij een groothandel of winkel die online en in de winkel één voorraad wil.
 

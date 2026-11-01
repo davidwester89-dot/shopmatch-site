@@ -12,8 +12,9 @@ const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); retur
 const DATUM = '2026-11-01';
 // /shop-match/, /platformen/, /platformen/mijndomein/, /gidsen/, /webshop-beginnen-kosten/ en /gratis-website-maken/ zijn op 2-11 opnieuw bijgewerkt (Mijndomein-vervolg); die datum test test/md-vervolg-0211.test.js.
 // '/', '/platformen/jouwweb/' en '/vergelijken/' zijn op 2-11 opnieuw bijgewerkt (maandprijzen); die datum test test/maandprijs-0211.test.js.
-const PAGINAS = ['/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/'];
-const MET_DATEMODIFIED = ['/blog/shopify-wix-jouwweb-kleine-webshop/'];
+// '/blog/' en '/blog/shopify-wix-jouwweb-kleine-webshop/' zijn op 2-11 opnieuw bijgewerkt (JouwWeb-actie t/m 30-11 terug); die datum test test/jouwweb-lightspeed-0211.test.js.
+const PAGINAS = [];
+const MET_DATEMODIFIED = [];
 
 test('JouwWeb-actie t/m 31-10-2026: nergens meer in de gebouwde site', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });

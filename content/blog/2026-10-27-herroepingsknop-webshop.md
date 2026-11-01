@@ -3,7 +3,7 @@ title: Herroepingsknop verplicht: wat moet je webshop regelen?
 seo_title: Herroepingsknop webshop: verplicht sinds juni 2026
 description: De herroepingsknop is verplicht voor je webshop. Voor wie hij geldt, waar hij aan moet voldoen, de risico's en een checklist per platform.
 date: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-02
 checked: 2026-10-27
 tools: /shop-match/, /platformen/, /webshop-beginnen-kosten/
 sources:

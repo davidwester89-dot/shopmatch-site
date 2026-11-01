@@ -53,6 +53,8 @@ export const PLATFORMS = {
     plus: ['0% verkoopcommissie', 'iDEAL, Bancontact, PayPal, Klarna en meer', 'Koppelingen met o.a. e-Boekhouden, Moneybird, Jortt en SnelStart', 'Verzendlabels voor PostNL, DHL, DPD, GLS en UPS'],
     min: ['Pro is beperkt tot 10 producten', 'Domeinnaam na het eerste jaar € 20 per jaar'],
     voor: 'Zzp\'ers en kleine webshops die snel en in het Nederlands willen starten.',
+    // Actie terug (MM 01-11-2026, L4): jouwweb.nl/prijzen (→ /tarieven), gerenderd 1-11-2026 NL-IP: "* ACTIE t/m 30 nov 2026 — Eerste 12 maanden 50%, daarna het standaardtarief." Vervolgcheck 1-12-2026.
+    actie: 'Actie tot en met 30 november 2026, volgens JouwWeb: "Eerste 12 maanden 50%, daarna het standaardtarief." De standaardprijzen hierboven gelden daarna.',
     bronnen: [['JouwWeb prijzen', 'https://www.jouwweb.nl/prijzen'], ['JouwWeb webshop', 'https://www.jouwweb.nl/webshop'], ['Over JouwWeb', 'https://www.jouwweb.nl/over-ons']],
   },
   lightspeed: {
@@ -191,7 +193,7 @@ export const FEATURES = {
     geenfee: { v: 'ja', t: 'Geen transactiekosten bij externe betaalproviders', s: S.lsPay },
     nl: { v: 'ja', t: 'Vestiging in Amsterdam', s: S.lsPrijs },
     onbeperkt: { v: 'nee', t: 'Maximaal 15.000 varianten (Professional)', s: S.lsPrijs },
-    b2b: { v: 'ja', t: 'In Professional (€ 259)', s: S.lsPrijs },
+    b2b: { v: 'ja', t: 'In Professional (€ 298 bij maandbetaling, € 259 bij jaarbetaling)', s: S.lsPrijs },
     talen: { v: 'ja', t: '3 talen (Advanced), 7 (Professional)', s: S.lsPrijs },
     pos: { v: 'ja', t: 'Kassa van Lightspeed', s: S.lsPrijs },
     hosting: { v: 'ja', t: 'Hosting inbegrepen', s: S.lsPrijs },
