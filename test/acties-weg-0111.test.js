@@ -2,6 +2,7 @@
 // Mijndomein: de actie 'eerste 6 maanden gratis' heeft geen einddatum (mijndomein.nl/actievoorwaarden) en staat nergens meer; jaarprijzen = 12 × de maandprijs bij jaarbetaling.
 // L7: elke pagina met een zichtbare bodywijziging, en de hubs erboven, heeft lastmod, dateModified (als de template die heeft) en de zichtbare bijgewerkt-regel op 1-11-2026.
 import test from 'node:test';
+import { EF_PADEN } from '../src/l7-externe-feedback-0311.mjs'; // pagina's die op 3-11 opnieuw zijn bijgewerkt: test/externe-feedback-0311.test.js
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -29,12 +30,12 @@ test('JouwWeb-actie t/m 31-10-2026: nergens meer in de gebouwde site', () => {
 
 test('L7 1-11: lastmod, dateModified en zichtbare bijgewerkt-regel op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of PAGINAS) {
+  for (const p of PAGINAS.filter((x) => !EF_PADEN.has(x))) {
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
     assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
   }
-  for (const p of MET_DATEMODIFIED) assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
+  for (const p of MET_DATEMODIFIED.filter((x) => !EF_PADEN.has(x))) assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
 });
 
 test('Mijndomein: geen actie zonder einddatum, jaarprijzen = 12 × de maandprijs bij jaarbetaling', async () => {

@@ -7,6 +7,7 @@ import { maakLogoCellen } from './src/lib/logo-cellen.mjs';
 import { PLATFORMS } from './src/lib/platforms.js';
 import { ZONDER_LOGO } from './src/lib/logo-rechten.js';
 import { loadPosts, postPage, blogIndex, latestHtml, feed } from './src/blog.mjs';
+import { efDatum } from './src/l7-externe-feedback-0311.mjs';
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
 // Logo's in tabelcellen met precies de naam van een platform (30-10); zelfde vak voor elk platform, alleen beeld.
@@ -16,7 +17,7 @@ const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileS
 // Blog: content/blog/*.md (nieuwste eerst; posts met een datum in de toekomst worden overgeslagen).
 const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
-export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound];
+export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound].map(efDatum);
 for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(layout(p)));
 // Doorverwijzingen voor weggehaalde pagina's. GitHub Pages kan geen 301 sturen: statische pagina met meta refresh,
 // canonical naar het doel en noindex. Staan niet in de sitemap.

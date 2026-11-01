@@ -36,10 +36,12 @@ const perTijd = (per) => per.map(([n, d]) => `, ${esc(n)} op <time datetime="${d
 const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
+// Namen uit PARTNERLINKS (alleen goedgekeurde, live programma's), zodat de FAQ meeloopt als er een partner bijkomt of afgaat.
+const PARTNER_NAMEN = ((n) => (n.length > 1 ? `${n.slice(0, -1).join(', ')} en ${n.at(-1)}` : n[0] || ''))(Object.keys(PARTNERLINKS).map((id) => P[id].naam));
 const homeFaq = [
   ['Wat is het beste webshopplatform voor een starter?', 'Dat hangt af van je aantal producten en budget. Met een paar producten start je goedkoop met JouwWeb Pro (€ 10 per maand, tot 10 producten). Wil je groeien of over de grens verkopen, dan is Shopify sterker. Zie <a href="/beste-webshop-platform/">beste webshopplatform 2026</a>.'],
   ['Hoe komt de volgorde tot stand?', 'We kijken naar 10 vaste punten, zoals iDEAL, kassa, B2B en contractvorm. Platforms die meer van die punten zelf noemen, staan hoger. Alles komt van de site van de aanbieder. Prijs staat er apart naast. Zie <a href="/over/#methode">zo vergelijken we</a>.'],
-  ['Verdient ShopMatch aan de aanbevelingen?', 'Bij sommige aanbieders kunnen we in de toekomst een vergoeding krijgen via een partnerlink. Die links worden bij de knoppen vermeld en tellen nooit mee in de match of de volgorde.'],
+  ['Verdient ShopMatch aan de aanbevelingen?', `Soms. De knoppen naar ${PARTNER_NAMEN} zijn partnerlinks: neem je via zo'n knop een pakket, dan kan ShopMatch een vergoeding krijgen. Bij die knoppen staat een korte vermelding. Partnerlinks tellen nooit mee in de match of de volgorde.`],
 ];
 const VS = [['/vergelijken/shopify-vs-lightspeed/', 'Shopify of Lightspeed', 'Voor winkels die ook online verkopen.'], ['/vergelijken/wix-vs-jouwweb/', 'Wix of JouwWeb', 'Websitebouwers voor zzp\'ers en kleine shops.'], ['/vergelijken/shopify-vs-woocommerce/', 'Shopify of WooCommerce', 'Alles geregeld of alles zelf in de hand.']];
 const vsCards = () => `<div class="grid cards">${VS.map(([h, t, d]) => `<a class="card" href="${h}"><h3>${esc(t)}</h3><p>${esc(d)}</p><span class="more">Bekijk de vergelijking →</span></a>`).join('')}</div>`;
@@ -184,7 +186,7 @@ export const platformPages = IDS.map((id) => {
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 <div class="pc-cta">${knop(id, 'platform_top', 'btn', wixTrafcat(id, 'wsb'))}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
 <h2>Pakketten en prijzen</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
-<h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld telt als 0. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
+<h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld levert geen punt op, net als nee. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
 ${v ? v.html + '\n' : ''}<div class="out">${knop(id, 'platform_bottom', 'btn', wixTrafcat(id, 'wsb'))}</div>
@@ -218,7 +220,7 @@ export const vsHub = {
 <form class="filters card" id="filters" aria-labelledby="h-f"><h2 id="h-f">Filter de platforms</h2>
 <div class="fgrid">${sel('f-budget', 'Budget per maand', BUDGET)}${sel('f-prod', 'Aantal producten', PROD)}</div>
 <fieldset class="q"><legend>Moet kunnen</legend><div class="fchecks">${FILTERS.map((k) => `<label class="check"><input type="checkbox" name="need" value="${k}"><span>${esc(PUNTEN[k].lang)}</span></label>`).join('')}</div></fieldset>
-<p class="sub">"Deels" telt mee als het kan, bijvoorbeeld met een extensie. Niet vermeld telt niet mee.</p>
+<p class="sub">"Deels" telt mee als het kan, bijvoorbeeld met een extensie. Niet vermeld levert geen punt op, net als nee.</p>
 <p class="count" id="f-count" aria-live="polite">${IDS.length} van ${IDS.length} platforms</p>
 <p id="f-ids" class="alert" hidden></p>
 </form>
@@ -375,7 +377,7 @@ export const over = {
 <p>Veel vergelijkingen zijn geschreven door webbouwers die je hun eigen favoriet willen verkopen, of door buitenlandse sites met dollarprijzen. Wij zetten de platforms die Nederlandse ondernemers echt gebruiken naast elkaar, met de prijzen van de aanbieders zelf.</p>
 <h2>Wat we elke week doen</h2><ul><li><strong>Prijzen checken</strong> op de prijspagina's van de aanbieders.</li><li><strong>Acties bijhouden</strong>, zoals tijdelijke kortingen en gratis maanden.</li><li><strong>De match testen</strong>, zodat de uitkomst klopt met de pakketten.</li><li><strong>Gidsen bijwerken</strong> zodra er iets verandert.</li></ul>
 <h2>Hoe we werken</h2><ul><li><strong>Alleen de bron.</strong> Elk bedrag komt van de site van de aanbieder, met link.</li><li><strong>Niets verzonnen.</strong> Staat iets niet op de site van de aanbieder, dan zeggen we dat.</li><li><strong>Onafhankelijk.</strong> We bouwen geen webshops en verkopen geen pakketten.</li><li><strong>Welke aanbieders erin staan.</strong> We vergelijken ook aanbieders waar we niet aan verdienen.</li><li><strong>Partnerlinks tellen nooit mee</strong> in de match of de volgorde. Ze worden bij de knoppen vermeld met één zin per blok.</li></ul>
-</article>${methodBox()}<article class="prose"><h2>Wat telt de checklist?</h2><ul>${GROEPEN.map((g) => `<li><strong>${esc(g.naam)}:</strong> ${g.punten.map((k) => esc(/^Nederland/.test(PUNTEN[k].lang) || !/^[A-Z][a-z]/.test(PUNTEN[k].lang) ? PUNTEN[k].lang : PUNTEN[k].lang[0].toLowerCase() + PUNTEN[k].lang.slice(1))).join(', ')}.</li>`).join('')}</ul><p>Noemt een aanbieder een punt niet op de eigen site, dan staat er "niet vermeld" en telt het als 0. Zo kan een platform lager uitkomen omdat de aanbieder minder openbaar maakt. Mist er iets? Mail ons, dan passen we het aan met bron.</p>
+</article>${methodBox()}<article class="prose"><h2>Wat telt de checklist?</h2><ul>${GROEPEN.map((g) => `<li><strong>${esc(g.naam)}:</strong> ${g.punten.map((k) => esc(/^Nederland/.test(PUNTEN[k].lang) || !/^[A-Z][a-z]/.test(PUNTEN[k].lang) ? PUNTEN[k].lang : PUNTEN[k].lang[0].toLowerCase() + PUNTEN[k].lang.slice(1))).join(', ')}.</li>`).join('')}</ul><p>Noemt een aanbieder een punt niet op de eigen site, dan staat er "niet vermeld". Dat levert geen punt op, net als nee. Zo kan een platform in de volgorde lager uitkomen omdat de aanbieder minder openbaar maakt. De keuzehulp gebruikt de checklist niet; noemt een aanbieder geen maximum aantal producten, dan rekent de keuzehulp zonder grens. Mist er iets? Mail ons, dan passen we het aan met bron.</p>
 <p>Fout gezien? Mail naar <a href="mailto:${SITE.email}">${SITE.email}</a>.</p></article>`,
 };
 
