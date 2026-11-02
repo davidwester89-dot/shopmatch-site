@@ -6,6 +6,8 @@ export const CFG = {
   hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }],
   // Alleen ONTBREKENDE velden die de template van deze pagina niet heeft. Een aanwezig veld moet altijd kloppen.
   exempt: {}, // /shop-match/ toont 'gecontroleerd 17 oktober 2026': dus een zichtbare bijgewerkt-regel nodig (SC 30-10, besluit 3)
+  // Automatisch gegenereerde teaser 'Meer op de blog' onder elke post (src/blog.mjs) telt niet als bodywijziging van die post (L7: geen datum bij alleen een nieuwe teaser). Vraagt SC-OK.
+  stripBlocks: [/<h2>Meer op de blog<\/h2><div class="grid cards two">[\s\S]*?<\/div>/],
 };
 export const ALLOW_NAME = [];
 export const BEKEND_ORPHAN = []; // SC 30-10 besluit 2: geserveerd = publiek, geen allowlist; build-only modules uit de output (zie build.mjs)

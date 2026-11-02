@@ -86,7 +86,7 @@ Volgens iDEAL is de overgang van iDEAL naar Wero gestart. Wero is het nieuwe Eur
 
 Wat je merkt als webshop, schrijft iDEAL zo: "Je ziet straks een nieuw logo: iDEAL | Wero. Verder blijft alles zoals het is – je checkout blijft werken, je PSP blijft hetzelfde en jij hoeft niks aan te passen." Je betaalprovider (PSP) zorgt voor de updates en het nieuwe logo, en houdt je op de hoogte.
 
-Uiterlijk eind 2027 is volgens iDEAL iedere iDEAL-acceptant overgestapt naar Wero. Daarna verdwijnt het iDEAL-merk stap voor stap. iDEAL schrijft erbij dat de communicatie over de technische overstap en de eindmijlpalen nog wordt afgestemd met de toezichthouder.
+Uiterlijk eind 2027 is iedere iDEAL-acceptant overgestapt naar Wero, volgens de [planning van iDEAL](https://ideal.nl/naar-wero). Daarna verdwijnt het iDEAL-merk stap voor stap.
 
 De naam zie je nu al: Shopify, Wix, JouwWeb, Mollie en WooCommerce noemen de betaalmethode iDEAL | Wero.
 
