@@ -32,6 +32,8 @@ const MD_VERVOLG = '2026-11-02';
 // L7 (pushdatum): /, /shop-match/ (js), /platformen/ en alle platformpagina's (kaart en alternatieven), /vergelijken/, /vergelijken/shopify-vs-lightspeed/ en /vergelijken/shopify-vs-woocommerce/.
 const MAAND_UPD = '2026-11-02';
 const PER_ALLE = perAanbieder(IDS);
+// Extra controledatum alleen in de stempel van deze platformpagina's (SC 01-11: JouwWeb-actie en Shopify gecontroleerd op 1-11).
+const STAMP_EXTRA = { jouwweb: [['JouwWeb', '2026-11-01']], shopify: [['Shopify', '2026-11-01']] };
 const perTijd = (per) => per.map(([n, d]) => `, ${esc(n)} op <time datetime="${d}">${fmtDate(d)}</time>`).join('');
 const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
@@ -151,7 +153,7 @@ export const VERDIEPING = Object.fromEntries(IDS.filter((id) => existsSync(`cont
 // CTR-fix 23-10 (GSC 28 d: veel vertoningen, 0 klikken): title/meta/H1 op de zoekwoorden ('lightspeed kosten/abonnement/alternatief', 'wix prijzen/website kosten').
 const SEO_PLATFORM = {
   shopify: { h1: 'Wat kost Shopify? Abonnementen, kosten, voor- en nadelen' },
-  lightspeed: { title: 'Lightspeed kosten 2026: € 78 p/m (€ 68 bij jaarbetaling)', h1: 'Lightspeed eCom: kosten, abonnementen en alternatieven',
+  lightspeed: { title: 'Lightspeed kosten 2026: vanaf € 78 p/m (€ 68 jaarbetaling)', h1: 'Lightspeed eCom: kosten, abonnementen en alternatieven',
     description: 'Wat kost Lightspeed eCom? Essential € 78, Advanced € 138, Professional € 298 per maand; bij jaarbetaling € 68, € 120 en € 259. Plus alternatieven.' },
   wix: { title: 'Wix prijzen 2026: wat kost een Wix-website per maand?', h1: 'Wix: prijzen per pakket, voor- en nadelen',
     description: 'Wix kost vanaf € 14 per maand (Light, jaarbetaling); online verkopen kan vanaf Core (€ 25). Alle Wix-pakketten, wat erin zit en voor wie Wix past.' },
@@ -177,7 +179,7 @@ export const platformPages = IDS.map((id) => {
   art = bijgewerkt(art, SCORE_WEG);
   if (id === 'jouwweb') art = bijgewerkt(art, JW_ACTIE_WEG);
   if (id === 'mijndomein') art = bijgewerkt(art, MD_VERVOLG);
-  art = bijgewerkt(art, MAAND_UPD); art.stamp = { ...art.stamp, checkedPer: perAanbieder([id, ...alt]) };
+  art = bijgewerkt(art, MAAND_UPD); art.stamp = { ...art.stamp, checkedPer: [...perAanbieder([id, ...alt]), ...(STAMP_EXTRA[id] || [])] };
   return {
     ...art,
     navPath: '/platformen/',
@@ -220,7 +222,7 @@ export const vsHub = {
 <form class="filters card" id="filters" aria-labelledby="h-f"><h2 id="h-f">Filter de platforms</h2>
 <div class="fgrid">${sel('f-budget', 'Budget per maand', BUDGET)}${sel('f-prod', 'Aantal producten', PROD)}</div>
 <fieldset class="q"><legend>Moet kunnen</legend><div class="fchecks">${FILTERS.map((k) => `<label class="check"><input type="checkbox" name="need" value="${k}"><span>${esc(PUNTEN[k].lang)}</span></label>`).join('')}</div></fieldset>
-<p class="sub">"Deels" telt mee als het kan, bijvoorbeeld met een extensie. Niet vermeld levert geen punt op, net als nee.</p>
+<p class="sub">"Deels" telt mee als het kan, bijvoorbeeld met een extensie. Niet vermeld levert geen punt op, net als nee. Noemt een aanbieder geen maximum aantal producten, dan filteren we zonder grens.</p>
 <p class="count" id="f-count" aria-live="polite">${IDS.length} van ${IDS.length} platforms</p>
 <p id="f-ids" class="alert" hidden></p>
 </form>

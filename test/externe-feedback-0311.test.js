@@ -4,6 +4,7 @@
 //    De keuzehulp (match.js) gebruikt de checklist niet; geen maximum aantal producten vermeld = geen grens (MAXPROD).
 // 3) L7: lastmod, zichtbare bijgewerkt-regel en (waar de template het heeft) dateModified op 2026-11-03.
 import test from 'node:test';
+import { SP_PADEN } from '../src/l7-sc-punten-0411.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -30,7 +31,7 @@ test('partner-FAQ en Niet vermeld: actueel en overal gelijk', () => {
 
 test('L7 3-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of EF_PADEN) {
+  for (const p of [...EF_PADEN].filter((x) => !SP_PADEN.has(x))) { // SP_PADEN: later (4-11) bijgewerkt
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${EF_UPD}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
     assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${EF_UPD}">`, 'i'), p);
