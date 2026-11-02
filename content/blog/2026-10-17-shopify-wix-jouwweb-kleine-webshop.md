@@ -3,7 +3,7 @@ title: Wix vs Shopify (of JouwWeb): welke past bij je kleine webshop?
 seo_title: Wix vs Shopify voor een kleine online winkel (2026)
 description: Wix vs Shopify voor een kleine online winkel: Shopify Basic € 28 (€ 21 bij jaarbetaling), Wix Core € 25 per maand (jaarbetaling). Plus JouwWeb.
 date: 2026-10-17
-updated: 2026-11-02
+updated: 2026-11-03
 checked: 2026-10-26
 tools: /shop-match/, /vergelijken/, /webshop-beginnen-kosten/
 sources:

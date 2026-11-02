@@ -7,6 +7,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { EF_PADEN } from '../src/l7-externe-feedback-0311.mjs'; // op 3-11 opnieuw bijgewerkt: test/externe-feedback-0311.test.js
+import { IDEAL_PADEN } from '../src/l7-ideal-blog-0311.mjs'; // op 3-11 opnieuw bijgewerkt (iDEAL-blog): test/ideal-blog-0311.test.js
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
@@ -80,7 +81,7 @@ test('SC F2: kostennoot, stempel en rekensommen', () => {
 
 test('L7 2-11: pagina\'s met deze bodywijzigingen op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of ['/', '/platformen/jouwweb/', '/platformen/lightspeed/', '/vergelijken/', '/vergelijken/shopify-vs-lightspeed/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/b2b-webshop-beginnen/', '/blog/herroepingsknop-webshop/'].filter((x) => !EF_PADEN.has(x))) {
+  for (const p of ['/', '/platformen/jouwweb/', '/platformen/lightspeed/', '/vergelijken/', '/vergelijken/shopify-vs-lightspeed/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/b2b-webshop-beginnen/', '/blog/herroepingsknop-webshop/'].filter((x) => !EF_PADEN.has(x) && !IDEAL_PADEN.has(x))) {
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
   }
@@ -88,7 +89,7 @@ test('L7 2-11: pagina\'s met deze bodywijzigingen op de pushdatum', () => {
 
 test('L7 2-11 (Shopify): pagina\'s met de Shopify-wijziging op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of ['/platformen/shopify/', '/vergelijken/shopify-vs-woocommerce/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/b2b-webshop-beginnen/'].filter((x) => !EF_PADEN.has(x))) {
+  for (const p of ['/platformen/shopify/', '/vergelijken/shopify-vs-woocommerce/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/b2b-webshop-beginnen/'].filter((x) => !EF_PADEN.has(x) && !IDEAL_PADEN.has(x))) {
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
   }

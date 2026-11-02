@@ -3,7 +3,7 @@ title: B2B-webshop maken: welk platform past bij zakelijke klanten?
 seo_title: B2B-webshop maken of starten: welk platform? (2026)
 description: B2B-webshop maken? JouwWeb vanaf € 10, Shopify vanaf € 28, Lightspeed vanaf € 298 per maand (bij jaarbetaling € 21 en € 259). Zo kies je.
 date: 2026-10-17
-updated: 2026-11-02
+updated: 2026-11-03
 checked: 2026-10-17
 tools: /shop-match/, /vergelijken/, /platformen/
 sources:
