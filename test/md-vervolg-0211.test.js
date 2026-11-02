@@ -12,7 +12,8 @@ import { execSync } from 'node:child_process';
 const read = (p) => readFileSync(p, 'utf8');
 const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? files(p) : /\.(html|js|xml)$/.test(p) ? [p] : []; });
 const DATUM = '2026-11-02';
-const PAGINAS = ['/shop-match/', '/platformen/', '/platformen/mijndomein/', '/gidsen/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/gratis-website-maken/', '/website-maken-zzp/'];
+// /shop-match/ en hub /gidsen/ zijn op 5-11 opnieuw bijgewerkt (voorbeelden en vragen); die datum test test/shop-match-0311.test.js.
+const PAGINAS = ['/platformen/', '/platformen/mijndomein/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/gratis-website-maken/', '/website-maken-zzp/'];
 const MET_DATEMODIFIED = ['/platformen/mijndomein/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/gratis-website-maken/', '/website-maken-zzp/'];
 
 test('bron Mijndomein actievoorwaarden nergens meer', () => {

@@ -30,7 +30,8 @@ test('uitslag toont de nieuwe maandprijs (Mijndomein Plus € 29,50)', () => {
 
 test('L7 2-11: pagina\'s met gewijzigde kaartprijzen op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
-  const PAGINAS = ['/', '/shop-match/', '/platformen/', '/vergelijken/', '/vergelijken/shopify-vs-lightspeed/', '/vergelijken/shopify-vs-woocommerce/', ...Object.keys(PLATFORMS).map((id) => `/platformen/${PLATFORMS[id].slug}/`)];
+  // /shop-match/ is op 5-11 opnieuw bijgewerkt (voorbeelden en vragen); die datum test test/shop-match-0311.test.js.
+  const PAGINAS = ['/', '/platformen/', '/vergelijken/', '/vergelijken/shopify-vs-lightspeed/', '/vergelijken/shopify-vs-woocommerce/', ...Object.keys(PLATFORMS).map((id) => `/platformen/${PLATFORMS[id].slug}/`)];
   for (const p of PAGINAS.filter((x) => !EF_PADEN.has(x))) {
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
