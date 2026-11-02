@@ -49,3 +49,16 @@ test('shop-match: FAQ \'er valt geen platform af\' bij meer dan 1.000 producten 
   assert.equal(items.length, 12);
   for (const li of items) assert.doesNotMatch(li, /€/, 'geen prijs zonder betaalbasis in een voorbeeldregel');
 });
+
+test('shop-match: \'Zo werkt de match\' beschrijft de echte productregel (L10) en JouwWeb-prijs in de uitslag met betaalbasis', () => {
+  const h = read('dist/shop-match/index.html');
+  const m = h.match(/id="methode"[\s\S]*?<\/section>/)[0];
+  assert.doesNotMatch(m, /vallen af/);
+  assert.match(m, /Kan zelfs het grootste pakket van een platform minder producten aan dan je opgeeft, dan telt dat zwaar tegen\. Met de huidige pakketten gebeurt dat niet\./);
+  const src = read('src/lib/match.js');
+  assert.match(src, /if \(n > MAXPROD\[id\]\) s -= 100;/, 'regel in score() ongewijzigd');
+  for (const max of Object.values(MAX_PRODUCTEN)) assert.ok((max ?? Infinity) >= 5000, "'gebeurt dat niet' klopt met de data");
+  const q = read('dist/js/quiz.js');
+  assert.match(q, /const PRIJS_LABEL = \{ jouwweb: 'bij jaarbetaling, excl\. btw' \};/);
+  assert.match(q, /\$\{fmt\(r\.prijs\)\} p\/m`\) \+ \(PRIJS_LABEL\[r\.id\] \? ` \$\{PRIJS_LABEL\[r\.id\]\}` : ''\)/);
+});

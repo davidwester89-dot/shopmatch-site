@@ -30,7 +30,10 @@ function antwoorden() {
   for (const v of VRAGEN) if (fd.get(v.id)) a[v.id] = fd.get(v.id);
   return a;
 }
-const prijsTekst = (r, a) => (r.id === 'woocommerce' ? '€ 0 + hosting' : `${fmt(r.prijs)} p/m`) + (a.doel === 'site' ? '' : '');
+// Betaalbasis bij de prijs als de aanbieder alleen prijzen bij jaarbetaling toont (prijsregel 30-10, MM 02-11 12:55).
+// jouwweb.nl/tarieven: "Prijzen zijn exclusief BTW en gelden bij jaarlijkse betaling". Alleen tekst; score, volgorde en bedragen ongewijzigd.
+const PRIJS_LABEL = { jouwweb: 'bij jaarbetaling, excl. btw' };
+const prijsTekst = (r, a) => (r.id === 'woocommerce' ? '€ 0 + hosting' : `${fmt(r.prijs)} p/m`) + (PRIJS_LABEL[r.id] ? ` ${PRIJS_LABEL[r.id]}` : '') + (a.doel === 'site' ? '' : '');
 
 function toon(a, scroll) {
   const top = score(a).slice(0, 3);
