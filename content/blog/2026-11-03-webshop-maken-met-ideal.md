@@ -3,7 +3,7 @@ title: Webshop maken met iDEAL: welk platform kies je en wat kost een betaling?
 seo_title: Webshop maken met iDEAL: platforms en kosten per betaling
 description: Welke webshopplatforms hebben iDEAL ingebouwd en wat kost een betaling? Shopify, Wix, JouwWeb, WooCommerce en meer naast elkaar, plus wat Wero verandert.
 date: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-05
 checked: 2026-11-02
 tools: /shop-match/, /vergelijken/, /webshop-beginnen-kosten/
 sources:

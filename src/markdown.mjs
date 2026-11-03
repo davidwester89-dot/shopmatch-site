@@ -86,7 +86,8 @@ export function parsePost(filename, src) {
   if (!fm) throw new Error(`Bestandsnaam moet JJJJ-MM-DD-slug.md zijn: ${filename}`);
   const { meta, body } = parseFrontmatter(src);
   for (const k of ['title', 'description', 'date', 'updated']) if (!meta[k]) throw new Error(`${filename}: '${k}' ontbreekt in de frontmatter`);
-  const sources = (meta.sources || []).map((s) => { const [t, u] = s.split(/\s+\|\s+/); return { title: t, url: u }; });
+  // Splits op de LAATSTE ' | ': brontitels mogen zelf ' | ' bevatten (bv. 'iDEAL | Wero'); de URL staat altijd achteraan.
+  const sources = (meta.sources || []).map((s) => { const m = String(s).match(/^(.*\S)\s+\|\s+(\S+)$/); return m ? { title: m[1], url: m[2] } : { title: s, url: undefined }; });
   const tools = String(meta.tools || '').split(',').map((s) => s.trim()).filter(Boolean);
   return {
     file: filename, slug: fm[2], path: `/blog/${fm[2]}/`,

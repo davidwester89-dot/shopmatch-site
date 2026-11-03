@@ -21,7 +21,11 @@ test('SC-punten 01-11: kolomkop, stempels, Lightspeed-titel, filterregel', () =>
 
 test('L7 4-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of [...SP_PADEN, '/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/']) {
+  // Hub /blog/ = nieuwste kind (regel D): 4-11 of later (5-11 schuift de iDEAL-post naar 2026-11-05).
+  const blog = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
+  assert.ok(blog && blog >= SP_UPD, `/blog/ lastmod ${blog}`);
+  assert.match(read('dist/blog/index.html'), new RegExp(`bijgewerkt (op )?<time datetime="${blog}">`, 'i'), '/blog/');
+  for (const p of [...SP_PADEN, '/blog/shopify-wix-jouwweb-kleine-webshop/']) {
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SP_UPD}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
     assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${SP_UPD}">`, 'i'), p);

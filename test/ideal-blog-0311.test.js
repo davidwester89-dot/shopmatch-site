@@ -47,5 +47,6 @@ test('L7 3-11 (iDEAL-blog): lastmod, dateModified en zichtbare bijgewerkt-regel 
     assert.equal(zicht, lm, `${p} zichtbaar ${zicht} = lastmod ${lm}`);
     if (p !== '/blog/') assert.equal(dm, lm, `${p} dateModified ${dm} = lastmod ${lm}`);
   }
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/blog\/webshop-maken-met-ideal\/<\/loc><lastmod>2026-11-03<\/lastmod>/);
+  // 5-11: bronlinks Wero/Shopify/Wix hersteld (bodywijziging) → post op de pushdatum 2026-11-05 (test/ideal-bronlinks-0511.test.js).
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/blog\/webshop-maken-met-ideal\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
 });
