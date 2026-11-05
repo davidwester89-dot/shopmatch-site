@@ -11,7 +11,7 @@ import { execSync } from 'node:child_process';
 const read = (p) => readFileSync(p, 'utf8');
 const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? files(p) : p.endsWith('.html') ? [p] : []; });
 const DATUM = '2026-11-01';
-// /shop-match/, /platformen/, /platformen/mijndomein/, /gidsen/, /webshop-beginnen-kosten/ en /gratis-website-maken/ zijn op 2-11 opnieuw bijgewerkt (Mijndomein-vervolg); die datum test test/md-vervolg-0211.test.js.
+// /shop-match/, /platformen/, /platformen/mijndomein/, /gidsen/ en /gratis-website-maken/ zijn op 2-11 opnieuw bijgewerkt (Mijndomein-vervolg); die datum test test/md-vervolg-0211.test.js. /webshop-beginnen-kosten/ opnieuw 5-11: test/interne-links-0511.test.js.
 // '/', '/platformen/jouwweb/' en '/vergelijken/' zijn op 2-11 opnieuw bijgewerkt (maandprijzen); die datum test test/maandprijs-0211.test.js.
 // '/blog/' en '/blog/shopify-wix-jouwweb-kleine-webshop/' zijn op 2-11 opnieuw bijgewerkt (JouwWeb-actie t/m 30-11 terug); die datum test test/jouwweb-lightspeed-0211.test.js.
 const PAGINAS = [];
