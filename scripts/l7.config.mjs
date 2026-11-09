@@ -3,7 +3,7 @@ import { execSync, execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 export const CFG = {
   build: (dir, env) => { execSync('node build.mjs', { cwd: dir, env, stdio: 'ignore' }); return join(dir, 'dist'); },
-  hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }],
+  hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }], // sinds 13-11 geen lastmod-plicht: een kinddatum tilt de hub niet (l7check)
   // Alleen ONTBREKENDE velden die de template van deze pagina niet heeft. Een aanwezig veld moet altijd kloppen.
   exempt: {}, // /shop-match/ toont 'gecontroleerd 17 oktober 2026': dus een zichtbare bijgewerkt-regel nodig (SC 30-10, besluit 3)
   // Automatisch gegenereerde teaser 'Meer op de blog' onder elke post (src/blog.mjs) telt niet als bodywijziging van die post (L7: geen datum bij alleen een nieuwe teaser). Vraagt SC-OK.

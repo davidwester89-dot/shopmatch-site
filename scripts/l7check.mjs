@@ -12,11 +12,11 @@
 //      Header/nav/footer buiten <main> tellen niet (SC-regel: footer en nav zijn geen bodywijziging).
 //   3. Client-side uitslagen: verandert een lokaal script dat de pagina laadt (transitief via import), zonder commentaar en
 //      zonder logo-regels, dan telt de pagina ook als gewijzigd (keuzehulp/match-data). Consent/GA-scripts tellen niet.
-//   4. Hubs: een pagina die naar een gewijzigde pagina linkt en daarvan een 'ouder' is (pad-prefix, bv. /blog/ → /blog/x/) of in
-//      cfg.hubs staat, moet de nieuwste datum van zijn kinderen dragen (bij een gewijzigd kind dus de pushdatum).
+//   4. Hubs liften niet mee (lastmod-hygiëne 13-11-2026). Een kind wijzigen geeft de hub geen nieuwe lastmod, zichtbare
+//      bijgewerkt-regel of dateModified. cfg.hubs blijft in de siteconfig staan maar dwingt geen datum meer af.
 //   4b. Is alleen een datumveld verschoven (lastmod/dateModified/zichtbaar), dan moeten alle velden mee naar de pushdatum.
 //   4c. Op elke pagina: geen datum na PUSH_DATE, en datePublished van een bestaande pagina schuift niet naar later (SC-voorstel 30-10).
-//   5. Voor elke gewijzigde pagina en hub: dateModified (alle waarden), article:modified_time (als aanwezig), de eerste zichtbare
+//   5. Voor elke gewijzigde pagina: dateModified (alle waarden), article:modified_time (als aanwezig), de eerste zichtbare
 //      'bijgewerkt'/'updated'-regel en de sitemap-lastmod moeten gelijk zijn aan de verwachte datum. Een ontbrekend veld is fout,
 //      tenzij het in cfg.exempt staat (alleen ontbrekende velden; een aanwezig veld moet altijd kloppen). dateModified is alleen
 //      verplicht als de JSON-LD van de pagina datePublished heeft (template met datums). L7_STRICT=1: alles verplicht, geen
@@ -293,16 +293,8 @@ export function runL7(root, cfg) {
       if (co && deps.some((d) => co.covers.test(d) && jsChanged(d)) && co.run(bOut) !== co.run(tOut)) cj = [...cj, 'uitslag ' + co.covers.source];
       if (cj.length) changed.set(path, 'client-side data: ' + cj.join(', '));
     }
-    // hubs
-    const hubs = new Map(); // hub -> [kinderen]
-    const linksOf = (html) => new Set([...mainHtml(html).matchAll(/<a\b[^>]*?\shref="([^"#?]+)/gi)].map((m) => { try { return new URL(m[1], 'https://x.nl/').pathname; } catch { return m[1]; } }));
-    for (const [path, { html }] of info) {
-      const cfgHub = (cfg.hubs || []).find((h) => h.hub === path);
-      const links = linksOf(html);
-      if (!cfgHub && (cfg.notHub || []).includes(path)) continue; // bv. taalhome /en/: geen hub, maar de homepage
-      const kids = [...links].filter((l) => l !== path && info.has(l) && (cfgHub ? cfgHub.children.test(l) : (path !== '/' && l.startsWith(path))));
-      if (kids.some((k) => changed.has(k))) hubs.set(path, kids);
-    }
+    // Hubs liften niet mee: geen datumplicht omdat een kind gewijzigd is (lastmod-hygiëne 13-11-2026).
+    const hubs = new Map();
     const failures = [];
     const report = [];
     const check = (path, expected, reden) => {
@@ -336,49 +328,17 @@ export function runL7(root, cfg) {
         if (pub(old) && pub(html) && pub(html) > pub(old)) failures.push(`${path}: datePublished naar later verschoven ${pub(old)} → ${pub(html)}`); // terugzetten naar de echte publicatiedag mag
       }
     }
-    for (const [hub, kids] of hubs) {
-      if (changed.has(hub)) continue; // al gecontroleerd op de pushdatum (= max, want een kind is gewijzigd)
-      const dates = kids.map((k) => (changed.has(k) ? pushDate : tMap.get(k) || dateFields(info.get(k).html).visible)).filter(Boolean).sort();
-      check(hub, dates.at(-1), `hub van ${kids.filter((k) => changed.has(k)).join(', ')}`);
-    }
-    for (const [hub, kids] of hubs) if (changed.has(hub)) {
-      const max = kids.map((k) => (changed.has(k) ? pushDate : tMap.get(k))).filter(Boolean).sort().at(-1);
-      if (max && max > pushDate) failures.push(`${hub}: hub, maar kind heeft nieuwere datum ${max}`);
-    }
     return { pushDate, base, tip: tipRef, how, changed: [...changed], hubs: [...hubs.keys()], failures, report };
   } finally {
     rmSync(tmp, { recursive: true, force: true });
   }
 }
 
-// --- A2. Statische hub-audit op één build (ook zonder diff): een hub draagt de nieuwste datum van zijn kinderen -------------
-// Hub = pagina die naar kinderen onder zijn eigen pad linkt (/blog/ → /blog/x/), of cfg.hubs. Fout als de zichtbare regel of
-// lastmod van de hub ouder is dan de nieuwste lastmod/zichtbare datum van een kind waarnaar hij linkt.
-export function hubAudit(outDir, cfg = {}) {
-  const ign = cfg.ignorePages || /^(404\.html|google[0-9a-f]+\.html)$/;
-  const map = readSitemap(outDir, cfg.sitemap);
-  const info = new Map();
-  for (const f of walk(outDir).filter((x) => x.endsWith('.html') && !ign.test(x))) {
-    const html = readFileSync(join(outDir, f), 'utf8');
-    if (pageMeta(html).noindex || pageMeta(html).redirect) continue;
-    info.set(fileToPath(f), html);
-  }
-  const datum = (p) => [map.get(p), dateFields(info.get(p)).visible].filter(Boolean).sort().at(-1);
-  const out = [];
-  for (const [path, html] of info) {
-    const cfgHub = (cfg.hubs || []).find((h) => h.hub === path);
-    const links = new Set([...mainHtml(html).matchAll(/<a\b[^>]*?\shref="([^"#?]+)/gi)].map((m) => { try { return new URL(m[1], 'https://x.nl/').pathname; } catch { return m[1]; } }));
-    if (!cfgHub && (cfg.notHub || []).includes(path)) continue;
-    const kids = [...links].filter((l) => l !== path && info.has(l) && (cfgHub ? cfgHub.children.test(l) : (path !== '/' && l.startsWith(path))));
-    if (!kids.length) continue;
-    const max = kids.map(datum).filter(Boolean).sort().at(-1);
-    const d = dateFields(html), lm = map.get(path);
-    const fout = [];
-    if (d.visible && d.visible < max) fout.push(`zichtbaar ${d.visible}`);
-    if (lm && lm < max) fout.push(`lastmod ${lm}`);
-    if (fout.length) out.push(`${path}: hub ouder dan nieuwste kind ${max} (${kids.filter((k) => datum(k) === max).join(', ')}): ${fout.join(', ')}`);
-  }
-  return out;
+// --- A2. Hub-audit ---------------------------------------------------------------------------------------------------------
+// Sinds lastmod-hygiëne 13-11-2026 leeg: een hub mag ouder zijn dan een kind. lastmod, de zichtbare bijgewerkt-regel en
+// dateModified wijzigen alleen als de body van die pagina zelf wijzigt. Handtekening blijft, zodat aanroepers niet breken.
+export function hubAudit(_outDir, _cfg = {}) {
+  return [];
 }
 
 // --- B. Naamgrep over ALLE geserveerde bestanden ---------------------------------------------------------------------------
