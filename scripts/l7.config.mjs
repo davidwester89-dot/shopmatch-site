@@ -4,6 +4,8 @@ import { join } from 'node:path';
 export const CFG = {
   build: (dir, env) => { execSync('node build.mjs', { cwd: dir, env, stdio: 'ignore' }); return join(dir, 'dist'); },
   hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }],
+  // SEO + SC: /platformen/ erft de datum van een kind niet. Lastmod blijft 2026-11-04 (gelijk aan main), ook als /platformen/shopify/ nieuwer is.
+  notHub: ['/platformen/'],
   // Alleen ONTBREKENDE velden die de template van deze pagina niet heeft. Een aanwezig veld moet altijd kloppen.
   exempt: {}, // /shop-match/ toont 'gecontroleerd 17 oktober 2026': dus een zichtbare bijgewerkt-regel nodig (SC 30-10, besluit 3)
   // Automatisch gegenereerde teaser 'Meer op de blog' onder elke post (src/blog.mjs) telt niet als bodywijziging van die post (L7: geen datum bij alleen een nieuwe teaser). Vraagt SC-OK.
