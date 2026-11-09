@@ -75,7 +75,7 @@ export const home = {
   body: `<section class="hero sec"><div class="hero-txt">
 <p class="h1-brand">Shop<b>Match</b>.nl</p>
 <h1 class="tagline">Webshop kiezen? Vergelijk eerst.</h1>
-<p class="lead">Welk webshopplatform past bij jouw bedrijf? Zeven platforms naast elkaar op prijs, iDEAL, kassa, B2B en contract. Beantwoord 5 vragen en zie je top 3.</p>
+<p class="lead">Welk webshopplatform past bij jouw bedrijf? Zeven platforms naast elkaar op prijs, iDEAL, kassa, B2B en contract. Beantwoord 5 vragen en zie je top 3, of <a href="/platformen/">alle webshopplatformen vergelijken</a>.</p>
 <div class="actions"><a class="btn" href="/shop-match/" data-cta="home_hero">Start de match</a><a class="btn ghost" href="/vergelijken/">Vergelijk alle 7 platforms</a></div>
 </div>
 <div class="hero-side">
