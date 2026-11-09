@@ -27,12 +27,15 @@ test('Shopify-verdieping 12-11: Plus, rekensom, POS-link, title ongewijzigd', ()
   assert.doesNotMatch(v, /rel="sponsored/);
 });
 
-test('L7 12-11: /platformen/shopify/ en hub /platformen/ op de pushdatum', () => {
+test('L7 12-11: /platformen/shopify/ op de pushdatum; hub /platformen/ niet (body ongewijzigd)', () => {
   const sm = read('dist/sitemap.xml');
   for (const p of SD_PADEN) {
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SD_UPD}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${SD_UPD}">`, 'i'), p);
   }
+  assert.ok(!SD_PADEN.has('/platformen/'));
+  assert.ok(sm.includes('<loc>https://shopmatch.nl/platformen/</loc><lastmod>2026-11-04</lastmod>'));
+  assert.match(read('dist/platformen/index.html'), /bijgewerkt (?:op )?<time datetime="2026-11-04">/i);
   assert.match(read('dist/platformen/shopify/index.html'), new RegExp(`"dateModified": ?"${SD_UPD}"`));
 });
 
