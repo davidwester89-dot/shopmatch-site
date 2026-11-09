@@ -35,3 +35,16 @@ test('L7 12-11: /platformen/shopify/ en hub /platformen/ op de pushdatum', () =>
   }
   assert.match(read('dist/platformen/shopify/index.html'), new RegExp(`"dateModified": ?"${SD_UPD}"`));
 });
+
+// SEO-B1 45b6c11: de gelinkte blog spreekt de Shopify-pagina niet meer tegen (iDEAL € 0,29); L7 12-11 op die blog en hub /blog/.
+test('SEO-B1 12-11: iDEAL € 0,29 in blog shopify-wix-jouwweb, blog en /blog/ op SD_UPD', () => {
+  const b = tekst('/blog/shopify-wix-jouwweb-kleine-webshop/');
+  assert.ok(b.includes('rekent Shopify volgens de prijspagina € 0,29 per betaling bij Basic, Grow en Advanced'));
+  assert.ok(!b.includes('een vast bedrag noemt Shopify niet'));
+  const sm = read('dist/sitemap.xml');
+  for (const p of ['/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/']) {
+    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SD_UPD}</lastmod>`), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${SD_UPD}">`, 'i'), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${SD_UPD}"`), p);
+  }
+});
