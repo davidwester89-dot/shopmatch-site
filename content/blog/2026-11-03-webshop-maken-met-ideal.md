@@ -3,7 +3,7 @@ title: Webshop maken met iDEAL: welk platform kies je en wat kost een betaling?
 seo_title: Webshop maken met iDEAL: platforms en kosten per betaling
 description: Welke webshopplatforms hebben iDEAL ingebouwd en wat kost een betaling? Shopify, Wix, JouwWeb, WooCommerce en meer naast elkaar, plus wat Wero verandert.
 date: 2026-11-03
-updated: 2026-11-05
+updated: 2026-11-13
 checked: 2026-11-02
 tools: /shop-match/, /vergelijken/, /webshop-beginnen-kosten/
 sources:
@@ -33,7 +33,7 @@ Verkoop je aan Nederlandse klanten, dan wil je iDEAL in je checkout. Goed nieuws
 >
 > Per betaling betaal je meestal een vast bedrag: € 0,29 bij Shopify Payments, Stripe en WooPayments, € 0,32 bij Mollie. Wix Payments rekent een percentage plus een vast bedrag.
 >
-> iDEAL gaat over naar Wero. Volgens iDEAL hoef je daar zelf niets voor aan te passen.
+> iDEAL gaat over naar Wero. Je hoeft daar zelf niets voor aan te passen.
 
 ## Waarom iDEAL in je webshop?
 
@@ -41,7 +41,7 @@ Volgens iDEAL zelf is iDEAL "de Nederlandse betaalstandaard met een bereik van b
 
 Je klant betaalt direct vanaf zijn eigen bankrekening, in de app of de internetbankieromgeving van zijn bank. Jij krijgt direct een betaalbevestiging. Een iDEAL-betaling kan de klant niet terugdraaien. Wil hij van de koop af, dan regelt hij dat met jou, via de regels voor bedenktijd. Lees daarover ook [de herroepingsknop voor je webshop](/blog/herroepingsknop-webshop/).
 
-Om iDEAL aan te bieden sluit je volgens iDEAL een overeenkomst met een van de deelnemende contractpartijen. Op een webshopplatform doe je dat via de betaaldienst van het platform zelf of via een gekoppelde betaalprovider, zoals Mollie of Stripe.
+Om iDEAL aan te bieden sluit je een overeenkomst met een van de deelnemende contractpartijen. Op een webshopplatform doe je dat via de betaaldienst van het platform zelf of via een gekoppelde betaalprovider, zoals Mollie of Stripe.
 
 ## Per platform: ingebouwd of via een betaalprovider
 
@@ -59,7 +59,7 @@ De bedragen van Mollie en Stripe zijn hun eigen tarieven voor iDEAL in Nederland
 
 - **Shopify.** Na het instellen van Shopify Payments wordt iDEAL automatisch aan je winkel gekoppeld. Je moet dan wel de identiteitsverificatie hebben afgerond en een wettelijke kennisgeving met je bedrijfsnaam, adres en contactgegevens op je site hebben. iDEAL verschijnt alleen voor klanten met een adres in Nederland die in euro afrekenen. Gebruik je een andere betaalprovider dan Shopify Payments, dan rekent Shopify extra transactiekosten: 2% op Basic, 1% op Grow, 0,6% op Advanced en 0,2% op Plus.
 - **Wix.** Je zet iDEAL aan in je dashboard, bij Wix Payments. Je account moet geverifieerd zijn om uitbetalingen te ontvangen.
-- **JouwWeb.** Volgens JouwWeb is Mollie in Nederland de populairste betaalprovider om te koppelen. Daarvoor heb je volgens JouwWeb een KvK-nummer nodig. Zonder KvK zijn Stripe en/of PayPal volgens JouwWeb een alternatief.
+- **JouwWeb.** Mollie is bij JouwWeb in Nederland de populairste betaalprovider om te koppelen. Daarvoor heb je een KvK-nummer nodig. Zonder KvK zijn Stripe en/of PayPal een alternatief.
 - **WooCommerce.** De plug-in zelf is gratis; hosting en de betaalplug-in regel je zelf. WooPayments rekent in Nederland 21% btw over zijn kosten, behalve als je een geldig btw-nummer opgeeft.
 - **Lightspeed eCom.** Volgens Lightspeed is iDEAL "een goede optie voor kleinere eCom shops". Heeft je shop meer dan 300 producten en verwacht je veel omzet, dan kies je volgens Lightspeed naast iDEAL ook een betaalprovider.
 - **Hostinger.** Eerst zet je Stripe aan in je Hostinger Ecommerce Store Manager. Daarna schakel je iDEAL in bij je Stripe-account.
@@ -78,11 +78,11 @@ De meeste aanbieders rekenen een vast bedrag per iDEAL-betaling, hoe hoog de bes
 
 Dit zijn alleen de kosten per betaling. Het abonnement van je platform komt erbij. Wat dat per platform kost, lees je in [wat een webshop beginnen kost](/webshop-beginnen-kosten/).
 
-Let ook op bij terugbetalen: betaal je een iDEAL-bestelling terug bij Shopify, dan krijg je volgens Shopify de administratiekosten niet terug.
+Let ook op bij terugbetalen: betaal je een iDEAL-bestelling terug bij Shopify, dan krijg je de administratiekosten niet terug.
 
 ## iDEAL wordt Wero: wat moet je doen?
 
-Volgens iDEAL is de overgang van iDEAL naar Wero gestart. Wero is het nieuwe Europese betaalsysteem, gebouwd op de basis van iDEAL. Het is al live in België, Duitsland en Frankrijk; Nederland volgt binnenkort.
+De overgang van iDEAL naar Wero is gestart. Wero is het nieuwe Europese betaalsysteem, gebouwd op de basis van iDEAL. Het is al live in België, Duitsland en Frankrijk; Nederland volgt binnenkort.
 
 Wat je merkt als webshop, schrijft iDEAL zo: "Je ziet straks een nieuw logo: iDEAL | Wero. Verder blijft alles zoals het is – je checkout blijft werken, je PSP blijft hetzelfde en jij hoeft niks aan te passen." Je betaalprovider (PSP) zorgt voor de updates en het nieuwe logo, en houdt je op de hoogte.
 

@@ -36,10 +36,10 @@ test('iDEAL-blog: bronnenlijst en JSON-LD citation alleen absolute https-URL\'s,
 test('L7 5-11 (iDEAL-bronlinks): post op 2026-11-05; hub /blog/ op die datum of later (regel D)', () => {
   const sm = read('dist/sitemap.xml');
   const h = read('dist/blog/webshop-maken-met-ideal/index.html');
-  assert.ok(sm.includes('<loc>https://shopmatch.nl/blog/webshop-maken-met-ideal/</loc><lastmod>2026-11-05</lastmod>'));
+  assert.ok(sm.includes('<loc>https://shopmatch.nl/blog/webshop-maken-met-ideal/</loc><lastmod>2026-11-13</lastmod>'));
   const blogLm = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
   assert.ok(blogLm && blogLm >= UPD, `/blog/ lastmod ${blogLm}`);
-  assert.match(h, /"dateModified": ?"2026-11-05"/);
-  assert.match(h, /bijgewerkt (?:op )?<time datetime="2026-11-05">/i);
+  assert.match(h, /"dateModified": ?"2026-11-13"/);
+  assert.match(h, /bijgewerkt (?:op )?<time datetime="2026-11-13">/i);
   assert.match(read('dist/blog/index.html'), new RegExp(`bijgewerkt (?:op )?<time datetime="${blogLm}">`, 'i'));
 });
