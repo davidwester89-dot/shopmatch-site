@@ -14,6 +14,8 @@ export const PARTNERLINKS = {
   wix: WIX_ECOM,
   // Hostinger: Daisycon campagne 16780, media ShopMatch 438840 goedgekeurd 19-10-2026; NL-deeplink 20-10-2026: landt op hostinger.com/nl/website-maken.
   hostinger: 'https://jf79.net/c/?si=16780&li=1722914&wi=438840&ws=shopmatch&dl=nl%2Fwebsite-maken',
+  // WooCommerce: nooit hier zetten. Automattic Affiliate dekt alleen Marketplace-extensies, niet de gratis plug-in/core
+  // (PM 10-11-2026). knop('woocommerce') is een gewone bronlink, geen CTA/sponsored.
 };
 
 /** Alle goedgekeurde Wix-URL's (voor tests en live-checks). */
@@ -48,8 +50,13 @@ export function uitgaand(id, arg) {
   return pl ? { href: pl, rel: 'sponsored nofollow noopener', partner: true, naam: p.knopnaam || p.naam } : { href: p.url, rel: 'noopener', partner: false, naam: p.knopnaam || p.naam };
 }
 
-/** Knop naar de aanbieder. Partnerlink: rel sponsored nofollow noopener, geen zichtbaar label (uitleg in de FAQ). */
+/** Knop naar de aanbieder. Partnerlink: rel sponsored nofollow noopener, geen zichtbaar label (uitleg in de FAQ).
+ * WooCommerce: geen betaalde route voor de platformkeuze (PM 10-11). Altijd een gewone bronlink, nooit btn/CTA/sponsored. */
 export function knop(id, pos, cls = 'btn', arg) {
+  if (id === 'woocommerce') {
+    const href = PLATFORMS.woocommerce.url; // https://woocommerce.com/nl/
+    return `<a href="${href}" rel="noopener">Bron: WooCommerce</a>`;
+  }
   const o = uitgaand(id, arg);
   return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${id}" data-pos="${pos}" data-cta="outbound" data-partner-slot="${id}">Naar ${o.naam}</a>`;
 }

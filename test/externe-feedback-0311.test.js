@@ -12,6 +12,7 @@ import { execSync } from 'node:child_process';
 import { EF_UPD, EF_PADEN } from '../src/l7-externe-feedback-0311.mjs';
 import { HL_PADEN } from '../src/l7-hublink-1311.mjs'; // home op 13-11; later 16-11 Hostinger-blog: test/hostinger-blog-1611.test.js
 import { HB_PADEN } from '../src/l7-hostinger-blog-1611.mjs';
+import { WN_PADEN } from '../src/l7-woocommerce-neutraal-1611.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 import { PLATFORMS } from '../src/lib/platforms.js';
 import { punt } from '../src/lib/checklist.js';
@@ -33,7 +34,7 @@ test('partner-FAQ en Niet vermeld: actueel en overal gelijk', () => {
 
 test('L7 3-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of [...EF_PADEN].filter((x) => !SP_PADEN.has(x) && !HL_PADEN.has(x) && !HB_PADEN.has(x))) { // SP_PADEN: later (4-11); HL/HB: home 13-11/16-11
+  for (const p of [...EF_PADEN].filter((x) => !SP_PADEN.has(x) && !HL_PADEN.has(x) && !HB_PADEN.has(x) && !WN_PADEN.has(x))) { // SP_PADEN: later (4-11); HL/HB: home 13-11/16-11
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${EF_UPD}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
     assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${EF_UPD}">`, 'i'), p);

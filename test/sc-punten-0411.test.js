@@ -5,7 +5,8 @@ import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { SP_UPD, SP_PADEN } from '../src/l7-sc-punten-0411.mjs';
 import { SD_PADEN } from '../src/l7-shopify-1211.mjs'; // op 12-11 opnieuw bijgewerkt (Shopify-verdieping): test/shopify-1211.test.js
-import { HB_PADEN } from '../src/l7-hostinger-blog-1611.mjs'; // /platformen/ en /vergelijken/ 16-11: test/hostinger-blog-1611.test.js
+import { HB_PADEN } from '../src/l7-hostinger-blog-1611.mjs';
+import { WN_PADEN } from '../src/l7-woocommerce-neutraal-1611.mjs'; // /platformen/ en /vergelijken/ 16-11: test/hostinger-blog-1611.test.js
 const read = (f) => readFileSync(f, 'utf8');
 const tekst = (p) => read(`dist${p}index.html`).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
 
@@ -27,7 +28,7 @@ test('L7 4-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   const blog = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
   assert.ok(blog && blog >= SP_UPD, `/blog/ lastmod ${blog}`);
   assert.match(read('dist/blog/index.html'), new RegExp(`bijgewerkt (op )?<time datetime="${blog}">`, 'i'), '/blog/');
-  for (const p of [...SP_PADEN].filter((x) => !SD_PADEN.has(x) && !HB_PADEN.has(x))) { // HB: /platformen/ en /vergelijken/ 16-11, eigen Hostinger-bodywijziging
+  for (const p of [...SP_PADEN].filter((x) => !SD_PADEN.has(x) && !HB_PADEN.has(x) && !WN_PADEN.has(x))) { // HB: /platformen/ en /vergelijken/ 16-11, eigen Hostinger-bodywijziging
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SP_UPD}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
     assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${SP_UPD}">`, 'i'), p);
