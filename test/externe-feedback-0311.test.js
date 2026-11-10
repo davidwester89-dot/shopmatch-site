@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs'; // Latere stijlrevisie, exacte datumtests blijven gelden.
 // Externe feedback nov (SM P2), push 2026-11-03:
 // 1) Homepage-FAQ: partnerlinks staan live (PARTNERLINKS: Shopify, Wix, Hostinger), dus geen 'in de toekomst' meer; namen uit PARTNERLINKS.
 // 2) 'Niet vermeld' overal dezelfde, ware uitleg: in de checklist levert het geen punt op, net als nee (checklist.js: punt(null) = 0).
@@ -32,9 +33,9 @@ test('partner-FAQ en Niet vermeld: actueel en overal gelijk', () => {
 test('L7 3-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   const sm = read('dist/sitemap.xml');
   for (const p of [...EF_PADEN].filter((x) => !SP_PADEN.has(x))) { // SP_PADEN: later (4-11) bijgewerkt
-    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${EF_UPD}</lastmod>`), p);
+    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${revisieDatum(p, EF_UPD)}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
-    assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${EF_UPD}">`, 'i'), p);
-    assert.doesNotMatch(h, new RegExp(`"dateModified": ?"(?!${EF_UPD})`), p);
+    assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, EF_UPD)}">`, 'i'), p);
+    assert.doesNotMatch(h, new RegExp(`"dateModified": ?"(?!${revisieDatum(p, EF_UPD)})`), p);
   }
 });

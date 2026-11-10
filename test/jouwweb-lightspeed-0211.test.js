@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs'; // Latere stijlrevisie, exacte datumtests blijven gelden.
 // Contentcommit 2-11-2026 (MM 01-11 11:25, alleen SC-OK):
 // 1) JouwWeb-actie terug met einddatum 30-11-2026 (L4), letterlijk van jouwweb.nl/prijzen (→ /tarieven, gerenderd 1-11-2026 NL-IP:
 //    "* ACTIE t/m 30 nov 2026 — Eerste 12 maanden 50%, daarna het standaardtarief."), altijd ná de standaardprijs (L1), op de pagina's waar f0275ad haar weghaalde.
@@ -86,15 +87,15 @@ test('SC F2: kostennoot, stempel en rekensommen', () => {
 test('L7 2-11: pagina\'s met deze bodywijzigingen op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
   for (const p of ['/', '/platformen/jouwweb/', '/platformen/lightspeed/', '/vergelijken/', '/vergelijken/shopify-vs-lightspeed/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/b2b-webshop-beginnen/', '/blog/herroepingsknop-webshop/'].filter((x) => !EF_PADEN.has(x) && !IDEAL_PADEN.has(x) && !LATER_0411.has(x) && !LINKS_PADEN.has(x))) {
-    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
+    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${revisieDatum(p, DATUM)}</lastmod>`), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, DATUM)}">`, 'i'), p);
   }
 });
 
 test('L7 2-11 (Shopify): pagina\'s met de Shopify-wijziging op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
   for (const p of ['/platformen/shopify/', '/vergelijken/shopify-vs-woocommerce/', '/beste-webshop-platform/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/b2b-webshop-beginnen/'].filter((x) => !EF_PADEN.has(x) && !IDEAL_PADEN.has(x) && !LATER_0411.has(x) && !LINKS_PADEN.has(x))) {
-    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
+    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${revisieDatum(p, DATUM)}</lastmod>`), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${revisieDatum(p, DATUM)}"`), p);
   }
 });

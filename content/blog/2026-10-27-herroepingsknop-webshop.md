@@ -3,7 +3,7 @@ title: Herroepingsknop verplicht: wat moet je webshop regelen?
 seo_title: Herroepingsknop webshop: verplicht sinds juni 2026
 description: De herroepingsknop is verplicht voor je webshop. Voor wie hij geldt, waar hij aan moet voldoen, de risico's en een checklist per platform.
 date: 2026-10-27
-updated: 2026-11-02
+updated: 2026-11-13
 checked: 2026-10-27
 tools: /shop-match/, /platformen/, /webshop-beginnen-kosten/
 sources:
@@ -28,7 +28,7 @@ Aan de bedenktijd zelf verandert weinig. Je klant mag nog steeds tot en met 14 d
 
 ## Voor wie geldt de regel?
 
-Volgens KVK geldt de herroepingsknop voor:
+De herroepingsknop geldt voor:
 
 - webshops die aan consumenten verkopen
 - verkopers van online diensten
@@ -50,11 +50,11 @@ Je mag zelf weten hoe de knop eruitziet. Hij moet wel aan deze eisen voldoen:
 6. **Een bevestigingspagina.** De knop leidt naar een online pagina waar de klant zijn gegevens invult en de koop definitief ongedaan maakt.
 7. **Direct een bevestiging.** Daarin staat welke koop ongedaan is gemaakt en wanneer: de datum en het tijdstip.
 
-Na die bevestiging heeft je klant volgens KVK 14 dagen om de bestelling terug te sturen.
+Na die bevestiging heeft je klant 14 dagen om de bestelling terug te sturen.
 
 ## Het modelformulier blijft
 
-De knop vervangt niets. Volgens Ondernemersplein moet je zowel de herroepingsknop als het modelformulier voor herroeping aanbieden. KVK zegt het zo: de knop is een extra, makkelijkere manier om de bedenktijd te gebruiken. Je klant kiest zelf hoe hij de koop ongedaan maakt.
+De knop vervangt niets. Je moet zowel de herroepingsknop als het modelformulier voor herroeping aanbieden. De knop is een extra, makkelijkere manier om de bedenktijd te gebruiken. Je klant kiest zelf hoe hij de koop ongedaan maakt.
 
 Vertel vóór de koop welke manieren er zijn, dus ook de knop. Je mag vragen waarom iemand van de koop af wil, maar het mag niet lijken alsof antwoorden verplicht is.
 
@@ -84,7 +84,7 @@ Of jouw platform een kant-en-klare knop heeft, verschilt en verandert. Wij noeme
 
 **Verkoop via social media:**
 
-- Volgens de ACM moet de knop er zijn op alle plekken waar je online verkoopt. Ons voorstel: zet een duidelijke link naar je herroepingspagina in je profiel en in je orderbevestiging.
+- De knop moet er zijn op alle plekken waar je online verkoopt. Ons voorstel: zet een duidelijke link naar je herroepingspagina in je profiel en in je orderbevestiging.
 
 **Voor iedereen:**
 

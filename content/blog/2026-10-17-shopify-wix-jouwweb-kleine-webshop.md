@@ -3,7 +3,7 @@ title: Wix vs Shopify (of JouwWeb): welke past bij je kleine webshop?
 seo_title: Wix vs Shopify vs JouwWeb voor een kleine online winkel
 description: Wix vs Shopify voor je kleine online winkel: Shopify Basic € 28 (€ 21 bij jaarbetaling), Wix Core € 25/mnd. JouwWeb-webshop vanaf € 10/mnd (excl. btw).
 date: 2026-10-17
-updated: 2026-11-06
+updated: 2026-11-13
 checked: 2026-10-26
 tools: /shop-match/, /vergelijken/, /webshop-beginnen-kosten/
 sources:
@@ -84,7 +84,7 @@ Wat er nog bij kan komen:
 
 - **Domeinnaam.** Het eerste jaar is gratis, daarna betaal je € 20 per jaar. Een extra domeinnaam kost ook € 20 per jaar.
 - **Mailbox.** Pro heeft 1 mailbox en Business 1 XL-mailbox. Een extra mailbox kost € 15 per jaar.
-- **Kosten per betaling.** JouwWeb rekent 0% verkoopcommissie, maar je betaalprovider rekent wel per betaling. JouwWeb koppelt automatische betalingen vooral via Mollie. Daar kost een iDEAL-betaling in Nederland € 0,32 (tarief van Mollie). Voor iDEAL via Mollie heb je een KvK-inschrijving en een zakelijke bankrekening nodig. Zonder KvK kun je volgens JouwWeb Stripe of PayPal gebruiken.
+- **Kosten per betaling.** JouwWeb rekent 0% verkoopcommissie, maar je betaalprovider rekent wel per betaling. JouwWeb koppelt automatische betalingen vooral via Mollie. Daar kost een iDEAL-betaling in Nederland € 0,32 (tarief van Mollie). Voor iDEAL via Mollie heb je een KvK-inschrijving en een zakelijke bankrekening nodig. Zonder KvK kun je Stripe of PayPal gebruiken.
 - **Contract.** Betaal je per jaar, dan verlengt je abonnement automatisch met een jaar, tenzij je minstens een maand voor de verlengdatum opzegt. Betaal je per maand, dan zeg je op met een opzegtermijn van een maand. Het maandtarief bij maandbetaling staat niet op de prijspagina.
 
 Een voorbeeld: met 30 iDEAL-bestellingen per maand betaal je bij Mollie € 9,60 per maand aan transactiekosten (30 × € 0,32), naast je JouwWeb-abonnement.
