@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { SD_UPD, SD_PADEN } from '../src/l7-shopify-1211.mjs';
+import { HB_UPD } from '../src/l7-hostinger-blog-1611.mjs';
 const read = (f) => readFileSync(f, 'utf8');
 const tekst = (p) => read(`dist${p}index.html`).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&quot;/g, '"').replace(/\s+/g, ' ');
 
@@ -27,18 +28,21 @@ test('Shopify-verdieping 12-11: Plus, rekensom, POS-link, title ongewijzigd', ()
   assert.doesNotMatch(v, /rel="sponsored/);
 });
 
-test('L7 12-11: /platformen/shopify/ op de pushdatum; hub /platformen/ blijft 2026-11-04', () => {
+test('L7: /platformen/shopify/ 16-11 door ALT_ZIN-bodywijziging; hub 16-11 door eigen body; datePublished 17-10', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of SD_PADEN) {
-    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SD_UPD}</lastmod>`), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${SD_UPD}">`, 'i'), p);
-  }
   assert.ok(!SD_PADEN.has('/platformen/'));
   assert.deepEqual([...SD_PADEN], ['/platformen/shopify/']);
-  assert.ok(sm.includes('<loc>https://shopmatch.nl/platformen/</loc><lastmod>2026-11-04</lastmod>'));
-  assert.match(read('dist/platformen/index.html'), /bijgewerkt (?:op )?<time datetime="2026-11-04">/i);
+  // /platformen/shopify/ krijgt 16-11 (hbDatum na sdDatum) door de zichtbare ALT_ZIN-wijziging.
+  for (const p of SD_PADEN) {
+    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${HB_UPD}</lastmod>`), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${HB_UPD}">`, 'i'), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${HB_UPD}"`));
+    assert.match(read(`dist${p}index.html`), /"datePublished": ?"2026-10-17"/);
+  }
+  // Hub /platformen/ heeft op 16-11 een eigen bodywijziging (Hostinger-prijstekst), niet alleen door dit Shopify-kind.
+  assert.ok(sm.includes('<loc>https://shopmatch.nl/platformen/</loc><lastmod>2026-11-16</lastmod>'));
+  assert.match(read('dist/platformen/index.html'), /bijgewerkt (?:op )?<time datetime="2026-11-16">/i);
   assert.doesNotMatch(read('dist/platformen/index.html'), /"dateModified": ?"2026-11-12"/);
-  assert.match(read('dist/platformen/shopify/index.html'), new RegExp(`"dateModified": ?"${SD_UPD}"`));
 });
 
 // SEO-B1 45b6c11: de gelinkte blog spreekt de Shopify-pagina niet meer tegen (iDEAL € 0,29); L7 12-11 op die blog en hub /blog/.
@@ -47,9 +51,12 @@ test('SEO-B1 12-11: iDEAL € 0,29 in blog shopify-wix-jouwweb, blog en /blog/ o
   assert.ok(b.includes('rekent Shopify volgens de prijspagina € 0,29 per betaling bij Basic, Grow en Advanced'));
   assert.ok(!b.includes('een vast bedrag noemt Shopify niet'));
   const sm = read('dist/sitemap.xml');
-  for (const p of ['/blog/shopify-wix-jouwweb-kleine-webshop/', '/blog/']) {
-    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SD_UPD}</lastmod>`), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${SD_UPD}">`, 'i'), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${SD_UPD}"`), p);
-  }
+  const blogP = '/blog/shopify-wix-jouwweb-kleine-webshop/';
+  assert.ok(sm.includes(`<loc>https://shopmatch.nl${blogP}</loc><lastmod>${SD_UPD}</lastmod>`), blogP);
+  assert.match(read(`dist${blogP}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${SD_UPD}">`, 'i'));
+  assert.match(read(`dist${blogP}index.html`), new RegExp(`"dateModified": ?"${SD_UPD}"`));
+  // /blog/ body wijzigt door de nieuwere Hostinger-post (16-11); lastmod = max(updated) >= SD_UPD.
+  const blogLm = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
+  assert.ok(blogLm && blogLm >= SD_UPD, `/blog/ lastmod ${blogLm}`);
+  assert.match(read('dist/blog/index.html'), new RegExp(`bijgewerkt (op )?<time datetime="${blogLm}">`, 'i'));
 });

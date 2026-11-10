@@ -48,13 +48,21 @@ export const faqHtml = (faq) => `<h2>Veelgestelde vragen</h2>${faq.map(([q, a]) 
 
 // ---- Prijzen ----
 export const eur = (n) => (n === 0 ? '€ 0' : '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }));
-export const verkoopTekst = (id) => (id === 'woocommerce' ? '€ 0 + hosting' : `${eur(VERKOOP_VANAF[id])} p/m`);
+export const INSTAP_ZIE_HOSTINGER = 'Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder.';
+export const verkoopTekst = (id) => (id === 'woocommerce' ? '€ 0 + hosting' : id === 'hostinger' ? INSTAP_ZIE_HOSTINGER : `${eur(VERKOOP_VANAF[id])} p/m`);
 export const maxProdTekst = (id) => { const m = MAX_PRODUCTEN[id]; return m === Infinity ? 'Onbeperkt' : m == null ? 'Niet vermeld' : `Tot ${m.toLocaleString('nl-NL')}`; };
-export const plansTable = (p) => `<ul class="pkg-grid">${p.plannen.map(([n, pr, w]) => {
+export const plansTable = (p) => {
+  if (p.slug === 'hostinger') {
+    const bron = p.bronnen[0][1];
+    const rijen = [['Premium', '€ 9,99 per maand'], ['Onbeperkt', '€ 16,99 per maand'], ['Cloud Startup', '€ 23,99 per maand']];
+    return `<div class="table-wrap"><table class="data"><thead><tr><th>Plan</th><th>Verlenging na de eerste looptijd</th><th>Looptijd en actuele instapprijs: zie Hostinger</th></tr></thead><tbody>${rijen.map(([n, pr]) => `<tr><th scope="row">${esc(n)}</th><td>${esc(pr)}</td><td><a href="${esc(bron)}" rel="noopener">Zie Hostinger</a></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  return `<ul class="pkg-grid">${p.plannen.map(([n, pr, w]) => {
   const main = pr.split(/ \(| · /)[0];
   const extra = pr.slice(main.length).replace(/^\s*[·(]\s*/, '').replace(/[()]/g, '');
   return `<li><div class="pkg-card"><h3>${esc(n)}</h3><p class="pkg-price"><strong>${esc(main)}</strong>${/^€ [\d.,]+$/.test(main) ? ' <span>per maand</span>' : ''}</p>${extra ? `<p class="pkg-year">${esc(extra)}</p>` : ''}<p class="pkg-facts">${esc(w)}</p></div></li>`;
 }).join('')}</ul>`;
+};
 
 // ---- Checklist-weergave ----
 const VCLS = { ja: 'ja', deels: 'deels', nee: 'nee' };

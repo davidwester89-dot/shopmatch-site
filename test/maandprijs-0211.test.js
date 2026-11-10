@@ -17,7 +17,7 @@ test('verkoopPrijs = maandprijs bij maandbetaling waar de aanbieder die toont', 
   assert.deepEqual([verkoopPrijs('lightspeed', 0), verkoopPrijs('lightspeed', 1000), verkoopPrijs('lightspeed', 10000)], [78, 138, 298]);
   assert.equal(verkoopPrijs('shopify', 0), 28);
   // Alleen een prijs bij jaarbetaling of vooruitbetaling getoond: blijft staan.
-  assert.deepEqual([verkoopPrijs('wix', 0), verkoopPrijs('jouwweb', 0), verkoopPrijs('jouwweb', 100), verkoopPrijs('hostinger', 0), verkoopPrijs('woocommerce', 0)], [25, 10, 20, 3.99, 0]);
+  assert.deepEqual([verkoopPrijs('wix', 0), verkoopPrijs('jouwweb', 0), verkoopPrijs('jouwweb', 100), verkoopPrijs('hostinger', 0), verkoopPrijs('woocommerce', 0)], [25, 10, 20, 16.99, 0]);
   assert.equal(PLATFORMS.shopify.vanaf, VERKOOP_VANAF.shopify);
   assert.equal(PLATFORMS.lightspeed.vanaf, VERKOOP_VANAF.lightspeed);
   assert.doesNotMatch(read('src/lib/match.js'), /€ 522/);

@@ -5,7 +5,7 @@
 export const CHECKED = '2026-10-17';
 // Controledatum per aanbieder als die afwijkt van CHECKED (alleen echte controles): Mijndomein-prijzen opnieuw gerenderd op 31-10-2026 (mijndomein.nl/producten/webshop, beide toggles);
 // Lightspeed-prijzen gerenderd op 1-11-2026 (lightspeedhq.nl/ecommerce/prijzen/, tabs Maandelijks en Jaarlijks).
-export const GECONTROLEERD = { lightspeed: '2026-11-01', mijndomein: '2026-10-31' };
+export const GECONTROLEERD = { lightspeed: '2026-11-01', mijndomein: '2026-10-31', hostinger: '2026-11-10' };
 
 /** Noot boven de prijstabel: btw-basis alleen als de aanbieder die zelf noemt (Site-controleur 17-10). */
 export const prijsNootVan = (p) => p.prijsNoot || (p.btw ? `${p.btw[0].toUpperCase()}${p.btw.slice(1)}, zoals ${p.naam.split(' ')[0]} ze toont.` : `Zoals ${p.naam.split(' ')[0]} ze toont; de prijspagina vermeldt niet of btw inbegrepen is.`);
@@ -74,13 +74,14 @@ export const PLATFORMS = {
   hostinger: {
     naam: 'Hostinger Website Bouwer', knopnaam: 'Hostinger', slug: 'hostinger', soort: 'Websitebouwer', url: 'https://www.hostinger.com/nl',
     kort: 'Goedkope websitebouwer met AI, webshop vanaf het Onbeperkt-pakket.',
-    vanaf: 2.99, vanafTekst: '€ 2,99 per maand (Premium, 48 maanden vooraf)', btw: 'excl. btw',
+    vanaf: 9.99, vanafTekst: '€ 9,99 per maand (Premium, verlenging na de eerste looptijd; actuele instapprijs: zie Hostinger)',
+    prijsNoot: 'Hostinger toont voor verlenging na de eerste looptijd: Premium € 9,99 per maand, Onbeperkt € 16,99 per maand en Cloud Startup € 23,99 per maand, voor dezelfde looptijd. Alle plannen worden vooraf betaald. Bekijk de actuele instapprijs en het totaal vooraf bij Hostinger. De getoonde prijzen zijn exclusief btw (volgens de prijspagina van Hostinger).',
     plannen: [
-      ['Premium', '€ 2,99 (48 mnd vooraf, € 143,52)', 'Verlenging € 9,99 per maand'],
-      ['Onbeperkt', '€ 3,99 (48 mnd vooraf, € 191,52)', 'Met e-commerce, onbeperkt websites; verlenging € 16,99 per maand'],
-      ['Cloud Startup', '€ 7,99 (48 mnd vooraf, € 383,52)', 'Verlenging € 23,99 per maand'],
+      ['Premium', '€ 9,99 per maand', 'Verlenging na de eerste looptijd'],
+      ['Onbeperkt', '€ 16,99 per maand', 'Verlenging na de eerste looptijd; met e-commerce, onbeperkt websites'],
+      ['Cloud Startup', '€ 23,99 per maand', 'Verlenging na de eerste looptijd'],
     ],
-    plus: ['Laagste instapprijs', '30 dagen geld-teruggarantie', 'Gratis domeinnaam bij jaarpakketten', '24/7 ondersteuning'],
+    plus: ['30 dagen geld-teruggarantie', 'Gratis domeinnaam bij jaarpakketten', '24/7 ondersteuning'],
     min: ['Lage prijs alleen bij 48 maanden vooraf betalen', 'Verlenging is duidelijk duurder'],
     voor: 'Starters met een klein budget die een eenvoudige site of kleine shop willen.',
     bronnen: [['Hostinger Website Bouwer', 'https://www.hostinger.com/nl/website-maken']],
@@ -124,14 +125,14 @@ export const BEST_FOR = {
   wix: 'Ontwerpvrijheid',
   jouwweb: 'Starters en zzp\'ers',
   lightspeed: 'Winkel met webshop',
-  hostinger: 'Laagste instapprijs',
+  hostinger: 'Eenvoudige site of kleine shop',
   mijndomein: 'Alles bij één Nederlandse partij',
   woocommerce: 'Volledige controle',
 };
 // Maandprijs van het goedkoopste pakket waarmee je online kunt verkopen (zelfde bedragen als in PLATFORMS.plannen): de prijs bij maandelijks betalen
 // (MM-besluit 01-11-2026; bronnen en controledatum in src/lib/match.js). Wix, JouwWeb en Hostinger tonen geen maandprijs bij maandbetaling: daar de getoonde prijs.
-export const VERKOOP_VANAF = { shopify: 28, wix: 25, jouwweb: 10, lightspeed: 78, hostinger: 3.99, mijndomein: 15, woocommerce: 0 };
-export const VERKOOP_PAKKET = { shopify: 'Basic, maandbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential, maandbetaling', hostinger: 'Onbeperkt, 48 maanden vooraf', mijndomein: 'Start, 25 producten', woocommerce: 'plug-in, plus hosting' };
+export const VERKOOP_VANAF = { shopify: 28, wix: 25, jouwweb: 10, lightspeed: 78, hostinger: 16.99, mijndomein: 15, woocommerce: 0 };
+export const VERKOOP_PAKKET = { shopify: 'Basic, maandbetaling', wix: 'Core', jouwweb: 'Pro, tot 10 producten', lightspeed: 'Essential, maandbetaling', hostinger: 'Onbeperkt, verlenging na de eerste looptijd', mijndomein: 'Start, 25 producten', woocommerce: 'plug-in, plus hosting' };
 // Maximaal aantal producten in het grootste standaardpakket. Infinity = onbeperkt; null = niet vermeld door de aanbieder.
 export const MAX_PRODUCTEN = { shopify: Infinity, wix: Infinity, jouwweb: Infinity, lightspeed: 15000, hostinger: null, mijndomein: 20000, woocommerce: Infinity };
 

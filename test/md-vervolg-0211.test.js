@@ -6,6 +6,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { EF_PADEN } from '../src/l7-externe-feedback-0311.mjs'; // op 3-11 opnieuw bijgewerkt: test/externe-feedback-0311.test.js
 import { LINKS_PADEN } from '../src/l7-interne-links-0511.mjs'; // op 5-11 opnieuw bijgewerkt: test/interne-links-0511.test.js
+import { HB_PADEN } from '../src/l7-hostinger-blog-1611.mjs'; // op 16-11 Hostinger-prijstekst: test/hostinger-blog-1611.test.js
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
@@ -35,9 +36,9 @@ test('controledatum per aanbieder op de pagina\'s met de Mijndomein-prijzen van 
 
 test('L7 2-11: lastmod, dateModified en zichtbare bijgewerkt-regel op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
-  for (const p of PAGINAS.filter((x) => !EF_PADEN.has(x) && !LINKS_PADEN.has(x))) {
+  for (const p of PAGINAS.filter((x) => !EF_PADEN.has(x) && !LINKS_PADEN.has(x) && !HB_PADEN.has(x))) {
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
   }
-  for (const p of MET_DATEMODIFIED.filter((x) => !EF_PADEN.has(x) && !LINKS_PADEN.has(x))) assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
+  for (const p of MET_DATEMODIFIED.filter((x) => !EF_PADEN.has(x) && !LINKS_PADEN.has(x) && !HB_PADEN.has(x))) assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
 });

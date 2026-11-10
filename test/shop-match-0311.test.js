@@ -35,8 +35,8 @@ test('shop-match: voorbeelden volgen de matchlogica (top 1 per situatie)', () =>
   assert.match(h, /<h3>Starter met een kleine webshop<\/h3><p class="sub">Antwoorden: [^<]*<\/p><ol><li><a href="\/platformen\/jouwweb\/">JouwWeb<\/a>/);
 });
 
-test('L7 5-11: /shop-match/ en hub /gidsen/ met lastmod en zichtbare bijgewerkt-regel op de pushdatum', () => {
-  for (const p of ['/shop-match/', '/gidsen/']) {
+test('L7 5-11: hub /gidsen/ op 2026-11-05; /shop-match/ schuift mee op 16-11 (Hostinger-prijs, eigen bodywijziging)', () => {
+  for (const p of ['/gidsen/']) {
     assert.match(read('dist/sitemap.xml'), new RegExp(`<loc>https://shopmatch\\.nl${p}</loc><lastmod>${DATUM}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
   }
