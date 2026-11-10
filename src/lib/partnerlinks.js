@@ -14,8 +14,13 @@ export const PARTNERLINKS = {
   wix: WIX_ECOM,
   // Hostinger: Daisycon campagne 16780, media ShopMatch 438840 goedgekeurd 19-10-2026; NL-deeplink 20-10-2026: landt op hostinger.com/nl/website-maken.
   hostinger: 'https://jf79.net/c/?si=16780&li=1722914&wi=438840&ws=shopmatch&dl=nl%2Fwebsite-maken',
+  // F1 (MM 10-11): geen van de onderstaande merken hier zetten tot er een goedgekeurde betaalde
+  // route is + SC-review op die hash. Zonder entry is knop() een gewone bronlink, geen CTA/sponsored.
+  // JouwWeb: TradeTracker 21002 nog Onder beoordeling; PM voegt de TT-link hier toe na goedkeuring.
+  // Lightspeed eCom: direct referral loopt, nog geen goedkeuring.
+  // Mijndomein: TradeTracker 27013 loopt al bij PM, nog niet goedgekeurd voor deze sitehash.
   // WooCommerce: nooit hier zetten. Automattic Affiliate dekt alleen Marketplace-extensies, niet de gratis plug-in/core
-  // (PM 10-11-2026). knop('woocommerce') is een gewone bronlink, geen CTA/sponsored.
+  // (PM 10-11-2026).
 };
 
 /** Alle goedgekeurde Wix-URL's (voor tests en live-checks). */
@@ -51,11 +56,17 @@ export function uitgaand(id, arg) {
 }
 
 /** Knop naar de aanbieder. Partnerlink: rel sponsored nofollow noopener, geen zichtbaar label (uitleg in de FAQ).
- * WooCommerce: geen betaalde route voor de platformkeuze (PM 10-11). Altijd een gewone bronlink, nooit btn/CTA/sponsored. */
+ * Geen betaalde route (niet in de partnerlinks-map): gewone bronlink, nooit btn/CTA/sponsored/target/ref/utm/partnernoot.
+ * F1 (MM 10-11, push 16-11): JouwWeb, Lightspeed eCom, Mijndomein en WooCommerce. Een knop komt pas terug
+ * als PM de goedgekeurde route in PARTNERLINKS zet (aparte hash + SC-review). Ook gebruikt door de quiz-client. */
 export function knop(id, pos, cls = 'btn', arg) {
-  if (id === 'woocommerce') {
-    const href = PLATFORMS.woocommerce.url; // https://woocommerce.com/nl/
-    return `<a href="${href}" rel="noopener">Bron: WooCommerce</a>`;
+  const p = PLATFORMS[id];
+  if (!p) throw new Error('Onbekend platform ' + id);
+  const { partnerlinks, trafcat } = opts(arg);
+  const pl = hrefVoor(id, partnerlinks, trafcat);
+  if (!pl) {
+    const naam = p.knopnaam || p.naam;
+    return `<a href="${p.url}" rel="noopener">Bron: ${naam}</a>`;
   }
   const o = uitgaand(id, arg);
   return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${id}" data-pos="${pos}" data-cta="outbound" data-partner-slot="${id}">Naar ${o.naam}</a>`;

@@ -13,6 +13,7 @@ import { sdDatum } from './src/l7-shopify-1211.mjs';
 import { hlDatum } from './src/l7-hublink-1311.mjs';
 import { hbDatum } from './src/l7-hostinger-blog-1611.mjs';
 import { wnDatum } from './src/l7-woocommerce-neutraal-1611.mjs';
+import { f1Datum } from './src/l7-f1-neutraal-1611.mjs';
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
 // Logo's in tabelcellen met precies de naam van een platform (30-10); zelfde vak voor elk platform, alleen beeld.
@@ -22,7 +23,7 @@ const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileS
 // Blog: content/blog/*.md (nieuwste eerst; posts met een datum in de toekomst worden overgeslagen).
 const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
-export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound].map(efDatum).map(spDatum).map(sdDatum).map(hlDatum).map(hbDatum).map(wnDatum);
+export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound].map(efDatum).map(spDatum).map(sdDatum).map(hlDatum).map(hbDatum).map(wnDatum).map(f1Datum);
 for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(layout(p)));
 // Doorverwijzingen voor weggehaalde pagina's. GitHub Pages kan geen 301 sturen: statische pagina met meta refresh,
 // canonical naar het doel en noindex. Staan niet in de sitemap.

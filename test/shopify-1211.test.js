@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { SD_UPD, SD_PADEN } from '../src/l7-shopify-1211.mjs';
 import { HB_UPD } from '../src/l7-hostinger-blog-1611.mjs';
+import { F1_UPD, F1_PADEN } from '../src/l7-f1-neutraal-1611.mjs';
 const read = (f) => readFileSync(f, 'utf8');
 const tekst = (p) => read(`dist${p}index.html`).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&quot;/g, '"').replace(/\s+/g, ' ');
 
@@ -52,9 +53,11 @@ test('SEO-B1 12-11: iDEAL € 0,29 in blog shopify-wix-jouwweb, blog en /blog/ o
   assert.ok(!b.includes('een vast bedrag noemt Shopify niet'));
   const sm = read('dist/sitemap.xml');
   const blogP = '/blog/shopify-wix-jouwweb-kleine-webshop/';
-  assert.ok(sm.includes(`<loc>https://shopmatch.nl${blogP}</loc><lastmod>${SD_UPD}</lastmod>`), blogP);
-  assert.match(read(`dist${blogP}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${SD_UPD}">`, 'i'));
-  assert.match(read(`dist${blogP}index.html`), new RegExp(`"dateModified": ?"${SD_UPD}"`));
+  // F1 (16-11): eigen bodywijziging (JouwWeb-knop → bronlink); lastmod niet meer SD_UPD.
+  assert.ok(F1_PADEN.has(blogP));
+  assert.ok(sm.includes(`<loc>https://shopmatch.nl${blogP}</loc><lastmod>${F1_UPD}</lastmod>`), blogP);
+  assert.match(read(`dist${blogP}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${F1_UPD}">`, 'i'));
+  assert.match(read(`dist${blogP}index.html`), new RegExp(`"dateModified": ?"${F1_UPD}"`));
   // /blog/ body wijzigt door de nieuwere Hostinger-post (16-11); lastmod = max(updated) >= SD_UPD.
   const blogLm = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
   assert.ok(blogLm && blogLm >= SD_UPD, `/blog/ lastmod ${blogLm}`);

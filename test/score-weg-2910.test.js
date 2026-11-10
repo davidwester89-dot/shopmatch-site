@@ -30,11 +30,7 @@ test('pagina\'s die een score toonden: lastmod en dateModified 2026-10-29', () =
   // '/vergelijken/' is op 1-11 opnieuw bijgewerkt (checklist Mijndomein); die datum test test/acties-weg-0111.test.js.
   // '/platformen/shopify/' en '/platformen/woocommerce/' zijn op 2-11 opnieuw bijgewerkt (maandprijzen in kaart en alternatieven); die datum test test/maandprijs-0211.test.js.
   // '/over/' en (opnieuw) de platformpagina's zijn op 3-11 bijgewerkt (externe feedback); die datum test test/externe-feedback-0311.test.js.
-  for (const p of ['/vergelijken/wix-vs-jouwweb/'])
+  // /vergelijken/wix-vs-jouwweb/ is op 16-11 opnieuw bijgewerkt (F1: JouwWeb-knop → bronlink); die datum test test/f1-neutraal-1611.test.js.
+  for (const p of [])
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p}</loc><lastmod>2026-10-29</lastmod>`), p);
-  for (const f of ['vergelijken/wix-vs-jouwweb']) {
-    const h = read(`dist/${f}/index.html`);
-    assert.match(h, /"dateModified":"2026-10-29"/, f);
-    assert.match(h, /Laatst bijgewerkt <time datetime="2026-10-29">/, f);
-  }
 });
