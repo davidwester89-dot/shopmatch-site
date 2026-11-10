@@ -3,14 +3,14 @@ title: Hostinger: website of webshop — prijzen en limieten
 seo_title: Hostinger website of webshop: prijzen en limieten
 description: Wat kost Hostinger Website Builder voor een site of webshop? Abonnementen, limieten en wanneer Wix of Shopify logischer is — alleen Hostinger-prijzen.
 date: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-18
 checked: 2026-11-05
 tools: /shop-match/, /vergelijken/, /platformen/hostinger/
 sources:
 - Hostinger: Website Bouwer | https://www.hostinger.com/nl/website-maken
 - Hostinger: Accepting payments via iDEAL | https://www.hostinger.com/support/6538716-hostinger-ecommerce-accepting-payments-via-ideal/
 ---
-Hostinger is de goedkoopste instap die we op ShopMatch vergelijken. Maar welk pakket heb je nodig voor een gewone website, en welk voor een webshop? Hier lees je wat er in elk plan zit volgens hostinger.com, waar de grenzen liggen en wanneer Wix of Shopify beter past.
+Hostinger is de goedkoopste instap die we op ShopMatch vergelijken. Maar welk pakket heb je nodig voor een gewone website, en welk voor een webshop? Hier lees je wat Hostinger in elk plan aanbiedt, waar de grenzen liggen en wanneer Wix of Shopify beter past.
 
 > **Kort gezegd:** Hostinger Website Bouwer heeft drie plannen: Premium, Onbeperkt en Cloud Startup. Na de eerste looptijd betaal je € 9,99, € 16,99 of € 23,99 per maand.
 >
@@ -20,7 +20,7 @@ Hostinger is de goedkoopste instap die we op ShopMatch vergelijken. Maar welk pa
 
 ## Welke Hostinger-plannen zijn er?
 
-Na de eerste looptijd verleng je tegen het standaardtarief. Dat tarief zet je het best in je begroting. De getoonde prijzen zijn exclusief btw (volgens de prijspagina van Hostinger).
+Na de eerste looptijd verleng je tegen het standaardtarief. Dat tarief zet je het best in je begroting. Hostinger toont deze prijzen exclusief btw.
 
 | Plan | Verlenging na de eerste looptijd | Looptijd en actuele instapprijs: zie Hostinger |
 |---|---|---|
@@ -45,7 +45,7 @@ Het grootste verschil tussen de plannen is e-commerce. Op hostinger.com staat "E
 | Ondersteuning | Chatbot (Hostinger Agent) | 24/7 prioriteit | 24/7 prioriteit |
 | AI e-mailmarketing | Niet vermeld | 1 jaar gratis | 1 jaar gratis |
 
-Alle plannen hebben volgens Hostinger 400+ websitetemplates, webhosting en een AI-assistent. Let op: mailboxen, AI e-mailmarketing en het domein zijn het eerste jaar gratis. Daarna betaal je ze apart.
+Hostinger biedt bij alle plannen 400+ websitetemplates, webhosting en een AI-assistent. Let op: mailboxen, AI e-mailmarketing en het domein zijn het eerste jaar gratis. Daarna betaal je ze apart.
 
 Wil je verkopen? Dan noemt Hostinger dit voor de webshop:
 

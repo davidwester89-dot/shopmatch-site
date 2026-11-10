@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs'; // Latere stijlrevisie, exacte datumtests blijven gelden.
 // SC-punten 01-11 (review 5ad582a/ab996ba, punten 1-3) + filterregel /vergelijken/, pushdatum 2026-11-04.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -32,8 +33,8 @@ test('L7 4-11: lastmod, zichtbare bijgewerkt-regel en dateModified', () => {
   for (const p of [...SP_PADEN].filter((x) => !SD_PADEN.has(x) && !HB_PADEN.has(x) && !WN_PADEN.has(x) && !F1_PADEN.has(x))) { // HB: /platformen/ en /vergelijken/ 16-11, eigen Hostinger-bodywijziging
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${SP_UPD}</lastmod>`), p);
     const h = read(`dist${p}index.html`);
-    assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${SP_UPD}">`, 'i'), p);
-    if (p !== '/blog/') assert.doesNotMatch(h, new RegExp(`"dateModified": ?"(?!${SP_UPD})`), p); // /blog/ heeft geen eigen dateModified (alleen die van de posts in de lijst)
+    assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, SP_UPD)}">`, 'i'), p);
+    if (p !== '/blog/') assert.doesNotMatch(h, new RegExp(`"dateModified": ?"(?!${revisieDatum(p, SP_UPD)})`), p); // /blog/ heeft geen eigen dateModified (alleen die van de posts in de lijst)
   }
   // 6-11: title/meta + hub-CTA → post updated 2026-11-06 (of later); exact SP_UPD niet meer vast
   {

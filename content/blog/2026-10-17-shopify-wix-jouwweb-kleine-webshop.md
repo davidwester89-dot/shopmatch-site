@@ -50,7 +50,7 @@ Dit zijn de goedkoopste pakketten waarmee je online kunt verkopen, zoals de aanb
 Het grootste verschil zit in waar ze vandaan komen. Shopify is gebouwd als webshop. Wix is een websitebouwer waar je een webshop aan toevoegt.
 
 - **Prijs.** Shopify Basic kost € 28 per maand bij maandbetaling en € 21 bij jaarbetaling. Bij Wix ontvang je betalingen vanaf Core: € 25 per maand bij een jaarabonnement, exclusief toeslagen.
-- **Kosten per verkoop.** Shopify rekent op Basic 2% extra als je een andere betaalprovider gebruikt dan Shopify Payments. Voor een iDEAL-betaling via Shopify Payments rekent Shopify volgens de prijspagina € 0,29 per betaling bij Basic, Grow en Advanced. Wix noemt op de prijspagina geen verkoopcommissie.
+- **Kosten per verkoop.** Shopify rekent op Basic 2% extra als je een andere betaalprovider gebruikt dan Shopify Payments. Voor een iDEAL-betaling via Shopify Payments rekent Shopify € 0,29 per betaling bij Basic, Grow en Advanced. Wix noemt op de prijspagina geen verkoopcommissie.
 - **Winkel erbij.** Met Shopify POS gebruik je Shopify ook als kassa. Wix noemt geen kassa op de pagina's die wij volgen.
 - **Ontwerp.** Wix geeft je veel vrijheid in de vormgeving van je hele site. Bij Shopify start je vanuit een winkeltemplate.
 
@@ -84,7 +84,7 @@ Wat er nog bij kan komen:
 
 - **Domeinnaam.** Het eerste jaar is gratis, daarna betaal je € 20 per jaar. Een extra domeinnaam kost ook € 20 per jaar.
 - **Mailbox.** Pro heeft 1 mailbox en Business 1 XL-mailbox. Een extra mailbox kost € 15 per jaar.
-- **Kosten per betaling.** JouwWeb rekent 0% verkoopcommissie, maar je betaalprovider rekent wel per betaling. JouwWeb koppelt automatische betalingen vooral via Mollie. Daar kost een iDEAL-betaling in Nederland € 0,32 (tarief van Mollie). Voor iDEAL via Mollie heb je een KvK-inschrijving en een zakelijke bankrekening nodig. Zonder KvK kun je volgens JouwWeb Stripe of PayPal gebruiken.
+- **Kosten per betaling.** JouwWeb rekent 0% verkoopcommissie, maar je betaalprovider rekent wel per betaling. JouwWeb koppelt automatische betalingen vooral via Mollie. Daar kost een iDEAL-betaling in Nederland € 0,32 (tarief van Mollie). Voor iDEAL via Mollie heb je een KvK-inschrijving en een zakelijke bankrekening nodig. Zonder KvK kun je Stripe of PayPal gebruiken.
 - **Contract.** Betaal je per jaar, dan verlengt je abonnement automatisch met een jaar, tenzij je minstens een maand voor de verlengdatum opzegt. Betaal je per maand, dan zeg je op met een opzegtermijn van een maand. Het maandtarief bij maandbetaling staat niet op de prijspagina.
 
 Een voorbeeld: met 30 iDEAL-bestellingen per maand betaal je bij Mollie € 9,60 per maand aan transactiekosten (30 × € 0,32), naast je JouwWeb-abonnement.

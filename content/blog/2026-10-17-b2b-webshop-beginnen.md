@@ -33,7 +33,7 @@ Verkoop je aan bedrijven, dan stellen je klanten andere eisen dan consumenten. Z
 
 Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin het zit. Prijzen per maand zoals de aanbieder ze toont: JouwWeb noemt ze excl. btw. Shopify en Lightspeed vermelden op hun prijspagina niet of btw inbegrepen is. Lightspeed: per maand bij maandbetaling (prijspagina gecontroleerd op 1-11-2026).
 
-| Platform | B2B volgens de aanbieder | Goedkoopste pakket met B2B |
+| Platform | B2B | Goedkoopste pakket met B2B |
 |---|---|---|
 | [JouwWeb](/platformen/jouwweb/) | B2B-webshop, btw-verleggingsregeling, btw-regels voor EU-leveringen | Pro € 10 (tot 10 producten), Business € 20 (onbeperkt) |
 | [Shopify](/platformen/shopify/) | Shopify B2B in Basic, Grow, Advanced en Plus; niet in Starter of Retail | Basic € 28 (€ 21 bij jaarbetaling) |
@@ -55,7 +55,7 @@ Zakelijke klanten kopen anders dan consumenten. Zet deze punten naast je wensen 
 
 ## JouwWeb: klein en zakelijk beginnen
 
-JouwWeb heeft een B2B-webshop met de btw-verleggingsregeling en btw-regels voor EU-leveringen. Op de webshoppagina noemt JouwWeb ook een klantaccountsysteem, betalen via factuur, een minimum bestelbedrag en facturen met je logo. In Pro en Business krijg je volgens JouwWeb alle webshopfuncties zonder extra kosten, en je betaalt 0% verkoopcommissie.
+JouwWeb heeft een B2B-webshop met de btw-verleggingsregeling en btw-regels voor EU-leveringen. Op de webshoppagina noemt JouwWeb ook een klantaccountsysteem, betalen via factuur, een minimum bestelbedrag en facturen met je logo. JouwWeb geeft je in Pro en Business alle webshopfuncties zonder extra kosten, met 0% verkoopcommissie.
 
 Voor je administratie koppelt JouwWeb met onder meer e-Boekhouden, Moneybird, Exact, SnelStart, Twinfield en Yuki.
 
@@ -67,7 +67,7 @@ Wat JouwWeb niet noemt: eigen prijzen per zakelijke klant. Heb je die nodig, kij
 
 Shopify B2B is een pakket functies in het beheercentrum van Shopify. Je stelt je zakelijke klanten in als bedrijven. Per klant bepaal je dan prijzen, valuta, producten, betaal- en verzendmethoden. Je kunt één winkel gebruiken voor zowel zakelijke klanten als consumenten, of een aparte winkel alleen voor B2B.
 
-Volgens Shopify hangen de B2B-functies af van je abonnement. Op Basic betaal je 2% extra per transactie als je niet met Shopify Payments werkt. Shopify noemt ook koppelingen met ERP's en andere systemen.
+De B2B-functies van Shopify hangen af van je abonnement. Op Basic betaal je 2% extra per transactie als je niet met Shopify Payments werkt. Shopify noemt ook koppelingen met ERP's en andere systemen.
 
 {{knop:shopify}}
 

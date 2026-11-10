@@ -1,5 +1,5 @@
 ---
-updated: 2026-11-12
+updated: 2026-11-18
 seo_title: Wat kost Shopify per maand? Abonnementen en kosten 2026
 description: Shopify kost € 28 per maand (Basic, maandbetaling) of € 21 per maand bij jaarbetaling. Alle abonnementen, transactiekosten, iDEAL en btw op een rij.
 sources:
@@ -27,7 +27,7 @@ Er zijn twee soorten kosten om uit elkaar te houden:
 - **Kosten per betaling.** Die betaal je voor de betaalmethode zelf, zoals een kaartbetaling of een iDEAL-betaling. Kaarttarieven verschillen per abonnement.
 - **Transactiekosten van een externe partij.** Gebruik je een andere betaalprovider in plaats van Shopify Payments, dan rekent Shopify daar per bestelling extra kosten over.
 
-Dit zijn de tarieven per transactie met Shopify Payments volgens de prijspagina:
+Dit zijn de tarieven per transactie met Shopify Payments:
 
 | Abonnement | Online kaartbetaling | iDEAL |
 |---|---|---|
@@ -36,7 +36,7 @@ Dit zijn de tarieven per transactie met Shopify Payments volgens de prijspagina:
 | Advanced | 1,6% + € 0,25 | € 0,29 |
 | Plus | 1,4% + € 0,25 | € 0,15 |
 
-Die extra transactiekosten met een externe betaalprovider zijn volgens de prijspagina:
+Shopify noemt op de prijspagina deze extra transactiekosten met een externe betaalprovider:
 
 | Abonnement | Extra transactiekosten met een externe betaalprovider |
 |---|---|
@@ -103,9 +103,9 @@ Betalen al je klanten met een kaart? Dan betaal je bij Basic 1,9% + € 0,25 per
 
 ## Wat kost Shopify Plus?
 
-Shopify Plus is het abonnement "voor complexe bedrijven". Op de Nederlandse prijspagina staat Plus voor vanaf € 2.100 per maand. Een vaste eindprijs noemt Shopify daar niet. Kies je Plus voor één of drie jaar, dan kun je volgens Shopify opzeggen na de looptijd van het abonnement.
+Shopify Plus is het abonnement "voor complexe bedrijven". Op de Nederlandse prijspagina staat Plus voor vanaf € 2.100 per maand. Een vaste eindprijs noemt Shopify daar niet. Kies je Plus voor één of drie jaar, dan kun je opzeggen na de looptijd van het abonnement.
 
-Wat je volgens de prijspagina krijgt bovenop Advanced:
+Wat Shopify Plus biedt bovenop Advanced:
 
 - **Lagere tarieven per transactie:** online kaartbetalingen 1,4% + € 0,25, iDEAL € 0,15 en 0,2% extra bij een externe betaalprovider.
 - **Kassa:** POS Pro zit erin voor 20 locaties, tot 200 met Shopify Payments.
@@ -116,7 +116,7 @@ Een rekensom: Plus kost per jaar minstens 12 × € 2.100 = € 25.200. Bij maan
 
 ## Shopify POS: ook verkopen in een winkel
 
-Met Shopify POS verkoop je ook in een winkel of op een markt, met dezelfde producten en voorraad als in je webshop. Volgens de prijspagina kun je bij elk abonnement betalingen aannemen met een telefoon of kaartlezer. Wil je meer kassafuncties, zoals medewerkersrollen en voorraadbeheer in de winkel? Dan komt POS Pro erbij: € 79 per maand per locatie. Een kaartbetaling in de winkel kost bij Basic 0,75% + € 0,10 met een betaalpas en 1,9% + € 0,10 met een creditcard.
+Met Shopify POS verkoop je ook in een winkel of op een markt, met dezelfde producten en voorraad als in je webshop. Bij elk Shopify-abonnement kun je betalingen aannemen met een telefoon of kaartlezer. Wil je meer kassafuncties, zoals medewerkersrollen en voorraadbeheer in de winkel? Dan komt POS Pro erbij: € 79 per maand per locatie. Een kaartbetaling in de winkel kost bij Basic 0,75% + € 0,10 met een betaalpas en 1,9% + € 0,10 met een creditcard.
 
 Ook van ons: wat de kassa van Shopify kost en voor welke winkel hij past, lees je op KassaMatch bij [Shopify POS](https://kassamatch.nl/aanbieders/shopify-pos/).
 
@@ -124,17 +124,17 @@ Ook van ons: wat de kassa van Shopify kost en voor welke winkel hij past, lees j
 
 Heeft je winkel een Europees adres, dan vraagt Shopify je btw-nummer. Dat vul je in het beheercentrum in via Instellingen, Facturering en dan Factureringsprofiel. Shopify controleert het nummer via VIES, het Europese systeem voor btw-nummers. Je nummer moet geldig zijn voor internationale transacties. Heb je geen btw-nummer, dan geef je dat aan.
 
-Volgens de gebruiksvoorwaarden sluit je in Europa je contract met Shopify International Limited in Ierland. Dat betekent voor je btw-aangifte iets.
+In Europa sluit je je contract met Shopify International Limited in Ierland. Dat betekent voor je btw-aangifte iets.
 
-Krijg je als ondernemer een dienst van een bedrijf uit een ander EU-land, dan krijg je volgens de Belastingdienst meestal een factuur met 'btw verlegd'. Je berekent de btw dan zelf en geeft die op in rubriek 4b van je btw-aangifte. Gebruik je het abonnement voor btw-belaste omzet, dan trek je hetzelfde bedrag weer af als voorbelasting in rubriek 5b. Per saldo betaal je dan niets.
+De Belastingdienst legt uit: krijg je als ondernemer een dienst van een bedrijf uit een ander EU-land, dan krijg je meestal een factuur met 'btw verlegd'. Je berekent de btw dan zelf en geeft die op in rubriek 4b van je btw-aangifte. Gebruik je het abonnement voor btw-belaste omzet, dan trek je hetzelfde bedrag weer af als voorbelasting in rubriek 5b. Per saldo betaal je dan niets.
 
 Je Shopify-factuur hoort dus ook in je btw-aangifte, niet alleen bij je kosten. Hoe je die aangifte stap voor stap invult, lees je bij [zo doe je je btw-aangifte als zzp'er](https://boekhoudmatch.nl/blog/btw-aangifte-doen-zzp/) op BoekhoudMatch.
 
 ## Extra kosten: apps en thema's
 
-Veel functies voeg je toe met apps. Een deel daarvan komt van andere bedrijven dan Shopify. Volgens Shopify kunnen die kosten periodiek, per gebruik of eenmalig zijn. Ze staan wel op je Shopify-factuur, maar in een andere cyclus dan je abonnement.
+Veel functies voeg je toe met apps. Een deel daarvan komt van andere bedrijven dan Shopify. Shopify onderscheidt periodieke appkosten, kosten per gebruik en eenmalige kosten. Ze staan wel op je Shopify-factuur, maar in een andere cyclus dan je abonnement.
 
-Voor het uiterlijk van je winkel kies je een thema. In de Shopify Theme Store vind je gratis en betaalde thema's. Koop je een thema van een andere partij, dan krijg je dat geld volgens Shopify niet terug.
+Voor het uiterlijk van je winkel kies je een thema. In de Shopify Theme Store vind je gratis en betaalde thema's. Shopify geeft aan dat je geen geld terugkrijgt als je een thema van een andere partij koopt.
 
 Zo houd je deze kosten in de hand:
 

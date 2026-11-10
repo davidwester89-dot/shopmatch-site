@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs';
 // F2 Hostinger-prijsherstel (SC + MM 10-11-2026), push 16-11: verlengprijzen, neutrale instaptekst, matchbasis 9.99/16.99.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -52,7 +53,7 @@ test('F2: geen Hostinger-introprijzen sitebreed, wel verlengprijzen en SC-zin', 
   assert.match(plat, /Cloud Startup[\s\S]*€ 23,99 per maand/);
   const post = read('dist/blog/hostinger-website-webshop-kosten/index.html');
   assert.match(tekst(post), /Voor de actuele instapprijs, de looptijd en het bedrag dat je vooraf betaalt/);
-  assert.match(tekst(post), /exclusief btw \(volgens de prijspagina van Hostinger\)/);
+  assert.match(tekst(post), /Hostinger toont deze prijzen exclusief btw\./);
   const vg = tekst(read('dist/vergelijken/index.html'));
   assert.ok(vg.includes('Hostinger exclusief btw (volgens de prijspagina van Hostinger)'));
   assert.doesNotMatch(vg, /Lightspeed, Hostinger en WooCommerce vermelden het in de opgehaalde prijstekst niet/);
@@ -63,9 +64,9 @@ test('F2: geen Hostinger-introprijzen sitebreed, wel verlengprijzen en SC-zin', 
   assert.ok(shop.includes('Wil je klein en goedkoper starten? Kijk dan ook naar'));
   assert.ok(shop.includes('href="/platformen/hostinger/">Hostinger</a>, of naar <a href="/platformen/wix/">Wix</a> als je veel ontwerpvrijheid wilt.'));
   assert.doesNotMatch(shop, /het platform met de laagste instapprijs/);
-  assert.match(shop, /"dateModified": ?"2026-11-16"/);
+  assert.match(shop, /"dateModified": ?"2026-11-18"/);
   assert.match(shop, /"datePublished": ?"2026-10-17"/);
-  assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-16">16 november 2026<\/time>/);
+  assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-18">18 november 2026<\/time>/);
   const platH = tekst(read('dist/platformen/hostinger/index.html'));
   assert.ok(platH.includes('Eenvoudige site of kleine shop'));
   assert.doesNotMatch(platH, /Laagste instapprijs/);

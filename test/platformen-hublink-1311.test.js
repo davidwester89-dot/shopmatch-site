@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs';
 // Hub-link 13-11-2026: precies één contextuele tekstlink in de homepage-<main> naar /platformen/.
 // L7-hygiëne: lastmod >= parent-build, en alleen omhoog bij bodywijziging.
 // Op deze keten (Hostinger-v3 boven B): parent is B (1bf0c3d) of, bij een losse FF-stap, de directe voorganger.
@@ -81,7 +82,7 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 16-11 alleen bij bodyw
     assert.equal(tSm.get('/'), HB_UPD);
     assert.ok(tSm.get('/') >= HL_UPD);
     assert.equal(tSm.get('/blog/'), HB_UPD);
-    assert.equal(tSm.get('/platformen/shopify/'), HB_UPD);
+    assert.equal(tSm.get('/platformen/shopify/'), revisieDatum('/platformen/shopify/', HB_UPD));
     const htmlOf = (out) => new Map(walk(out).filter((f) => f.endsWith('.html') && !ign.test(f)).map((f) => [f, readFileSync(join(out, f), 'utf8')]));
     const bPages = htmlOf(bOut);
     const tPages = htmlOf(tOut);
@@ -98,7 +99,7 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 16-11 alleen bij bodyw
       if (noindex(html) || redirect(html)) continue;
       if (bodyFingerprint(old, CFG) !== bodyFingerprint(html, CFG)) bodyGewijzigd.add(path);
     }
-    for (const path of bodyGewijzigd) assert.equal(tSm.get(path), HB_UPD, `${path} bodywijziging zonder 16-11`);
+    for (const path of bodyGewijzigd) assert.equal(tSm.get(path), revisieDatum(path, HB_UPD), `${path} bodywijziging zonder 16-11`);
     for (const [path, lm] of tSm) {
       const oud = bSm.get(path);
       if (oud) assert.ok(lm >= oud, `${path}: lastmod ${lm} < parent ${oud}`);
@@ -110,8 +111,8 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 16-11 alleen bij bodyw
     assert.match(hub, /Laatst bijgewerkt <time datetime="2026-11-16">16 november 2026<\/time>/);
     assert.doesNotMatch(hub, /"dateModified": ?"2026-11-12"/);
     const shop = readFileSync(join(tOut, 'platformen/shopify/index.html'), 'utf8');
-    assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-16">16 november 2026<\/time>/);
-    assert.match(shop, /"dateModified": ?"2026-11-16"/);
+    assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-18">18 november 2026<\/time>/);
+    assert.match(shop, /"dateModified": ?"2026-11-18"/);
     assert.match(shop, /"datePublished": ?"2026-10-17"/);
   } finally {
     rmSync(tmp, { recursive: true, force: true });

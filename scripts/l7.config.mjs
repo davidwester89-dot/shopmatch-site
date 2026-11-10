@@ -2,6 +2,8 @@
 import { execSync, execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 export const CFG = {
+  // Geen datumlift door alleen een gewijzigd kind; bij eigen body geldt de gewone L7-plicht.
+  bodyOnlyHubs: ["/blog/", "/platformen/"],
   build: (dir, env) => { execSync('node build.mjs', { cwd: dir, env, stdio: 'ignore' }); return join(dir, 'dist'); },
   hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }], // sinds 13-11 geen lastmod-plicht: een kinddatum tilt de hub niet (l7check)
   // SEO + SC: /platformen/ erft de datum van een kind niet. Lastmod blijft 2026-11-04 (gelijk aan main), ook als /platformen/shopify/ nieuwer is.

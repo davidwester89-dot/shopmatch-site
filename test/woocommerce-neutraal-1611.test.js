@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs';
 // WooCommerce-neutralisatie (PM 10-11-2026): geen CTA/sponsored voor de platformkeuze.
 // Automattic Affiliate dekt niet de gratis plug-in. Vervanging: gewone bronlink.
 import test from 'node:test';
@@ -64,15 +65,15 @@ test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink;
 
   const sm = read('dist/sitemap.xml');
   for (const p of WN_PADEN) {
-    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${WN_UPD}</lastmod>`), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${WN_UPD}">`, 'i'), p);
+    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${revisieDatum(p, WN_UPD)}</lastmod>`), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, WN_UPD)}">`, 'i'), p);
   }
   assert.match(read('dist/js/lib/partnerlinks.js'), /Bron: \$\{naam\}/);
 
   // datePublished van de bestaande B2B-post blijft 17-10.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-16"/);
+  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-18"/);
   // /gidsen/ blijft 5-11 (geen Woo-wijziging). /platformen/shopify/ blijft 16-11 (ALT_ZIN in Hostinger-v3; deze hash tilt hem niet).
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/gidsen\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-16<\/lastmod>/);
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-18<\/lastmod>/);
 });

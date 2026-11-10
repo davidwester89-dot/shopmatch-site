@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs';
 // Shopify-verdieping 12-11-2026 (SEO wk46): Plus, rekenvoorbeeld eerste jaar, tarieven per transactie, POS-link; L7-datum 12-11.
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -35,9 +36,9 @@ test('L7: /platformen/shopify/ 16-11 door ALT_ZIN-bodywijziging; hub 16-11 door 
   assert.deepEqual([...SD_PADEN], ['/platformen/shopify/']);
   // /platformen/shopify/ krijgt 16-11 (hbDatum na sdDatum) door de zichtbare ALT_ZIN-wijziging.
   for (const p of SD_PADEN) {
-    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${HB_UPD}</lastmod>`), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${HB_UPD}">`, 'i'), p);
-    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${HB_UPD}"`));
+    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${revisieDatum(p, HB_UPD)}</lastmod>`), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, HB_UPD)}">`, 'i'), p);
+    assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${revisieDatum(p, HB_UPD)}"`));
     assert.match(read(`dist${p}index.html`), /"datePublished": ?"2026-10-17"/);
   }
   // Hub /platformen/ heeft op 16-11 een eigen bodywijziging (Hostinger-prijstekst), niet alleen door dit Shopify-kind.
@@ -49,15 +50,15 @@ test('L7: /platformen/shopify/ 16-11 door ALT_ZIN-bodywijziging; hub 16-11 door 
 // SEO-B1 45b6c11: de gelinkte blog spreekt de Shopify-pagina niet meer tegen (iDEAL € 0,29); L7 12-11 op die blog en hub /blog/.
 test('SEO-B1 12-11: iDEAL € 0,29 in blog shopify-wix-jouwweb, blog en /blog/ op SD_UPD', () => {
   const b = tekst('/blog/shopify-wix-jouwweb-kleine-webshop/');
-  assert.ok(b.includes('rekent Shopify volgens de prijspagina € 0,29 per betaling bij Basic, Grow en Advanced'));
+  assert.ok(b.includes('rekent Shopify € 0,29 per betaling bij Basic, Grow en Advanced'));
   assert.ok(!b.includes('een vast bedrag noemt Shopify niet'));
   const sm = read('dist/sitemap.xml');
   const blogP = '/blog/shopify-wix-jouwweb-kleine-webshop/';
   // F1 (16-11): eigen bodywijziging (JouwWeb-knop → bronlink); lastmod niet meer SD_UPD.
   assert.ok(F1_PADEN.has(blogP));
-  assert.ok(sm.includes(`<loc>https://shopmatch.nl${blogP}</loc><lastmod>${F1_UPD}</lastmod>`), blogP);
-  assert.match(read(`dist${blogP}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${F1_UPD}">`, 'i'));
-  assert.match(read(`dist${blogP}index.html`), new RegExp(`"dateModified": ?"${F1_UPD}"`));
+  assert.ok(sm.includes(`<loc>https://shopmatch.nl${blogP}</loc><lastmod>${revisieDatum(blogP, F1_UPD)}</lastmod>`), blogP);
+  assert.match(read(`dist${blogP}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(blogP, F1_UPD)}">`, 'i'));
+  assert.match(read(`dist${blogP}index.html`), new RegExp(`"dateModified": ?"${revisieDatum(blogP, F1_UPD)}"`));
   // /blog/ body wijzigt door de nieuwere Hostinger-post (16-11); lastmod = max(updated) >= SD_UPD.
   const blogLm = sm.match(/<loc>https:\/\/shopmatch\.nl\/blog\/<\/loc><lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/)?.[1];
   assert.ok(blogLm && blogLm >= SD_UPD, `/blog/ lastmod ${blogLm}`);
