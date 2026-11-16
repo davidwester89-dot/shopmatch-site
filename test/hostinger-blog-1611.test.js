@@ -30,7 +30,7 @@ test('hostinger-blog L7: post, hub /blog/, home en prijswijzigingspagina\'s op 2
   const h = readFileSync(new URL('../dist/blog/hostinger-website-webshop-kosten/index.html', import.meta.url), 'utf8');
   assert.match(h, /"dateModified": ?"2026-11-20"/);
   assert.match(h, /rel="sponsored nofollow noopener"[^>]*data-vendor="hostinger"/);
-  assert.match(readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8'), /bijgewerkt op <time datetime="2026-11-20">/);
+  assert.match(readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8'), new RegExp(`bijgewerkt op <time datetime="${revisieDatum('/', '2026-11-20')}">`)); // 20-11: bloglijst (dropshipping-post)
   for (const p of HB_PADEN) {
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${revisieDatum(p, HB_UPD)}</lastmod>`), p);
     assert.match(readFileSync(new URL(`../dist${p}index.html`, import.meta.url), 'utf8'), new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, HB_UPD)}">`, 'i'), p);
