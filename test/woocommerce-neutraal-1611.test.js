@@ -10,7 +10,8 @@ import { knop, uitgaand, PARTNERLINKS } from '../src/lib/partnerlinks.js';
 import { VERKOOP_VANAF, PLATFORMS } from '../src/lib/platforms.js';
 import { WN_PADEN, WN_UPD } from '../src/l7-woocommerce-neutraal-1611.mjs';
 // 20-11: een latere pushdatum (nieuwe blogpost) mag meebouwen; nooit eerder dan 19-11.
-const LATER = (k) => (process.env[k] && process.env[k] > '2026-11-19' ? process.env[k] : '2026-11-19');
+const amsterdamToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date());
+const LATER = (k) => { const v = process.env[k] || amsterdamToday(); return v > '2026-11-19' ? v : '2026-11-19'; };
 
 const read = (p) => readFileSync(p, 'utf8');
 const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? files(p) : p.endsWith('.html') || p.endsWith('.js') ? [p] : []; });

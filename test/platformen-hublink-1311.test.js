@@ -1,4 +1,4 @@
-import { revisieDatum } from './nuchter-datums-helper.mjs';
+import { revisieDatum, buildDag } from './nuchter-datums-helper.mjs';
 // Hub-link 17-11-2026: precies één contextuele tekstlink in de homepage-<main> naar /platformen/.
 // L7-hygiëne: lastmod >= parent-build, en alleen omhoog bij bodywijziging.
 // Op deze keten (Hostinger-v3 boven A+B): parent is A+B (892f387) of, bij een losse FF-stap, de directe voorganger.
@@ -18,7 +18,8 @@ import { HB_UPD } from '../src/l7-hostinger-blog-1611.mjs';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const BASIS = process.env.L7_BASE || '892f3870a445eb0e427f048a7ebc71dc49fc6277';
 const ANKER = 'alle webshopplatformen vergelijken';
-const env = { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: process.env.BUILD_DATE || HB_UPD, PUSH_DATE: process.env.PUSH_DATE || HB_UPD };
+const dag = [HB_UPD, buildDag()].sort().at(-1);
+const env = { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: process.env.BUILD_DATE || dag, PUSH_DATE: process.env.PUSH_DATE || dag };
 const ign = /^(404\.html|google[0-9a-f]+\.html)$/;
 const noindex = (html) => /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
 const redirect = (html) => /<meta\b[^>]*http-equiv=["']refresh["']/i.test(html);

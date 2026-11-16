@@ -26,10 +26,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - run: echo "PUSH_DATE=$(TZ=Europe/Amsterdam date +%F)" >> "$GITHUB_ENV"
       - run: npm test
         env:
           L7_BASE: ${{ github.event.before }} # L7 vergelijkt met wat live stond, niet HEAD met zichzelf
+          PUSH_DATE: ${{ env.PUSH_DATE }}
+          BUILD_DATE: ${{ env.PUSH_DATE }}
       - run: npm run build
+        env:
+          PUSH_DATE: ${{ env.PUSH_DATE }}
+          BUILD_DATE: ${{ env.PUSH_DATE }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
