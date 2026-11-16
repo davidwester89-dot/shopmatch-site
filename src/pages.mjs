@@ -52,8 +52,23 @@ const matchFaq = () => [
 ];
 const PER_ALLE = perAanbieder(IDS);
 // Extra controledatum alleen in de stempel van deze platformpagina's (SC 01-11: JouwWeb-actie en Shopify gecontroleerd op 1-11).
-const STAMP_EXTRA = { jouwweb: [['JouwWeb', '2026-11-01']], shopify: [['Shopify', '2026-11-01']] };
+const STAMP_EXTRA = { jouwweb: [['JouwWeb', '2026-11-16']], shopify: [['Shopify', '2026-11-01']] };
 const perTijd = (per) => per.map(([n, d]) => `, ${esc(n)} op <time datetime="${d}">${fmtDate(d)}</time>`).join('');
+// Wk47-upgrade /platformen/jouwweb/ (L7 23-11 via src/l7-jouwweb-tarieven-2311.mjs): tarieventabel jaar- vs maandbetaling en H2 'Bijkomende kosten'.
+// Alleen jouwweb.nl (tarieven + FAQ websitebouwer), opgehaald 16-11-2026. Standaardtarief, excl. btw; de actie t/m 30-11 staat in platforms.js.
+const JW_BRONNEN = [['JouwWeb tarieven', 'https://www.jouwweb.nl/tarieven'], ['JouwWeb websitebouwer (veelgestelde vragen)', 'https://www.jouwweb.nl/website-maker']];
+const JW_JAAR = [['Lite', 5.5, null], ['Pro', 10, 12], ['Business', 20, null]];
+const jwEur = (n) => '€ ' + (Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ','));
+const JW_TARIEVEN = `<h3>Jaarbetaling of maandbetaling</h3>
+<div class="table-wrap"><table class="data"><thead><tr><th scope="col">Pakket</th><th scope="col">Per maand bij maandbetaling</th><th scope="col">Per maand bij jaarbetaling</th><th scope="col">Verschil per jaar</th></tr></thead><tbody>${JW_JAAR.map(([n, pm, mnd]) => `<tr><th scope="row">${n}</th><td>${mnd ? jwEur(mnd) : 'Niet vermeld op jouwweb.nl'}</td><td>${jwEur(pm)}</td><td>${mnd ? jwEur((mnd - pm) * 12) : '–'}</td></tr>`).join('')}</tbody></table></div>
+<p class="sub">Standaardtarief, exclusief btw. Verschil per jaar = 12 × het verschil per maand (onze rekensom). JouwWeb Pro kost € 120 per jaar bij jaarbetaling.</p>
+<p>JouwWeb rekent de prijzen op de tarievenpagina bij jaarbetaling. Maandelijks betalen kan ook, maar is duurder: voor Pro noemt JouwWeb € 12 per maand. Voor Lite en Business staat het maandtarief niet op de site.</p>
+<p>Het verschil zit ook in het contract. Bij maandbetaling zeg je op met een opzegtermijn van 1 maand. Een jaarabonnement wordt automatisch met een jaar verlengd, tenzij je minimaal 1 maand voor de verlengingsdatum opzegt. Betalen kan met iDEAL, creditcard, PayPal, Bancontact of overschrijving.</p>
+<p>Wil je eerst kijken of de editor je ligt? Het Gratis-pakket kost niets, maar heeft geen eigen domeinnaam. Meer daarover in <a href="/gratis-website-maken/">gratis website maken</a>.</p>
+<h2>Bijkomende kosten</h2>
+<ul><li><strong>Domeinnaam.</strong> Bij Lite, Pro en Business is je domeinnaam het eerste jaar gratis, daarna € 20 per jaar. Een extra domeinnaam kost € 20 per jaar.</li><li><strong>Mailbox.</strong> Pro heeft 1 mailbox, Business 1 XL-mailbox. Een extra mailbox kost € 15 per jaar.</li><li><strong>Hosting.</strong> Webhosting en een beveiligde verbinding (SSL) zitten in elk pakket. Er zijn geen opstartkosten.</li><li><strong>Webshop.</strong> Verkopen kan vanaf Pro, tot 10 producten; Business heeft onbeperkt producten. Alle webshopfuncties zitten in die pakketten zonder extra kosten, en JouwWeb rekent 0% verkoopcommissie.</li><li><strong>Betalingen.</strong> Het betalingsverkeer loopt via Mollie. Wat Mollie per transactie rekent, staat niet op jouwweb.nl.</li></ul>
+<p><strong>Rekenvoorbeeld van ShopMatch</strong> met het standaardtarief, exclusief btw: JouwWeb Pro kost € 120 per jaar bij jaarbetaling, met de domeinnaam het eerste jaar gratis. Vanaf het tweede jaar betaal je bij jaarbetaling € 120 + € 20 voor de domeinnaam = € 140 per jaar.</p>
+<p>Twijfel je tussen JouwWeb en Wix? Zie <a href="/vergelijken/wix-vs-jouwweb/">Wix of JouwWeb</a> en <a href="/blog/shopify-wix-jouwweb-kleine-webshop/">Shopify, Wix of JouwWeb voor een kleine webshop</a>. Als zzp'er lees je meer in <a href="/website-maken-zzp/">website maken als zzp'er</a>. Of laat de <a href="/shop-match/">match</a> drie platforms voor je kiezen.</p>`;
 const bijgewerkt = (art, upd) => ({ ...art, lastmod: upd, stamp: { ...art.stamp, updated: upd }, article: { ...art.article, updated: upd }, schema: [{ ...art.schema[0], dateModified: upd }, ...art.schema.slice(1)] });
 const logo = (id, maat = 'md') => logoImg(id, { maat });
 
@@ -212,13 +227,13 @@ export const platformPages = IDS.map((id) => {
 <div class="pcard first"><div class="pc-head"><span class="sc-lbl">Verkopen vanaf</span><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p>${p.vanaf !== VERKOOP_VANAF[id] && id !== 'woocommerce' ? `<p class="pc-price">Website zonder verkoop: vanaf ${esc(p.vanafTekst)}</p>` : ''}</div>
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 <div class="pc-cta">${knop(id, 'platform_top', 'btn', wixTrafcat(id, 'wsb'))}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
-<h2>Pakketten en prijzen</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.slug === 'hostinger' ? '<p>Tijdelijke actieprijzen zonder zichtbare einddatum tonen we niet.</p>' : ''}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
+<h2>${id === 'jouwweb' ? 'Pakketten, prijzen en tarieven' : 'Pakketten en prijzen'}</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.slug === 'hostinger' ? '<p>Tijdelijke actieprijzen zonder zichtbare einddatum tonen we niet.</p>' : ''}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}${id === 'jouwweb' ? JW_TARIEVEN : ''}
 <h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld levert geen punt op, net als nee. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
 ${v ? v.html + '\n' : ''}<div class="out">${knop(id, 'platform_bottom', 'btn', wixTrafcat(id, 'wsb'))}</div>
 <h2>Alternatieven</h2><ul class="gidslijst">${alt.map((x) => `<li class="withlogo">${logo(x, 'sm')}<a href="/platformen/${P[x].slug}/">${esc(P[x].naam)}</a> · ${esc(BEST_FOR[x])} · ${verkoopTekst(x)}</li>`).join('')}${(RELATED[id] || []).map(([h, tt]) => `<li><a href="${h}">${esc(tt)}</a></li>`).join('')}<li><a href="/vergelijken/">Alle platforms naast elkaar</a></li></ul>${ALT_ZIN[id] || ''}
-${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featureBronnen(id), v ? v.sources : [])}</article>`,
+${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, id === 'jouwweb' ? JW_BRONNEN : [], featureBronnen(id), v ? v.sources : [])}</article>`,
   };
 });
 
