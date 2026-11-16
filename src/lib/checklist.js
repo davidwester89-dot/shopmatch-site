@@ -45,7 +45,7 @@ export function ranglijst(ids = Object.keys(PLATFORMS)) {
 // Beste keuze per situatie: vaste regels op de checklist en prijs. Goedkoopste platform dat aan de regel voldoet.
 export const SITUATIES = [
   { id: 'start', titel: 'Goedkoopste webshop, per maand te betalen', regel: 'Hosting inbegrepen en per maand te betalen. Laagste verkoopprijs.', past: (f) => f.hosting.v === 'ja' && f.maand.v === 'ja' },
-  { id: 'budget', titel: 'Laagste prijs als je vooruit betaalt', regel: 'Hosting inbegrepen. Laagste maandprijs, ook bij een lange looptijd.', past: (f) => f.hosting.v === 'ja' },
+  { id: 'budget', titel: 'Laagste prijs als je vooruit betaalt', regel: 'Hosting inbegrepen. Laagste maandprijs van de hosted platforms, bij jaarbetaling.', past: (f) => f.hosting.v === 'ja' },
   { id: 'winkel', titel: 'Winkel met webshop', regel: 'Kassa en webshop van één leverancier, met Nederlandse vestiging.', past: (f) => f.pos.v === 'ja' && f.nl.v === 'ja' && f.hosting.v === 'ja' },
   { id: 'groei', titel: 'B2B en verkoop over de grens', regel: 'B2B-functies, meerdere talen en onbeperkt producten, met hosting.', past: (f) => f.b2b.v === 'ja' && f.talen.v === 'ja' && f.onbeperkt.v === 'ja' && f.hosting.v === 'ja' },
   { id: 'controle', titel: 'Volledige controle', regel: 'Zelf hosten, geen omzetaandeel, onbeperkt producten.', past: (f) => f.hosting.v === 'nee' && f.geenfee.v === 'ja' && f.onbeperkt.v === 'ja' },

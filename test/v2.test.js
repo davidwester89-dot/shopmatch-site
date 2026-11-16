@@ -43,7 +43,7 @@ test('score is de som van de punten (ja 1, deels 0,5, rest 0)', () => {
 
 test('situaties volgen uit vaste regels', () => {
   const t = Object.fromEntries(situaties().map((s) => [s.id, s.top]));
-  assert.deepEqual(t, { start: 'jouwweb', budget: 'hostinger', winkel: 'lightspeed', groei: 'shopify', controle: 'woocommerce' });
+  assert.deepEqual(t, { start: 'jouwweb', budget: 'jouwweb', winkel: 'lightspeed', groei: 'shopify', controle: 'woocommerce' }); // budget: Hostinger-verkoopprijs is de toetsbare verlengprijs 16.99 (MM 10-11), daardoor JouwWeb 10 het laagst
 });
 
 test('prijzen in de vergelijking = prijzen in de match', () => {
