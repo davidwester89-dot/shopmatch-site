@@ -72,7 +72,7 @@ test('F2: geen Hostinger-introprijzen sitebreed, wel verlengprijzen en SC-zin', 
   const home = tekst(read('dist/index.html'));
   assert.ok(home.includes('Hosting inbegrepen. Laagste maandprijs van de hosted platforms, bij jaarbetaling.'));
   assert.doesNotMatch(home, /ook bij een lange looptijd/);
-  // JouwWeb/Lightspeed/Mijndomein blijven CTA (F1 deels open). WooCommerce is in deze neutrale hash een bronlink; deze test dekt Hostinger-prijzen, niet de CTA-vorm.
+  // F1 maakt van JouwWeb/Lightspeed/Mijndomein/WooCommerce bronlinks; deze test dekt Hostinger-prijzen, niet de CTA-vorm.
 });
 
 test('quiz.js toont voor Hostinger de neutrale instapzin, geen introprijs', () => {

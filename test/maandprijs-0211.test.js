@@ -5,7 +5,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { EF_PADEN } from '../src/l7-externe-feedback-0311.mjs';
-import { WN_PADEN } from '../src/l7-woocommerce-neutraal-1611.mjs'; // op 3-11 opnieuw bijgewerkt: test/externe-feedback-0311.test.js
+import { WN_PADEN } from '../src/l7-woocommerce-neutraal-1611.mjs';
+import { F1_PADEN } from '../src/l7-f1-neutraal-1611.mjs'; // op 3-11 opnieuw bijgewerkt: test/externe-feedback-0311.test.js
 import { readFileSync } from 'node:fs';
 import { verkoopPrijs, score } from '../src/lib/match.js';
 import { VERKOOP_VANAF, PLATFORMS } from '../src/lib/platforms.js';
@@ -33,10 +34,10 @@ test('L7 2-11: pagina\'s met gewijzigde kaartprijzen op de pushdatum', () => {
   const sm = read('dist/sitemap.xml');
   // /shop-match/ is op 5-11 opnieuw bijgewerkt (voorbeelden en vragen); die datum test test/shop-match-0311.test.js.
   const PAGINAS = ['/', '/platformen/', '/vergelijken/', '/vergelijken/shopify-vs-lightspeed/', '/vergelijken/shopify-vs-woocommerce/', ...Object.keys(PLATFORMS).map((id) => `/platformen/${PLATFORMS[id].slug}/`)];
-  for (const p of PAGINAS.filter((x) => !EF_PADEN.has(x) && !WN_PADEN.has(x))) {
+  for (const p of PAGINAS.filter((x) => !EF_PADEN.has(x) && !WN_PADEN.has(x) && !F1_PADEN.has(x))) {
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${DATUM}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${DATUM}">`, 'i'), p);
   }
-  for (const p of ['/vergelijken/shopify-vs-lightspeed/', '/platformen/shopify/', '/platformen/lightspeed/'].filter((x) => !EF_PADEN.has(x) && !WN_PADEN.has(x))) assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
+  for (const p of ['/vergelijken/shopify-vs-lightspeed/', '/platformen/shopify/', '/platformen/lightspeed/'].filter((x) => !EF_PADEN.has(x) && !WN_PADEN.has(x) && !F1_PADEN.has(x))) assert.match(read(`dist${p}index.html`), new RegExp(`"dateModified": ?"${DATUM}"`), p);
   assert.match(read('dist/platformen/lightspeed/index.html'), /Prijzen gecontroleerd op <time datetime="2026-10-17">17 oktober 2026<\/time>, Lightspeed op <time datetime="2026-11-01">1 november 2026<\/time>/);
 });

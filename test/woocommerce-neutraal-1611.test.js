@@ -55,8 +55,8 @@ test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink;
   assert.deepEqual(fout, []);
   assert.ok(bron >= 5, `verwacht bronlink op platformpagina, vs-pagina, beste-gids, blog en hub; gevonden ${bron}`);
 
-  // Andere merken blijven een CTA-knop (Naar …, data-cta=outbound) — niet per ongeluk mee geneutraliseerd.
-  for (const id of ['jouwweb', 'lightspeed', 'mijndomein', 'shopify', 'hostinger', 'wix']) {
+  // Betaalde merken blijven een CTA-knop. JouwWeb/Lightspeed/Mijndomein zijn in F1 (opvolgende hash) bronlinks; dat dekt test/f1-neutraal-1611.test.js.
+  for (const id of ['shopify', 'hostinger', 'wix']) {
     const re = new RegExp(`data-vendor="${id}"[^>]*data-cta="outbound"[^>]*>Naar `);
     const hit = files('dist').some((f) => f.endsWith('.html') && re.test(read(f)));
     assert.ok(hit, `${id} moet nog een CTA-knop "Naar …" hebben`);
@@ -67,7 +67,7 @@ test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink;
     assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${WN_UPD}</lastmod>`), p);
     assert.match(read(`dist${p}index.html`), new RegExp(`bijgewerkt (op )?<time datetime="${WN_UPD}">`, 'i'), p);
   }
-  assert.match(read('dist/js/lib/partnerlinks.js'), /Bron: WooCommerce/);
+  assert.match(read('dist/js/lib/partnerlinks.js'), /Bron: \$\{naam\}/);
 
   // datePublished van de bestaande B2B-post blijft 17-10.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
