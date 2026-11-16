@@ -42,7 +42,7 @@ const out = () => {
 };
 after(() => TMP && rmSync(TMP, { recursive: true, force: true }));
 
-test('hub-audit (L7): elke hub draagt de nieuwste datum van zijn kinderen (zichtbare regel en lastmod)', (t) => {
+test('hub-audit (L7): een kinddatum tilt de hub niet (lastmod alleen bij bodywijziging)', (t) => {
   const alle = hubAudit(out(), CFG);
   const bekend = (h) => isBekend(h, BEKEND_HUB);
   for (const b of BEKEND_HUB.filter((b) => !bekendActief(b))) t.diagnostic(`BEKEND_HUB verlopen op ${b.tot}, telt weer als fout: ${b.pad}`);
