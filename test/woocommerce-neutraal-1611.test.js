@@ -9,6 +9,8 @@ import { execSync } from 'node:child_process';
 import { knop, uitgaand, PARTNERLINKS } from '../src/lib/partnerlinks.js';
 import { VERKOOP_VANAF, PLATFORMS } from '../src/lib/platforms.js';
 import { WN_PADEN, WN_UPD } from '../src/l7-woocommerce-neutraal-1611.mjs';
+// 20-11: een latere pushdatum (nieuwe blogpost) mag meebouwen; nooit eerder dan 19-11.
+const LATER = (k) => (process.env[k] && process.env[k] > '2026-11-19' ? process.env[k] : '2026-11-19');
 
 const read = (p) => readFileSync(p, 'utf8');
 const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? files(p) : p.endsWith('.html') || p.endsWith('.js') ? [p] : []; });
@@ -35,7 +37,7 @@ test('prijzen en ranking-basis WooCommerce ongewijzigd', () => {
 });
 
 test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink; andere merken ongewijzigd als CTA', () => {
-  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: '2026-11-19', PUSH_DATE: '2026-11-19' } });
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: LATER('BUILD_DATE'), PUSH_DATE: LATER('PUSH_DATE') } });
   const fout = [];
   let bron = 0;
   for (const f of files('dist')) {
