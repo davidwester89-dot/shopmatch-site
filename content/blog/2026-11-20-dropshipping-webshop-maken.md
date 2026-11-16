@@ -80,7 +80,7 @@ Alle jaarkosten per platform naast elkaar vind je in [wat een webshop beginnen k
 
 **Retour.** Is je webshop in Nederland gevestigd, dan heb je een retouradres in Nederland nodig, goed vindbaar op je site. Vermeld wie het terugsturen betaalt en wat het kost. Doe je dat niet, dan zijn de retourkosten voor jou.
 
-**Leveranciers buiten de EU.** Dan krijg je te maken met douaneregels en btw bij invoer. Voor zendingen van buiten de EU tot € 150 aan particulieren in de EU bestaat de Invoerregeling van het eenloketsysteem (IOSS). Daarmee meld je de btw elke maand en betaal je in één keer voor alle betrokken EU-landen. Komt het product van buiten de EU, dan betaal je meestal ook invoerrechten. Voor e-commercezendingen tot € 150 is dat een vast bedrag van € 3 per productsoort.
+**Leveranciers buiten de EU.** Dan krijg je te maken met douaneregels en btw bij invoer. Voor zendingen van buiten de EU tot € 150 aan particulieren in de EU bestaat de Invoerregeling van het eenloketsysteem (IOSS). Daarmee meld je de btw elke maand en betaal je in één keer voor alle betrokken EU-landen. Komt het product van buiten de EU, dan betaal je meestal ook invoerrechten. Voor e-commercezendingen tot € 150 is dat een vast bedrag van € 3 per productsoort. Sinds 1 november 2026 komt daar een Europese afhandelingsvergoeding bij van € 2 per productsoort, voor alle e-commercezendingen van buiten de EU, ook boven € 150. Voor e-commercezendingen tot € 150 aan consumenten is sindsdien ook productidentificatie (M-PID) nodig.
 
 Let ook op productveiligheid en namaak. Producten die je in de EU verkoopt moeten veilig zijn, en namaakartikelen verkopen mag niet. Vraag je leverancier om technische documenten en een verklaring dat de producten geen merkenrechten schenden.
 
