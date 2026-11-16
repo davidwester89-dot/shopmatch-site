@@ -15,7 +15,7 @@ const tekst = (p) => read(`dist${p}index.html`).replace(/<script[\s\S]*?<\/scrip
 test('SC-punten 01-11: kolomkop, stempels, Lightspeed-titel, filterregel', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
   assert.match(tekst('/blog/shopify-wix-jouwweb-kleine-webshop/'), /Actie tot en met 30 november 2026 \(eerste 12 maanden 50%, onze rekensom\)/);
-  assert.match(tekst('/platformen/jouwweb/'), /Prijzen gecontroleerd op 17 oktober 2026 ?, Lightspeed op 1 november 2026 ?, JouwWeb op 1 november 2026/);
+  assert.match(tekst('/platformen/jouwweb/'), /Prijzen gecontroleerd op 17 oktober 2026 ?, Lightspeed op 1 november 2026 ?, JouwWeb op 16 november 2026/); // wk47: JouwWeb-tarieven opnieuw gecontroleerd op 16-11
   assert.match(tekst('/platformen/shopify/'), /Prijzen gecontroleerd op 17 oktober 2026[^.]*?, Shopify op 1 november 2026/);
   const t = read('dist/platformen/lightspeed/index.html').match(/<title>(.*?)<\/title>/)[1];
   assert.equal(t, 'Lightspeed kosten 2026: vanaf € 78 p/m (€ 68 jaarbetaling)'); assert.ok(t.length <= 60);

@@ -1,4 +1,4 @@
-// Onafhankelijke verwachting voor de stijlrelease van 20 november 2026.
+// Onafhankelijke verwachting voor de stijlrelease van 19 november 2026.
 export const STIJL_PADEN = new Set([
   "/blog/hostinger-website-webshop-kosten/",
   "/blog/b2b-webshop-beginnen/",
@@ -12,4 +12,7 @@ export const STIJL_PADEN = new Set([
 export const DS_PADEN = new Set(['/', '/blog/', '/blog/dropshipping-webshop-maken/']);
 const amsterdamToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date());
 export const buildDag = () => process.env.BUILD_DATE || process.env.PUSH_DATE || amsterdamToday();
-export const revisieDatum = (pad, vorige) => (DS_PADEN.has(pad) && buildDag() >= '2026-11-20') ? '2026-11-20' : STIJL_PADEN.has(pad) ? '2026-11-20' : vorige;
+// 23-11 (wk47 JouwWeb-tarieven): eigen bodywijziging op /platformen/jouwweb/ (src/l7-jouwweb-tarieven-2311.mjs).
+// Onvoorwaardelijk, net als jwDatum in de build: de body van die pagina wijzigt ongeacht de bouwdatum.
+export const JW_PADEN_TEST = new Set(['/platformen/jouwweb/']);
+export const revisieDatum = (pad, vorige) => JW_PADEN_TEST.has(pad) ? '2026-11-23' : (DS_PADEN.has(pad) && buildDag() >= '2026-11-20') ? '2026-11-20' : STIJL_PADEN.has(pad) ? '2026-11-20' : vorige;
