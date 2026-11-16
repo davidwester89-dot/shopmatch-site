@@ -6,7 +6,8 @@ export const DS_PADEN = new Set(['/']);
 const NL = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 const fmt = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${dd} ${NL[m - 1]} ${y}`; };
 /** Zet lastmod, zichtbare bijgewerkt-datum en dateModified op DS_UPD voor de pagina's in DS_PADEN. */
-export function dsDatum(p, today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10)) {
+const amsterdamToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date());
+export function dsDatum(p, today = process.env.BUILD_DATE || amsterdamToday()) {
   // Alleen als de post in deze build zit (posts met een datum in de toekomst worden overgeslagen).
   if (!DS_PADEN.has(p.path) || today < DS_UPD) return p;
   const q = { ...p, lastmod: DS_UPD };

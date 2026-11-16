@@ -37,7 +37,8 @@ function splitFaq(md) {
   return { md: md.slice(0, i) + (end < 0 ? '' : rest.slice(end)), faq };
 }
 
-export function loadPosts(dir = 'content/blog', today = process.env.BUILD_DATE || new Date().toISOString().slice(0, 10)) {
+const amsterdamToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date());
+export function loadPosts(dir = 'content/blog', today = process.env.BUILD_DATE || amsterdamToday()) {
   return readdirSync(dir).filter((f) => f.endsWith('.md')).sort().reverse()
     .map((f) => {
       const p = parsePost(f, readFileSync(join(dir, f), 'utf8'));
