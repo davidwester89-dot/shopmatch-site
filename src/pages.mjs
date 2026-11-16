@@ -162,7 +162,7 @@ const RELATED = {
 };
 // Eén zin onder Alternatieven (SEO-audit 20-10, SM-01): interne links naar platforms die nog niet geïndexeerd zijn.
 const ALT_ZIN = {
-  shopify: '<p>Wil je klein en goedkoper starten? Kijk dan ook naar <a href="/platformen/hostinger/">Hostinger</a>, het platform met de laagste instapprijs, of naar <a href="/platformen/wix/">Wix</a> als je veel ontwerpvrijheid wilt.</p>',
+  shopify: '<p>Wil je klein en goedkoper starten? Kijk dan ook naar <a href="/platformen/hostinger/">Hostinger</a>, of naar <a href="/platformen/wix/">Wix</a> als je veel ontwerpvrijheid wilt.</p>',
 };
 // Verdieping per platform (optioneel): content/platformen/<id>.md met frontmatter updated + sources (Naam | https://url).
 // Komt onder "Voor wie?"; de bronnen gaan mee in de bronregel en updated wordt lastmod en dateModified.
@@ -208,7 +208,7 @@ export const platformPages = IDS.map((id) => {
 <div class="pcard first"><div class="pc-head"><span class="sc-lbl">Verkopen vanaf</span><p class="pc-price"><strong>${verkoopTekst(id)}</strong>${esc(VERKOOP_PAKKET[id])}</p>${p.vanaf !== VERKOOP_VANAF[id] && id !== 'woocommerce' ? `<p class="pc-price">Website zonder verkoop: vanaf ${esc(p.vanafTekst)}</p>` : ''}</div>
 <ul class="pc-facts"><li><span>Producten</span><span>${maxProdTekst(id)}</span></li><li><span>iDEAL</span><span>${fv(FEATURES[id].ideal, false)}</span></li><li><span>Kassa</span><span>${fv(FEATURES[id].pos, false)}</span></li><li><span>B2B</span><span>${fv(FEATURES[id].b2b, false)}</span></li><li><span>Plek in de vergelijking</span><span>${pos} van ${IDS.length}</span></li></ul>
 <div class="pc-cta">${knop(id, 'platform_top', 'btn', wixTrafcat(id, 'wsb'))}<a href="/shop-match/">Past het bij mij? Start de match →</a></div></div>
-<h2>Pakketten en prijzen</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
+<h2>Pakketten en prijzen</h2><p class="sub">${esc(prijsNootVan(p))}</p>${plansTable(p)}${p.slug === 'hostinger' ? '<p>Tijdelijke actieprijzen zonder zichtbare einddatum tonen we niet.</p>' : ''}${p.actie ? `<p class="alert">${esc(p.actie)}</p>` : ''}
 <h2>Checklist: wat zit erin?</h2><p class="sub">Tien vaste punten, uit de site van de aanbieder. Niet vermeld levert geen punt op, net als nee. <a href="/over/#methode">Zo tellen we</a></p>${checklistTable(id)}
 <h2>Voor- en nadelen</h2><div class="pm"><div class="card plus"><h3>Sterk</h3><ul>${p.plus.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div><div class="card min"><h3>Let op</h3><ul>${p.min.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div></div>
 <h2>Voor wie?</h2><p>${esc(p.voor)}</p>
@@ -250,7 +250,7 @@ export const vsHub = {
 <div class="sortbar"><h2 style="margin:0">Alle platforms naast elkaar</h2>${sel('f-sort', 'Sorteer op', [['score', 'Meeste checklistpunten'], ['prijs', 'Laagste prijs'], ['naam', 'Naam']])}</div>
 ${matrix(RANG)}
 <p class="empty" id="f-empty" hidden>Geen platform voldoet aan alles. Zet een filter uit of <a href="/shop-match/">start de match</a>.</p>
-<p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, zoals de aanbieder het toont. JouwWeb, Hostinger en Mijndomein noemen excl. btw, Wix exclusief toeslagen; Shopify, Lightspeed en WooCommerce vermelden het niet. Bronnen staan op de pagina van elk platform.</p>
+<p class="src">Verkopen vanaf = goedkoopste pakket waarmee je online kunt verkopen, per maand, zoals de aanbieder het toont. JouwWeb en Mijndomein noemen excl. btw, Hostinger exclusief btw (volgens de prijspagina van Hostinger), Wix exclusief toeslagen; Shopify, Lightspeed en WooCommerce vermelden het in de opgehaalde prijstekst niet. Bronnen staan op de pagina van elk platform.</p>
 ${methodBox('h2', PER_ALLE)}
 <h2>Twee platforms naast elkaar</h2>${vsCards()}${matchCta()}`,
 };
@@ -309,7 +309,7 @@ export const vsPages = [
 const G = [['/gidsen/', 'Gidsen']];
 const kostRows = [
   ['jouwweb', 'Pro (tot 10 producten)', '€ 120', 'Business (onbeperkt): € 240 per jaar'],
-  ['hostinger', 'Onbeperkt', '€ 191,52 voor 48 maanden', 'Daarna € 16,99 per maand'],
+  ['hostinger', 'Onbeperkt', 'Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder.', 'Verlenging € 16,99 per maand'],
   ['mijndomein', 'MijnWebshop Start (25 producten)', '€ 162', 'Pakket loopt 12 maanden'],
   ['shopify', 'Basic', '€ 252 bij jaarbetaling', 'Bij maandbetaling € 336; 2% extra per transactie bij externe betaalprovider'],
   ['wix', 'Core', '€ 300', 'Betalingen ontvangen vanaf Core'],
@@ -318,20 +318,20 @@ const kostRows = [
 ];
 const besteFaq = [
   ['Wat is het beste webshopplatform in 2026?', 'Er is geen platform dat voor iedereen het beste is. Voor een kleine start is JouwWeb het goedkoopst met een volwaardige webshop, voor groei en verkoop over de grens is Shopify het sterkst en voor een winkel met webshop past Lightspeed eCom.'],
-  ['Wat is het goedkoopste webshopplatform?', 'Hostinger Website Bouwer Onbeperkt kost € 3,99 per maand als je 48 maanden vooraf betaalt. Bij maandelijks opzegbare pakketten is JouwWeb Pro met € 10 per maand het goedkoopst.'],
+  ['Wat is het goedkoopste webshopplatform?', 'Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder. Bij maandelijks opzegbare pakketten is JouwWeb Pro met € 10 per maand het goedkoopst.'],
 ];
 export const beste = bijgewerkt({
   ...article({ path: '/beste-webshop-platform/', title: 'Beste webshopplatform 2026: keuze per situatie', h1: 'Het beste webshopplatform van 2026', description: 'Welk webshopplatform is het beste in 2026? Per situatie de beste keuze: starters, klein budget, groei, winkel met webshop en volledige controle.', og: 'beste-webshop-platform', parents: G, faq: besteFaq }),
   navPath: '/gidsen/',
   body: `<article class="prose"><h1>Het beste webshopplatform van 2026</h1>${by()}<p class="lead">Het beste platform hangt af van wat je verkoopt, hoeveel producten je hebt en hoeveel tijd je in techniek wilt steken. Dit is onze keuze per situatie.</p>
 <h2>Beste voor starters met een paar producten: JouwWeb</h2><p>JouwWeb Pro kost € 10 per maand voor een webshop tot 10 producten, zonder verkoopcommissie. Met Business (€ 20) verkoop je onbeperkt. iDEAL en koppelingen met boekhoudprogramma's zitten erin.</p><div class="out">${knop('jouwweb', 'gids_beste')}</div>
-<h2>Beste met het kleinste budget: Hostinger Website Bouwer</h2><p>Het Onbeperkt-pakket met e-commerce kost € 3,99 per maand, maar alleen als je 48 maanden vooraf betaalt (€ 191,52). Daarna verleng je voor € 16,99 per maand.</p><div class="out">${knop('hostinger', 'gids_beste')}</div>
+<h2>Beste met het kleinste budget: Hostinger Website Bouwer</h2><p>Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder. Na de eerste looptijd verleng je Onbeperkt voor € 16,99 per maand.</p><p>Tijdelijke actieprijzen zonder zichtbare einddatum tonen we niet.</p><div class="out">${knop('hostinger', 'gids_beste')}</div>
 <h2>Beste om te groeien en internationaal te verkopen: Shopify</h2><p>Onbeperkt producten vanaf Basic (€ 28 per maand bij maandbetaling, € 21 bij jaarbetaling) en een grote appwinkel. Let op de 2% extra transactiekosten als je niet met Shopify Payments werkt.</p><div class="out">${knop('shopify', 'gids_beste')}</div>
 <h2>Beste voor een winkel met webshop: Lightspeed eCom</h2><p>Webshop en kassa van één leverancier. Essential kost € 78 per maand (€ 68 bij jaarbetaling); telefonische support krijg je vanaf Advanced (€ 138, € 120 bij jaarbetaling).</p><div class="out">${knop('lightspeed', 'gids_beste')}</div>
 <h2>Beste alles-in-één bij een Nederlandse partij: Mijndomein</h2><p>Domein, e-mail, cookiebanner en webshop in één pakket. MijnWebshop Start kost € 15 per maand voor 25 producten; het pakket loopt 12 maanden.</p><div class="out">${knop('mijndomein', 'gids_beste')}</div>
 <h2>Beste voor ontwerpvrijheid: Wix</h2><p>Veel vrijheid in vormgeving. Online betalingen ontvangen kan vanaf Core (€ 25 per maand).</p><div class="out">${knop('wix', 'gids_beste', 'btn', { trafcat: 'ecom' })}</div>
 <h2>Beste voor volledige controle: WooCommerce</h2><p>Gratis plug-in voor WordPress, zonder platformkosten of omzetaandeel. Je regelt zelf hosting, updates en beveiliging.</p><div class="out">${knop('woocommerce', 'gids_beste')}</div>
-<h2>Alles op een rij</h2><div class="table-wrap"><table class="data"><thead><tr><th>Situatie</th><th>Platform</th><th>Vanaf per maand</th></tr></thead><tbody><tr><td>Paar producten</td><td><a href="/platformen/jouwweb/">JouwWeb</a></td><td>€ 10</td></tr><tr><td>Kleinste budget</td><td><a href="/platformen/hostinger/">Hostinger</a></td><td>€ 3,99 (48 mnd vooraf)</td></tr><tr><td>Groei en buitenland</td><td><a href="/platformen/shopify/">Shopify</a></td><td>€ 28 (€ 21 bij jaarbetaling)</td></tr><tr><td>Winkel met webshop</td><td><a href="/platformen/lightspeed/">Lightspeed eCom</a></td><td>€ 78 (€ 68 bij jaarbetaling)</td></tr><tr><td>Alles bij één partij</td><td><a href="/platformen/mijndomein/">Mijndomein</a></td><td>€ 15</td></tr><tr><td>Ontwerpvrijheid</td><td><a href="/platformen/wix/">Wix</a></td><td>€ 25</td></tr><tr><td>Volledige controle</td><td><a href="/platformen/woocommerce/">WooCommerce</a></td><td>€ 0 + hosting</td></tr></tbody></table></div>
+<h2>Alles op een rij</h2><div class="table-wrap"><table class="data"><thead><tr><th>Situatie</th><th>Platform</th><th>Vanaf per maand</th></tr></thead><tbody><tr><td>Paar producten</td><td><a href="/platformen/jouwweb/">JouwWeb</a></td><td>€ 10</td></tr><tr><td>Kleinste budget</td><td><a href="/platformen/hostinger/">Hostinger</a></td><td>Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder.</td></tr><tr><td>Groei en buitenland</td><td><a href="/platformen/shopify/">Shopify</a></td><td>€ 28 (€ 21 bij jaarbetaling)</td></tr><tr><td>Winkel met webshop</td><td><a href="/platformen/lightspeed/">Lightspeed eCom</a></td><td>€ 78 (€ 68 bij jaarbetaling)</td></tr><tr><td>Alles bij één partij</td><td><a href="/platformen/mijndomein/">Mijndomein</a></td><td>€ 15</td></tr><tr><td>Ontwerpvrijheid</td><td><a href="/platformen/wix/">Wix</a></td><td>€ 25</td></tr><tr><td>Volledige controle</td><td><a href="/platformen/woocommerce/">WooCommerce</a></td><td>€ 0 + hosting</td></tr></tbody></table></div>
 ${faqHtml(besteFaq)}${matchCta('Welke past bij jouw situatie?')}${bron(...['jouwweb', 'hostinger', 'shopify', 'lightspeed', 'mijndomein', 'wix', 'woocommerce'].map((i) => P[i].bronnen))}</article>`,
 }, MD_VERVOLG);
 
@@ -363,13 +363,13 @@ export const gratis = bijgewerkt({
   body: `<article class="prose"><h1>Gratis website maken: wat kan wel en niet?</h1>${by()}<p class="lead">Een gratis website is prima om te proberen. Voor een zakelijke site wil je een eigen domeinnaam, en die zit niet in de gratis pakketten.</p>
 <h2>Gratis pakketten</h2><div class="table-wrap"><table class="data"><thead><tr><th>Aanbieder</th><th>Gratis</th><th>Grens</th></tr></thead><tbody><tr><th scope="row"><a href="/platformen/jouwweb/">JouwWeb</a></th><td>Gratis pakket, altijd</td><td>Geen eigen domeinnaam</td></tr><tr><th scope="row"><a href="/platformen/wix/">Wix</a></th><td>Gratis website</td><td>Wix-advertenties en een Wix-adres</td></tr><tr><th scope="row"><a href="/platformen/woocommerce/">WooCommerce</a></th><td>Gratis plug-in</td><td>Hosting en domein betaal je zelf</td></tr></tbody></table></div>
 <h2>Gratis proberen</h2><ul><li><a href="/platformen/shopify/">Shopify</a>: 3 dagen gratis, daarna de eerste 3 maanden € 1 per maand.</li><li><a href="/platformen/hostinger/">Hostinger</a>: 30 dagen geld-teruggarantie.</li><li><a href="/platformen/wix/">Wix</a>: 14 dagen geld-teruggarantie op een premiumpakket.</li></ul>
-<h2>De goedkoopste stap naar een eigen domein</h2><p>JouwWeb Lite kost € 5,50 per maand met het eerste jaar een gratis domeinnaam. Hostinger Premium kost € 2,99 per maand, maar alleen bij 48 maanden vooraf (€ 143,52).</p>
+<h2>De goedkoopste stap naar een eigen domein</h2><p>JouwWeb Lite kost € 5,50 per maand met het eerste jaar een gratis domeinnaam. Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder. Na de eerste looptijd verleng je Premium voor € 9,99 per maand.</p>
 <div class="out">${knop('jouwweb', 'gids_gratis')}${knop('hostinger', 'gids_gratis', 'btn ghost')}</div>
 ${faqHtml(gratisFaq)}${matchCta()}${bron(P.jouwweb.bronnen, P.wix.bronnen, P.woocommerce.bronnen, P.shopify.bronnen, P.hostinger.bronnen, P.mijndomein.bronnen)}</article>`,
 }, MD_VERVOLG);
 
 const zzpFaq = [
-  ['Welke websitebouwer is het beste voor een zzp\'er?', 'Voor een dienstensite zonder webshop zijn JouwWeb (vanaf € 5,50) en Hostinger (vanaf € 2,99 bij 48 maanden vooraf) het voordeligst. Wix geeft de meeste ontwerpvrijheid.'],
+  ['Welke websitebouwer is het beste voor een zzp\'er?', 'Voor een dienstensite zonder webshop is JouwWeb (vanaf € 5,50) een voordelige keuze. Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder. Wix geeft de meeste ontwerpvrijheid.'],
   ['Kan ik afspraken laten boeken op mijn site?', 'Ja. Bij Mijndomein zit boekingen en afspraken in elk MijnWebshop-pakket.'],
 ];
 export const zzp = bijgewerkt({
@@ -377,7 +377,7 @@ export const zzp = bijgewerkt({
   navPath: '/gidsen/', lastmod: '2026-10-19',
   body: `<article class="prose"><h1>Website maken als zzp'er</h1>${by()}<p class="lead">Een goede zzp-site heeft een eigen domeinnaam, laat zien wat je doet en maakt contact makkelijk. Dat kan zonder webbouwer.</p>
 <h2>Wat je nodig hebt</h2><ul><li>Een eigen domeinnaam en een e-mailadres op dat domein.</li><li>Een pagina per dienst, met prijzen of een vanaf-prijs.</li><li>Een contactformulier of afsprakenplanner.</li><li>Je bedrijfsgegevens onderaan je site (in de voettekst).</li></ul>
-<h2>Welke bouwer past?</h2><div class="table-wrap"><table class="data"><thead><tr><th>Bouwer</th><th>Vanaf per maand</th><th>Sterk punt</th></tr></thead><tbody><tr><th scope="row"><a href="/platformen/jouwweb/">JouwWeb</a></th><td>€ 5,50 (Lite)</td><td>Domeinnaam eerste jaar gratis, Nederlandstalig</td></tr><tr><th scope="row"><a href="/platformen/hostinger/">Hostinger</a></th><td>€ 2,99 (48 mnd vooraf)</td><td>Laagste prijs, AI-bouwer</td></tr><tr><th scope="row"><a href="/platformen/wix/">Wix</a></th><td>€ 14 (Light)</td><td>Ontwerpvrijheid</td></tr><tr><th scope="row"><a href="/platformen/mijndomein/">Mijndomein</a></th><td>€ 15 (Start)</td><td>Afspraken boeken en e-mail inbegrepen</td></tr></tbody></table></div>
+<h2>Welke bouwer past?</h2><div class="table-wrap"><table class="data"><thead><tr><th>Bouwer</th><th>Vanaf per maand</th><th>Sterk punt</th></tr></thead><tbody><tr><th scope="row"><a href="/platformen/jouwweb/">JouwWeb</a></th><td>€ 5,50 (Lite)</td><td>Domeinnaam eerste jaar gratis, Nederlandstalig</td></tr><tr><th scope="row"><a href="/platformen/hostinger/">Hostinger</a></th><td>Hostinger: bekijk de actuele instapprijs en looptijd bij de aanbieder.</td><td>AI-bouwer; verlenging Premium € 9,99 per maand</td></tr><tr><th scope="row"><a href="/platformen/wix/">Wix</a></th><td>€ 14 (Light)</td><td>Ontwerpvrijheid</td></tr><tr><th scope="row"><a href="/platformen/mijndomein/">Mijndomein</a></th><td>€ 15 (Start)</td><td>Afspraken boeken en e-mail inbegrepen</td></tr></tbody></table></div>
 <p>Wil je later ook een echte webshop met veel producten? Lees dan eerst <a href="/platformen/shopify/">wat Shopify kost en wat je ervoor krijgt</a>.</p>
 <h2>Factureren en btw</h2><p>Verkoop je via je site, dan wil je facturen en btw goed op orde. JouwWeb koppelt met onder meer e-Boekhouden, Moneybird, Jortt en SnelStart. Welk boekhoudprogramma bij je past, zie je op <a href="https://boekhoudmatch.nl/">BoekhoudMatch</a>.</p>
 <div class="out">${knop('jouwweb', 'gids_zzp')}${knop('wix', 'gids_zzp', 'btn ghost', { trafcat: 'wsb' })}</div>

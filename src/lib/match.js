@@ -22,7 +22,7 @@ const MAXPROD = Object.fromEntries(Object.entries(MAX_PRODUCTEN).map(([k, v]) =>
 // - wix 25: nl.wix.com/pricing toont alleen "jaarabonnementen die bij aankoop volledig worden betaald" (Core € 25); geen maandprijs op de prijspagina, dus blijft staan.
 // - jouwweb 10/20: jouwweb.nl/tarieven, "Prijzen zijn exclusief BTW en gelden bij jaarlijkse betaling"; maandbetaling kan, maar zonder getoonde maandprijs, dus blijft staan.
 // - lightspeed 78/138/298: lightspeedhq.nl/ecommerce/prijzen/, tab "Maandelijks" (tab "Jaarlijks": 68/120/259).
-// - hostinger 3.99: hostinger.com/nl/website-maken, "Alle plannen worden vooraf betaald" (48 maanden); geen maandbetaling, dus blijft staan.
+// - hostinger 16.99: hostinger.com/nl/website-maken, verlenging Onbeperkt € 16,99/mnd (MM 10-11-2026: alleen de toetsbare niet-tijdelijke prijs; instapprijs is een actie zonder zichtbare einddatum en telt niet mee). Geen maandbetaling.
 // - mijndomein 15/29,50/43,50: mijndomein.nl/producten/webshop, toggle "Maandelijks" (excl. btw; gecontroleerd 31-10 en 1-11-2026).
 // - woocommerce 0: gratis plug-in, geen abonnement.
 export const VERKOOPPRIJS = VERKOOP_VANAF;

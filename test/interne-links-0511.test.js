@@ -14,12 +14,16 @@ test('interne-links-exp SM: contextlink met exact anker', () => {
   assert.ok(main('/webshop-beginnen-kosten/').includes('<a href="/vergelijken/wix-vs-jouwweb/">Wix en JouwWeb naast elkaar</a>'));
 });
 
-test('interne-links-exp SM L7: /webshop-beginnen-kosten/ op 2026-11-05', () => {
+test('interne-links-exp SM L7: /webshop-beginnen-kosten/ niet ouder dan 2026-11-05', () => {
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   for (const p of LINKS_PADEN) {
-    assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>${LINKS_UPD}</lastmod>`), p);
-    assert.match(readFileSync(`dist${p}index.html`, 'utf8'), new RegExp(`bijgewerkt (op )?<time datetime="${LINKS_UPD}">`, 'i'), p);
-    assert.match(readFileSync(`dist${p}index.html`, 'utf8'), new RegExp(`"dateModified": ?"${LINKS_UPD}"`), p);
+    const lm = sm.match(new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/[/.]/g, '\\$&')}</loc><lastmod>(\\d{4}-\\d{2}-\\d{2})</lastmod>`))?.[1];
+    assert.ok(lm && lm >= LINKS_UPD, `${p} lastmod ${lm}`);
+    const h = readFileSync(`dist${p}index.html`, 'utf8');
+    const zicht = h.match(/bijgewerkt (?:op )?<time datetime="(\d{4}-\d{2}-\d{2})">/i)?.[1];
+    const dm = h.match(/"dateModified": ?"(\d{4}-\d{2}-\d{2})"/)?.[1];
+    assert.equal(zicht, lm, `${p} zichtbaar`);
+    assert.equal(dm, lm, `${p} dateModified`);
   }
 });
 
