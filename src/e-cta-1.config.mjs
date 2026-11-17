@@ -20,10 +20,10 @@ export const ECTA = {
   keuzehulp: { href: '/shop-match/', tekst: 'Doe de keuzehulp' },
   vergelijker: { href: '/vergelijken/', tekst: 'Vergelijk de webshopplatforms' },
   partners: {
-    shopify: { naam: 'Shopify', reflink: PARTNERLINKS.shopify, subid: false }, // impact 13624
-    wix: { naam: 'Wix', reflink: WIX_ECOM, subid: false }, // impact 25616 ecom
-    wixWsb: { naam: 'Wix', vendor: 'wix', reflink: WIX_WSB, subid: false }, // impact 25616 wsb
-    hostinger: { naam: 'Hostinger', reflink: PARTNERLINKS.hostinger, subid: { param: 'ws', waarde: '{site}-{slug}-{pos}' } }, // Daisycon 16780
+    shopify: { naam: 'Shopify', reflink: PARTNERLINKS.shopify, subid: false, pastAls: 'Past als je wilt groeien of in meerdere landen wilt verkopen.' }, // impact 13624; pastAls uit platforms.js voor
+    wix: { naam: 'Wix', reflink: WIX_ECOM, subid: false, pastAls: 'Past als je veel vrijheid in het ontwerp wilt, als dienstverlener of creatieve ondernemer.' }, // impact 25616 ecom; pastAls uit platforms.js voor
+    wixWsb: { naam: 'Wix', vendor: 'wix', reflink: WIX_WSB, subid: false, pastAls: 'Past als je veel vrijheid in het ontwerp wilt, als dienstverlener of creatieve ondernemer.' }, // impact 25616 wsb; zelfde voor-tekst
+    hostinger: { naam: 'Hostinger', reflink: PARTNERLINKS.hostinger, subid: { param: 'ws', waarde: '{site}-{slug}-{pos}' }, pastAls: 'Past als je een eenvoudige site of kleine shop wilt starten.' }, // Daisycon 16780; pastAls uit platforms.js voor, zonder prijsclaim
     // Wacht (kaart): JouwWeb (TT 21002), Mijndomein (TT 27013), Lightspeed eCom. Leeg = geen CTA.
     jouwweb: { naam: 'JouwWeb', reflink: '', subid: null },
     mijndomein: { naam: 'Mijndomein', reflink: '', subid: null },
