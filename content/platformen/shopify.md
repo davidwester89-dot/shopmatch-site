@@ -16,11 +16,11 @@ sources:
 ---
 ## Wat kost Shopify naast het abonnement?
 
-De abonnementsprijs is maar een deel van het verhaal. Wat je per maand betaalt, hangt ook af van hoe je klanten betalen, of je per maand of per jaar afrekent en welke apps je toevoegt. Hieronder lees je per kostenpost waar je op let, zodat je niet na drie maanden schrikt van je eerste echte factuur.
+{{tekstlink:shopify}}: de abonnementsprijs is maar een deel van het verhaal. Wat je per maand betaalt, hangt ook af van hoe je klanten betalen, of je per maand of per jaar afrekent en welke apps je toevoegt. Hieronder lees je per kostenpost waar je op let, zodat je niet na drie maanden schrikt van je eerste echte factuur.
 
 ## Kosten per transactie en Shopify Payments
 
-Shopify heeft een eigen betaaldienst: Shopify Payments. Daarmee neem je kaartbetalingen, iDEAL en andere betaalmethoden aan zonder aparte betaalprovider. Het geld komt bij je volgende uitbetaling op je rekening.
+{{tekstlink:shopify}} heeft een eigen betaaldienst: Shopify Payments. Daarmee neem je kaartbetalingen, iDEAL en andere betaalmethoden aan zonder aparte betaalprovider. Het geld komt bij je volgende uitbetaling op je rekening.
 
 Er zijn twee soorten kosten om uit elkaar te houden:
 
@@ -73,7 +73,7 @@ Twee dingen om te weten:
 
 ## Kosten per maand of per jaar
 
-Shopify heeft drie standaardabonnementen. Betaal je per jaar, dan is de prijs per maand lager:
+{{tekstlink:shopify}} heeft drie standaardabonnementen. Betaal je per jaar, dan is de prijs per maand lager:
 
 | Abonnement | Per maand bij maandbetaling | Per maand bij jaarbetaling | Verschil per jaar |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Wat is slim? Weet je nog niet zeker of je webshop loopt, begin dan met maandbeta
 
 ## Rekenvoorbeeld: wat kost Shopify het eerste jaar?
 
-Een rekenvoorbeeld, met onze eigen rekensom. Stel: je start op Basic en verkoopt het eerste jaar 240 bestellingen van € 50, samen € 12.000 omzet. Je klanten betalen met iDEAL via Shopify Payments. De bedragen komen van de prijspagina van Shopify. Btw, apps, een betaald thema en je domein tellen we niet mee.
+Een rekenvoorbeeld, met onze eigen rekensom. Stel: je start op Basic en verkoopt het eerste jaar 240 bestellingen van € 50, samen € 12.000 omzet. Je klanten betalen met iDEAL via Shopify Payments. De bedragen komen van de prijspagina van {{tekstlink:shopify}}. Btw, apps, een betaald thema en je domein tellen we niet mee.
 
 | Kostenpost | Bij maandbetaling | Bij jaarbetaling |
 |---|---|---|
@@ -103,7 +103,7 @@ Betalen al je klanten met een kaart? Dan betaal je bij Basic 1,9% + € 0,25 per
 
 ## Wat kost Shopify Plus?
 
-Shopify Plus is het abonnement "voor complexe bedrijven". Op de Nederlandse prijspagina staat Plus voor vanaf € 2.100 per maand. Een vaste eindprijs noemt Shopify daar niet. Kies je Plus voor één of drie jaar, dan kun je opzeggen na de looptijd van het abonnement.
+Shopify Plus is het abonnement "voor complexe bedrijven". Op de Nederlandse prijspagina staat Plus voor vanaf € 2.100 per maand. Een vaste eindprijs noemt {{tekstlink:shopify}} daar niet. Kies je Plus voor één of drie jaar, dan kun je opzeggen na de looptijd van het abonnement.
 
 Wat Shopify Plus biedt bovenop Advanced:
 
@@ -116,13 +116,13 @@ Een rekensom: Plus kost per jaar minstens 12 × € 2.100 = € 25.200. Bij maan
 
 ## Shopify POS: ook verkopen in een winkel
 
-Met Shopify POS verkoop je ook in een winkel of op een markt, met dezelfde producten en voorraad als in je webshop. Bij elk Shopify-abonnement kun je betalingen aannemen met een telefoon of kaartlezer. Wil je meer kassafuncties, zoals medewerkersrollen en voorraadbeheer in de winkel? Dan komt POS Pro erbij: € 79 per maand per locatie. Een kaartbetaling in de winkel kost bij Basic 0,75% + € 0,10 met een betaalpas en 1,9% + € 0,10 met een creditcard.
+Met Shopify POS verkoop je ook in een winkel of op een markt, met dezelfde producten en voorraad als in je webshop. Bij elk abonnement van {{tekstlink:shopify}} kun je betalingen aannemen met een telefoon of kaartlezer. Wil je meer kassafuncties, zoals medewerkersrollen en voorraadbeheer in de winkel? Dan komt POS Pro erbij: € 79 per maand per locatie. Een kaartbetaling in de winkel kost bij Basic 0,75% + € 0,10 met een betaalpas en 1,9% + € 0,10 met een creditcard.
 
 Ook van ons: wat de kassa van Shopify kost en voor welke winkel hij past, lees je op KassaMatch bij [Shopify POS](https://kassamatch.nl/aanbieders/shopify-pos/).
 
 ## Btw op je Shopify-abonnement
 
-Heeft je winkel een Europees adres, dan vraagt Shopify je btw-nummer. Dat vul je in het beheercentrum in via Instellingen, Facturering en dan Factureringsprofiel. Shopify controleert het nummer via VIES, het Europese systeem voor btw-nummers. Je nummer moet geldig zijn voor internationale transacties. Heb je geen btw-nummer, dan geef je dat aan.
+Heeft je winkel een Europees adres, dan vraagt {{tekstlink:shopify}} je btw-nummer. Dat vul je in het beheercentrum in via Instellingen, Facturering en dan Factureringsprofiel. Shopify controleert het nummer via VIES, het Europese systeem voor btw-nummers. Je nummer moet geldig zijn voor internationale transacties. Heb je geen btw-nummer, dan geef je dat aan.
 
 In Europa sluit je je contract met Shopify International Limited in Ierland. Dat betekent voor je btw-aangifte iets.
 
@@ -132,7 +132,7 @@ Je Shopify-factuur hoort dus ook in je btw-aangifte, niet alleen bij je kosten. 
 
 ## Extra kosten: apps en thema's
 
-Veel functies voeg je toe met apps. Een deel daarvan komt van andere bedrijven dan Shopify. Shopify onderscheidt periodieke appkosten, kosten per gebruik en eenmalige kosten. Ze staan wel op je Shopify-factuur, maar in een andere cyclus dan je abonnement.
+Veel functies voeg je toe met apps. Een deel daarvan komt van andere bedrijven dan {{tekstlink:shopify}}. Shopify onderscheidt periodieke appkosten, kosten per gebruik en eenmalige kosten. Ze staan wel op je Shopify-factuur, maar in een andere cyclus dan je abonnement.
 
 Voor het uiterlijk van je winkel kies je een thema. In de Shopify Theme Store vind je gratis en betaalde thema's. Shopify geeft aan dat je geen geld terugkrijgt als je een thema van een andere partij koopt.
 
