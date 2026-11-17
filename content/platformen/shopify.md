@@ -14,7 +14,7 @@ sources:
 - Shopify Theme Store | https://themes.shopify.com/
 - Belastingdienst: Aangifte doen van goederen en diensten uit een ander EU-land | https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/zakendoen_met_het_buitenland/goederen_en_diensten_afnemen_uit_andere_eu_landen/aangifte_doen/aangifte-doen-van-goederen-en-diensten-uit-andere-eu-landen
 ---
-## Wat kost {{tekstlink:shopify}} naast het abonnement?
+## Wat kost Shopify naast het abonnement?
 
 De abonnementsprijs is maar een deel van het verhaal. Wat je per maand betaalt, hangt ook af van hoe je klanten betalen, of je per maand of per jaar afrekent en welke apps je toevoegt. Hieronder lees je per kostenpost waar je op let, zodat je niet na drie maanden schrikt van je eerste echte factuur.
 
@@ -64,7 +64,7 @@ Wel moet je winkel aan een paar eisen voldoen:
 
 Je klant ziet iDEAL alleen bij het afrekenen als hij een Nederlands adres heeft en in euro's betaalt.
 
-{{tekstlink:shopify}} rekent voor iDEAL | Wero administratiekosten per betaling. Op de prijspagina is dat 0% + € 0,29 per betaling bij Basic, Grow en Advanced, en € 0,15 bij Plus. Meer over iDEAL in je webshop lees je bij [webshop maken met iDEAL](/blog/webshop-maken-met-ideal/).
+Shopify rekent voor iDEAL | Wero administratiekosten per betaling. Op de prijspagina is dat 0% + € 0,29 per betaling bij Basic, Grow en Advanced, en € 0,15 bij Plus. Meer over iDEAL in je webshop lees je bij [webshop maken met iDEAL](/blog/webshop-maken-met-ideal/).
 
 Twee dingen om te weten:
 
@@ -89,7 +89,7 @@ Wat is slim? Weet je nog niet zeker of je webshop loopt, begin dan met maandbeta
 
 ## Rekenvoorbeeld: wat kost Shopify het eerste jaar?
 
-Een rekenvoorbeeld, met onze eigen rekensom. Stel: je start op Basic en verkoopt het eerste jaar 240 bestellingen van € 50, samen € 12.000 omzet. Je klanten betalen met iDEAL via Shopify Payments. De bedragen komen van de prijspagina van {{tekstlink:shopify}}. Btw, apps, een betaald thema en je domein tellen we niet mee.
+Een rekenvoorbeeld, met onze eigen rekensom. Stel: je start op Basic en verkoopt het eerste jaar 240 bestellingen van € 50, samen € 12.000 omzet. Je klanten betalen met iDEAL via Shopify Payments. De bedragen komen van de prijspagina van Shopify. Btw, apps, een betaald thema en je domein tellen we niet mee.
 
 | Kostenpost | Bij maandbetaling | Bij jaarbetaling |
 |---|---|---|
@@ -103,7 +103,7 @@ Betalen al je klanten met een kaart? Dan betaal je bij Basic 1,9% + € 0,25 per
 
 ## Wat kost Shopify Plus?
 
-Shopify Plus is het abonnement "voor complexe bedrijven". Op de Nederlandse prijspagina staat Plus voor vanaf € 2.100 per maand. Een vaste eindprijs noemt {{tekstlink:shopify}} daar niet. Kies je Plus voor één of drie jaar, dan kun je opzeggen na de looptijd van het abonnement.
+Shopify Plus is het abonnement "voor complexe bedrijven". Op de Nederlandse prijspagina staat Plus voor vanaf € 2.100 per maand. Een vaste eindprijs noemt Shopify daar niet. Kies je Plus voor één of drie jaar, dan kun je opzeggen na de looptijd van het abonnement.
 
 Wat Shopify Plus biedt bovenop Advanced:
 
@@ -118,7 +118,7 @@ Een rekensom: Plus kost per jaar minstens 12 × € 2.100 = € 25.200. Bij maan
 
 Met Shopify POS verkoop je ook in een winkel of op een markt, met dezelfde producten en voorraad als in je webshop. Bij elk Shopify-abonnement kun je betalingen aannemen met een telefoon of kaartlezer. Wil je meer kassafuncties, zoals medewerkersrollen en voorraadbeheer in de winkel? Dan komt POS Pro erbij: € 79 per maand per locatie. Een kaartbetaling in de winkel kost bij Basic 0,75% + € 0,10 met een betaalpas en 1,9% + € 0,10 met een creditcard.
 
-Ook van ons: wat de kassa van {{tekstlink:shopify}} kost en voor welke winkel hij past, lees je op KassaMatch bij [Shopify POS](https://kassamatch.nl/aanbieders/shopify-pos/).
+Ook van ons: wat de kassa van Shopify kost en voor welke winkel hij past, lees je op KassaMatch bij [Shopify POS](https://kassamatch.nl/aanbieders/shopify-pos/).
 
 ## Btw op je Shopify-abonnement
 
