@@ -23,8 +23,9 @@ function hrefMetSubid(href, partner, path, pos = POS_B) {
   return u.toString();
 }
 
-/** Tekstlink naar een betaalde partner uit ECTA. Alleen merken met reflink. */
-export function bTekstlink(partnerId, path) {
+/** Tekstlink naar een betaalde partner. Anker is de merknaam of een eigen zin;
+ *  ' (partnerlink)' staat ernaast, niet in de ankerttekst. rel/data-* blijven. */
+export function bTekstlink(partnerId, path, tekst) {
   const cfg = ECTA.partners[partnerId];
   if (!cfg || !cfg.reflink) throw new Error(`bTekstlink: geen betaalde partner ${partnerId}`);
   const vendor = cfg.vendor || partnerId;
@@ -32,7 +33,25 @@ export function bTekstlink(partnerId, path) {
   const o = uitgaand(vendor, wixTrafcat(vendor, trafcat));
   if (!o.partner) throw new Error(`bTekstlink: ${partnerId} heeft geen partnerlink`);
   const href = hrefMetSubid(o.href, cfg, path, POS_B);
-  return `<a href="${href}" rel="${o.rel}" target="_blank" data-ecta="B" data-vendor="${vendor}" data-cta="outbound" data-pos="${POS_B}">${cfg.naam} (partnerlink)</a>`;
+  const label = tekst || cfg.naam;
+  return `<a href="${href}" rel="${o.rel}" target="_blank" data-ecta="B" data-vendor="${vendor}" data-cta="outbound" data-pos="${POS_B}">${label}</a> (partnerlink)`;
+}
+
+/** Eigen alinea per hub (niet dezelfde pastAls-reeks). */
+export function bHub(path) {
+  const L = (id) => bTekstlink(id, path);
+  switch (path) {
+    case '/platformen/':
+      return `<p>Op deze lijst staan onder meer ${L('shopify')}, ${L('wix')} en ${L('hostinger')}. Per platform zie je de prijs, de checklist en voor wie het past.</p>`;
+    case '/vergelijken/':
+      return `<p>In de tabel filter je onder meer ${L('shopify')}, ${L('wix')} en ${L('hostinger')} op prijs, producten en checklistpunten, naast JouwWeb, Lightspeed, Mijndomein en WooCommerce.</p>`;
+    case '/gidsen/':
+      return `<p>De gidsen hieronder gaan over beginnen en kiezen. ${L('shopify')}, ${L('wix')} en ${L('hostinger')} komen daarin terug waar ze bij de situatie passen.</p>`;
+    case '/blog/':
+      return `<p>De artikelen gaan over kiezen en starten, met de prijzen van de aanbieders zelf en bronnen. ${L('shopify')}, ${L('wix')} en ${L('hostinger')} komen in meerdere stukken terug.</p>`;
+    default:
+      return bAndere(path);
+  }
 }
 
 export function bAndere(path, skip = []) {
@@ -50,5 +69,5 @@ export function bAndere(path, skip = []) {
 }
 
 export function vervangTekstlinks(html, path) {
-  return html.replace(/\{\{tekstlink:([A-Za-z]+)\}\}/g, (_, id) => bTekstlink(id, path));
+  return html.replace(/\{\{tekstlink:([A-Za-z]+)(?:\|([^}]+))?\}\}/g, (_, id, tekst) => bTekstlink(id, path, tekst || undefined));
 }
