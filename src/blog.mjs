@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { SITE, esc, fmtDate, ORG, AUTHOR } from './layout.mjs';
 import { parsePost, markdown, inline } from './markdown.mjs';
 import { knop } from './lib/partnerlinks.js';
+import { vervangTekstlinks, bAndere } from './b-tekstlink.mjs';
 import { PLATFORMS } from './lib/platforms.js';
 import { faqHtml, matchCta } from './parts.mjs';
 
@@ -21,9 +22,10 @@ const postReadMin = (p) => p.slug === 'webshop-maken-met-ideal' ? 6 : readMin(p.
 
 function tokens(html, slug) {
   let n = 0;
-  return html
+  const path = `/blog/${slug}/`;
+  return vervangTekstlinks(html
     .replace(/<p>\{\{knop:([a-z]+)\}\}<\/p>/g, (_, id) => { if (!PLATFORMS[id]) throw new Error(`${slug}: onbekend platform ${id}`); return `<div class="out">${knop(id, `blog_${++n}`)}</div>`; })
-    .replace(/\{\{score:([a-z]+)\}\}/g, () => { throw new Error(`${slug}: {{score}}-token wordt niet meer getoond`); });
+    .replace(/\{\{score:([a-z]+)\}\}/g, () => { throw new Error(`${slug}: {{score}}-token wordt niet meer getoond`); }), path);
 }
 
 /** FAQ uit de markdown: een sectie "## Veelgestelde vragen" met ### vraag + alinea antwoord. */
@@ -82,6 +84,7 @@ export function blogIndex(posts) {
   const body = `
 <h1>Blog: webshop en website beginnen</h1>
 <p class="lead">Welk platform past bij jouw bedrijf en wat kost het? Kort uitgelegd, met de prijzen van de aanbieders zelf en bronnen.</p>
+${bAndere('/blog/')}
 <div class="postlist">
 ${posts.map((x) => `<a class="card" href="${x.path}"><time datetime="${x.date}">${fmtDate(x.date)}</time><h2 style="margin:.2em 0 .3em;font-size:1.3rem">${esc(x.title)}</h2><p>${esc(x.description)}</p><span class="more">Lees verder →</span></a>`).join('\n')}
 </div>
