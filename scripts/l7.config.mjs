@@ -8,6 +8,8 @@ export const CFG = {
   hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }], // sinds 17-11 geen lastmod-plicht: een kinddatum tilt de hub niet (l7check)
   // SEO + SC: /platformen/ erft de datum van een kind niet. Lastmod blijft 2026-11-04 (gelijk aan main), ook als /platformen/shopify/ nieuwer is.
   notHub: ['/platformen/'],
+  // E-CTA-1 (plan MM 17-11, Dave via GB2): de CTA-blokken A/C (src/e-cta.mjs) tellen niet als bodywijziging; geen datum-lift. Vraagt SC-OK.
+  stripCta: [/<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g],
   // Alleen ONTBREKENDE velden die de template van deze pagina niet heeft. Een aanwezig veld moet altijd kloppen.
   exempt: {}, // /shop-match/ toont 'gecontroleerd 17 oktober 2026': dus een zichtbare bijgewerkt-regel nodig (SC 30-10, besluit 3)
   // Automatisch gegenereerde teaser 'Meer op de blog' onder elke post (src/blog.mjs) telt niet als bodywijziging van die post (L7: geen datum bij alleen een nieuwe teaser). Vraagt SC-OK.
