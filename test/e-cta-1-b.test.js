@@ -1,6 +1,6 @@
 // E-CTA-1 B (17-11): tekstlinks in de lopende tekst (copy Blogschrijver, src/b-tekstlink.mjs), pastAls in keuzebox A,
 // en de L7-unwrap (scripts/l7.config.mjs stripCta): alleen de B-linkmarkup telt niet; tekst eromheen telt wel.
-import { test } from 'node:test';
+import { test, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -11,11 +11,25 @@ import { resolve, MAX_A } from '../src/e-cta.mjs';
 import { CFG } from '../scripts/l7.config.mjs';
 import { bodyFingerprint } from '../scripts/l7check.mjs';
 import { bLinks, zonderB, B_LABEL, REL_B } from './e-cta-b-helper.mjs';
+import { secties, plekFouten } from './e-cta-b-plek.mjs';
 
 // SEO-besluit B in-tekst (17-11, /workspace/site-checks/2026-11-17/e-cta-1/seo-besluit-b-intekst.md): alleen kaartmerken, exacte
 // partnerlink + rel sponsored + label (partnerlink), niet in FAQ/schema, max. 1 per merk per sectie, alleen als link in een bestaande
 // zin (geen nieuwe tekst: bewaakt door L7 met de B-unwrap), interne links wijken nooit (o.a. SEO-01 /platformen/shopify/ → /platformen/wix/).
-const PRE_B = '94bd15d'; // golf-1-tip vóór B (vendor-fix); interne links mogen t.o.v. deze stand niet verdwijnen
+// Aanvulling 17-11 (seo-review-5380612.md, besluit punten 8-10): geen B in koppen, B op de eerste vermelding in p/li per H2-sectie,
+// alleen bestaande woorden linken, bronregels byte-gelijk.
+const PRE_B = '94bd15d'; // golf-1-tip vóór B (vendor-fix): referentie voor interne links, koppen, bronregels en tekst
+let basisDir = null;
+/** dist van PRE_B (eenmalig gebouwd in een tijdelijke map), of null als de commit niet in deze clone zit. */
+const basis = () => {
+  if (basisDir !== null) return basisDir || null;
+  const tmp = mkdtempSync(join(tmpdir(), 'sm-pre-b-'));
+  try { execSync(`git archive ${PRE_B} | tar -x -C ${tmp}`, { stdio: 'ignore' }); } catch { rmSync(tmp, { recursive: true, force: true }); basisDir = ''; return null; }
+  execSync('node build.mjs', { cwd: tmp, stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } });
+  basisDir = tmp; return tmp;
+};
+after(() => { if (basisDir) rmSync(basisDir, { recursive: true, force: true }); });
+const oudePagina = (p) => { try { return readFileSync(join(basis(), 'dist', p, 'index.html'), 'utf8'); } catch { return null; } };
 
 const SITE = {
   build: () => execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } }),
@@ -79,21 +93,72 @@ const STRIP_AC = /<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/
 const interneLinks = (h) => { const m = new Map(); for (const x of (h.match(/<main[\s\S]*<\/main>/) || [''])[0].replace(STRIP_AC, '').matchAll(/<a\b[^>]*\shref="(\/[^"]*)"/g)) m.set(x[1], (m.get(x[1]) || 0) + 1); return m; };
 test('E-CTA-1 B: een interne link wijkt nooit voor een partnerlink (SEO-besluit 5; t.o.v. de stand vóór B)', (t) => {
   pagina('/');
-  const tmp = mkdtempSync(join(tmpdir(), 'sm-pre-b-'));
-  try {
-    try { execSync(`git archive ${PRE_B} | tar -x -C ${tmp}`, { stdio: 'ignore' }); } catch { t.skip(`${PRE_B} niet in deze clone`); return; }
-    execSync('node build.mjs', { cwd: tmp, stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } });
-    let n = 0;
-    for (const p of alle(SITE.root)) {
-      const h = readFileSync(join(SITE.root, p, 'index.html'), 'utf8'); if (!bLinks(h).length) continue;
-      let oud; try { oud = readFileSync(join(tmp, 'dist', p, 'index.html'), 'utf8'); } catch { continue; }
-      const a = interneLinks(oud), b = interneLinks(h); n++;
-      for (const [href, k] of a) assert.ok((b.get(href) || 0) >= k, `${p}: interne link ${href} ${k}× → ${b.get(href) || 0}×`);
-    }
-    assert.ok(n > 0);
-  } finally { rmSync(tmp, { recursive: true, force: true }); }
+  if (!basis()) { t.skip(`${PRE_B} niet in deze clone`); return; }
+  let n = 0;
+  for (const p of alle(SITE.root)) {
+    const h = readFileSync(join(SITE.root, p, 'index.html'), 'utf8'); if (!bLinks(h).length) continue;
+    const oud = oudePagina(p); if (!oud) continue;
+    const a = interneLinks(oud), b = interneLinks(h); n++;
+    for (const [href, k] of a) assert.ok((b.get(href) || 0) >= k, `${p}: interne link ${href} ${k}× → ${b.get(href) || 0}×`);
+  }
+  assert.ok(n > 0);
   // SEO-01 (audit 20-10): ALT_ZIN op /platformen/shopify/ linkt intern naar /platformen/wix/.
   assert.match(pagina('/platformen/shopify/'), /Wil je klein en goedkoper starten\? Kijk dan ook naar <a href="\/platformen\/hostinger\/">Hostinger<\/a>, of naar <a href="\/platformen\/wix\/">Wix<\/a>/);
+});
+
+const H2 = /(?=<h2\b)/;
+test('E-CTA-1 B: geen sponsored link in h1-h6 (SEO-besluit 8)', () => {
+  pagina('/');
+  for (const p of alle(SITE.root)) {
+    const h = readFileSync(join(SITE.root, p, 'index.html'), 'utf8');
+    for (const m of h.matchAll(/<(h[1-6])\b[^>]*>((?:(?!<\/\1>)[\s\S])*)<\/\1>/g)) assert.doesNotMatch(m[2], /<a\b[^>]*\srel="[^"]*\bsponsored\b/, `${p}: sponsored link in <${m[1]}>`);
+  }
+});
+
+test('E-CTA-1 B: per H2-sectie max. 1 per merk, op de eerste vermelding in de lopende tekst (p/li) (SEO-besluit 3, 9)', () => {
+  pagina('/');
+  const fout = [];
+  for (const p of alle(SITE.root)) {
+    const h = readFileSync(join(SITE.root, p, 'index.html'), 'utf8').replace(STRIP_AC, ''); if (!bLinks(h).length) continue;
+    for (const s of secties(h, H2)) for (const f of plekFouten(s)) fout.push(`${p} [${(s.match(/^<h2[^>]*>([\s\S]*?)<\/h2>/) || [, 'intro'])[1].replace(/<[^>]+>/g, '')}] ${f}`);
+  }
+  assert.deepEqual(fout, []);
+});
+
+test('E-CTA-1 B: alleen bestaande woorden gelinkt; koppen en bronregels byte-gelijk aan de stand vóór B (SEO-besluit 4, 8, 10)', (t) => {
+  pagina('/');
+  if (!basis()) { t.skip(`${PRE_B} niet in deze clone`); return; }
+  const koppen = (h) => [...h.matchAll(/<h[1-6]\b[\s\S]*?<\/h[1-6]>/g)].map((m) => m[0]);
+  const bron = (h) => [...h.matchAll(/<(p|div|ul)\b[^>]*\sclass="[^"]*\b(?:src|sources|bron)\b[^"]*"[^>]*>[\s\S]*?<\/\1>/g)].map((m) => m[0]);
+  let n = 0;
+  for (const p of alle(SITE.root)) {
+    const h = readFileSync(join(SITE.root, p, 'index.html'), 'utf8'); if (!bLinks(h).length) continue;
+    const oud = oudePagina(p); assert.ok(oud, `${p}: B op een pagina die vóór B niet bestond`); n++;
+    // linktekst zonder label = het woord dat er al stond: na de unwrap is de body gelijk aan de stand vóór B
+    assert.equal(bodyFingerprint(h, CFG), bodyFingerprint(oud, CFG), `${p}: tekst gewijzigd t.o.v. ${PRE_B} (niet alleen een bestaand woord gelinkt)`);
+    assert.equal(bodyFingerprint(zonderB(h), CFG), bodyFingerprint(oud, CFG), `${p}: zonderB ≠ stand vóór B`);
+    assert.deepEqual(koppen(h), koppen(oud), `${p}: koppen niet byte-gelijk aan ${PRE_B}`);
+    assert.deepEqual(bron(h), bron(oud), `${p}: bronregels niet byte-gelijk aan ${PRE_B}`);
+  }
+  assert.ok(n > 0);
+});
+
+test('E-CTA-1 B plek: negatieve tests (kop, latere vermelding, dubbel, productnaam, tabel, in een andere link)', () => {
+  const b = (v = 'shopify', t = 'Shopify') => `<a href="https://x.example/r" rel="sponsored nofollow noopener" target="_blank" data-ecta="B" data-vendor="${v}" data-cta="outbound" data-pos="mid">${t} (partnerlink)</a>`;
+  const ok = (s) => assert.deepEqual(plekFouten(s), [], s);
+  const rood = (s, re) => assert.ok(plekFouten(s).some((f) => re.test(f)), `${s} → ${plekFouten(s)}`);
+  ok(`<h2>Shopify</h2><p>Kies ${b()} als je wilt groeien. Shopify heeft apps.</p>`);
+  rood(`<h2>Kies ${b()}</h2><p>Shopify heeft apps.</p>`, /in <h2>|lopende tekst/);
+  rood(`<h2>X</h2><p>Shopify heeft apps. Kies ${b()}.</p>`, /eerdere vermelding/);
+  rood(`<h2>X</h2><ul><li>Shopify is groot.</li></ul><p>Kies ${b()}.</p>`, /eerdere vermelding/);
+  rood(`<h2>X</h2><p>Kies ${b()}. En ${b()}.</p>`, /2 B-links/);
+  rood(`<h2>X</h2><p>Via Shopify Payments betaal je. Kies ${b()}.</p>`, /eerdere vermelding/);
+  rood(`<h2>X</h2><p>Via ${b()} Payments.</p>`, /productnaam/);
+  rood(`<h2>X</h2><table><tr><td>${b()}</td></tr></table><p>Shopify.</p>`, /lopende tekst/);
+  rood(`<h2>X</h2><p><a href="/x/">Over Shopify</a> en ${b()}.</p>`, /eerdere vermelding/);
+  rood(`<h2>X</h2><p>Kies ${b('shopify', 'Wix')}.</p>`, /geen vermelding/);
+  // koppen, tabellen, bronregels en knoplabels tellen niet als vermelding
+  ok(`<h2>Shopify</h2><table><tr><td>Shopify</td></tr></table><p class="src">Bron: Shopify</p><p class="go"><a href="#">Shopify</a></p><p>Kies ${b()}.</p>`);
 });
 
 test('E-CTA-1 B: alinea met alleen tekstlinks (bAndere) volgt de neutrale kaartvolgorde, nooit een onbetaald merk', () => {

@@ -67,7 +67,7 @@ De bedragen van Mollie en Stripe zijn hun eigen tarieven voor iDEAL in Nederland
 
 ## Wat kost een iDEAL-betaling?
 
-De meeste aanbieders rekenen een vast bedrag per iDEAL-betaling, hoe hoog de bestelling ook is. Wix Payments rekent een percentage van het bedrag plus € 0,30. Daardoor maakt het bij {{tekstlink:wix}} uit hoe groot je bestellingen zijn.
+De meeste aanbieders rekenen een vast bedrag per iDEAL-betaling, hoe hoog de bestelling ook is. Wix Payments rekent een percentage van het bedrag plus € 0,30. Daardoor maakt het bij Wix uit hoe groot je bestellingen zijn.
 
 **Voorbeeld:** 100 iDEAL-bestellingen van € 50 per maand.
 

@@ -21,13 +21,13 @@ sources:
 - Mollie: Tarieven | https://www.mollie.com/nl/pricing
 ---
 
-Je wilt een kleine webshop beginnen en drie namen komen steeds terug: {{tekstlink:shopify}}, Wix en JouwWeb. Alle drie zijn ze makkelijk te gebruiken zonder webbouwer. Toch verschillen ze flink in prijs, in wat je per verkoop betaalt en in hoe ver je ermee kunt groeien.
+Je wilt een kleine webshop beginnen en drie namen komen steeds terug: {{tekstlink:shopify}}, {{tekstlink:wix}} en JouwWeb. Alle drie zijn ze makkelijk te gebruiken zonder webbouwer. Toch verschillen ze flink in prijs, in wat je per verkoop betaalt en in hoe ver je ermee kunt groeien.
 
 > **Kort gezegd:** met een paar producten en vooral Nederlandse klanten ben je met JouwWeb het goedkoopst uit (vanaf € 10 per maand, excl. btw).
 >
 > Wil je groeien, over de grens verkopen of ook een winkelkassa? Dan is Shopify sterker (Basic € 28 per maand bij maandbetaling, € 21 bij jaarbetaling).
 >
-> {{tekstlink:wix}} past als het ontwerp van je site voorop staat en de webshop erbij komt (Core € 25 per maand bij jaarbetaling).
+> Wix past als het ontwerp van je site voorop staat en de webshop erbij komt (Core € 25 per maand bij jaarbetaling).
 >
 > Alle zeven platforms naast elkaar: [webshopplatforms vergelijken](/vergelijken/).
 
@@ -64,11 +64,11 @@ Heb je meer dan 10 producten, dan valt JouwWeb Pro af en kom je bij Business uit
 | Platform | Pakket | Eerste jaar |
 |---|---|---|
 | JouwWeb | Business | € 240 (excl. btw) |
-| {{tekstlink:shopify}} | Basic, maandbetaling | € 336 (12 × € 28, onze rekensom) |
+| Shopify | Basic, maandbetaling | € 336 (12 × € 28, onze rekensom) |
 | Shopify | Basic, jaarbetaling | € 252 (12 × € 21, onze rekensom) |
-| {{tekstlink:wix}} | Core, jaarbetaling | € 300 (exclusief toeslagen) |
+| Wix | Core, jaarbetaling | € 300 (exclusief toeslagen) |
 
-Bij Shopify komt daar 2% per verkoop bij als je een andere betaalprovider gebruikt dan Shopify Payments. Bij JouwWeb betaal je na het eerste jaar € 20 per jaar voor je domeinnaam. Bij Wix zit een domeinnaam het eerste jaar in de meeste jaarpakketten.
+Bij {{tekstlink:shopify}} komt daar 2% per verkoop bij als je een andere betaalprovider gebruikt dan Shopify Payments. Bij JouwWeb betaal je na het eerste jaar € 20 per jaar voor je domeinnaam. Bij {{tekstlink:wix}} zit een domeinnaam het eerste jaar in de meeste jaarpakketten.
 
 Verkoop je 10 producten of minder? Dan kost JouwWeb Pro € 120 per jaar (excl. btw). Tot en met 30 november 2026 heeft JouwWeb een actie: "Eerste 12 maanden 50%, daarna het standaardtarief." (prijspagina van JouwWeb, gecontroleerd op 1-11-2026). Die actie hebben we niet meegerekend.
 
