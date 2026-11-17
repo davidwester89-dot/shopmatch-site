@@ -1,3 +1,4 @@
+import { zonderB } from './e-cta-b-helper.mjs'; // E-CTA-1 B: SC-zin mag met een Hostinger-tekstlink beginnen
 import { revisieDatum } from './nuchter-datums-helper.mjs';
 // F2 Hostinger-prijsherstel (SC + MM 10-11-2026), push 18-11: verlengprijzen, neutrale instaptekst, matchbasis 9.99/16.99.
 import test from 'node:test';
@@ -43,7 +44,8 @@ test('F2: geen Hostinger-introprijzen sitebreed, wel verlengprijzen en SC-zin', 
     const vis = tekst(h);
     assert.doesNotMatch(vis, verboden, p);
     if (p !== '/blog/hostinger-website-webshop-kosten/') {
-      assert.ok(vis.includes(INSTAP_ZIE_HOSTINGER) || vis.includes('Bekijk de actuele instapprijs'), p);
+      const visB = tekst(zonderB(h)); // B-link ('Hostinger (partnerlink)') telt als de merknaam; de SC-zin zelf blijft exact
+      assert.ok(visB.includes(INSTAP_ZIE_HOSTINGER) || visB.includes('Bekijk de actuele instapprijs'), p);
     }
   }
   const plat = read('dist/platformen/hostinger/index.html');
