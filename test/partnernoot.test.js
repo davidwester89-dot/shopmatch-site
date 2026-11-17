@@ -30,8 +30,12 @@ test('build: geen label per knop, precies 1 zin per partnerblok, rel sponsored n
   for (const f of html('dist')) {
     const s = readFileSync(f, 'utf8');
     assert.doesNotMatch(s, /<span class="(partner|plabel)">\s*partner ?link/i, `${f}: label per knop`);
-    const ls = [...s.matchAll(/<a\s[^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
-    for (const m of ls) assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: rel`);
+    // E-CTA-1 (17-11): knoppen in de A/C-blokken hebben een eigen label "Partnerlink" (plan MM/Dave); die blokken
+    // krijgen geen partnerzin en vallen buiten deze blokcheck. rel blijft hier wel gecontroleerd (zie ook test/e-cta-1.test.js).
+    const ecta = [...s.matchAll(/<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g)].map((m) => [m.index, m.index + m[0].length]);
+    const alle = [...s.matchAll(/<a\s[^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
+    for (const m of alle) assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: rel`);
+    const ls = alle.filter((m) => !ecta.some(([a, b]) => m.index > a && m.index < b));
     const bl = partnerBlokken(s).filter((b) => b.partner);
     for (const m of ls) assert.ok(bl.some((b) => m.index > b.start && m.index < b.end), `${f}: partnerlink buiten een blok`);
     for (const b of bl) {

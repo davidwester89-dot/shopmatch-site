@@ -3,6 +3,8 @@ import { mkdirSync, writeFileSync, cpSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { layout, SITE, BASE, PREVIEW } from './src/layout.mjs';
 import { partnerNoten } from './src/lib/partnerlinks.js';
+import { applyEcta } from './src/e-cta.mjs';
+import { ECTA } from './src/e-cta-1.config.mjs';
 import * as P from './src/pages.mjs';
 import { maakLogoCellen } from './src/lib/logo-cellen.mjs';
 import { PLATFORMS } from './src/lib/platforms.js';
@@ -27,7 +29,7 @@ const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileS
 const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
 export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound].map(efDatum).map(spDatum).map(sdDatum).map(hlDatum).map(hbDatum).map(wnDatum).map(f1Datum).map((p) => dsDatum(p)).map(jwDatum).map(nuchterDatum);
-for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(layout(p)));
+for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(applyEcta(layout(p), p.path, ECTA))); // E-CTA-1: A/C op gids/blog, geen datumwijziging
 // Doorverwijzingen voor weggehaalde pagina's. GitHub Pages kan geen 301 sturen: statische pagina met meta refresh,
 // canonical naar het doel en noindex. Staan niet in de sitemap.
 export const REDIRECTS = { '/platformen/squarespace/': '/platformen/' }; // Squarespace uit de vergelijking (26-10-2026)
