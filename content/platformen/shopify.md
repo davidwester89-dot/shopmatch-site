@@ -16,7 +16,7 @@ sources:
 ---
 ## Wat kost Shopify naast het abonnement?
 
-{{tekstlink:shopify}}: de abonnementsprijs is maar een deel van het verhaal. Wat je per maand betaalt, hangt ook af van hoe je klanten betalen, of je per maand of per jaar afrekent en welke apps je toevoegt. Hieronder lees je per kostenpost waar je op let, zodat je niet na drie maanden schrikt van je eerste echte factuur.
+De abonnementsprijs van {{tekstlink:shopify}} is maar een deel van het verhaal. Wat je per maand betaalt, hangt ook af van hoe je klanten betalen, of je per maand of per jaar afrekent en welke apps je toevoegt. Hieronder lees je per kostenpost waar je op let, zodat je niet na drie maanden schrikt van je eerste echte factuur.
 
 ## Kosten per transactie en Shopify Payments
 
@@ -89,7 +89,7 @@ Wat is slim? Weet je nog niet zeker of je webshop loopt, begin dan met maandbeta
 
 ## Rekenvoorbeeld: wat kost Shopify het eerste jaar?
 
-Een rekenvoorbeeld, met onze eigen rekensom. Stel: je start op Basic en verkoopt het eerste jaar 240 bestellingen van € 50, samen € 12.000 omzet. Je klanten betalen met iDEAL via Shopify Payments. De bedragen komen van de prijspagina van {{tekstlink:shopify}}. Btw, apps, een betaald thema en je domein tellen we niet mee.
+Een rekenvoorbeeld, met onze eigen rekensom. Stel: je start op Basic en verkoopt het eerste jaar 240 bestellingen van € 50, samen € 12.000 omzet. Je klanten betalen met iDEAL via Shopify Payments. De bedragen komen van {{tekstlink:shopify|de prijspagina van Shopify}}. Btw, apps, een betaald thema en je domein tellen we niet mee.
 
 | Kostenpost | Bij maandbetaling | Bij jaarbetaling |
 |---|---|---|

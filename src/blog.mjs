@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { SITE, esc, fmtDate, ORG, AUTHOR } from './layout.mjs';
 import { parsePost, markdown, inline } from './markdown.mjs';
 import { knop } from './lib/partnerlinks.js';
-import { vervangTekstlinks, bAndere } from './b-tekstlink.mjs';
+import { vervangTekstlinks, bHub } from './b-tekstlink.mjs';
 import { PLATFORMS } from './lib/platforms.js';
 import { faqHtml, matchCta } from './parts.mjs';
 
@@ -84,7 +84,7 @@ export function blogIndex(posts) {
   const body = `
 <h1>Blog: webshop en website beginnen</h1>
 <p class="lead">Welk platform past bij jouw bedrijf en wat kost het? Kort uitgelegd, met de prijzen van de aanbieders zelf en bronnen.</p>
-${bAndere('/blog/')}
+${bHub('/blog/')}
 <div class="postlist">
 ${posts.map((x) => `<a class="card" href="${x.path}"><time datetime="${x.date}">${fmtDate(x.date)}</time><h2 style="margin:.2em 0 .3em;font-size:1.3rem">${esc(x.title)}</h2><p>${esc(x.description)}</p><span class="more">Lees verder →</span></a>`).join('\n')}
 </div>
