@@ -1,6 +1,6 @@
-// E-CTA-1 B: tekstlink in paginabronnen. Geen componentlogica; rendert één partnerlink
-// via de bestaande partnerconfig. Meting volgt de vendor-tip (17-11): data-vendor =
-// vendor-ID (partnerkaart), data-pos = mid (B, naast A=top en C=eind), data-cta = outbound.
+// E-CTA-1 B: tekstlink in bestaande zinnen. Geen nieuwe copy. Label staat in de
+// ankerttekst, zodat stripCta «Merk (partnerlink)» naar «Merk» kan unwrappen.
+// Meting: data-vendor (partnerkaart), data-pos=mid, data-cta=outbound.
 import { uitgaand, wixTrafcat } from './lib/partnerlinks.js';
 import { ECTA } from './e-cta-1.config.mjs';
 
@@ -23,8 +23,7 @@ function hrefMetSubid(href, partner, path, pos = POS_B) {
   return u.toString();
 }
 
-/** Tekstlink naar een betaalde partner. Anker is de merknaam of een eigen zin;
- *  ' (partnerlink)' staat ernaast, niet in de ankerttekst. rel/data-* blijven. */
+/** Tekstlink naar een betaalde partner. Anker = bestaande merknaam + ' (partnerlink)'. */
 export function bTekstlink(partnerId, path, tekst) {
   const cfg = ECTA.partners[partnerId];
   if (!cfg || !cfg.reflink) throw new Error(`bTekstlink: geen betaalde partner ${partnerId}`);
@@ -34,38 +33,8 @@ export function bTekstlink(partnerId, path, tekst) {
   if (!o.partner) throw new Error(`bTekstlink: ${partnerId} heeft geen partnerlink`);
   const href = hrefMetSubid(o.href, cfg, path, POS_B);
   const label = tekst || cfg.naam;
-  return `<a href="${href}" rel="${o.rel}" target="_blank" data-ecta="B" data-vendor="${vendor}" data-cta="outbound" data-pos="${POS_B}">${label}</a> (partnerlink)`;
-}
-
-/** Eigen alinea per hub (niet dezelfde pastAls-reeks). */
-export function bHub(path) {
-  const L = (id) => bTekstlink(id, path);
-  switch (path) {
-    case '/platformen/':
-      return `<p>Op deze lijst staan onder meer ${L('shopify')}, ${L('wix')} en ${L('hostinger')}. Per platform zie je de prijs, de checklist en voor wie het past.</p>`;
-    case '/vergelijken/':
-      return `<p>In de tabel filter je onder meer ${L('shopify')}, ${L('wix')} en ${L('hostinger')} op prijs, producten en checklistpunten, naast JouwWeb, Lightspeed, Mijndomein en WooCommerce.</p>`;
-    case '/gidsen/':
-      return `<p>De gidsen hieronder gaan over beginnen en kiezen. ${L('shopify')}, ${L('wix')} en ${L('hostinger')} komen daarin terug waar ze bij de situatie passen.</p>`;
-    case '/blog/':
-      return `<p>De artikelen gaan over kiezen en starten, met de prijzen van de aanbieders zelf en bronnen. ${L('shopify')}, ${L('wix')} en ${L('hostinger')} komen in meerdere stukken terug.</p>`;
-    default:
-      return bAndere(path);
-  }
-}
-
-export function bAndere(path, skip = []) {
-  const skipSet = new Set(skip);
-  const ids = (ECTA.pages[path]?.partners || []).filter((id) => {
-    const p = ECTA.partners[id];
-    return p?.reflink && !skipSet.has(id);
-  });
-  if (!ids.length) return '';
-  const zinnen = ids.map((id) => {
-    const als = ECTA.partners[id].pastAls ? ` ${ECTA.partners[id].pastAls}` : '';
-    return `${bTekstlink(id, path)}.${als}`;
-  });
-  return `<p>${zinnen.join(' ')}</p>`;
+  const zicht = /partnerlink/i.test(label) ? label : `${label} (partnerlink)`;
+  return `<a href="${href}" rel="${o.rel}" target="_blank" data-ecta="B" data-vendor="${vendor}" data-cta="outbound" data-pos="${POS_B}">${zicht}</a>`;
 }
 
 export function vervangTekstlinks(html, path) {
