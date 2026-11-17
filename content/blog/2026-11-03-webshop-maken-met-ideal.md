@@ -27,9 +27,10 @@ sources:
 - Mijndomein: Webshop | https://www.mijndomein.nl/producten/webshop
 - Hostinger: Accepting payments via iDEAL | https://www.hostinger.com/support/6538716-hostinger-ecommerce-accepting-payments-via-ideal/
 ---
+
 Verkoop je aan Nederlandse klanten, dan wil je iDEAL in je checkout. Goed nieuws: op alle zeven platforms die we op ShopMatch vergelijken kan dat. Het verschil zit in hoe je het aanzet en wat je per betaling betaalt. Hieronder zie je het per platform, met de tarieven van de aanbieders zelf.
 
-> **Kort gezegd:** iDEAL werkt op {{tekstlink:shopify}}, {{tekstlink:wix}}, JouwWeb, WooCommerce, Lightspeed eCom, Mijndomein en Hostinger.
+> **Kort gezegd:** iDEAL werkt op {{tekstlink:shopify}}, {{tekstlink:wix}}, JouwWeb, WooCommerce, Lightspeed eCom, Mijndomein en {{tekstlink:hostinger}}.
 >
 > Per betaling betaal je meestal een vast bedrag: € 0,29 bij Shopify Payments, Stripe en WooPayments, € 0,32 bij Mollie. Wix Payments rekent een percentage plus een vast bedrag.
 >
@@ -62,7 +63,7 @@ De bedragen van Mollie en Stripe zijn hun eigen tarieven voor iDEAL in Nederland
 - **JouwWeb.** JouwWeb noemt Mollie in Nederland de populairste betaalprovider om te koppelen en vraagt daarvoor een KvK-nummer. Zonder KvK zijn Stripe en/of PayPal een alternatief.
 - **WooCommerce.** De plug-in zelf is gratis; hosting en de betaalplug-in regel je zelf. WooPayments rekent in Nederland 21% btw over zijn kosten, behalve als je een geldig btw-nummer opgeeft.
 - **Lightspeed eCom.** Volgens Lightspeed is iDEAL "een goede optie voor kleinere eCom shops". Heeft je shop meer dan 300 producten en verwacht je veel omzet, dan kies je volgens Lightspeed naast iDEAL ook een betaalprovider.
-- **Hostinger.** Eerst zet je Stripe aan in je Hostinger Ecommerce Store Manager. Daarna schakel je iDEAL in bij je Stripe-account.
+- **{{tekstlink:hostinger}}.** Eerst zet je Stripe aan in je Hostinger Ecommerce Store Manager. Daarna schakel je iDEAL in bij je Stripe-account.
 
 ## Wat kost een iDEAL-betaling?
 

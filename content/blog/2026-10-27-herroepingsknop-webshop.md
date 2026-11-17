@@ -71,7 +71,7 @@ Er zijn twee risico's:
 
 Of jouw platform een kant-en-klare knop heeft, verschilt en verandert. Wij noemen hier dus geen functies per platform. Wel wat je zelf nakijkt. Zoek eerst in de helppagina's van je platform naar 'herroepingsknop', 'ontbindingsfunctie' of 'withdrawal'. KVK raadt aan om met de bouwer van je website te overleggen waar de knop het beste kan staan.
 
-**Een kant-en-klaar platform** ([Shopify](/platformen/shopify/), [Wix](/platformen/wix/), [JouwWeb](/platformen/jouwweb/), [Lightspeed eCom](/platformen/lightspeed/), [Hostinger](/platformen/hostinger/) of [Mijndomein](/platformen/mijndomein/)). Van de betaalde merken in deze groep: {{tekstlink:shopify}}, {{tekstlink:wix}} en {{tekstlink:hostinger}}:
+**Een kant-en-klaar platform** ([Shopify](/platformen/shopify/), [Wix](/platformen/wix/), [JouwWeb](/platformen/jouwweb/), [Lightspeed eCom](/platformen/lightspeed/), [Hostinger](/platformen/hostinger/) of [Mijndomein](/platformen/mijndomein/)):
 
 - Heeft het platform een eigen functie of app voor de herroepingsknop? Zo niet: maak een vaste pagina met een formulier en zet de link in je menu of footer.
 - Werkt het formulier zonder inloggen en zonder account?
