@@ -31,7 +31,8 @@ test('iDEAL-blog: bedragen exact zoals de bronnen', () => {
 test('iDEAL-blog: interne links uit de briefing en geen partnerlinks in de lopende tekst', () => {
   const h = read(P);
   for (const l of ['/shop-match/', '/vergelijken/', '/platformen/shopify/', '/platformen/wix/', '/platformen/jouwweb/', '/platformen/woocommerce/', '/platformen/lightspeed/', '/platformen/mijndomein/', '/platformen/hostinger/', '/webshop-beginnen-kosten/', '/gratis-website-maken/']) assert.ok(h.includes(`href="${l}"`), l);
-  const art = h.slice(h.indexOf('<article'), h.indexOf('</article>'));
+  // E-CTA-1 (17-11): de vaste A/C-blokken met label "Partnerlink" zijn geen lopende tekst; de lopende tekst blijft zonder partnerlinks.
+  const art = h.slice(h.indexOf('<article'), h.indexOf('</article>')).replace(/<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g, '');
   assert.doesNotMatch(art, /sponsored/);
   assert.doesNotMatch(art, /reddit/i);
 });
