@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
+import { bLinks, B_LABEL, REL_B } from './e-cta-b-helper.mjs';
 import { partnerBlokken, partnerNoten, metNoot, NOOT_HTML, PARTNER_NOOT } from '../src/lib/partnerlinks.js';
 
 // Partnerzin i.p.v. label per knop: precies één zin per blok met partnerlinks; rel sponsored nofollow noopener blijft.
@@ -35,7 +36,9 @@ test('build: geen label per knop, precies 1 zin per partnerblok, rel sponsored n
     const ecta = [...s.matchAll(/<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g)].map((m) => [m.index, m.index + m[0].length]);
     const alle = [...s.matchAll(/<a\s[^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
     for (const m of alle) assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: rel`);
-    const ls = alle.filter((m) => !ecta.some(([a, b]) => m.index > a && m.index < b));
+    // E-CTA-1 B (17-11): een tekstlink in de lopende tekst draagt zijn eigen label ' (partnerlink)' en hoort niet in een .out-blok.
+    const bIdx = new Set(bLinks(s).map((b) => { assert.ok(b.tekst.endsWith(B_LABEL) && b.rel === REL_B, `${f}: B-link zonder label of rel`); return b.index; }));
+    const ls = alle.filter((m) => !ecta.some(([a, b]) => m.index > a && m.index < b) && !bIdx.has(m.index));
     const bl = partnerBlokken(s).filter((b) => b.partner);
     for (const m of ls) assert.ok(bl.some((b) => m.index > b.start && m.index < b.end), `${f}: partnerlink buiten een blok`);
     for (const b of bl) {
