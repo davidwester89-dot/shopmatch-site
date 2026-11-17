@@ -132,7 +132,8 @@ test('E-CTA-1: blokken zonder datums of prijzen; idempotent; tekst buiten de blo
     }
     assert.equal(applyEcta(s, p, ECTA), s, `${p}: idempotent`);
     const zonder = s.replace(STRIP, '');
-    assert.equal(zonder.includes('data-ecta='), false);
+    // E-CTA-1 B (17-11): tekstlinks in de lopende tekst dragen data-ecta="B" en staan bewust buiten de blokken; hier gaat het om A/C.
+    assert.equal(/data-ecta="[AC]"/.test(zonder), false);
     assert.equal(applyEcta(zonder, p, ECTA), s, `${p}: alleen de twee blokken toegevoegd, de rest byte-gelijk`);
     for (const veld of SITE.datumvelden(zonder)) assert.ok(SITE.datumvelden(s).includes(veld), `${p}: datumveld ${veld}`);
   }

@@ -1,3 +1,4 @@
+import { zonderB, bLinks } from './e-cta-b-helper.mjs';
 import { revisieDatum } from './nuchter-datums-helper.mjs';
 // Shopify-verdieping 17-11-2026 (SEO wk46): Plus, rekenvoorbeeld eerste jaar, tarieven per transactie, POS-link; L7-datum 17-11.
 import test from 'node:test';
@@ -27,7 +28,9 @@ test('Shopify-verdieping 17-11: Plus, rekensom, POS-link, title ongewijzigd', ()
   for (const l of ['/vergelijken/shopify-vs-woocommerce/', '/vergelijken/shopify-vs-lightspeed/', '/webshop-beginnen-kosten/', '/blog/webshop-maken-met-ideal/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/shop-match/', '/vergelijken/']) assert.ok(h.includes(`href="${l}"`), l);
   // Geen nieuwe partnerlink in de verdieping: alleen de bestaande Shopify-knoppen (platform_top, platform_bottom).
   const v = h.slice(h.indexOf('Wat kost Shopify naast het abonnement?'), h.indexOf('class="out"'));
-  assert.doesNotMatch(v, /rel="sponsored/);
+  // E-CTA-1 B (17-11, partnerkaart: onderwerp Shopify): alleen gelabelde Shopify-tekstlinks; geen andere partnerlink in de verdieping.
+  assert.ok(bLinks(v).every((b) => b.vendor === 'shopify'));
+  assert.doesNotMatch(zonderB(v), /rel="sponsored/);
 });
 
 test('L7: /platformen/shopify/ 18-11 door ALT_ZIN-bodywijziging; hub 18-11 door eigen body; datePublished 17-10', () => {

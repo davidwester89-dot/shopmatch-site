@@ -2,6 +2,7 @@
 // shopify.com/nl/prijzen ("iDEAL-tarieven 0% + € 0,29 EUR" Basic/Grow/Advanced, "0% + € 0,15 EUR" Plus; "Transactiekosten externe partij 2% 1% 0,6% 0,2%"),
 // support.wix.com iDEAL-artikel ("2,5% + € 0,30"), mollie.com/nl/pricing ("iDEAL | Wero € 0,32"), stripe.com/nl/pricing ("€ 0,29 per betaling via iDEAL"),
 // woocommerce.com WooPayments fees, Netherlands ("iDEAL | Wero €0.29"), ideal.nl/naar-wero ("Uiterlijk eind 2027 ...").
+import { zonderB, bLinks } from './e-cta-b-helper.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -33,7 +34,9 @@ test('iDEAL-blog: interne links uit de briefing en geen partnerlinks in de lopen
   for (const l of ['/shop-match/', '/vergelijken/', '/platformen/shopify/', '/platformen/wix/', '/platformen/jouwweb/', '/platformen/woocommerce/', '/platformen/lightspeed/', '/platformen/mijndomein/', '/platformen/hostinger/', '/webshop-beginnen-kosten/', '/gratis-website-maken/']) assert.ok(h.includes(`href="${l}"`), l);
   // E-CTA-1 (17-11): de vaste A/C-blokken met label "Partnerlink" zijn geen lopende tekst; de lopende tekst blijft zonder partnerlinks.
   const art = h.slice(h.indexOf('<article'), h.indexOf('</article>')).replace(/<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g, '');
-  assert.doesNotMatch(art, /sponsored/);
+  // E-CTA-1 B (17-11, partnerkaart: Shopify + Wix ecom): alleen gelabelde B-tekstlinks naar die twee; verder geen partnerlink in de tekst.
+  assert.deepEqual([...new Set(bLinks(art).map((b) => b.vendor))].sort(), ['shopify', 'wix']);
+  assert.doesNotMatch(zonderB(art), /sponsored/);
   assert.doesNotMatch(art, /reddit/i);
 });
 
