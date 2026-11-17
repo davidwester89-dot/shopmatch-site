@@ -1,3 +1,4 @@
+import { zonderB } from './e-cta-b-helper.mjs'; // E-CTA-1 B: merknamen in de kostennoot mogen een tekstlink zijn
 import { revisieDatum } from './nuchter-datums-helper.mjs'; // Latere stijlrevisie, exacte datumtests blijven gelden.
 // Contentcommit 2-11-2026 (MM 01-11 11:25, alleen SC-OK):
 // 1) JouwWeb-actie terug met einddatum 30-11-2026 (L4), letterlijk van jouwweb.nl/prijzen (→ /tarieven, gerenderd 1-11-2026 NL-IP:
@@ -82,7 +83,7 @@ test('Shopify: geen jaarprijs (€ 21/59/289/252) zonder "jaarbetaling", ook nie
 });
 
 test('SC F2: kostennoot, stempel en rekensommen', () => {
-  const k = tekst('/webshop-beginnen-kosten/');
+  const k = zonderB(read('dist/webshop-beginnen-kosten/index.html')).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/&quot;/g, '"').replace(/\s+/g, ' ');
   assert.match(k, /Shopify, Wix en Lightspeed: 12 × de maandprijs bij jaarbetaling \(onze rekensom\)\. Bij maandbetaling: Shopify 12 × € 28 = € 336, Lightspeed 12 × € 78 = € 936 \(onze rekensom/);
   assert.match(read('dist/webshop-beginnen-kosten/index.html'), /Prijzen gecontroleerd op <time datetime="2026-10-17">17 oktober 2026<\/time>, Lightspeed op <time datetime="2026-11-01">1 november 2026<\/time>, Mijndomein op/);
 });
