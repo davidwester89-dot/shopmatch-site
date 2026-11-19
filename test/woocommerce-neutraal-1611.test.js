@@ -35,7 +35,7 @@ test('prijzen en ranking-basis WooCommerce ongewijzigd', () => {
 });
 
 test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink; andere merken ongewijzigd als CTA', () => {
-  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: '2026-11-19', PUSH_DATE: '2026-11-19' } });
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: '2026-11-20', PUSH_DATE: '2026-11-20' } });
   const fout = [];
   let bron = 0;
   for (const f of files('dist')) {
@@ -72,8 +72,8 @@ test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink;
 
   // datePublished van de bestaande B2B-post blijft 17-10.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-19"/);
+  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-20"/);
   // /gidsen/ blijft 5-11 (geen Woo-wijziging). /platformen/shopify/ blijft 18-11 (ALT_ZIN in Hostinger-v3; deze hash tilt hem niet).
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/gidsen\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-19<\/lastmod>/);
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-20<\/lastmod>/);
 });

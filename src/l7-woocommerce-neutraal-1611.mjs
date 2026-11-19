@@ -1,7 +1,7 @@
-// L7 WooCommerce-neutralisatie (pushdatum 2026-11-18, zelfde dag als Hostinger-v2).
+// L7 WooCommerce-neutralisatie (pushdatum 2026-11-20, zelfde dag als Hostinger-v2).
 // Alleen pagina's met een eigen bodywijziging (CTA → gewone bronlink). Hubs niet tillen
 // tenzij ze zelf een gewijzigde WooCommerce-knop tonen. datePublished van bestaande stukken blijft.
-export const WN_UPD = '2026-11-18';
+export const WN_UPD = '2026-11-20';
 export const WN_PADEN = new Set([
   '/platformen/woocommerce/',
   '/vergelijken/shopify-vs-woocommerce/',

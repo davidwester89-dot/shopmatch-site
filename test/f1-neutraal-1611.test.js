@@ -48,7 +48,7 @@ test('prijzen en ranking-basis ongewijzigd t.o.v. Hostinger-v2 / Woo-neutraal', 
 });
 
 test('gebouwde site: F1-merken nergens CTA of sponsored; 25 exacte bronlinks; betaalde merken ongewijzigd als CTA', () => {
-  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: '2026-11-19', PUSH_DATE: '2026-11-19' } });
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', BUILD_DATE: '2026-11-20', PUSH_DATE: '2026-11-20' } });
   const fout = [];
   const bronPerMerk = { jouwweb: 0, lightspeed: 0, mijndomein: 0, woocommerce: 0 };
   let bronTotaal = 0;
@@ -101,13 +101,13 @@ test('gebouwde site: F1-merken nergens CTA of sponsored; 25 exacte bronlinks; be
 
   // datePublished van bestaande posts blijft.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-19"/);
+  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-20"/);
   assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"dateModified": ?"2026-11-19"/);
+  assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"dateModified": ?"2026-11-20"/);
 
   // /gidsen/ blijft 5-11 (geen F1-wijziging). /platformen/shopify/ blijft 18-11 (ALT_ZIN in Hostinger-v3; deze hash tilt hem niet).
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/gidsen\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-19<\/lastmod>/);
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-20<\/lastmod>/);
   // /shop-match/ HTML heeft geen onbetaalde knop (alleen de clientmodule); lastmod blijft 18-11 (Hostinger-v2).
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/shop-match\/<\/loc><lastmod>2026-11-18<\/lastmod>/);
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/shop-match\/<\/loc><lastmod>2026-11-20<\/lastmod>/);
 });

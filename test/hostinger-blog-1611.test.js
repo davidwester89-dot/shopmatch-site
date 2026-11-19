@@ -4,14 +4,14 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { HB_UPD, HB_PADEN } from '../src/l7-hostinger-blog-1611.mjs';
 
-const md = readFileSync(new URL('../content/blog/2026-11-18-hostinger-website-webshop-kosten.md', import.meta.url), 'utf8');
+const md = readFileSync(new URL('../content/blog/2026-11-20-hostinger-website-webshop-kosten.md', import.meta.url), 'utf8');
 
-test('hostinger-blog: SEO-pack title/meta/H1, datums 2026-11-18', () => {
+test('hostinger-blog: SEO-pack title/meta/H1, datums 2026-11-20', () => {
   assert.match(md, /^seo_title: Hostinger website of webshop: prijzen en limieten$/m);
   assert.match(md, /^title: Hostinger: website of webshop — prijzen en limieten$/m);
   const d = md.match(/^description: (.*)$/m)[1];
   assert.ok(d.length >= 120 && d.length <= 155, String(d.length));
-  assert.match(md, /^date: 2026-11-18$/m); assert.match(md, /^updated: 2026-11-19$/m);
+  assert.match(md, /^date: 2026-11-20$/m); assert.match(md, /^updated: 2026-11-20$/m);
 });
 
 test('hostinger-blog: H2-outline, links, alleen bestaande knop, geen Squarespace, geen actieprijs, verlengprijs', () => {
@@ -24,13 +24,13 @@ test('hostinger-blog: H2-outline, links, alleen bestaande knop, geen Squarespace
   assert.ok(md.includes('Hostinger toont deze prijzen exclusief btw.'));
 });
 
-test('hostinger-blog L7: post, hub /blog/, home en prijswijzigingspagina\'s op 2026-11-18', () => {
+test('hostinger-blog L7: post, hub /blog/, home en prijswijzigingspagina\'s op 2026-11-20', () => {
   const sm = readFileSync(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
-  for (const p of ['blog/hostinger-website-webshop-kosten/', 'blog/', '']) assert.ok(sm.includes(`<loc>https://shopmatch.nl/${p}</loc><lastmod>${revisieDatum('/' + p, '2026-11-18')}</lastmod>`), p);
+  for (const p of ['blog/hostinger-website-webshop-kosten/', 'blog/', '']) assert.ok(sm.includes(`<loc>https://shopmatch.nl/${p}</loc><lastmod>${revisieDatum('/' + p, '2026-11-20')}</lastmod>`), p);
   const h = readFileSync(new URL('../dist/blog/hostinger-website-webshop-kosten/index.html', import.meta.url), 'utf8');
-  assert.match(h, /"dateModified": ?"2026-11-19"/);
+  assert.match(h, /"dateModified": ?"2026-11-20"/);
   assert.match(h, /rel="sponsored nofollow noopener"[^>]*data-vendor="hostinger"/);
-  assert.match(readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8'), /bijgewerkt op <time datetime="2026-11-18">/);
+  assert.match(readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8'), /bijgewerkt op <time datetime="2026-11-20">/);
   for (const p of HB_PADEN) {
     assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${revisieDatum(p, HB_UPD)}</lastmod>`), p);
     assert.match(readFileSync(new URL(`../dist${p}index.html`, import.meta.url), 'utf8'), new RegExp(`bijgewerkt (op )?<time datetime="${revisieDatum(p, HB_UPD)}">`, 'i'), p);

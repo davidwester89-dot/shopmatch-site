@@ -64,9 +64,9 @@ test('F2: geen Hostinger-introprijzen sitebreed, wel verlengprijzen en SC-zin', 
   assert.ok(shop.includes('Wil je klein en goedkoper starten? Kijk dan ook naar'));
   assert.ok(shop.includes('href="/platformen/hostinger/">Hostinger</a>, of naar <a href="/platformen/wix/">Wix</a> als je veel ontwerpvrijheid wilt.'));
   assert.doesNotMatch(shop, /het platform met de laagste instapprijs/);
-  assert.match(shop, /"dateModified": ?"2026-11-19"/);
+  assert.match(shop, /"dateModified": ?"2026-11-20"/);
   assert.match(shop, /"datePublished": ?"2026-10-17"/);
-  assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-19">19 november 2026<\/time>/);
+  assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-20">20 november 2026<\/time>/);
   const platH = tekst(read('dist/platformen/hostinger/index.html'));
   assert.ok(platH.includes('Eenvoudige site of kleine shop'));
   assert.doesNotMatch(platH, /Laagste instapprijs/);
