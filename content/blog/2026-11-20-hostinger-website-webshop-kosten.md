@@ -2,8 +2,8 @@
 title: Hostinger: website of webshop — prijzen en limieten
 seo_title: Hostinger website of webshop: prijzen en limieten
 description: Wat kost Hostinger Website Builder voor een site of webshop? Abonnementen, limieten en wanneer Wix of Shopify logischer is — alleen Hostinger-prijzen.
-date: 2026-11-18
-updated: 2026-11-19
+date: 2026-11-20
+updated: 2026-11-20
 checked: 2026-11-05
 tools: /shop-match/, /vergelijken/, /platformen/hostinger/
 sources:

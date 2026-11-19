@@ -108,11 +108,11 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 18-11 alleen bij bodyw
     const home = readFileSync(join(tOut, 'index.html'), 'utf8');
     assert.equal(dateFields(home).visible, HB_UPD);
     const hub = readFileSync(join(tOut, 'platformen/index.html'), 'utf8');
-    assert.match(hub, /Laatst bijgewerkt <time datetime="2026-11-18">18 november 2026<\/time>/);
+    assert.match(hub, /Laatst bijgewerkt <time datetime="2026-11-20">20 november 2026<\/time>/);
     assert.doesNotMatch(hub, /"dateModified": ?"2026-11-17"/);
     const shop = readFileSync(join(tOut, 'platformen/shopify/index.html'), 'utf8');
-    assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-19">19 november 2026<\/time>/);
-    assert.match(shop, /"dateModified": ?"2026-11-19"/);
+    assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-20">20 november 2026<\/time>/);
+    assert.match(shop, /"dateModified": ?"2026-11-20"/);
     assert.match(shop, /"datePublished": ?"2026-10-17"/);
   } finally {
     rmSync(tmp, { recursive: true, force: true });

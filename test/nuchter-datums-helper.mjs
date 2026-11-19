@@ -1,4 +1,4 @@
-// Onafhankelijke verwachting voor de stijlrelease van 19 november 2026.
+// Onafhankelijke verwachting voor de stijlrelease van 20 november 2026.
 export const STIJL_PADEN = new Set([
   "/blog/hostinger-website-webshop-kosten/",
   "/blog/b2b-webshop-beginnen/",
@@ -7,4 +7,4 @@ export const STIJL_PADEN = new Set([
   "/blog/webshop-maken-met-ideal/",
   "/platformen/shopify/"
 ]);
-export const revisieDatum = (pad, vorige) => STIJL_PADEN.has(pad) ? '2026-11-19' : vorige;
+export const revisieDatum = (pad, vorige) => STIJL_PADEN.has(pad) ? '2026-11-20' : vorige;
