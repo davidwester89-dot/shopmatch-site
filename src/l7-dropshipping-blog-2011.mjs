@@ -1,7 +1,7 @@
-// L7 dropshipping-blog (pushdatum 2026-11-20, wk47). Nieuwe post /blog/dropshipping-webshop-maken/ (datum uit content/blog,
-// date/updated 2026-11-20) verschijnt in de bloglijst op de homepage (bodywijziging /) en op de blogindex (bodywijziging /blog/,
-// datum = nieuwste post). Alleen '/' moet hier expliciet naar 20-11; geen andere pagina heeft een eigen bodywijziging.
-export const DS_UPD = '2026-11-20';
+// L7 dropshipping-blog (pushdatum 2026-11-24, wk47). Nieuwe post /blog/dropshipping-webshop-maken/ (datum uit content/blog,
+// date/updated 2026-11-24) verschijnt in de bloglijst op de homepage (bodywijziging /) en op de blogindex (bodywijziging /blog/,
+// datum = nieuwste post). Alleen '/' moet hier expliciet naar 24-11; geen andere pagina heeft een eigen bodywijziging.
+export const DS_UPD = '2026-11-24';
 export const DS_PADEN = new Set(['/']);
 const NL = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 const fmt = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${dd} ${NL[m - 1]} ${y}`; };

@@ -2,8 +2,8 @@
 title: Dropshipping webshop maken: platform, kosten en regels
 seo_title: Dropshipping webshop maken: platform, kosten en regels
 description: Een dropshipping webshop maken zonder voorraad? Welk platform past, wat het kost, wat je regelt voor KvK en btw, en waar je op let bij levertijd en retour.
-date: 2026-11-20
-updated: 2026-11-20
+date: 2026-11-24
+updated: 2026-11-24
 checked: 2026-11-16
 tools: /shop-match/, /vergelijken/, /webshop-beginnen-kosten/
 sources:

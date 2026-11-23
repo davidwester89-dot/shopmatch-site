@@ -42,8 +42,8 @@ test('L7: /platformen/shopify/ 18-11 door ALT_ZIN-bodywijziging; hub 18-11 door 
     assert.match(read(`dist${p}index.html`), /"datePublished": ?"2026-10-17"/);
   }
   // Hub /platformen/ heeft op 18-11 een eigen bodywijziging (Hostinger-prijstekst), niet alleen door dit Shopify-kind.
-  assert.ok(sm.includes('<loc>https://shopmatch.nl/platformen/</loc><lastmod>2026-11-20</lastmod>'));
-  assert.match(read('dist/platformen/index.html'), /bijgewerkt (?:op )?<time datetime="2026-11-20">/i);
+  assert.ok(sm.includes('<loc>https://shopmatch.nl/platformen/</loc><lastmod>2026-11-24</lastmod>'));
+  assert.match(read('dist/platformen/index.html'), /bijgewerkt (?:op )?<time datetime="2026-11-24">/i);
   assert.doesNotMatch(read('dist/platformen/index.html'), /"dateModified": ?"2026-11-17"/);
 });
 

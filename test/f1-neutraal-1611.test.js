@@ -9,9 +9,9 @@ import { execSync } from 'node:child_process';
 import { knop, uitgaand, PARTNERLINKS } from '../src/lib/partnerlinks.js';
 import { VERKOOP_VANAF, PLATFORMS } from '../src/lib/platforms.js';
 import { F1_PADEN, F1_UPD } from '../src/l7-f1-neutraal-1611.mjs';
-// 20-11: een latere pushdatum (nieuwe blogpost) mag meebouwen; nooit eerder dan 19-11.
+// 24-11: een latere pushdatum (nieuwe blogpost) mag meebouwen; nooit eerder dan 19-11.
 const amsterdamToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date());
-const LATER = (k) => { const v = process.env[k] || amsterdamToday(); return v > '2026-11-20' ? v : '2026-11-20'; };
+const LATER = (k) => { const v = process.env[k] || amsterdamToday(); return v > '2026-11-24' ? v : '2026-11-24'; };
 
 const read = (p) => readFileSync(p, 'utf8');
 const files = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? files(p) : p.endsWith('.html') || p.endsWith('.js') ? [p] : []; });
@@ -104,13 +104,13 @@ test('gebouwde site: F1-merken nergens CTA of sponsored; 25 exacte bronlinks; be
 
   // datePublished van bestaande posts blijft.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-20"/);
+  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-24"/);
   assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"dateModified": ?"2026-11-20"/);
+  assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"dateModified": ?"2026-11-24"/);
 
   // /gidsen/ blijft 5-11 (geen F1-wijziging). /platformen/shopify/ blijft 18-11 (ALT_ZIN in Hostinger-v3; deze hash tilt hem niet).
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/gidsen\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-20<\/lastmod>/);
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-24<\/lastmod>/);
   // /shop-match/ HTML heeft geen onbetaalde knop (alleen de clientmodule); lastmod blijft 18-11 (Hostinger-v2).
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/shop-match\/<\/loc><lastmod>2026-11-20<\/lastmod>/);
+  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/shop-match\/<\/loc><lastmod>2026-11-24<\/lastmod>/);
 });

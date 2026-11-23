@@ -1,10 +1,10 @@
-// L7 Hostinger-blog + F2-prijsherstel (pushdatum 2026-11-20, wk47: na SM A 17-11 en B 17-11).
+// L7 Hostinger-blog + F2-prijsherstel (pushdatum 2026-11-24, wk47: na SM A 17-11 en B 17-11).
 // Nieuwe post /blog/hostinger-website-webshop-kosten/ verschijnt in de bloglijst op de homepage (bodywijziging /)
-// en op de blogindex (bodywijziging /blog/). Post en /blog/ krijgen hun datum uit content/blog/*.md (updated 2026-11-20).
+// en op de blogindex (bodywijziging /blog/). Post en /blog/ krijgen hun datum uit content/blog/*.md (updated 2026-11-24).
 // Pagina's waarvan de Hostinger-prijstekst wijzigt (eigen bodywijziging) krijgen ook 18-11, inclusief hub /platformen/
 // (niet getild door een kind, wel omdat de Hostinger-kaart zelf wijzigt). /platformen/shopify/ gaat naar 18-11
 // door de zichtbare ALT_ZIN-bodywijziging (geen “laagste instapprijs” meer); datePublished blijft 17-10.
-export const HB_UPD = '2026-11-20';
+export const HB_UPD = '2026-11-24';
 export const HB_PADEN = new Set([
   '/',
   '/platformen/',

@@ -1,7 +1,7 @@
-// L7 F1-neutralisatie (pushdatum 2026-11-20, zelfde dag als Hostinger-v2 en WooCommerce-neutraal).
+// L7 F1-neutralisatie (pushdatum 2026-11-24, zelfde dag als Hostinger-v2 en WooCommerce-neutraal).
 // Alleen pagina's met een eigen bodywijziging (onbetaalde CTA → gewone bronlink). Hubs niet tillen
 // tenzij ze zelf een gewijzigde knop tonen. datePublished van bestaande stukken blijft.
-export const F1_UPD = '2026-11-20';
+export const F1_UPD = '2026-11-24';
 export const F1_PADEN = new Set([
   '/platformen/jouwweb/',
   '/platformen/lightspeed/',

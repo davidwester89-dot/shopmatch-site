@@ -9,9 +9,9 @@ test('stijlrelease 19-11: exacte bijgewerkt-/lastmod-/dateModified-datums, uitsl
   for (const pad of STIJL_PADEN) {
     const file = pad.endsWith('.html') ? out + pad : out + pad + 'index.html';
     const fields = dateFields(readFileSync(file, 'utf8'));
-    assert.equal(fields.visible, '2026-11-20', pad + ': zichtbaar');
-    assert.equal(sitemap.get(pad), '2026-11-20', pad + ': sitemap');
-    for (const date of [...fields.ld, ...fields.og]) assert.equal(date, '2026-11-20', pad + ': dateModified');
+    assert.equal(fields.visible, '2026-11-24', pad + ': zichtbaar');
+    assert.equal(sitemap.get(pad), '2026-11-24', pad + ': sitemap');
+    for (const date of [...fields.ld, ...fields.og]) assert.equal(date, '2026-11-24', pad + ': dateModified');
   }
 });
 

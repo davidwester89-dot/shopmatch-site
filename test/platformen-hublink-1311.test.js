@@ -80,9 +80,9 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 18-11 alleen bij bodyw
     assert.ok(bSm.has('/platformen/'), 'basis heeft /platformen/');
     assert.ok(tSm.get('/platformen/') >= bSm.get('/platformen/'), `/platformen/ ${tSm.get('/platformen/')} < basis ${bSm.get('/platformen/')}`);
     assert.equal(tSm.get('/platformen/'), HB_UPD);
-    assert.equal(tSm.get('/'), revisieDatum('/', HB_UPD)); // 20-11: bloglijst (dropshipping-post)
+    assert.equal(tSm.get('/'), revisieDatum('/', HB_UPD)); // 24-11: bloglijst (dropshipping-post)
     assert.ok(tSm.get('/') >= HL_UPD);
-    assert.equal(tSm.get('/blog/'), revisieDatum('/blog/', HB_UPD)); // 20-11: nieuwste post
+    assert.equal(tSm.get('/blog/'), revisieDatum('/blog/', HB_UPD)); // 24-11: nieuwste post
     assert.equal(tSm.get('/platformen/shopify/'), revisieDatum('/platformen/shopify/', HB_UPD));
     const htmlOf = (out) => new Map(walk(out).filter((f) => f.endsWith('.html') && !ign.test(f)).map((f) => [f, readFileSync(join(out, f), 'utf8')]));
     const bPages = htmlOf(bOut);
@@ -109,11 +109,11 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 18-11 alleen bij bodyw
     const home = readFileSync(join(tOut, 'index.html'), 'utf8');
     assert.equal(dateFields(home).visible, revisieDatum('/', HB_UPD));
     const hub = readFileSync(join(tOut, 'platformen/index.html'), 'utf8');
-    assert.match(hub, /Laatst bijgewerkt <time datetime="2026-11-20">20 november 2026<\/time>/);
+    assert.match(hub, /Laatst bijgewerkt <time datetime="2026-11-24">24 november 2026<\/time>/);
     assert.doesNotMatch(hub, /"dateModified": ?"2026-11-17"/);
     const shop = readFileSync(join(tOut, 'platformen/shopify/index.html'), 'utf8');
-    assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-20">20 november 2026<\/time>/);
-    assert.match(shop, /"dateModified": ?"2026-11-20"/);
+    assert.match(shop, /Laatst bijgewerkt <time datetime="2026-11-24">24 november 2026<\/time>/);
+    assert.match(shop, /"dateModified": ?"2026-11-24"/);
     assert.match(shop, /"datePublished": ?"2026-10-17"/);
   } finally {
     rmSync(tmp, { recursive: true, force: true });
