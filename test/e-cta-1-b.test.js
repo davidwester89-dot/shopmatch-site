@@ -18,7 +18,7 @@ import { secties, plekFouten } from './e-cta-b-plek.mjs';
 // zin (geen nieuwe tekst: bewaakt door L7 met de B-unwrap), interne links wijken nooit (o.a. SEO-01 /platformen/shopify/ → /platformen/wix/).
 // Aanvulling 17-11 (seo-review-5380612.md, besluit punten 8-10): geen B in koppen, B op de eerste vermelding in p/li per H2-sectie,
 // alleen bestaande woorden linken, bronregels byte-gelijk.
-const PRE_B = '07a94c7b93ae8958a3d48224305173129f4c2ac9'; // golf-1-tip vóór B (vendor-fix, herbouw op 25-11-parent): referentie voor interne links, koppen, bronregels en tekst
+const PRE_B = '19e0f98f4cc3736d878e9e14b16eaca60944f88f'; // golf-1-tip vóór B (vendor-fix, herbouw op db882b4 / 25-11-v3): referentie voor interne links, koppen, bronregels en tekst
 let basisDir = null;
 /** dist van PRE_B (eenmalig gebouwd in een tijdelijke map), of null als de commit niet in deze clone zit. */
 const basis = () => {
