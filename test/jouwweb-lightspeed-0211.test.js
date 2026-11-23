@@ -27,18 +27,12 @@ const DATUM = '2026-11-02';
 const LATER_0411 = new Set([...SP_PADEN, '/blog/', '/blog/shopify-wix-jouwweb-kleine-webshop/']);
 const JW = /Eerste 12 maanden 50%, daarna het standaardtarief\./;
 
-test('JouwWeb-actie t/m 30-11-2026 op de drie pagina\'s, met einddatum en ná de standaardprijs', () => {
+test('JouwWeb-actie t/m 30-11-2026 weg op de drie pagina\'s (pushdag 01-12, L4); standaardprijs blijft', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
   const jw = tekst('/platformen/jouwweb/');
-  assert.match(jw, /Actie tot en met 30 november 2026, volgens JouwWeb: "Eerste 12 maanden 50%, daarna het standaardtarief\."/);
-  assert.ok(jw.indexOf('€ 10') < jw.indexOf('Actie tot en met 30 november 2026'));
-  const k = tekst('/webshop-beginnen-kosten/');
-  assert.match(k, /JouwWeb-actie tot en met 30 november 2026/); assert.match(k, JW);
-  const b = tekst('/blog/shopify-wix-jouwweb-kleine-webshop/');
-  assert.match(b, /Tot en met 30 november 2026 heeft JouwWeb een actie/); assert.match(b, JW);
-  assert.match(b, /Prijs per maand Producten Actie tot en met 30 november 2026 \(eerste 12 maanden 50%, onze rekensom\)/);
-  // Nergens een actie zonder einddatum: elke vermelding van de JouwWeb-actie staat naast '30 november 2026'.
-  for (const f of files('dist')) { const t = read(f); if (/12 maanden 50%/.test(t)) assert.match(t, /30 november 2026/, f); }
+  assert.ok(jw.includes('€ 10'));
+  for (const p of ['/platformen/jouwweb/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/']) assert.doesNotMatch(tekst(p), /30 november 2026|JouwWeb-actie|12 maanden 50%/, p);
+  for (const f of files('dist')) assert.doesNotMatch(read(f), JW, f);
 });
 
 // Alle zichtbare tekst + title/meta/og/alt + JSON-LD, per pagina, als één string (SC 01-11: ook title, meta, JSON-LD, tabellen en teasers).

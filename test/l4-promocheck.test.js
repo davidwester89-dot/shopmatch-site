@@ -3,6 +3,7 @@
 // Vandaag = Europe/Amsterdam, of L4_VANDAAG. Einddatum-cues: t/m | tot en met | geldig tot | eindigt.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -55,16 +56,16 @@ test('geen false positive op transactie, actief of een actie zonder prijs', () =
   assert.equal(beoordeelPassage('Actie tot en met 30 november 2026 (eerste 12 maanden 50%, onze rekensom).', DAG), null);
 });
 
-test('live copy: JouwWeb-actie heeft einddatum 30 november 2026 en is vandaag groen', () => {
-  const veld = PLATFORMS.jouwweb.actie;
-  assert.deepEqual(endDates(veld), ['2026-11-30']);
-  assert.equal(beoordeelActie(veld, DAG), null);
-  assert.equal(beoordeelActie(veld, vandaag()), null);
+test('live copy: JouwWeb-actie t/m 30-11-2026 is weg (pushdag 01-12, GB2 23-11); alleen standaardtarieven', () => {
+  assert.equal(PLATFORMS.jouwweb.actie, undefined);
+  for (const f of ['src/lib/platforms.js', 'src/pages.mjs', 'content/blog/2026-10-17-shopify-wix-jouwweb-kleine-webshop.md']) {
+    const t = readFileSync(f, 'utf8').split('\n').filter((r) => !/^\s*\/\//.test(r)).join('\n');
+    assert.doesNotMatch(t, /30 november 2026|Eerste 12 maanden 50%/i, f);
+  }
+  // Mutatie: dezelfde zin met verlopen einddatum blijft rood (regel B) vanaf 01-12.
   const alinea = 'Bij maandbetaling: Shopify 12 × € 28 = € 336. Tijdelijke acties zijn niet meegerekend, zoals de JouwWeb-actie tot en met 30 november 2026 ("Eerste 12 maanden 50%").';
   assert.equal(beoordeelPassage(alinea, DAG), null);
   assert.equal(beoordeelPassage(alinea, '2026-12-01').regel, 'B');
-  const blog = 'Dan kost JouwWeb Pro € 120 per jaar (excl. btw). Tot en met 30 november 2026 heeft JouwWeb een actie: "Eerste 12 maanden 50%, daarna het standaardtarief."';
-  assert.equal(beoordeelPassage(blog, DAG), null);
 });
 
 test('regel C: actie-veld is leeg of heeft een einddatum; vrije tekst en een verlopen datum falen', () => {
@@ -141,8 +142,6 @@ test('L4: gebouwde site en actie-velden groen (of alleen een actieve BEKEND_L4)'
 
 test('regel C op de bronmodules van deze site', async () => {
   assert.deepEqual(await scanActieModules(ROOT, CFG.actieModules, vandaag()), []);
-  const na = await scanActieModules(ROOT, CFG.actieModules, '2026-12-01');
-  assert.equal(na.length, 1);
-  assert.match(na[0], /src\/lib\/platforms\.js \(B\): PLATFORMS\.jouwweb\.actie:/);
-  assert.match(na[0], /einddatum 2026-11-30 < 2026-12-01/);
+  // JouwWeb-actie (t/m 30-11) per 01-12 weg: ook op en na de pushdag groen.
+  for (const d of ['2026-12-01', '2026-12-02']) assert.deepEqual(await scanActieModules(ROOT, CFG.actieModules, d), [], d);
 });

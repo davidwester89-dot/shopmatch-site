@@ -92,6 +92,8 @@ test('E-CTA-1 B: niet in de FAQ en niet in het schema (SEO-besluit 2)', () => {
 const STRIP_AC = /<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g;
 // 'Meer op de blog' (src/blog.mjs) toont de nieuwste andere posts en wisselt bij elke nieuwe post; geen bodywijziging
 // (stripBlocks in scripts/l7.config.mjs), dus ook hier buiten de vergelijking met de stand vóór B (wk48 webshop-maken-met-ai).
+// Pagina's met een inhoudswijziging ná B (01-12, L4: JouwWeb-actie t/m 30-11 weg). Koppen en bronregels blijven byte-gelijk getest.
+const NA_B_INHOUD = new Set(['/blog/shopify-wix-jouwweb-kleine-webshop/', '/webshop-beginnen-kosten/', '/platformen/jouwweb/']);
 const zonderMeer = (h) => h.replace(/<h2>Meer op de blog<\/h2><div class="grid cards two">[\s\S]*?<\/div>/, '');
 const interneLinks = (h) => { const m = new Map(); for (const x of zonderMeer((h.match(/<main[\s\S]*<\/main>/) || [''])[0].replace(STRIP_AC, '')).matchAll(/<a\b[^>]*\shref="(\/[^"]*)"/g)) m.set(x[1], (m.get(x[1]) || 0) + 1); return m; };
 test('E-CTA-1 B: een interne link wijkt nooit voor een partnerlink (SEO-besluit 5; t.o.v. de stand vóór B)', (t) => {
@@ -138,10 +140,16 @@ test('E-CTA-1 B: alleen bestaande woorden gelinkt; koppen en bronregels byte-gel
     const h = readFileSync(join(SITE.root, p, 'index.html'), 'utf8'); if (!bLinks(h).length) continue;
     const oud = oudePagina(p); assert.ok(oud, `${p}: B op een pagina die vóór B niet bestond`); n++;
     // linktekst zonder label = het woord dat er al stond: na de unwrap is de body gelijk aan de stand vóór B
-    assert.equal(bodyFingerprint(h, CFG), bodyFingerprint(oud, CFG), `${p}: tekst gewijzigd t.o.v. ${PRE_B} (niet alleen een bestaand woord gelinkt)`);
-    assert.equal(bodyFingerprint(zonderB(h), CFG), bodyFingerprint(oud, CFG), `${p}: zonderB ≠ stand vóór B`);
+    if (NA_B_INHOUD.has(p)) {
+      // Inhoud ná B gewijzigd (geen B-wijziging): B-links wikkelen nog steeds alleen bestaande woorden.
+      assert.equal(bodyFingerprint(h, CFG), bodyFingerprint(zonderB(h), CFG), `${p}: B-link wijzigt tekst`);
+    } else {
+      assert.equal(bodyFingerprint(h, CFG), bodyFingerprint(oud, CFG), `${p}: tekst gewijzigd t.o.v. ${PRE_B} (niet alleen een bestaand woord gelinkt)`);
+      assert.equal(bodyFingerprint(zonderB(h), CFG), bodyFingerprint(oud, CFG), `${p}: zonderB ≠ stand vóór B`);
+    }
     assert.deepEqual(koppen(h), koppen(oud), `${p}: koppen niet byte-gelijk aan ${PRE_B}`);
-    assert.deepEqual(bron(h), bron(oud), `${p}: bronregels niet byte-gelijk aan ${PRE_B}`);
+    const lees = (x) => NA_B_INHOUD.has(p) ? x.map((r) => r.replace(/\d+ min lezen/, '‹n› min lezen')) : x; // leestijd volgt de ingekorte tekst
+    assert.deepEqual(lees(bron(h)), lees(bron(oud)), `${p}: bronregels niet byte-gelijk aan ${PRE_B}`);
   }
   assert.ok(n > 0);
 });

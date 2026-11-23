@@ -17,3 +17,16 @@ export function aiDatum(p, today = process.env.BUILD_DATE || amsterdamToday()) {
   q.body = q.body.replace(/bijgewerkt op <time datetime="\d{4}-\d{2}-\d{2}">[^<]*<\/time>/, `bijgewerkt op <time datetime="${AI_UPD}">${fmt(AI_UPD)}</time>`);
   return q;
 }
+
+// Zelfde push 01-12 (GB2 23-11, L4): JouwWeb-actie t/m 30-11-2026 weggehaald uit platforms.js (actie-veld op /platformen/jouwweb/),
+// /webshop-beginnen-kosten/ en /blog/shopify-wix-jouwweb-kleine-webshop/; /shop-match/ via client-side js/lib/platforms.js. Eigen bodywijziging, onvoorwaardelijk (zoals jwDatum).
+export const JWACTIE_PADEN = new Set(['/shop-match/', '/platformen/jouwweb/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/']);
+export function jwActieDatum(p) {
+  if (!JWACTIE_PADEN.has(p.path)) return p;
+  const q = { ...p, lastmod: AI_UPD };
+  if (q.stamp) q.stamp = { ...q.stamp, updated: AI_UPD };
+  if (q.article) q.article = { ...q.article, updated: AI_UPD };
+  if (q.schema) q.schema = q.schema.map((x) => ('dateModified' in x ? { ...x, dateModified: AI_UPD } : x));
+  q.body = q.body.replace(/bijgewerkt op <time datetime="\d{4}-\d{2}-\d{2}">[^<]*<\/time>/, `bijgewerkt op <time datetime="${AI_UPD}">${fmt(AI_UPD)}</time>`);
+  return q;
+}

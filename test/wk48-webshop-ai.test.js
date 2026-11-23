@@ -38,9 +38,9 @@ test('ai-webshop: L7 01-12 op post, / en /blog/; byline Redactie', () => {
   for (const p of ['/blog/webshop-maken-met-ai/', '/blog/', '/']) assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${D}</lastmod>`), p);
   assert.match(h, /og\/blog-webshop-maken-met-ai\.png/);
 });
-test('ai-webshop: / en /blog/ hebben JSON-LD dateModified = lastmod = zichtbare stempel = 01-12 (les 19-11)', () => {
+test('ai-webshop: /, /blog/ en /shop-match/ hebben JSON-LD dateModified = lastmod = zichtbare stempel = 01-12 (les 19-11)', () => {
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
-  for (const [p, f, type] of [['/', 'dist/index.html', 'WebPage'], ['/blog/', 'dist/blog/index.html', 'Blog']]) {
+  for (const [p, f, type] of [['/', 'dist/index.html', 'WebPage'], ['/blog/', 'dist/blog/index.html', 'Blog'], ['/shop-match/', 'dist/shop-match/index.html', 'WebApplication']]) {
     const s = readFileSync(f, 'utf8');
     const ld = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
     const x = ld.find((o) => o['@type'] === type);
@@ -51,4 +51,14 @@ test('ai-webshop: / en /blog/ hebben JSON-LD dateModified = lastmod = zichtbare 
     assert.equal(vis, lm, `${p}: zichtbare stempel ≠ lastmod`);
     assert.equal(lm, D, `${p}: lastmod`);
   }
+});
+test('JouwWeb-actie t/m 30-11 weg (L4, pushdag 01-12): drie pagina\'s + clientdata met datum 01-12', () => {
+  const sm = readFileSync('dist/sitemap.xml', 'utf8');
+  for (const p of ['/platformen/jouwweb/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/shop-match/']) {
+    const s = readFileSync(`dist${p}index.html`, 'utf8');
+    assert.doesNotMatch(s, /30 november 2026|12 maanden 50%|JouwWeb-actie/, p);
+    assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${D}</lastmod>`), p);
+    assert.match(s, new RegExp(`"dateModified": ?"${D}"`), p);
+  }
+  assert.doesNotMatch(readFileSync('dist/js/lib/platforms.js', 'utf8'), /30 november 2026|12 maanden 50%/);
 });

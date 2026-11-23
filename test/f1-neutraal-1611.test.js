@@ -107,11 +107,11 @@ test('gebouwde site: F1-merken nergens CTA of sponsored; 25 exacte bronlinks; be
   // wk48: eigen bodywijziging 27-11 (B2B-upgrade) tilt deze post terecht verder; zie test/wk48-b2b-upgrade.test.js.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), new RegExp(`"dateModified": ?"${revisieDatum('/blog/b2b-webshop-beginnen/', '2026-11-24')}"`));
   assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"dateModified": ?"2026-11-24"/);
+  assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), new RegExp(`"dateModified": ?"${revisieDatum('/blog/shopify-wix-jouwweb-kleine-webshop/', '2026-11-24')}"`));
 
   // /gidsen/ blijft 5-11 (geen F1-wijziging). /platformen/shopify/ blijft 18-11 (ALT_ZIN in Hostinger-v3; deze hash tilt hem niet).
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/gidsen\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-24<\/lastmod>/);
   // /shop-match/ HTML heeft geen onbetaalde knop (alleen de clientmodule); lastmod blijft 18-11 (Hostinger-v2).
-  assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/shop-match\/<\/loc><lastmod>2026-11-24<\/lastmod>/);
+  assert.match(sm, new RegExp(`<loc>https://shopmatch\\.nl/shop-match/</loc><lastmod>${revisieDatum('/shop-match/', '2026-11-24')}</lastmod>`)); // 01-12: clientdata (JouwWeb-actie weg)
 });
