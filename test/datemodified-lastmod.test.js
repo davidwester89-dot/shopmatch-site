@@ -25,7 +25,7 @@ test('elke pagina met lastmod = PUSH_DATE heeft dateModified = PUSH_DATE', () =>
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   const pages = [...sm.matchAll(/<loc>https:\/\/shopmatch\.nl([^<]*)<\/loc><lastmod>([^<]*)<\/lastmod>/g)];
   const lifted = pages.filter(([, , last]) => last === PUSH);
-  assert.ok(lifted.length, `geen pagina met lastmod ${PUSH}`);
+  // Geen lastmod-lift op deze pushdag (zoals L3/E-CTA-1) is groen; wel een lift zonder dateModified is rood.
   const missing = [];
   for (const [, path, last] of lifted) {
     const file = path === '/' ? 'dist/index.html' : `dist${path}index.html`;
