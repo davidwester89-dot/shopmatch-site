@@ -75,7 +75,8 @@ test('gebouwde site: WooCommerce nergens CTA of sponsored; wél exacte bronlink;
 
   // datePublished van de bestaande B2B-post blijft 17-10.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-24"/);
+  // wk48: eigen bodywijziging 27-11 (B2B-upgrade) tilt deze post terecht verder; zie test/wk48-b2b-upgrade.test.js.
+  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), new RegExp(`"dateModified": ?"${revisieDatum('/blog/b2b-webshop-beginnen/', '2026-11-24')}"`));
   // /gidsen/ blijft 5-11 (geen Woo-wijziging). /platformen/shopify/ blijft 18-11 (ALT_ZIN in Hostinger-v3; deze hash tilt hem niet).
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/gidsen\/<\/loc><lastmod>2026-11-05<\/lastmod>/);
   assert.match(sm, /<loc>https:\/\/shopmatch\.nl\/platformen\/shopify\/<\/loc><lastmod>2026-11-24<\/lastmod>/);

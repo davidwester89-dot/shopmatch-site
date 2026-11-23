@@ -10,8 +10,16 @@ sources:
 - JouwWeb: Webshop | https://www.jouwweb.nl/webshop
 - JouwWeb: Prijzen | https://www.jouwweb.nl/prijzen
 - Shopify Help: Shopify B2B | https://help.shopify.com/nl/manual/b2b
+- Shopify Help: B2B-functies per abonnement | https://help.shopify.com/nl/manual/b2b/getting-started/plan-features
+- Shopify Help: B2B-bedrijven aanmaken | https://help.shopify.com/nl/manual/b2b/companies-and-customers/creating-companies
 - Shopify: Prijzen | https://www.shopify.com/nl/prijzen
 - Lightspeed eCom: Prijzen | https://www.lightspeedhq.nl/ecommerce/prijzen/
+- Lightspeed eCom Help: Over verkopen aan bedrijven (B2B) | https://ecom-support.lightspeedhq.com/hc/nl/articles/115005022748-Over-verkopen-aan-bedrijven-B2B
+- Lightspeed eCom Help: Kortingsregel voor klantengroepen | https://ecom-support.lightspeedhq.com/hc/nl/articles/115000347334-Kortingsregel-Korting-voor-klantengroepen
+- Lightspeed eCom Help: Over betalingen | https://ecom-support.lightspeedhq.com/hc/nl/articles/220661447-Over-betalingen
+- Lightspeed eCom Help: Minimale orderwaarde | https://ecom-support.lightspeedhq.com/hc/nl/articles/360036443933-Een-minimaal-vereiste-orderwaarde-toevoegen
+- Lightspeed eCom Help: Btw verleggen | https://ecom-support.lightspeedhq.com/hc/nl/articles/360001445814-Belasting-toegevoegde-waarde-btw-verleggen-doorschuiven
+- Lightspeed eCom Help: Offerte maken | https://ecom-support.lightspeedhq.com/hc/nl/articles/220661287-Een-offerte-maken-in-de-backoffice
 - WooCommerce: B2B for WooCommerce | https://woocommerce.com/products/b2b-for-woocommerce/
 - WooCommerce: Prijzen | https://woocommerce.com/nl/pricing/
 - ECB: euro-referentiekoers US$ | https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html
@@ -41,6 +49,19 @@ Dit is wat de aanbieders zelf over B2B zeggen, met het goedkoopste pakket waarin
 | [WooCommerce](/platformen/woocommerce/) | Via een betaalde extensie, zoals B2B for WooCommerce | Plug-in € 0, plus hosting en extensie |
 
 [Wix](/platformen/wix/), [Hostinger](/platformen/hostinger/) en [Mijndomein](/platformen/mijndomein/) noemen op de pagina's die wij volgen geen B2B-functies. Daarom telt B2B bij hen in de checklist als 0. [Zo tellen we](/over/#methode).
+
+### B2B-functies naast elkaar
+
+Wat elk platform op zijn eigen pagina's zegt over vijf dingen die zakelijke klanten vaak vragen. Staat er "niet genoemd", dan vonden we het niet op de site van de aanbieder.
+
+| Platform | Prijzen per klant of klantgroep | Betalen op rekening | Minimale bestelling | Btw verleggen | Offerte |
+|---|---|---|---|---|---|
+| JouwWeb | Niet genoemd | Betalen via factuur | Minimum bestelbedrag | Btw-verleggingsregeling en btw-regels voor EU-leveringen | Niet genoemd |
+| Shopify | Catalogi met eigen prijzen per groep bedrijven (Basic tot en met Advanced: maximaal 3 actieve toewijzingen); per bedrijf alleen in Plus | Netto betalingsvoorwaarden, in alle abonnementen met B2B | Aantalregels per variant: minimum, maximum en staffel | Btw-nummer per bedrijfslocatie (EU), door Shopify Tax gecontroleerd; per locatie btw wel of niet innen | Bestellingen als concept laten indienen, prijs vastzetten en een factuur sturen |
+| Lightspeed eCom | Klantengroepen met een eigen korting; prijzen excl. btw tonen | Betalen per factuur (standaard betaalprovider in Nederland en België) | Minimum orderbedrag, ook per betaalprovider | Automatisch 0% btw voor een bedrijf met geldig btw-nummer in een ander land | Offerte in de backoffice, om te zetten naar een order |
+| WooCommerce + B2B for WooCommerce | Prijzen per klantrol en per klant | Niet genoemd; wel betaalmethoden per klantrol beperken | Minimum en maximum aantal per klantrol | Btw-vrijstelling per klant, aan te vragen bij de checkout | Offerteaanvraag met pdf-offerte, om te zetten naar een order |
+
+Bij Lightspeed zit de B2B-module alleen in Professional. WooCommerce heeft deze functies niet zelf: ze komen uit de betaalde extensie B2B for WooCommerce.
 
 ## Waar let je op bij een B2B-webshop?
 
@@ -85,6 +106,16 @@ WooCommerce is een gratis plug-in voor WordPress. B2B-functies voeg je toe met e
 
 {{knop:woocommerce}}
 
+## B2B-webshop bouwen in 5 stappen
+
+1. **Zet je eisen op een rij.** Gebruik de zes punten hierboven: btw, betalen op rekening, klantaccounts, eigen prijzen, minimum bestelbedrag en je boekhouding.
+2. **Kies platform en pakket.** B2B zit bij Shopify in Basic en hoger, bij Lightspeed eCom in Professional en bij JouwWeb in Pro en Business. Bij WooCommerce heb je een extensie nodig. Twijfel je tussen twee? Vergelijk [Shopify en Lightspeed](/vergelijken/shopify-vs-lightspeed/) of [Shopify en WooCommerce](/vergelijken/shopify-vs-woocommerce/).
+3. **Maak klantaccounts en prijzen aan.** Leg je zakelijke klanten vast als bedrijf of klantgroep en zet hun prijzen of korting erbij. Bij Lightspeed kun je nieuwe accounts eerst laten goedkeuren.
+4. **Stel betalen en btw in.** Zet betalen op factuur of netto betalingsvoorwaarden aan, en laat klanten hun btw-nummer invullen.
+5. **Koppel je boekhouding en test.** Plaats een proefbestelling als zakelijke klant en kijk of factuur en btw goed in je administratie komen.
+
+Meer platforms naast elkaar? Zie [het beste webshopplatform voor jouw situatie](/beste-webshop-platform/).
+
 ## Welke kies je?
 
 - **Paar zakelijke klanten, klein assortiment, Nederland en EU:** [JouwWeb](/platformen/jouwweb/).
@@ -104,6 +135,9 @@ Van de platforms die B2B-functies noemen, is JouwWeb het goedkoopst: Pro kost �
 
 ### Kan ik met Shopify Basic al B2B verkopen?
 Ja. Volgens Shopify zit Shopify B2B in Basic, Grow, Advanced en Plus, maar niet in Starter of Retail. Welke B2B-functies je krijgt, hangt af van je abonnement.
+
+### Welke B2B-webshopsoftware past bij een kleine zaak?
+Dat hangt af van wat je zakelijke klanten vragen. Heb je een klein assortiment en vooral factuur en verlegde btw nodig, dan komt JouwWeb Pro of Business in beeld. Wil je eigen prijzen per groep klanten of B2B naast consumenten, kijk dan naar Shopify Basic. Heb je ook een winkel met kassa, dan past Lightspeed eCom Professional. De tabel hierboven laat per functie zien wat elk platform noemt.
 
 ### Kan ik in één webshop aan bedrijven en consumenten verkopen?
 Bij Shopify wel: je kunt één winkel voor B2B en consumenten gebruiken, of een aparte B2B-winkel. Vergelijk ook [Shopify, Wix en JouwWeb voor een kleine webshop](/blog/shopify-wix-jouwweb-kleine-webshop/).
