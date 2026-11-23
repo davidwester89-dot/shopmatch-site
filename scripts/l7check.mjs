@@ -244,8 +244,15 @@ export const DEFAULT_JS_IGNORE = /(^|\/)(consent|gtag|ga|ga4|analytics|cookie|in
 // Dit is geen datumvrijstelling: eigen body/clientdata blijven onder de gewone pushdatumcheck vallen.
 export function unchangedHubDateErrors(path, old, html, beforeLastmod, afterLastmod, cfg = {}) {
   if (!(cfg.bodyOnlyHubs || []).includes(path) || bodyFingerprint(old, cfg) !== bodyFingerprint(html, cfg)) return [];
-  const own = (h, lastmod) => { const d = dateFields(h); return JSON.stringify({ ld: d.ld, og: d.og, visible: d.visible, lastmod }); };
-  return own(old, beforeLastmod) === own(html, afterLastmod) ? [] : [`${path}: hubdatum gewijzigd zonder eigen bodywijziging`];
+  const a = dateFields(old), b = dateFields(html);
+  // Les 19-11 / SEO 23-11: ontbrekende dateModified aanvullen tot de bestaande lastmod en
+  // zichtbare stempel is geen hub-lift (die datums wijzigen niet).
+  if (beforeLastmod === afterLastmod && a.visible === b.visible
+    && JSON.stringify(a.og) === JSON.stringify(b.og)
+    && b.ld.every((d) => d === afterLastmod)
+    && a.ld.every((d) => b.ld.includes(d))) return [];
+  const own = (d, lastmod) => JSON.stringify({ ld: d.ld, og: d.og, visible: d.visible, lastmod });
+  return own(a, beforeLastmod) === own(b, afterLastmod) ? [] : [`${path}: hubdatum gewijzigd zonder eigen bodywijziging`];
 }
 
 export function runL7(root, cfg) {

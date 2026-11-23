@@ -14,3 +14,9 @@ test('een echte eigen hub-bodywijziging blijft beschikbaar voor de gewone L7-pus
   assert.notEqual(bodyFingerprint(h('2026-11-11')), bodyFingerprint(h('2026-11-19', '<p>Nieuwe samenvatting.</p>')));
   assert.deepEqual(unchangedHubDateErrors('/blog/', h('2026-11-11'), h('2026-11-19', '<p>Nieuwe samenvatting.</p>'), '2026-11-11', '2026-11-19', cfg), []);
 });
+test('ontbrekende dateModified aanvullen tot de bestaande hubdatum is geen hub-lift', () => {
+  const zonder = h('2026-11-24');
+  const met = h('2026-11-24', '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","dateModified":"2026-11-24"}</script>');
+  assert.equal(bodyFingerprint(zonder, cfg), bodyFingerprint(met, cfg));
+  assert.deepEqual(unchangedHubDateErrors('/blog/', zonder, met, '2026-11-24', '2026-11-24', cfg), []);
+});

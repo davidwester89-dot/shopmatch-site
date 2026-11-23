@@ -71,7 +71,11 @@ const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${l
 export const home = {
   path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: MAAND_UPD,
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
-  schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
+  // WebPage met dateModified: elke lastmod-lift vereist dateModified (les 19-11 / SEO 23-11). FAQPage blijft erna. Geen tweede WebPage.
+  schema: [
+    { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Webshop kiezen? Vergelijk eerst.', url: SITE.domain + '/', description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.', inLanguage: 'nl-NL', dateModified: MAAND_UPD },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) },
+  ],
   body: `<section class="hero sec"><div class="hero-txt">
 <p class="h1-brand">Shop<b>Match</b>.nl</p>
 <h1 class="tagline">Webshop kiezen? Vergelijk eerst.</h1>
@@ -134,7 +138,7 @@ export const quiz = {
   path: '/shop-match/', title: 'Webshopplatform kiezen: keuzehulp in 5 vragen | ShopMatch', h1: 'Welk webshopplatform past bij jou?', crumb: 'De match', og: 'match', noCta: true, stamp: { updated: MATCH_UPD }, lastmod: MATCH_UPD,
   description: 'Vijf vragen over je plannen, aantal producten, budget en ervaring. Je krijgt de drie platforms die het best passen, met prijs en uitleg.',
   scripts: ['/js/quiz.js'],
-  schema: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ShopMatch', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: SITE.domain + '/shop-match/', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, publisher: ORG }, { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: matchFaq().map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
+  schema: [{ '@context': 'https://schema.org', '@type': 'WebApplication', name: 'ShopMatch', applicationCategory: 'BusinessApplication', operatingSystem: 'Web', url: SITE.domain + '/shop-match/', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, publisher: ORG, dateModified: MATCH_UPD }, { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: matchFaq().map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<h1>Welk webshopplatform past bij jou?</h1><p class="lead">Beantwoord 5 korte vragen. Je ziet meteen wat past, wat het kost en waarom.</p>
 <div class="mgrid">
 <form id="form" class="quiz card" novalidate>
@@ -221,7 +225,11 @@ ${matchCta(`Is ${esc(p.naam)} de beste keuze voor jou?`)}${bron(p.bronnen, featu
 export const platformHub = {
   path: '/platformen/', title: 'Webshopplatforms 2026: prijzen en checklist | ShopMatch', h1: 'Webshopplatforms op een rij', crumb: 'Platforms', og: 'platformen', stamp: { checked: CHECKED, checkedPer: PER_ALLE, updated: MAAND_UPD }, lastmod: MAAND_UPD,
   description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce: per platform de prijs, de checklist en voor wie het past.',
-  schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) }],
+  // CollectionPage met dateModified: elke lastmod-lift vereist dateModified (les 19-11 / SEO 23-11). ItemList blijft erna. Geen WebPage ernaast.
+  schema: [
+    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Webshopplatforms op een rij', url: SITE.domain + '/platformen/', description: 'Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce: per platform de prijs, de checklist en voor wie het past.', inLanguage: 'nl-NL', dateModified: MAAND_UPD },
+    { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: RANG.map((id, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.domain}/platformen/${P[id].slug}/`, name: P[id].naam })) },
+  ],
   body: `<h1>Webshopplatforms op een rij</h1><p class="lead">Zeven manieren om online te verkopen, van gratis plug-in tot compleet platform met kassa. Gesorteerd op het aantal checklistpunten dat de aanbieder noemt, bij gelijke stand op prijs.</p>
 <div class="actions"><a class="btn" href="/shop-match/">Liever advies op maat? Start de match</a><a class="btn ghost" href="/vergelijken/">Filter en vergelijk</a></div>
 <ol class="plist">${RANG.map((id, i) => pcard(id, { rank: i + 1, pos: 'lijst' })).join('')}</ol>
@@ -238,6 +246,8 @@ export const vsHub = {
   path: '/vergelijken/', title: 'Webshopplatforms vergelijken 2026 | ShopMatch', h1: 'Webshopplatforms vergelijken', crumb: 'Vergelijken', og: 'vergelijken', stamp: { checked: CHECKED, checkedPer: PER_ALLE, updated: MAAND_UPD }, lastmod: MAAND_UPD,
   scripts: ['/js/vergelijk.js'],
   description: 'Alle 7 webshopplatforms in één tabel: prijs, aantal producten, iDEAL, kassa, B2B, talen en contract. Filter op wat jij nodig hebt.',
+  // CollectionPage met dateModified: elke lastmod-lift vereist dateModified (les 19-11 / SEO 23-11). Geen tweede WebPage.
+  schema: [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Webshopplatforms vergelijken', url: SITE.domain + '/vergelijken/', description: 'Alle 7 webshopplatforms in één tabel: prijs, aantal producten, iDEAL, kassa, B2B, talen en contract. Filter op wat jij nodig hebt.', inLanguage: 'nl-NL', dateModified: MAAND_UPD }],
   body: `<h1>Webshopplatforms vergelijken (2026)</h1><p class="lead">Zeven platforms op prijs en 10 vaste punten. Filter op wat jouw bedrijf nodig heeft.</p>
 <div class="actions"><a class="btn" href="/shop-match/">Liever advies op maat? Start de match</a></div>
 <form class="filters card" id="filters" aria-labelledby="h-f"><h2 id="h-f">Filter de platforms</h2>
