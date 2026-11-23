@@ -104,7 +104,8 @@ test('gebouwde site: F1-merken nergens CTA of sponsored; 25 exacte bronlinks; be
 
   // datePublished van bestaande posts blijft.
   assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"datePublished": ?"2026-10-17"/);
-  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), /"dateModified": ?"2026-11-24"/);
+  // wk48: eigen bodywijziging 27-11 (B2B-upgrade) tilt deze post terecht verder; zie test/wk48-b2b-upgrade.test.js.
+  assert.match(read('dist/blog/b2b-webshop-beginnen/index.html'), new RegExp(`"dateModified": ?"${revisieDatum('/blog/b2b-webshop-beginnen/', '2026-11-24')}"`));
   assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"datePublished": ?"2026-10-17"/);
   assert.match(read('dist/blog/shopify-wix-jouwweb-kleine-webshop/index.html'), /"dateModified": ?"2026-11-24"/);
 
