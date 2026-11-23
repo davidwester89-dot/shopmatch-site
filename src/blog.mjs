@@ -94,7 +94,7 @@ ${matchCta()}`;
     path: '/blog/', title: 'Blog: webshop en website beginnen | ShopMatch', h1: 'Blog', ogTitle: 'Blog: webshop en website beginnen',
     description: 'Artikelen over het kiezen van een webshopplatform of websitebouwer: prijzen, verschillen en wat past bij jouw bedrijf. Met bronnen.',
     crumb: 'Blog', og: 'blog', body, lastmod: upd, stamp: { updated: upd },
-    schema: [{ '@context': 'https://schema.org', '@type': 'Blog', name: 'ShopMatch blog', url: SITE.domain + '/blog/', inLanguage: 'nl-NL', publisher: ORG,
+    schema: [{ '@context': 'https://schema.org', '@type': 'Blog', name: 'ShopMatch blog', url: SITE.domain + '/blog/', inLanguage: 'nl-NL', dateModified: upd, publisher: ORG,
       blogPost: posts.map((x) => ({ '@type': 'BlogPosting', headline: x.title, url: SITE.domain + x.path, datePublished: x.date, dateModified: x.updated })) }],
   };
 }

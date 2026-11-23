@@ -21,6 +21,8 @@ import { f1Datum } from './src/l7-f1-neutraal-1611.mjs';
 import { b2bDatum } from './src/l7-b2b-upgrade-2711.mjs';
 import { jwDatum } from './src/l7-jouwweb-tarieven-2311.mjs';
 import { aiDatum } from './src/l7-ai-blog-0112.mjs';
+// Hubs / en /blog/: dateModified in het WebPage-/Blog-schema volgt altijd de uiteindelijke lastmod (les 19-11, SEO 23-11).
+const datumSync = (p) => (p.path === '/' || p.path === '/blog/') && p.schema ? { ...p, schema: p.schema.map((x) => ('dateModified' in x && /^(WebPage|Blog)$/.test(x['@type']) ? { ...x, dateModified: p.lastmod } : x)) } : p;
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
 // Logo's in tabelcellen met precies de naam van een platform (30-10); zelfde vak voor elk platform, alleen beeld.
@@ -30,7 +32,7 @@ const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileS
 // Blog: content/blog/*.md (nieuwste eerst; posts met een datum in de toekomst worden overgeslagen).
 const posts = loadPosts();
 const home = { ...P.home, body: P.home.body.replace('{{latest}}', latestHtml(posts)) };
-export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound].map(efDatum).map(spDatum).map(sdDatum).map(hlDatum).map(hbDatum).map(wnDatum).map(f1Datum).map((p) => dsDatum(p)).map((p) => aiDatum(p)).map(jwDatum).map(b2bDatum).map(nuchterDatum);
+export const pages = [home, P.quiz, P.platformHub, ...P.platformPages, P.vsHub, ...P.vsPages, P.gidsHub, ...P.guides, ...(posts.length ? [blogIndex(posts), ...posts.map((x) => postPage(x, posts))] : []), P.over, P.privacy, P.notfound].map(efDatum).map(spDatum).map(sdDatum).map(hlDatum).map(hbDatum).map(wnDatum).map(f1Datum).map((p) => dsDatum(p)).map((p) => aiDatum(p)).map(jwDatum).map(b2bDatum).map(nuchterDatum).map(datumSync);
 for (const p of pages) write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), partnerNoten(applyEcta(layout(p), p.path, ECTA))); // E-CTA-1: A/C op gids/blog, geen datumwijziging
 // Doorverwijzingen voor weggehaalde pagina's. GitHub Pages kan geen 301 sturen: statische pagina met meta refresh,
 // canonical naar het doel en noindex. Staan niet in de sitemap.

@@ -87,7 +87,9 @@ const miniRows = RANG.map((id) => `<tr><th scope="row"><span class="rowlogo">${l
 export const home = {
   path: '/', title: 'Webshop maken? Kies het juiste platform | ShopMatch', ogTitle: 'ShopMatch: welk webshopplatform past bij jouw bedrijf?', h1: 'Webshop kiezen? Vergelijk eerst.', og: 'home', lastmod: MAAND_UPD,
   description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.',
-  schema: [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
+  // WebPage met dateModified: elke lastmod-lift vereist dateModified (les 19-11; SEO 23-11, zoals WPM/TAM). Gelijkgezet met lastmod in build.mjs (datumSync).
+  schema: [{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Webshop kiezen? Vergelijk eerst.', url: SITE.domain + '/', description: 'Vergelijk Shopify, Wix, JouwWeb, Lightspeed, Hostinger, Mijndomein en WooCommerce op prijs, iDEAL, kassa en B2B. Doe de match en zie je top 3.', inLanguage: 'nl-NL', dateModified: MAAND_UPD },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: homeFaq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) }],
   body: `<section class="hero sec"><div class="hero-txt">
 <p class="h1-brand">Shop<b>Match</b>.nl</p>
 <h1 class="tagline">Webshop kiezen? Vergelijk eerst.</h1>

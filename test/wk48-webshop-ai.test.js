@@ -38,3 +38,17 @@ test('ai-webshop: L7 01-12 op post, / en /blog/; byline Redactie', () => {
   for (const p of ['/blog/webshop-maken-met-ai/', '/blog/', '/']) assert.ok(sm.includes(`<loc>https://shopmatch.nl${p}</loc><lastmod>${D}</lastmod>`), p);
   assert.match(h, /og\/blog-webshop-maken-met-ai\.png/);
 });
+test('ai-webshop: / en /blog/ hebben JSON-LD dateModified = lastmod = zichtbare stempel = 01-12 (les 19-11)', () => {
+  const sm = readFileSync('dist/sitemap.xml', 'utf8');
+  for (const [p, f, type] of [['/', 'dist/index.html', 'WebPage'], ['/blog/', 'dist/blog/index.html', 'Blog']]) {
+    const s = readFileSync(f, 'utf8');
+    const ld = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    const x = ld.find((o) => o['@type'] === type);
+    assert.ok(x, `${p}: ${type}-schema ontbreekt`);
+    const lm = sm.match(new RegExp(`<loc>https://shopmatch\\.nl${p.replace(/\//g, '\\/')}</loc><lastmod>([^<]+)</lastmod>`))[1];
+    const vis = s.match(/bijgewerkt[^<]*<time datetime="([^"]+)"/)[1];
+    assert.equal(x.dateModified, lm, `${p}: dateModified ≠ lastmod`);
+    assert.equal(vis, lm, `${p}: zichtbare stempel ≠ lastmod`);
+    assert.equal(lm, D, `${p}: lastmod`);
+  }
+});
