@@ -13,10 +13,10 @@ import { PARTNERLINKS, WIX_URLS } from '../src/lib/partnerlinks.js';
 import * as P from '../src/pages.mjs';
 import { loadPosts } from '../src/blog.mjs';
 
-// Site-adapter ShopMatch: 22 pagina's van de PM-kaart + 2 nieuwe posts (18-11, 20-11) = 24.
+// Site-adapter ShopMatch: 22 pagina's van de PM-kaart + 3 nieuwe posts (18-11, 20-11, wk48 webshop-maken-met-ai) = 25.
 const SITE = {
   root: 'dist',
-  aantal: 24,
+  aantal: 25,
   build: () => execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } }),
   file: (p) => join('dist', p, 'index.html'),
   gidsBlog: () => [...P.guides.map((g) => g.path), ...loadPosts().map((x) => x.path), '/gidsen/', '/blog/'],
