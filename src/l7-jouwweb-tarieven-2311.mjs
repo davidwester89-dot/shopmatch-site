@@ -1,7 +1,7 @@
-// L7 JouwWeb-tarieven (pushdatum 2026-11-23, wk47). /platformen/jouwweb/ kreeg een eigen bodywijziging: tarieventabel
+// L7 JouwWeb-tarieven (pushdatum 2026-11-25, wk47). /platformen/jouwweb/ kreeg een eigen bodywijziging: tarieventabel
 // jaar- vs maandbetaling en H2 'Bijkomende kosten'. Title en meta ongewijzigd. Geen andere pagina wijzigt: de hub /platformen/
 // en de vergelijkingspagina's tonen dezelfde pcard/prijzen als bij de parent, dus niet tillen.
-export const JW_UPD = '2026-11-23';
+export const JW_UPD = '2026-11-25';
 export const JW_PADEN = new Set(['/platformen/jouwweb/']);
 const NL = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 const fmt = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${dd} ${NL[m - 1]} ${y}`; };
