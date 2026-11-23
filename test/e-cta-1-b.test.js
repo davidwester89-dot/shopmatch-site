@@ -90,7 +90,10 @@ test('E-CTA-1 B: niet in de FAQ en niet in het schema (SEO-besluit 2)', () => {
 });
 
 const STRIP_AC = /<aside class="ecta[^"]*"[^>]*data-ecta="[AC]"[^>]*>[\s\S]*?<\/aside>/g;
-const interneLinks = (h) => { const m = new Map(); for (const x of (h.match(/<main[\s\S]*<\/main>/) || [''])[0].replace(STRIP_AC, '').matchAll(/<a\b[^>]*\shref="(\/[^"]*)"/g)) m.set(x[1], (m.get(x[1]) || 0) + 1); return m; };
+// 'Meer op de blog' (src/blog.mjs) toont de nieuwste andere posts en wisselt bij elke nieuwe post; geen bodywijziging
+// (stripBlocks in scripts/l7.config.mjs), dus ook hier buiten de vergelijking met de stand vóór B (wk48 webshop-maken-met-ai).
+const zonderMeer = (h) => h.replace(/<h2>Meer op de blog<\/h2><div class="grid cards two">[\s\S]*?<\/div>/, '');
+const interneLinks = (h) => { const m = new Map(); for (const x of zonderMeer((h.match(/<main[\s\S]*<\/main>/) || [''])[0].replace(STRIP_AC, '')).matchAll(/<a\b[^>]*\shref="(\/[^"]*)"/g)) m.set(x[1], (m.get(x[1]) || 0) + 1); return m; };
 test('E-CTA-1 B: een interne link wijkt nooit voor een partnerlink (SEO-besluit 5; t.o.v. de stand vóór B)', (t) => {
   pagina('/');
   if (!basis()) { t.skip(`${PRE_B} niet in deze clone`); return; }
@@ -128,7 +131,7 @@ test('E-CTA-1 B: per H2-sectie max. 1 per merk, op de eerste vermelding in de lo
 test('E-CTA-1 B: alleen bestaande woorden gelinkt; koppen en bronregels byte-gelijk aan de stand vóór B (SEO-besluit 4, 8, 10)', (t) => {
   pagina('/');
   if (!basis()) { t.skip(`${PRE_B} niet in deze clone`); return; }
-  const koppen = (h) => [...h.matchAll(/<h[1-6]\b[\s\S]*?<\/h[1-6]>/g)].map((m) => m[0]);
+  const koppen = (h) => [...zonderMeer(h).matchAll(/<h[1-6]\b[\s\S]*?<\/h[1-6]>/g)].map((m) => m[0]);
   const bron = (h) => [...h.matchAll(/<(p|div|ul)\b[^>]*\sclass="[^"]*\b(?:src|sources|bron)\b[^"]*"[^>]*>[\s\S]*?<\/\1>/g)].map((m) => m[0]);
   let n = 0;
   for (const p of alle(SITE.root)) {

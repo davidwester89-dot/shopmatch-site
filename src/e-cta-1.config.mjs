@@ -59,5 +59,6 @@ export const ECTA = {
     // Niet op de kaart (posts van 18-11 en 20-11, na de sitemap van 17-11): voorlopig alleen keuzehulp.
     '/blog/hostinger-website-webshop-kosten/': KEUZEHULP,
     '/blog/dropshipping-webshop-maken/': KEUZEHULP,
+    '/blog/webshop-maken-met-ai/': KEUZEHULP, // wk48, push 01-12: niet op de kaart, alleen keuzehulp
   },
 };

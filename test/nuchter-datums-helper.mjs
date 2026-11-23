@@ -17,4 +17,6 @@ export const buildDag = () => process.env.BUILD_DATE || process.env.PUSH_DATE ||
 export const JW_PADEN_TEST = new Set(['/platformen/jouwweb/']);
 // 27-11 (wk48 B2B-upgrade): eigen bodywijziging op /blog/b2b-webshop-beginnen/ (src/l7-b2b-upgrade-2711.mjs), onvoorwaardelijk.
 export const B2B_PADEN_TEST = new Set(['/blog/b2b-webshop-beginnen/']);
-export const revisieDatum = (pad, vorige) => B2B_PADEN_TEST.has(pad) ? '2026-11-27' : JW_PADEN_TEST.has(pad) ? '2026-11-25' : (DS_PADEN.has(pad) && buildDag() >= '2026-11-24') ? '2026-11-24' : STIJL_PADEN.has(pad) ? '2026-11-24' : vorige;
+// 01-12 (wk48 webshop-maken-met-ai): nieuwe post + bloglijst op / en /blog/; alleen als de post in de build zit.
+export const AI_PADEN = new Set(['/', '/blog/', '/blog/webshop-maken-met-ai/']);
+export const revisieDatum = (pad, vorige) => (AI_PADEN.has(pad) && buildDag() >= '2026-12-01') ? '2026-12-01' : B2B_PADEN_TEST.has(pad) ? '2026-11-27' : JW_PADEN_TEST.has(pad) ? '2026-11-25' : (DS_PADEN.has(pad) && buildDag() >= '2026-11-24') ? '2026-11-24' : STIJL_PADEN.has(pad) ? '2026-11-24' : vorige;
