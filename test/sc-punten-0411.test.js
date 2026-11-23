@@ -14,7 +14,9 @@ const tekst = (p) => read(`dist${p}index.html`).replace(/<script[\s\S]*?<\/scrip
 
 test('SC-punten 01-11: kolomkop, stempels, Lightspeed-titel, filterregel', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1' } });
-  assert.match(tekst('/blog/shopify-wix-jouwweb-kleine-webshop/'), /Actie tot en met 30 november 2026 \(eerste 12 maanden 50%, onze rekensom\)/);
+  // Actiekolom (t/m 30-11-2026) per 01-12 weg (L4); kolomkoppen zonder actie.
+  assert.match(tekst('/blog/shopify-wix-jouwweb-kleine-webshop/'), /JouwWeb-pakket Prijs per maand Producten Pro € 10 10 Business € 20 Onbeperkt/);
+  assert.doesNotMatch(tekst('/blog/shopify-wix-jouwweb-kleine-webshop/'), /30 november 2026|12 maanden 50%/);
   assert.match(tekst('/platformen/jouwweb/'), /Prijzen gecontroleerd op 17 oktober 2026 ?, Lightspeed op 1 november 2026 ?, JouwWeb op 16 november 2026/); // wk47: JouwWeb-tarieven opnieuw gecontroleerd op 16-11
   assert.match(tekst('/platformen/shopify/'), /Prijzen gecontroleerd op 17 oktober 2026[^.]*?, Shopify op 1 november 2026/);
   const t = read('dist/platformen/lightspeed/index.html').match(/<title>(.*?)<\/title>/)[1];

@@ -1,9 +1,9 @@
 // Onafhankelijke verwachting voor de stijlrelease van 24 november 2026.
+// /blog/shopify-wix-jouwweb-kleine-webshop/ uit de stijllijst: eigen bodywijziging 01-12 (JouwWeb-actie weg, JWACTIE_PADEN_TEST).
 // /blog/b2b-webshop-beginnen/ uit de stijllijst: eigen bodywijziging 27-11 (wk48-upgrade, B2B_PADEN_TEST hieronder).
 export const STIJL_PADEN = new Set([
   "/blog/hostinger-website-webshop-kosten/",
   "/blog/herroepingsknop-webshop/",
-  "/blog/shopify-wix-jouwweb-kleine-webshop/",
   "/blog/webshop-maken-met-ideal/",
   "/platformen/shopify/"
 ]);
@@ -19,4 +19,6 @@ export const JW_PADEN_TEST = new Set(['/platformen/jouwweb/']);
 export const B2B_PADEN_TEST = new Set(['/blog/b2b-webshop-beginnen/']);
 // 01-12 (wk48 webshop-maken-met-ai): nieuwe post + bloglijst op / en /blog/; alleen als de post in de build zit.
 export const AI_PADEN = new Set(['/', '/blog/', '/blog/webshop-maken-met-ai/']);
-export const revisieDatum = (pad, vorige) => (AI_PADEN.has(pad) && buildDag() >= '2026-12-01') ? '2026-12-01' : B2B_PADEN_TEST.has(pad) ? '2026-11-27' : JW_PADEN_TEST.has(pad) ? '2026-11-25' : (DS_PADEN.has(pad) && buildDag() >= '2026-11-24') ? '2026-11-24' : STIJL_PADEN.has(pad) ? '2026-11-24' : vorige;
+// 01-12 (zelfde push, L4): JouwWeb-actie t/m 30-11 weg; onvoorwaardelijk.
+export const JWACTIE_PADEN_TEST = new Set(['/shop-match/', '/platformen/jouwweb/', '/webshop-beginnen-kosten/', '/blog/shopify-wix-jouwweb-kleine-webshop/']);
+export const revisieDatum = (pad, vorige) => JWACTIE_PADEN_TEST.has(pad) ? '2026-12-01' : (AI_PADEN.has(pad) && buildDag() >= '2026-12-01') ? '2026-12-01' : B2B_PADEN_TEST.has(pad) ? '2026-11-27' : JW_PADEN_TEST.has(pad) ? '2026-11-25' : (DS_PADEN.has(pad) && buildDag() >= '2026-11-24') ? '2026-11-24' : STIJL_PADEN.has(pad) ? '2026-11-24' : vorige;

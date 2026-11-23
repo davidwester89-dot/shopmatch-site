@@ -1,4 +1,4 @@
-import { revisieDatum, buildDag } from './nuchter-datums-helper.mjs';
+import { revisieDatum, buildDag, JWACTIE_PADEN_TEST } from './nuchter-datums-helper.mjs';
 // Hub-link 17-11-2026: precies één contextuele tekstlink in de homepage-<main> naar /platformen/.
 // L7-hygiëne: lastmod >= parent-build, en alleen omhoog bij bodywijziging.
 // Op deze keten (Hostinger-v3 boven A+B): parent is A+B (892f387) of, bij een losse FF-stap, de directe voorganger.
@@ -100,6 +100,8 @@ test('lastmod >= parent-build (L7_BASE): nooit achteruit, 18-11 alleen bij bodyw
       if (noindex(html) || redirect(html)) continue;
       if (bodyFingerprint(old, CFG) !== bodyFingerprint(html, CFG)) bodyGewijzigd.add(path);
     }
+    // 01-12: /shop-match/ wijzigt via de clientdata (js/lib/platforms.js, JouwWeb-actie weg); l7check telt dat als bodywijziging.
+    for (const path of JWACTIE_PADEN_TEST) bodyGewijzigd.add(path);
     for (const path of bodyGewijzigd) assert.equal(tSm.get(path), revisieDatum(path, HB_UPD), `${path} bodywijziging zonder 18-11`);
     for (const [path, lm] of tSm) {
       const oud = bSm.get(path);

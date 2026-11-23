@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { JW_UPD } from '../src/l7-jouwweb-tarieven-2311.mjs';
+import { revisieDatum } from './nuchter-datums-helper.mjs';
+const JW_D = revisieDatum('/platformen/jouwweb/', '2026-11-25'); // 01-12: JouwWeb-actie weg (zelfde push als webshop-maken-met-ai)
 
 test('JouwWeb: H2 tarieven + bijkomende kosten, tabel, interne links, datum 25-11, geen partnerknop', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '' }, stdio: 'ignore' });
@@ -21,6 +23,6 @@ test('JouwWeb: H2 tarieven + bijkomende kosten, tabel, interne links, datum 25-1
   for (const l of ['/vergelijken/wix-vs-jouwweb/', '/gratis-website-maken/', '/website-maken-zzp/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/shop-match/']) assert.ok(h.includes(`href="${l}"`), l);
   assert.ok(h.includes('href="https://www.jouwweb.nl/tarieven"'));
   assert.doesNotMatch(h, /data-vendor="jouwweb"|rel="[^"]*sponsored[^"]*"[^>]*jouwweb/);
-  assert.match(h, /"dateModified": ?"2026-11-25"/);
-  assert.match(h, /bijgewerkt (op )?<time datetime="2026-11-25">/i);
+  assert.match(h, new RegExp(`"dateModified": ?"${JW_D}"`));
+  assert.match(h, new RegExp(`bijgewerkt (op )?<time datetime="${JW_D}">`, 'i'));
 });

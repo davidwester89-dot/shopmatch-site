@@ -53,8 +53,7 @@ export const PLATFORMS = {
     plus: ['0% verkoopcommissie', 'iDEAL, Bancontact, PayPal, Klarna en meer', 'Koppelingen met o.a. e-Boekhouden, Moneybird, Jortt en SnelStart', 'Verzendlabels voor PostNL, DHL, DPD, GLS en UPS'],
     min: ['Pro is beperkt tot 10 producten', 'Domeinnaam na het eerste jaar € 20 per jaar'],
     voor: 'Zzp\'ers en kleine webshops die snel en in het Nederlands willen starten.',
-    // Actie terug (MM 01-11-2026, L4): jouwweb.nl/prijzen (→ /tarieven), gerenderd 1-11-2026 NL-IP: "* ACTIE t/m 30 nov 2026 — Eerste 12 maanden 50%, daarna het standaardtarief." Vervolgcheck 1-12-2026.
-    actie: 'Actie tot en met 30 november 2026, volgens JouwWeb: "Eerste 12 maanden 50%, daarna het standaardtarief." De standaardprijzen hierboven gelden daarna.',
+    // JouwWeb-actie t/m 30-11-2026 weggehaald (L4, GB2 23-11): op pushdag 01-12 verlopen. Alleen standaardtarieven; geen actie-veld.
     bronnen: [['JouwWeb prijzen', 'https://www.jouwweb.nl/prijzen'], ['JouwWeb webshop', 'https://www.jouwweb.nl/webshop'], ['Over JouwWeb', 'https://www.jouwweb.nl/over-ons']],
   },
   lightspeed: {
