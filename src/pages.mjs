@@ -54,7 +54,7 @@ const PER_ALLE = perAanbieder(IDS);
 // Extra controledatum alleen in de stempel van deze platformpagina's (SC 01-11: JouwWeb-actie en Shopify gecontroleerd op 1-11).
 const STAMP_EXTRA = { jouwweb: [['JouwWeb', '2026-11-16']], shopify: [['Shopify', '2026-11-01']] };
 const perTijd = (per) => per.map(([n, d]) => `, ${esc(n)} op <time datetime="${d}">${fmtDate(d)}</time>`).join('');
-// Wk47-upgrade /platformen/jouwweb/ (L7 23-11 via src/l7-jouwweb-tarieven-2311.mjs): tarieventabel jaar- vs maandbetaling en H2 'Bijkomende kosten'.
+// Wk47-upgrade /platformen/jouwweb/ (L7 25-11 via src/l7-jouwweb-tarieven-2311.mjs): tarieventabel jaar- vs maandbetaling en H2 'Bijkomende kosten'.
 // Alleen jouwweb.nl (tarieven + FAQ websitebouwer), opgehaald 16-11-2026. Standaardtarief, excl. btw; de actie t/m 30-11 staat in platforms.js.
 const JW_BRONNEN = [['JouwWeb tarieven', 'https://www.jouwweb.nl/tarieven'], ['JouwWeb websitebouwer (veelgestelde vragen)', 'https://www.jouwweb.nl/website-maker']];
 const JW_JAAR = [['Lite', 5.5, null], ['Pro', 10, 12], ['Business', 20, null]];

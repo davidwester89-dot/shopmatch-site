@@ -1,15 +1,15 @@
-// Wk47: /platformen/jouwweb/ upgrade (push 23-11). Alleen jouwweb.nl-prijzen; title/meta ongewijzigd; geen nieuwe knop.
+// Wk47: /platformen/jouwweb/ upgrade (push 25-11). Alleen jouwweb.nl-prijzen; title/meta ongewijzigd; geen nieuwe knop.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { JW_UPD } from '../src/l7-jouwweb-tarieven-2311.mjs';
 
-test('JouwWeb: H2 tarieven + bijkomende kosten, tabel, interne links, datum 23-11, geen partnerknop', () => {
+test('JouwWeb: H2 tarieven + bijkomende kosten, tabel, interne links, datum 25-11, geen partnerknop', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', PREVIEW: '' }, stdio: 'ignore' });
   const h = readFileSync('dist/platformen/jouwweb/index.html', 'utf8');
   const t = h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-  assert.equal(JW_UPD, '2026-11-23');
+  assert.equal(JW_UPD, '2026-11-25');
   assert.match(h, /<h2>Pakketten, prijzen en tarieven<\/h2>/);
   assert.match(h, /<h2>Bijkomende kosten<\/h2>/);
   assert.doesNotMatch(h, /<h2>Pakketten en prijzen<\/h2>/);
@@ -21,6 +21,6 @@ test('JouwWeb: H2 tarieven + bijkomende kosten, tabel, interne links, datum 23-1
   for (const l of ['/vergelijken/wix-vs-jouwweb/', '/gratis-website-maken/', '/website-maken-zzp/', '/blog/shopify-wix-jouwweb-kleine-webshop/', '/shop-match/']) assert.ok(h.includes(`href="${l}"`), l);
   assert.ok(h.includes('href="https://www.jouwweb.nl/tarieven"'));
   assert.doesNotMatch(h, /data-vendor="jouwweb"|rel="[^"]*sponsored[^"]*"[^>]*jouwweb/);
-  assert.match(h, /"dateModified": ?"2026-11-23"/);
-  assert.match(h, /bijgewerkt (op )?<time datetime="2026-11-23">/i);
+  assert.match(h, /"dateModified": ?"2026-11-25"/);
+  assert.match(h, /bijgewerkt (op )?<time datetime="2026-11-25">/i);
 });
